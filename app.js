@@ -3,8 +3,14 @@
 
 const express = require("express");
 const { connection } = require("./db");
+const path = require('path');
 
 const app = express();
+
+// Ruta para servir index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.get("/api/capitulos", (req, res) => {
   connection.query("SELECT * FROM capitulook", (err, data) => {
