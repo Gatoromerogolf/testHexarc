@@ -28,7 +28,7 @@ app.get("/api/preguntas", (req, res) => {
 });
 
 app.get("/api/respuestas", (req, res) => {
-  connection.query("SELECT * FROM respuestasa", (err, data) => {
+  connection.query("SELECT * FROM respuestas", (err, data) => {
     if (err) {
       console.error("Error in query:", err);
       res.status(500).json({ error: "Error fetching data from database" });
