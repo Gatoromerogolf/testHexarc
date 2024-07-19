@@ -1,0 +1,119 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-image: url('background.jpg'); /*../estilos/estiloMenuGeneral.css*/
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+}
+
+
+/* Fondo específico para la clase fiananciero */
+body.financiero {
+  background: url('background financiero.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase fiananciero */
+body.aperie {
+  background: url('background aperie.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.survey-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.containerTitulo {
+    display: flex; /* Flexbox para la disposición de los elementos */
+    justify-content: space-between;/* Distribuye el espacio*/
+    align-items: center;/* Centra verticalmente*/
+    padding: 10px;/* Espacio alrededor del contenido*/
+  }
+  
+  .left-icon {
+    display: flex; /* Alineación por si hay más elementos en el futuro */
+    align-items: center;
+  }
+  
+  .right-icons {
+    display: flex; /* Flexbox para alinear los iconos a la derecha */
+    align-items: center;
+    gap: 15px; /* Espacio entre los iconos */
+  }
+  
+h1, h2, h3, h4 {
+    text-align: center;
+    color: #333333;
+}
+
+h3 {
+  margin-top: 0; /* Elimina el margen superior del h3 */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#tablaIndice,
+#tablaIndiceCapitulos {
+    text-decoration: none;
+    padding:2px ;
+    display:block;
+    font-family:'Roboto', sans-serif;
+    font-size: 15px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+    margin: auto; /* Centra horizontalmente */
+}
+
+#tablaIndice th,
+#tablaIndiceCapitulos th{
+    background-color: #f0f0f0; /* Color de fondo */
+    border: 1px solid #ccc; /* Borde */
+    padding: 8px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    font-family:'Roboto', sans-serif;
+  }
+
+  #tablaIndiceCapitulos tr {
+    height: 30px; /* Ajusta esta altura según tus necesidades */
+    font-size: 17px; /* Tamaño del texto */
+}
+  #tablaIndice tr {
+    height: 21px; /* Ajusta esta altura según tus necesidades */
+    font-size: 15px; /* Tamaño del texto */
+}
+  
+.botonSiguiente {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-family:'Roboto', sans-serif;
+  color: white;
+  background-color: #007BFF;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.botonSiguiente:hover {
+  background-color: #0056b3;
+}
+  .centrado-flex {
+    margin: 20px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    /*align-items: center; Centra verticalmente*/
+    /*height: 100vh; /* Altura completa de la ventana del navegador */
+  }
+  
+/* ajusta los valores de totales de Menu-A*/  
+  .ajustado-derecha{
+    text-align: right;
+  }

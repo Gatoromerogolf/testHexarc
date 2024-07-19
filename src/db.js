@@ -14,12 +14,12 @@ require("dotenv").config();
 // });
 
 // Crear conexión usando la URL completa
-const connection = mysql.createConnection(process.env.MYSQL_URL);
+const conexion = mysql.createConnection(process.env.MYSQL_URL);
 
 
 
 
-connection.connect((err) => {
+conexion.connect((err) => {
   if (err) {
     console.error("CONNECT FAILED", err.code);
     return;
@@ -28,7 +28,7 @@ console.log("CONNECTED to the database");
 });
 
 // Ejemplo de una consulta
-connection.query('SELECT * FROM preguntas', (err, results, fields) => {
+conexion.query('SELECT * FROM preguntas', (err, results, fields) => {
   if (err) {
       console.error('Error in query:', err);
       return;
@@ -36,5 +36,4 @@ connection.query('SELECT * FROM preguntas', (err, results, fields) => {
   console.log('Query results:', results);
 });
 
-
-module.exports = { connection };
+module.exports = { conexion };

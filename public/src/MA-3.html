@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+
+  <div class="survey-container">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div class="nav-icons">
+            <a href="MA-2.html"><img src="../img/anterior.png" alt="Avance"></a>
+            <a href="MA-4.html"><img src="../img/siguiente.png" alt="Avance"></a>
+          </div>
+          <div class="nav-iconsxx">
+            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+          </div>
+          <div class="nav-iconsxx">
+            <h5> Autoevaluación</h5>
+          </div>
+        </div>
+        <hr>
+
+      <form id="formulario">
+
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A.html">III - El Directorio y su articulación con las Gerencias</a></h4>
+          </div>
+  
+          <p style="font-size:12px">Seleccione la opción que corresponda a su organización</p>
+          
+          <ul class="listas">
+          <li>Los miembros del Directorio (y en su caso el Advisory Board) tienen acceso y participan con cierta frecuencia en reuniones con</li>
+            <p style="font-size:12px">(marcar todos los que correspondan)</p>
+
+          <ul class="dos-columnas">
+
+            <li><input id="uno" type="checkbox" value="1"><label class="check" for="uno">Gerente de Operaciones</label>
+            </li>
+            <li><input id="uno" type="checkbox" value="2"><label class="check" for="uno">Gerente de Administración y Finanzas</label>
+            </li>
+            <li><input id="uno" type="checkbox" value="3"><label class="check" for="uno">Gerente de Riesgos</label>
+            </li>
+            <li><input id="uno" type="checkbox" value="4"><label class="check" for="uno">Gerente de Tecnología</label>
+            </li>
+            <li><input id="uno" type="checkbox" value="5"><label class="check" for="uno">Gerente de Gente y
+                Cultura</label></li>
+            <li><input id="uno" type="checkbox" value="6"><label class="check" for="uno">Gerente de Innovación/Transformación</label>
+            </li>
+            <li><input id="uno" type="checkbox" value="7"><label class="check" for="uno">Gerente de Inteligencia Artificial</label></li>
+            <li><input id="uno" type="checkbox" value="8"><label class="check" for="uno">Gerente de Legales</label></li>
+            <li><input id="uno" type="checkbox" value="9"><label class="check" for="uno">Comité de Alta Gerencia</label></li>
+            <li><input id="uno" type="checkbox" value="10"><label class="check" for="uno">Auditor Interno</label></li>
+          </ul>
+        </ul>
+
+
+        <div class="centrado-flex">
+          <button type="submit" id="boton-enviar">Enviar</button>
+        </div>
+
+        <div class="centrado-flex">
+          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+        </div>
+
+      </form>
+    </div>
+
+    </section>
+  </section>
+
+
+  <!-- ventana al final con resultados -->
+
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+      <div class="gauge-container">
+        <canvas id="gaugeChart";></canvas>
+      </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<!-- <script src="../datos/tabla01.js"></script> -->
+<!-- <script src="../datos/tabla02.js"></script> -->
+<script src="../../js/ma-3.js"></script>
+
+</html>
