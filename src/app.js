@@ -8,12 +8,12 @@ const path = require('path');
 const app = express();
 
 // Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
-// // Ruta para servir index.html
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'index.html'));
-// });
+// Ruta para servir index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
 
 app.get("/api/preguntas", (req, res) => {
   connection.query("SELECT * FROM preguntas", (err, data) => {
