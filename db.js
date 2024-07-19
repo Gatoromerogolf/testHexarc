@@ -28,7 +28,7 @@ console.log("CONNECTED to the database");
 });
 
 // Ejemplo de una consulta
-connection.query('SELECT * FROM capitulook', (err, results, fields) => {
+connection.query('SELECT * FROM preguntas', (err, results, fields) => {
   if (err) {
       console.error('Error in query:', err);
       return;
