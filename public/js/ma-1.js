@@ -25,9 +25,9 @@ function obtenerValoresSeleccionados() {
     "A-I-12",
     "A-I-13",
     "A-I-14",
-    "A-I-15",
     "A-I-16",
     "A-I-17",
+    "A-I-18",
   ];
 
   var indiceFilas = 0;
@@ -57,27 +57,51 @@ function obtenerValoresSeleccionados() {
     alert(`Falta infomar en estas filas: ${filasFaltantes}`);
   } else {
     //  inserta con 6 el valor de los checkbox para que se posicione en la ultima = 0
-    respuestas.splice(6, 0, 9);
+      respuestas.splice(6, 0, 9);
 
-    const advisoryBoard = document.querySelector(
-      `input[name="A-I-10"]:checked`
-    );
-    if (advisoryBoard.value == 1) {
-      // indica que se informó que tiene AB
-      const respuestaAB = document.querySelector(
-        `input[name="A-I-11"]:checked`
+      const advisoryBoard = document.querySelector(
+        `input[name="A-I-10"]:checked`
       );
-      // si puso que tiene AB tiene que informar el campo 11
-      if (respuestaAB) {
-        console.log("entro por aca: " + respuestaAB.value);
-        //si respondio hay que insertar el valor en el arreglo
-        respuestas.splice(10, 0, respuestaAB.value);
-      } else {
-        alert(`No selecciono lo del AB en la fila 11`);
+      
+      if (advisoryBoard.value == 1) {
+          // indica que se informó que tiene AB
+          const respuestaAB = document.querySelector(
+            `input[name="A-I-11"]:checked`
+          );
+          // si puso que tiene AB tiene que informar el campo 11
+          if (respuestaAB) {
+            console.log("entro por aca: " + respuestaAB.value);
+            //si respondio hay que insertar el valor en el arreglo
+            respuestas.splice(10, 0, respuestaAB.value);
+          } else {
+            alert(`No selecciono lo del AB en la fila 11`);
+          }
+          } else {
+            respuestas.splice(10, 0, '9'); // oone 9 como marca de no respuesta    
       }
-      } else {
-        respuestas.splice(10, 0, '9'); // oone 9 como marca de no respuesta    
+
+
+      const codGobCorp = document.querySelector(
+        `input[name="A-I-14"]:checked`
+        );
+      if (codGobCorp.value > 1) {
+          // indica que se informó que tiene Cód de Gobierno
+          const respuestaCGC = document.querySelector(
+            `input[name="A-I-15"]:checked`
+          );
+          // si puso que tiene AB tiene que informar el campo 11
+          if (respuestaCGC) {
+            console.log("entro por aca: " + respuestaCGC.value);
+            //si respondio hay que insertar el valor en el arreglo
+            respuestas.splice(14, 0, respuestaCGC.value);
+          } else {
+            alert(`No selecciono aprobación Cod Gob Cor en la fila 15`);
+          }
+          } else {
+            respuestas.splice(14, 0, '9'); // pone 9 como marca de no respuesta    
       }
+      
+                
     }
     console.log(`respuestas con 7 y 11 ${respuestas}`);
     return respuestas; // Devuelve el arreglo si necesitas hacer algo más con él
@@ -162,6 +186,7 @@ function calculaResultados() {
   for (let i = 0; i < respuestas.length; i++) {
     if (i === 6) continue;
     if (i === 10 && respuestas[10] == 9) continue;
+    if (i === 10 && respuestas[10] == 9) continue;
     if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
     console.log(`i= ${i} ,
          valores ${valores} ,
@@ -190,7 +215,7 @@ function calculaResultados() {
 // PRINCIPAL ::::::::::::::::::::::::::::::::::::::::::::::::
 
 document
-.getElementById("survey-form")
+.getElementById("formulario")
   .addEventListener("submit", function (event) {
     valores = 0;
     event.preventDefault(); // Prevenir el envío del formulario
@@ -265,9 +290,14 @@ function limpiarSelecciones() {
     checkbox.checked = false;
   });
 
-  document.getElementById('lineaAB').style.display = 'none';
-  document.getElementById('lineaABS').style.display = 'none';
-  document.getElementById('lineaABN').style.display = 'none';
+  document.getElementById('linea2').style.display = 'none';
+  document.getElementById('linea3').style.display = 'none';
+  document.getElementById('linea4').style.display = 'none';
+  document.getElementById('linea5').style.display = 'none';
+  document.getElementById('linea6').style.display = 'none';
+  document.getElementById('fila-15').style.display = 'none';
+  document.getElementById('fila-15a').style.display = 'none';
+  document.getElementById('fila-15b').style.display = 'none';
 }
 
 // ------------ ventana del final con resultados---------------
@@ -297,84 +327,14 @@ function cerrarAlerta() {
 }
 
 function continuar() {
-  cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+  cerrarAlerta(); // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
 
-  grabarResultados2(respuestas)
-    .then(() => {
-      localStorage.setItem('username', username);
-      const CUIT = localStorage.getItem('CUIT');
-      actualizaUserIngreso(username, CUIT)
-      window.location.href =
-        JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "MA-2.html"
-          : "MA-2-en.html";
-    })
-    .catch((error) => {
-      console.error("Error en grabarResultados:", error);
-      alert("Hubo un error al grabar los resultados: " + error.message);
-    });
-}
+  // if (idioma == 1) {
+  //       (window.location.href = "MA-2.html")
+  //     else
+  //       (window.location.href = "MA-2-en.html")}
 
-//   window.location.href = (JSON.parse(localStorage.getItem('idioma'))) == 1 ? "MA-2.html" : "MA-2-en.html"
-// }
-
-async function grabarResultados2(respuestas) {
-
-  const capitulo = "A";
-  const seccion = 1;
-  const score = valores;
-  const respuesta = respuestas;
-
-  const body = {
-    capitulo,
-    seccion,
-    score,
-    respuesta
-  };
-
-  try {
-    const response = await fetch("http://localhost:3000/insertar2", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-      credentials: "include",
-    });
-
-    const result = await response.json();
-    if (result.success) {
-    } else {
-      throw new Error(result.error || "Error desconocido ins 2");
-    }
-  } catch (error) {
-    console.log("Error:", error);
-    alert("estamos en el error (ins 2): " + error.message);
-    throw error; // Rechaza la promesa en caso de error
-  }
-}
-
-
-// Función para actualizar el campo ingresado del usuario
-function actualizaUserIngreso(username, CUIT) {
-  fetch('/api/updateIngresado', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username , CUIT })
-  })
-  .then(response => response.json())
-  .then(data => {
-      if (data.message === 'Campo ingresado actualizado correctamente') {
-          console.log('Campo ingresado actualizado correctamente');
-      } else {
-          console.error('Error al actualizar el campo ingresado');
-      }
-  })
-  .catch(error => {
-      console.error('Error en la solicitud de actualización:', error);
-  });
+  window.location.href = (JSON.parse(localStorage.getItem('idioma'))) == 1 ? "MA-2.html" : "MA-2-en.html"
 }
 
 // ------------------ no se utiliza
