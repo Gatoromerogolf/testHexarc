@@ -1,14 +1,15 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
+    background-image: url('../img/reuniones.png'); /*../estilos/estiloMenuGeneral.css*/
     background-image: url('background.jpg'); /*../estilos/estiloMenuGeneral.css*/
     background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
     background-position: center; /* Centra la imagen */
     background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
     margin: 0;
     padding: 0;
-    background-attachment: fixed;
+    background-repeat: no-repeat; 
+    height: 100%;
 }
-
 
 /* Fondo específico para la clase fiananciero */
 body.financiero {
@@ -21,13 +22,18 @@ body.aperie {
   background: url('background aperie.jpg') no-repeat center center fixed;
   background-size: cover;
 }
+
+h3, h4 {
+  margin-top: 0;
+}
+
 .survey-container {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
 }
 
 .containerTitulo {
@@ -37,32 +43,34 @@ body.aperie {
     padding: 10px;/* Espacio alrededor del contenido*/
   }
   
-  .left-icon {
-    display: flex; /* Alineación por si hay más elementos en el futuro */
-    align-items: center;
-  }
-  
-  .right-icons {
-    display: flex; /* Flexbox para alinear los iconos a la derecha */
-    align-items: center;
-    gap: 15px; /* Espacio entre los iconos */
-  }
+.contenedorTabla {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center;     /* (Opcional) Centra el contenido verticalmente */
+  /*height: 50vh;           /* (Opcional) Ajusta la altura del contenedor al 100% del viewport */
+}
+
+.left-icon {
+  display: flex; /* Alineación por si hay más elementos en el futuro */
+  align-items: center;
+}
+
+.right-icons {
+  display: flex; /* Flexbox para alinear los iconos a la derecha */
+  align-items: center;
+  gap: 15px; /* Espacio entre los iconos */
+}
   
 h1, h2, h3, h4 {
     text-align: center;
     color: #333333;
 }
 
-h3 {
-  margin-top: 0; /* Elimina el margen superior del h3 */
-}
-
 .form-group {
     margin-bottom: 15px;
 }
 
-#tablaIndice,
-#tablaIndiceCapitulos {
+#tablaIndice {
     text-decoration: none;
     padding:2px ;
     display:block;
@@ -72,8 +80,7 @@ h3 {
     margin: auto; /* Centra horizontalmente */
 }
 
-#tablaIndice th,
-#tablaIndiceCapitulos th{
+#tablaIndice  th{
     background-color: #f0f0f0; /* Color de fondo */
     border: 1px solid #ccc; /* Borde */
     padding: 8px; /* Espaciado interno */
@@ -81,13 +88,8 @@ h3 {
     font-family:'Roboto', sans-serif;
   }
 
-  #tablaIndiceCapitulos tr {
-    height: 30px; /* Ajusta esta altura según tus necesidades */
-    font-size: 17px; /* Tamaño del texto */
-}
   #tablaIndice tr {
-    height: 21px; /* Ajusta esta altura según tus necesidades */
-    font-size: 15px; /* Tamaño del texto */
+    height: 20px; /* Ajusta esta altura según tus necesidades */
 }
   
 .botonSiguiente {
