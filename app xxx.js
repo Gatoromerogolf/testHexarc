@@ -2,7 +2,7 @@
 // node-mysql-app/app.js
 
 const express = require("express");
-const { connection } = require("./db");
+const { connection } = require("./db xxx");
 const path = require('path');
 
 const app = express();
