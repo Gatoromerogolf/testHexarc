@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+
+<body class="financiero">
+
+  <div class="survey-container" style="max-width: 900px;">
+
+    <form id="survey-form">
+      <div class="containerTitulo">
+        <div class="left-icon">
+          <a href="../../index.html">
+            <img src="../img/contenido (1).png" width="30px">
+          </a>
+        </div>
+        <div class="right-icons">
+          <a href="Menu-General.html" id="spainIcon">
+            <img src="../img/espana.png" width="25px">
+          </a>
+          <!-- <a href="Menu-General-en.html" id="usaIcon">
+            <img src="../img/usa.png" width="25px">
+          </a> -->
+        </div>
+      </div>
+
+      <h2>Bienvenido.</h2>
+
+      
+
+      <p>Está por comenzar una nueva etapa del proceso de autoevaluación.</p>
+      <p>La aplicación le habilitará el ingreso de información a partir del último capitulo y sección que haya completado.</p>
+
+      <p>Le recordamos que al finalizar todos los capítulos, se presentará un resumen general con el puntaje obtenido, proporcionando una
+        visión integral de la posición de la empresa frente al desafío de la gestión de riesgos.</p>
+
+      <div class="centrado-flex">
+        <button id="boton-enviar" type="button">CONTINUAR</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+<script>
+  document.getElementById("boton-enviar").addEventListener('click', () => {
+    const idioma = JSON.parse(localStorage.getItem('idioma'));
+    if (idioma == 2) {
+      window.location.href = "Menu-General-en.html";
+    } else {
+      window.location.href = "Menu-General.html";
+    }
+  });
+</script>
+
+<script>
+      localStorage.setItem('idioma', '1');
+</script>
+
+<!-- <script>
+  // Agrega un evento de clic al ícono de España
+  document.getElementById('spainIcon').addEventListener('click', function () {
+    // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de España
+    localStorage.setItem('idioma', '1');
+  });
+</script> -->
+
+<!-- <script>
+  // Agrega un evento de clic al ícono de USA
+  document.getElementById('usaIcon').addEventListener('click', function () {
+    // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de USA
+    localStorage.setItem('idioma', '2');
+  });
+</script> -->
+
+<!-- <script src="../../js/menu-General.js"></script> -->
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="survey-container">
+      <section class="main">
+        <section class="gobCorpo">
+          <div class="header-container">
+            <div class="nav-icons">
+              <a href="MA-14.html"><img src="../img/anterior.png" alt="Avance"></a>
+              <a href="Menu-A.html"><img src="../img/siguiente.png" alt="Avance"></a>
+            </div>
+            <div class="nav-iconsxx">
+              <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+            </div>
+            <div class="nav-iconsxx">
+              <h5> Autoevaluación</h5>
+            </div>
+          </div>
+          <hr>
+
+          <form id="formulario">
+
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A.html">XV - Secretaría del Directorio</a></h4>
+          </div>
+
+          <!-- <h1>XV - Secretaría del Directorio.</h1> -->
+
+          <p style="font-size:12px">Seleccione la opción que corresponda a su organización.</p>
+          <!-- <p style="font-size:12px">Si desea dejar pendiente una respuesta, marque el casillero adjunto al número de pregunta.  El sistema le recordará las respuestas pendientes de informar</p> -->
+
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Situación</th>
+              <th class="respuesta-col">No efectiva</th>
+              <th class="respuesta-col">Poco efectivo</th>
+              <th class="respuesta-col">Efectivo</th>
+              <th class="respuesta-col">Muy efectivo</th>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">
+                <!-- <input type="checkbox" id="selection" name="selection" onchange="toggleRedTextAndDisableRadios(this)"> -->
+                1. La Secretaría se asegura del cumplimiento del Estatuto, el Código de Gobierno Corporativo y el Reglamento del Directorio, en su caso</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="1"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="2"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="3"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="4"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">2. Los directores evalúan a la Secretaría</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-2" value="1"><label for="A-15-2" class="radio-label">Si</label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-2" value="2"><label for="A-15-2" class="radio-label">No</label>
+                </div>
+              </td>
+
+            </tr>
+
+          </table>
+
+
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Enviar</button>
+          </div>
+
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
+
+          <!-- </form> -->
+
+    </form>
+  </div>
+
+  </section>
+  </section>
+
+
+  <!-- ventana al final con resultados -->
+
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+        <!-- <button type="button" onclick="cerrarAlerta()">Cerrar</button> -->
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  function toggleRedTextAndDisableRadios(checkbox) {
+      var row = checkbox.closest('tr'); // Encuentra la fila (tr) más cercana
+      var radios = row.querySelectorAll('input[type="radio"]'); // Encuentra todos los radio buttons en la fila
+
+      if (checkbox.checked) {
+          row.classList.add('red-text');
+          radios.forEach(function(radio) {
+              radio.disabled = true; // Deshabilita cada radio button
+          });
+          alert("Al seleccionar esta opción, la situación planteada quedará pendiente de respuesta y se deshabilitará el marcado de opciones.\n\nCuando desee completar la respuesta puede regresar a esta página.\n\nLe recordaremos todas las situaciones pendientes de respuesta.\n\nPara responder a la situación pendiente, simplemente desmarque la casilla y  las opciones se habilitarán nuevamente.");
+      } else {
+          row.classList.remove('red-text');
+          radios.forEach(function(radio) {
+              radio.disabled = false; // Habilita cada radio button
+          });
+      }
+  }
+</script>
+
+<!-- <script src="../datos/tabla01.js"></script> -->
+<!-- <script src="../datos/tabla02.js"></script> -->
+<script src="../../js/ma-15.js"></script>
+
+</html>
