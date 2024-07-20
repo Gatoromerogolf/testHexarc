@@ -102,7 +102,7 @@ app.get('/totalCapitulos', (req, res) => {
       return;
     }
 
-  console.log(`Recibido CUIT: ${CUIT}, capitulo: ${capitulo}`);
+  // console.log(`Recibido CUIT: ${CUIT}, capitulo: ${capitulo}`);
 
   const query = 'SELECT * FROM totalcapitulos WHERE CUIT = ? AND capitulo = ?';
 
@@ -112,7 +112,7 @@ app.get('/totalCapitulos', (req, res) => {
         console.log("error servidor al obtener registros");
         return;
       }
-      console.log('Resultados de la consulta:', results);
+      // console.log('Resultados de la consulta:', results);
       
       // Verificar si hay al menos un registro
       if (results.length > 0) {
