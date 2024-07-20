@@ -36,7 +36,7 @@ document
             if (data.user.ingresado == 1) {
                 window.location.href = '../src/continuacion.html';
                } else {
-                window.location.href = '../src/presentacion.html'
+                window.location.href = '../src/Presentacion.html'
             }
         } else {
             // Mostrar mensaje de error si las credenciales son inválidas
