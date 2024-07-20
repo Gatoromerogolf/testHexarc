@@ -76,7 +76,7 @@ h1, h2, h3, h4 {
     margin-bottom: 15px;
 }
 
-#tablaIndiceCapitulo {
+#tablaIndiceCapitulos {
     text-decoration: none;
     padding:2px ;
     display:block;
@@ -86,7 +86,7 @@ h1, h2, h3, h4 {
     margin: auto; /* Centra horizontalmente */
 }
 
-#tablaIndiceCapitulo  th{
+#tablaIndiceCapitulos  th{
     background-color: #f0f0f0; /* Color de fondo */
     border: 1px solid #ccc; /* Borde */
     padding: 8px; /* Espaciado interno */
@@ -94,10 +94,36 @@ h1, h2, h3, h4 {
     font-family:'Roboto', sans-serif;
   }
 
-  #tablaIndiceCApitulo tr {
+  #tablaIndiceCapitulos tr {
     height: 30px; /* Ajusta esta altura según tus necesidades */
 }
-  
+
+#tablaIndice {
+  text-decoration: none;
+  padding:2px ;
+  display:block;
+  font-family:'Roboto', sans-serif;
+  font-size: 15px; /* Tamaño del texto */
+  color: #333; /* Color del texto */
+  margin: auto; /* Centra horizontalmente */
+}
+
+#tablaIndice th{
+  background-color: #f0f0f0; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  padding: 8px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+  font-family:'Roboto', sans-serif;
+}
+
+#tablaIndice tr {
+  height: 30px; /* Ajusta esta altura según tus necesidades */
+}
+
+
+
+
+
 .botonSiguiente {
   display: inline-block;
   padding: 10px 20px;
