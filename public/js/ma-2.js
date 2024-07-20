@@ -5,7 +5,7 @@ let valores = 0;
 let porcientoFormateado = 0;
 let puntajesIndividuales = [];
 let filasFaltantes = [];
-const maximo = 160;
+let maximo = 160;
 if (JSON.parse(localStorage.getItem('3o4Direct')) == 1) {
       maximo =+ 10;
 }
