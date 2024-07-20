@@ -146,7 +146,7 @@ app.get('/secciones', (req, res) => {
       }
     });
   });
-  
+
 // Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
 app.get('/preguntas', (req, res) => {
   const query = 'SELECT * FROM preguntas';
@@ -183,9 +183,9 @@ app.get('/busca-respuesta-capitulo', (req, res) => {
       }
       if (results.length > 0) {
         res.json({ exists: true, records: results});
-        console.log('Resultados encontrados busca-respuesta-capitulo - despues json:', results);
+        // console.log('Resultados encontrados busca-respuesta-capitulo - despues json:', results);
       } else {
-        console.log (`no hay respuesta para CUIT ${CUIT} y capitulo ${capitulo} en busca-respuesta-capitulo`)
+        // console.log (`no hay respuesta para CUIT ${CUIT} y capitulo ${capitulo} en busca-respuesta-capitulo`)
         res.json({ exists: false });
         }
       });
