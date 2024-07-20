@@ -23,6 +23,12 @@ body.aperie {
   background-size: cover;
 }
 
+/* Fondo específico para la clase fiananciero */
+body.menugral {
+  background: url('background menugral.webp') no-repeat center center fixed;
+  background-size: cover;
+}
+
 h3, h4 {
   margin-top: 0;
 }
