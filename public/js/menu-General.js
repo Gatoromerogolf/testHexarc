@@ -118,6 +118,9 @@ function completarHtml() {
     enlace.href = tablaMenuA[i][1]; // Establecer el atributo href con el valor correspondiente
     enlace.textContent = tablaMenuA[i][2]; // Establecer el texto del enlace con el tercer elemento de la tabla
     enlace.style.textDecoration = 'none';
+    if (tablaMenuA[i][1] == "##") {
+      enlace.style.color='gray';
+    }
 
       // Agregar el enlace como hijo de la celda
     if (i == tablaMenuA.length-1){
