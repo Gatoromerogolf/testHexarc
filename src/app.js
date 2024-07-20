@@ -4,7 +4,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 const { conexion } = require("./db");
 const path = require('path');
 const session = require('express-session')
@@ -43,7 +43,7 @@ app.use(session({
     secret: 'mi-super-secreto', // Cambia esto por un secreto más seguro en producción
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Cambia esto a true si usas HTTPS
+    cookie: { secure: true } // Cambia esto a true si usas HTTPS
 }));
 
 app.post('/api/login', (req, res) => {
