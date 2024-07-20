@@ -120,17 +120,21 @@ h3, h4 {
   height: 20px; /* Ajusta esta altura según tus necesidades */
 }
 
+table {
+  border-collapse: collapse; /* Asegura que no haya espacio entre los bordes de las celdas */
+}
+
 th, td {
   padding: 8px;
-  border: 1px solid black;
+  border: 1px solid #ccc;
 }
 
 th {
-  padding-bottom: 4px; /* Reduce el padding inferior de los encabezados */
+  padding-bottom: 0px; /* Reduce el padding inferior de los encabezados */
 }
 
 tr:first-of-type + tr {
-  height: 10px; /* Reduce la altura de la primera fila después del encabezado */
+  height: 1px; /* Reduce la altura de la primera fila después del encabezado */
 }
 
 

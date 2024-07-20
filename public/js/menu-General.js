@@ -164,11 +164,12 @@ function completarHtml() {
     // totcalif = totcalif.toFixed(2);
     totcalif += Number(tablaMenuA[i][4]);
 
+
     celdaPorciento = lineaDatosFd.insertCell(-1);
     if (tablaMenuA[i][5] === 0) {
       tablaMenuA[i][5] = ""
     }
-    celdaPorciento.textContent = tablaMenuA[i][5];
+    celdaPorciento.textContent = tablaMenuA[i][5]};
     celdaPorciento.classList.add('ajustado-derecha');
 
     celdaPDF = lineaDatosFd.insertCell(-1);
@@ -203,7 +204,12 @@ function completarHtml() {
       celdaPuntos.textContent = numeroFormateado;
 
       celdaPorciento.style.fontWeight = 'bold'; // Hacer el texto en negrita
-      celdaPorciento.textContent = ((totcalif / totmaximo)*100).toFixed(2);
+      if (totmaximo > 0) {
+        celdaPorciento.textContent = ((totcalif / totmaximo)*100).toFixed(2)
+      }
+        else {
+          celdaPorciento.textContent = "";
+        }
 
       if (!totcalif > 0) {
         celdaMaximo.textContent = '';
@@ -212,7 +218,7 @@ function completarHtml() {
       }
     }
   }
-}
+
 
 // ::::::::::::::::::::::------------------------------------------
 function formatearNumero(numero) {
