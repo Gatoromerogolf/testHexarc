@@ -176,8 +176,8 @@ async function grabarResultados2(respuestas) {
     respuesta
   };
 
-  try {
-    const response = await fetch("http://localhost:3000/insertar2", {
+  try {http://localhost:3000
+    const response = await fetch("/insertar2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

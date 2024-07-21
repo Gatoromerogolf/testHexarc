@@ -27,13 +27,13 @@ conexion.connect((err) => {
 console.log("CONNECTED to the database");
 });
 
-// Ejemplo de una consulta
-conexion.query('SELECT * FROM preguntas', (err, results, fields) => {
-  if (err) {
-      console.error('Error in query:', err);
-      return;
-  }
-  console.log('Query results:', results);
-});
+// // Ejemplo de una consulta
+// conexion.query('SELECT * FROM preguntas', (err, results, fields) => {
+//   if (err) {
+//       console.error('Error in query:', err);
+//       return;
+//   }
+//   console.log('Query results:', results);
+// });
 
 module.exports = { conexion };
