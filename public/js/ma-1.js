@@ -327,14 +327,86 @@ function cerrarAlerta() {
 }
 
 function continuar() {
-  cerrarAlerta(); // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+  cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
 
-  // if (idioma == 1) {
-  //       (window.location.href = "MA-2.html")
-  //     else
-  //       (window.location.href = "MA-2-en.html")}
+  grabarResultados2(respuestas)
+    .then(() => {
+      localStorage.setItem('username', username);
+      const CUIT = localStorage.getItem('CUIT');
+      actualizaUserIngreso(username, CUIT)
+      window.location.href =
+        JSON.parse(localStorage.getItem("idioma")) == 1
+          ? "MA-2.html"
+          : "MA-2-en.html";
+    })
+    .catch((error) => {
+      console.error("Error en grabarResultados:", error);
+      alert("Hubo un error al grabar los resultados: " + error.message);
+    });
+}
 
-  window.location.href = (JSON.parse(localStorage.getItem('idioma'))) == 1 ? "MA-2.html" : "MA-2-en.html"
+//   window.location.href = (JSON.parse(localStorage.getItem('idioma'))) == 1 ? "MA-2.html" : "MA-2-en.html"
+// }
+
+async function grabarResultados2(respuestas) {
+
+  const capitulo = "A";
+  const seccion = 1;
+  const score = valores;
+  const respuesta = respuestas;
+
+  const body = {
+    capitulo,
+    seccion,
+    score,
+    respuesta
+  };
+
+  try {
+    const response = await fetch("/insertar2", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+      credentials: "include",
+    });
+
+    const result = await response.json();
+    if (result.success) {
+    } else {
+      throw new Error(result.error || "Error desconocido ins 2");
+    }
+  } catch (error) {
+    console.log("Error:", error);
+    alert("estamos en el error (ins 2): " + error.message);
+    throw error; // Rechaza la promesa en caso de error
+  }
+}
+
+
+
+
+// Función para actualizar el campo ingresado del usuario
+function actualizaUserIngreso(username, CUIT) {
+  fetch('/api/updateIngresado', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username , CUIT })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.message === 'Campo ingresado actualizado correctamente') {
+          console.log('Campo ingresado actualizado correctamente');
+      } else {
+          console.error('Error al actualizar el campo ingresado');
+      }
+  })
+  .catch(error => {
+      console.error('Error en la solicitud de actualización:', error);
+  });
 }
 
 // ------------------ no se utiliza

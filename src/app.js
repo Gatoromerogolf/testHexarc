@@ -68,6 +68,32 @@ app.post('/api/login', (req, res) => {
 });
 
 
+// Ruta para actualizar el campo "ingresado" del usuario:::::::::::::::::::::::::::::::
+app.post('/api/updateIngresado', (req, res) => {
+  const { username, CUIT } = req.body;
+  const query = 'UPDATE usuarios SET ingresado = 1 WHERE username = ?, CUIT = ?';
+
+  conexion.query(query, [username, CUIT], (error, results) => {
+    if (error) {
+      console.error('Error al actualizar el campo ingresado:', error);
+      res.status(500).json({ error: 'Error al actualizar el campo ingresado' });
+      return;
+    }
+    res.json({ message: 'Campo ingresado actualizado correctamente' });
+  });
+});
+
+
+// Ruta protegida que requiere autenticación :::::::::::::::::::::::::::::::::::::::::.
+app.get('/protected', (req, res) => {
+  if (req.session.user) {
+      res.status(200).send(`Bienvenido ${req.session.user.username}`);
+  } else {
+      res.status(401).send('Necesitas iniciar sesión');
+  }
+});
+
+
 // Ruta para obtener los registros de la tabla capitulos ::::::::::::::::::::
 app.get('/capitulos', (req, res) => {
   // obtiene el indice de la consulta
@@ -256,6 +282,47 @@ app.get("/api/respuestas", (req, res) => {
   });
 });
 
+
+
+// Inserción de registros en MySQL opcion 2 :::::::::::::::::::::::::::::::::::::
+app.post('/insertar2', (req, res) => {
+  if (!req.session.user){
+      return res.status(401).json({ error: 'No estás autenticado' });
+  }
+
+  console.log ("llego y paso el req session")
+
+  const { capitulo, seccion, score, respuesta } = req.body;
+  const usuario = req.session.user.username; // Obtener el usuario de la sesión
+  const CUIT = req.session.user.CUIT;
+
+  if (!usuario) {
+      return res.status(400).json({ error: 'Usuario no definido en la sesión' });
+  }
+
+  // Convertir el array de respuesta a un string JSON
+  const respuestaJSON = JSON.stringify(respuesta);   
+
+  console.log('Datos recibidos:', { CUIT, usuario, capitulo, seccion, score, respuesta });
+
+  const nuevoResultado = 'INSERT INTO respuestas (CUIT, usuario, capitulo, seccion, score, respuesta) VALUES (?, ?, ?, ?, ?, ?)';
+  const datosAPasar = [CUIT, usuario, capitulo, seccion, score, respuestaJSON];
+
+  conexion.query(nuevoResultado, datosAPasar, function (error, lista) {
+      if (error) {
+          if (error.code === 'ER_DUP_ENTRY') {
+              // Manejar el error de duplicación
+              res.status(409).json({ error: 'Ya existe una respuesta para esta combinación de capitulo y seccion' });
+          } else {
+          console.log('Error:', error);
+          res.status(500).json({ error: error.message });
+      }
+      } else {
+          console.log(lista.insertId, lista.fieldCount);
+          res.status(200).json({ success: true });
+      }
+  });
+});
 
 
 app.listen(8080, () => console.log(`Server is listening on port ${8080}`));
