@@ -99,7 +99,7 @@ function completarHtml() {
   tablaMenuEs.push(elemento);
 
   tablaMenuA = tablaMenuEs;
-  console.table(tablaMenuA);
+  // console.table(tablaMenuA);
 
   let tablaIndice = document.getElementById("tablaIndiceCapitulos");
   for (i = 0; i < tablaMenuA.length; i++) {
@@ -169,7 +169,7 @@ function completarHtml() {
     if (tablaMenuA[i][5] === 0) {
       tablaMenuA[i][5] = ""
     }
-    celdaPorciento.textContent = tablaMenuA[i][5]};
+    celdaPorciento.textContent = tablaMenuA[i][5];
     celdaPorciento.classList.add('ajustado-derecha');
 
     celdaPDF = lineaDatosFd.insertCell(-1);
@@ -218,7 +218,7 @@ function completarHtml() {
       }
     }
   }
-
+}
 
 // ::::::::::::::::::::::------------------------------------------
 function formatearNumero(numero) {
