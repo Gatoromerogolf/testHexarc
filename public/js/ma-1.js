@@ -331,9 +331,9 @@ function continuar() {
 
   grabarResultados2(respuestas)
     .then(() => {
-      localStorage.setItem('username', username);
+      const usuario = localStorage.getItem('username');
       const CUIT = localStorage.getItem('CUIT');
-      actualizaUserIngreso(username, CUIT)
+      actualizaUserIngreso(usuario, CUIT)
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
           ? "MA-2.html"

@@ -42,7 +42,7 @@ app.use(cookieParser()); // Configura el middleware para leer cookies
 app.use(session({
     secret: 'mi-super-secreto', // Cambia esto por un secreto más seguro en producción
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: true } // Cambia esto a true si usas HTTPS
 }));
 
@@ -60,7 +60,15 @@ app.post('/api/login', (req, res) => {
              lastName: user.Apellido,
              CUIT: user.CUIT}; // Guarda el usuario como un objeto en la sesión
           // res.status(200).send('Login exitoso');
-          res.status(200).json({ message: 'Login exitoso', user: { firstName: user.Nombre, lastName: user.Apellido, CUIT: user.CUIT, ingresado: user.ingresado } }); 
+          res.status(200).json({ 
+            message: 'Login exitoso',
+            user: {
+              firstName: user.Nombre,
+              lastName: user.Apellido,
+              CUIT: user.CUIT,
+              ingresado: user.ingresado 
+            }
+          }); 
       } else {
           res.status(401).send('Credenciales inválidas');
       }
