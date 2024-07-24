@@ -31,6 +31,7 @@ document
             console.log('nombre:', localStorage.getItem('nombre'));
             console.log('apellido:', localStorage.getItem('apellido'));
             console.log('CUIT:', localStorage.getItem('CUIT'));
+            alert ('entro correctamente')
             // Login exitoso, redirige a presentacion.html
 
             if (data.user.ingresado == 1) {
