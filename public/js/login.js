@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     .then(data => {
         if (data.message === 'Login exitoso') {
             // Guardar el nombre de usuario en localStorage
-            localStorage.setItem('username', username);
+            localStorage.setItem('username', data.user.username);
             localStorage.setItem('ingresado', data.user.ingresado); 
             
             // Guardar el nombre y apellido en localStorage

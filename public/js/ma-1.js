@@ -8,20 +8,8 @@ let filasFaltantes = [];
 
 let checkboxesSeleccionados = [];
 
+
 // obtenerValoresSeleccionados :::::::::::::::::::::
-
-// modulo1.js
-function usarListaPrecios() {
-  if (global.listaPrecios) {
-    console.table(global.listaPrecios);
-    // Tu lógica con la lista de precios
-  } else {
-    console.error('La lista de precios no está disponible.');
-  }
-}
-
-usarListaPrecios();
-
 
 function obtenerValoresSeleccionados() {
   respuestas = [];
