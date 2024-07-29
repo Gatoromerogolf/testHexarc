@@ -181,14 +181,17 @@ async function grabarResultados2(respuestas) {
   const seccion = 9;
   const score = valores;
   const respuesta = respuestas;
+  const porcentaje = porcientoFormateado;
 
   const body = {
-    //CUIT,
     capitulo,
     seccion,
+    maximo, 
     score,
+    porcentaje,
     respuesta
   };
+
 
   try {
     const response = await fetch("/insertar2", {

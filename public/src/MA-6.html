@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,9 @@
   <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 </head>
 
 <body>
-
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
@@ -36,95 +35,105 @@
             <h4 class="tituloSeccion"><a href="Menu-A.html">VI - Información para el Directorio</a></h4>
           </div>
 
-        <!-- <h1>VI - Información para el Directorio.</h1> -->
+          <p style="font-size:12px">Seleccione la opción que corresponda a su organización</p>
 
-        <p style="font-size:12px">Seleccione la opción que corresponda a su organización</p>
-
-        <table>
-          <tr>
+          <table>
+            <tr>
               <th class="pregunta-col">Situación</th>
-              <th class="respuesta-col">No efectiva</th>
+              <th class="respuesta-col">No efectivo</th>
               <th class="respuesta-col">Poco efectivo</th>
               <th class="respuesta-col">Efectivo</th>
               <th class="respuesta-col">Muy efectivo</th>
-          </tr>
+            </tr>
 
-          <tr>
-            <td class="pregunta-col">1. El Directorio recibe KPI´s suficientes y sólidos desde la Gerencia.</td>
+            <tr>
+              <td class="pregunta-col">1. El Directorio recibe KPI´s suficientes y sólidos desde la Gerencia.</td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-1" value="1"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="1">
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-1" value="2"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="2">
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-1" value="3"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="3">
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-1" value="4"></td>
-          </tr>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="4">
+              </td>
+            </tr>
 
-          <tr>
-            <td class="pregunta-col">2. El Directorio ejerce consistentemente un desafío creíble a la información gerencial</td>
+            <tr>
+              <td class="pregunta-col">2. El Directorio ejerce consistentemente un desafío creíble a la información
+                gerencial</td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-2" value="1"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-2" value="2"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-2" value="3"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-2" value="4"></td>
-          </tr>
-          
-          <tr>
-            <td class="pregunta-col">3. El Directorio aprueba los contratos significativos celebrados por la Gerencia</td>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+              </td>
+            </tr>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-3" value="1">Si</td>
+            <tr>
+              <td class="pregunta-col">3. El Directorio aprueba los contratos significativos celebrados por la Gerencia
+              </td>
 
-            <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-6-3" value="2">No</td>
-          </tr>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-3" value="1">Si
+              </td>
 
-        </table>
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-3" value="2">No
+              </td>
+            </tr>
 
-        <div class="centrado-flex">
-          <button type="submit" id="boton-enviar">Enviar</button>
-        </div>
+          </table>
 
-        <div class="centrado-flex">
-          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
-        </div>
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Enviar</button>
+          </div>
 
-      </form>
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
+
+        </form>
+      </section>
     </section>
-  </section>
 
 
 
-  <div id="miAlerta" class="alerta-oculto">
-    <div class="alerta-contenido">
-      <div class="alerta-cabecera">
-        <span>Resumen de la sección</span>
-      </div>
-      <div class="alerta-cuerpo">
-        <p>Puntaje máximo posible: <span id="maximo"></span></p>
-        <p>Calificación obtenida: <span id="calificacion"></span></p>
-        <p>Porcentual: <span id="porcentual"></span></p>
+    <div id="miAlerta" class="alerta-oculto">
+      <div class="alerta-contenido">
+        <div class="alerta-cabecera">
+          <span>Resumen de la sección</span>
+        </div>
+        <div class="alerta-cuerpo">
+          <p>Puntaje máximo posible: <span id="maximo"></span></p>
+          <p>Calificación obtenida: <span id="calificacion"></span></p>
+          <p>Porcentual: <span id="porcentual"></span></p>
 
-      <div class="gauge-container">
-        <canvas id="gaugeChart";></canvas>
-      </div>
+          <div class="gauge-container">
+            <canvas id="gaugeChart" ;></canvas>
+          </div>
 
-        <button id="continuar" onclick="continuar()">Continuar</button>
+          <button id="continuar" onclick="continuar()">Continuar</button>
+        </div>
       </div>
     </div>
-  </div>
 
 </body>
 

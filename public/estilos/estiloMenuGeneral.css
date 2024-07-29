@@ -71,7 +71,12 @@ h3, h4 {
   align-items: center;
   gap: 15px; /* Espacio entre los iconos */
 }
-  
+
+h1, h2, h3, h4 {
+  text-align: center;
+  color: #333333;
+}
+
 .form-group {
     margin-bottom: 15px;
 }

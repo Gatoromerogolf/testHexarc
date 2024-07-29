@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     /* background-image: url('../img/reuniones.png'); ../estilos/estiloMenuGeneral.css */
     background-image: url('background.jpg'); /*../estilos/estiloMenuGeneral.css*/
-    /*background-image: url('../estilos/background.jpg'); /*../estilos/estiloMenuGeneral.css */
+    background-image: url('../estilos/background.jpg'); /*../estilos/estiloMenuGeneral.css */
     background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
     background-position: center; /* Centra la imagen */
     background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
@@ -11,14 +11,44 @@ body {
     background-attachment: fixed;
 }
 
+
 /* Fondo específico para la clase fiananciero */
 body.financiero {
   background: url('background financiero.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
+/* Fondo específico para la clase apetito riesgo */
+body.aperie {
+  background: url('background aperie.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase mercado */
+body.mercado {
+  background: url('background mercado.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase procesos */
+body.procesos {
+  background: url('background procesos.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase clidad */
+body.calidad {
+  background: url('background calidad.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+
 .survey-container {
-    max-width: 900px;
+    max-width: 700px;
     margin: 50px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
@@ -49,8 +79,28 @@ h1, h2, h3 {
     color: #333333;
 }
 
+h5 {
+  color: #686767;
+}
+
 .form-group {
     margin-bottom: 15px;
+}
+
+
+.salida {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salida p {
+  font-size: 12px;
+  margin: 0; /* Remove default margin */
+}
+
+.salida button {
+  margin-left: auto; /* Push button to the right */
 }
 
 #tablaIndice {
@@ -228,6 +278,9 @@ h1, h2, h3 {
   height: auto;
 }
 
+.nav-iconstxt a {
+  text-decoration: none;
+}
 
 /* --------------   PREGUNTAS EN TABLAS
   /* Estilos para la tabla */
@@ -343,7 +396,84 @@ h1, h2, h3 {
     justify-content: center;
   }
 
-#tituloSeccion{
+
+  /* -----------BOTON SALIR ------------------------*/
+
+  #boton-salir {
+    background-color: #f558b9; /* Color de fondo */
+    color: white; /* Color de texto */
+    padding: 5px 30px 5px; /* Espaciado alrededor del texto */
+    border: none; /* Sin bordes */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano al pasar el mouse */
+    transition: all 0.3s; /* Transición suave para los cambios */
+    font-size: 14px; /* Tamaño de la fuente */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 10px;
+  }
+  
+  #boton-salir:hover {
+    background-color: #8d8886; /* Color de fondo al pasar el mouse */
+  }
+  
+  #boton-salir:focus {
+    outline: none; /* Elimina el contorno al enfocar */
+    box-shadow: 0 0 8px rgba(248, 109, 17, 0.6); /* Sombra de foco */
+  }
+
+  #overlay {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray background */
+    z-index: 9999; /* Ensure it is on top of other elements */
+  }
+  
+  #ventanaSalida {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 
+
+  .confirm-modal {
+  /* #ventanaSalida { */
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.confirm-box button {
+    margin: 5px;
+}
+
+
+
+  /* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+.tituloSeccion{
   display: inline-block;
   padding: 10px 50px 10px 50px; /* Espacio interior del rectángulo */
   border: 2px solid rgba(0, 0, 0, 0.5); /* Borde del rectángulo */
@@ -353,7 +483,7 @@ h1, h2, h3 {
   text-align: center; 
 }
 
-#tituloSeccion a {
+.tituloSeccion a {
   text-decoration: none; /* Quitar el subrayado del enlace */
   color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
 }

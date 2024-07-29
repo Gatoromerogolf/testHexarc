@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modelo HexaRCi</title>
+  <title>Evaluación de riesgos</title>
   <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
   <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
@@ -12,8 +12,6 @@
 </head>
 
 <body>
-
-
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
@@ -36,8 +34,6 @@
           <div class="center-container">
             <h4 class="tituloSeccion"><a href="Menu-A.html">IV - Comités del Directorio</a></h4>
           </div>
-
-          <!-- <h1>IV - Comités del Directorio.</h1> -->
 
           <p style="font-size:12px">Seleccione la opción que corresponda a su organización</p>
 
@@ -131,13 +127,7 @@
               </td>
             </tr>
             <tr></tr>
-            <!-- <tr>
-            <th class="pregunta-col">Situación</th>
-            <th class="respuesta-col">No efectiva</th>
-            <th class="respuesta-col">Poco efectivo</th>
-            <th class="respuesta-col">Efectivo</th>
-            <th class="respuesta-col">Muy efectivo</th>
-        </tr> -->
+
 
 
             </tr>
@@ -156,7 +146,7 @@
 
             <tr>
               <th class="pregunta-col">Situación</th>
-              <th class="respuesta-col">No efectiva</th>
+              <th class="respuesta-col">No efectivo</th>
               <th class="respuesta-col">Poco efectivo</th>
               <th class="respuesta-col">Efectivo</th>
               <th class="respuesta-col">Muy efectivo</th>
@@ -345,6 +335,30 @@
     </div>
   </div>
 
+  <!-- <script>
+  function mostrarOcultarComAudit(valorSeleccionadoAB) {
+
+    // Muestra las líneas si el valor seleccionado es '1'
+    if (valorSeleccionadoAB === '1') {
+      document.getElementById('lineaComAud').style.display = 'block';
+      document.getElementById('lineaComAudS').style.display = 'inline-block';
+      document.getElementById('lineaComAudN').style.display = 'inline-block';
+      document.getElementById("reunionComAud").style.display = 'block';
+      document.getElementById("reunionComAud1").style.display = 'inline-block';
+      document.getElementById("reunionComAud2").style.display = 'inline-block';
+      document.getElementById("tituloFrecuencia").style.display = 'inline-block';
+
+    } else {
+      // Mostrar las líneas si se selecciona cualquier otro valor
+      document.getElementById('lineaComAud').style.display = 'none';
+      document.getElementById('lineaComAudS').style.display = 'none';
+      document.getElementById('lineaComAudN').style.display = 'none';
+      document.getElementById("reunionComAud").style.display = 'none';
+      document.getElementById("reunionComAud1").style.display = 'none';
+      document.getElementById("reunionComAud2").style.display = 'none';
+    }
+  }
+</script> -->
 
   <script>
     function mostrarOcultarComAudit(value) {
