@@ -5,6 +5,7 @@ let maximo = 20; // 2 por 5
 let porcientoFormateado = 0;
 let puntajesIndividuales = [];
 let filasFaltantes = [];
+let isExiting = false;
 
 let checkboxesSeleccionados = [];
 
@@ -52,35 +53,47 @@ function calculaResultados() {
     //      respuestas: ${respuestas[i]}`);
 
     switch (respuestas[0]) {
-      case "1": valores +=0;
-              break;
-      case "2": valores +=(0.50 * 10);
-              console.log (`caso 2 ${valores}`)
-              break;
-      case "3": valores +=(0.75 * 10);
-              console.log (`caso 3 ${valores}`)
-              break;
-      case "4": valores +=10;
-              console.log (`caso 4 ${valores}`)
-              break;
-      }
+      case "1":
+        valores += 0;
+        break;
+      case "2":
+        valores += 0.5 * 10;
+        console.log(`caso 2 ${valores}`);
+        break;
+      case "3":
+        valores += 0.75 * 10;
+        console.log(`caso 3 ${valores}`);
+        break;
+      case "4":
+        valores += 10;
+        console.log(`caso 4 ${valores}`);
+        break;
+    }
 
     if (respuestas[1] == 1) {
-        valores +=10
-      } 
+      valores += 10;
+    }
 
     console.log(`valor despues calculo: ${valores}`);
-  
-  const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
-  return porcientoFormateado;
-}}
+
+    const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
+    return porcientoFormateado;
+  }
+}
 
 // PROCESO PRINCIPAL ::::::::::::::::::::::::::::::::::::::::::
 
 document
-  // Captura del formulario :::::::::::::::::::::::::::::::::::::
   .getElementById("formulario")
   .addEventListener("submit", function (event) {
+    // Verifica si el usuario está en proceso de salir y evita la validación en ese caso
+    if (isExiting) {
+      // Reinicia el indicador de salida para futuras operaciones
+      isExiting = false;
+
+      // Omite la validación cuando se está intentando salir
+      return;
+    }
     valores = 0;
     event.preventDefault(); // Prevenir el envío del formulario
 
@@ -175,9 +188,9 @@ function continuar() {
 
   grabarResultados2(respuestas)
     .then(() => {
-      const username = localStorage.getItem('username');
-      const CUIT = localStorage.getItem('CUIT');
-      actualizaUserIngreso(username, CUIT)
+      const username = localStorage.getItem("username");
+      const CUIT = localStorage.getItem("CUIT");
+      actualizaUserIngreso(username, CUIT);
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
           ? "Menu-A.html"
@@ -196,17 +209,20 @@ async function grabarResultados2(respuestas) {
   const seccion = 15;
   const score = valores;
   const respuesta = respuestas;
+  const porcentaje = porcientoFormateado;
 
   const body = {
     capitulo,
     seccion,
+    maximo,
     score,
-    respuesta
+    porcentaje,
+    respuesta,
   };
 
   try {
-    // const response = await fetch("/insertar2", {
-      const response = await fetch("/insertar2", {
+    // const response = await fetch("http://localhost:3000/insertar2", {
+    const response = await fetch("/insertar2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -228,27 +244,26 @@ async function grabarResultados2(respuestas) {
   }
 }
 
-
 // Función para actualizar el campo ingresado del usuario
 function actualizaUserIngreso(username, CUIT) {
-  fetch('/api/updateIngresado', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username , CUIT })
+  fetch("/api/updateIngresado", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, CUIT }),
   })
-  .then(response => response.json())
-  .then(data => {
-      if (data.message === 'Campo ingresado actualizado correctamente') {
-          console.log('Campo ingresado actualizado correctamente');
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message === "Campo ingresado actualizado correctamente") {
+        console.log("Campo ingresado actualizado correctamente");
       } else {
-          console.error('Error al actualizar el campo ingresado');
+        console.error("Error al actualizar el campo ingresado");
       }
-  })
-  .catch(error => {
-      console.error('Error en la solicitud de actualización:', error);
-  });
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud de actualización:", error);
+    });
 }
 
 // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
@@ -286,7 +301,6 @@ const opts = {
   },
 };
 
-
 // //
 // let respuestas = [1, 2, 3, 4, 5]; // Ejemplo de arreglo de respuestas
 // let checklistValues = [6, 7, 8]; // Ejemplo de arreglo de valores de checklist
@@ -299,8 +313,6 @@ const opts = {
 // console.log(respuestas[0]); // Salida: 1
 // console.log(respuestas[2]); // Salida: [6, 7, 8]
 
-
 // let respuestas = [1, 2, [6, 7, 8], 3, 4, 5];
 // let numeroSiete = respuestas[2][1]; // Accede al subarreglo en la posición 2, y luego al elemento en la posición 1 dentro de ese subarreglo
 // console.log(numeroSiete); // Salida: 7
-

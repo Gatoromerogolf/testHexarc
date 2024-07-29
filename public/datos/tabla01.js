@@ -6,7 +6,7 @@ const tabla01 = [
   [0, 20, 40], // 5. Direc independ
   [0, 5, 10, 15], // 6. Mujeres
   [10, 20, 20, 10, 10, 10, 0], // 7. experiencia
-  [20, 10, 10], // 8.  frecuencia reuniones
+  [20, 10], // 8.  frecuencia reuniones
   [10, 0], // 9. reun adicionales
   [40, 0], // 10. advisory board
   [0, 30, 45, 60], // 11

@@ -216,21 +216,24 @@ function continuar() {
 }
 
 async function grabarResultados2(respuestas) {
-
   const capitulo = "A";
   const seccion = 2;
   const score = valores;
   const respuesta = checkboxesSeleccionados;
+  const porcentaje = porcientoFormateado;
 
   const body = {
     capitulo,
     seccion,
+    maximo, 
     score,
+    porcentaje,
     respuesta
   };
 
+
   try {
-    const response = await fetch("/insertar2", {
+    const response = await fetch("http://localhost:3000/insertar2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

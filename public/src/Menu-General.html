@@ -8,60 +8,68 @@
   <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet">
-  <!-- <link href="../estilos/estiloEncuestas.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
 </head>
-<body class="menugral">
 
+<body>
   <div class="survey-container">
     <form id="survey-form">
-          <div class="containerTitulo">
-            <div class="left-icon">
-              <a href="../../index.html">
-                <img src="../img/contenido (1).png" width="25px">
-              </a>
-            </div>
-            <div class="logo">
-              <img src="../img/molinos.png" width="150px">
-            </div>
-            <div class="right-icons">
-              <a href="Menu-General.html" id="spainIcon"> 
-                <img src="../img/espana.png" width="25px">
-              </a>
-            </div>
-          </div>
-          
-          <h3>Autoevaluación de la calidad del manejo de la empresa</h3>
-
-          <div class="contenedorTabla">
-            <table id="tablaIndiceCapitulos">
-              <tr>
-                <th>#</th>
-                <th style="width: 250px;">Factor</th>
-                <th style="width: 40px;">Máx</th>
-                <th style="width: 50px;">Calif</th>
-                <th style="width: 40px;">%</th>
-                <th style="width: 20px;"><img src='../img/pdf (1).png' style="width: 20px;"></th>
-              </tr>
-              <tr id="lineaMenu"></tr>
-            </table>
-          </div>
+      <div class="containerTitulo">
+        <div class="left-icon">
+          <a href="../../index.html">
+            <img src="../img/contenido (1).png" width="30px">
+          </a>
+        </div>
+        <div class="logo">
+          <img src="../img/molinos.png" width="150px">
+        </div>
+        <div class="right-icons">
+          <a href="Menu-General.html" id="spainIcon">
+            <img src="../img/espana.png" width="25px">
+          </a>
+          <!-- <a href="Menu-General-en.html" id="usaIcon">
+                <img src="../img/usa.png" width="25px">
+              </a> -->
+        </div>
+      </div>
+      <!-- <h1>Bienvenido, <span id="username"></span>!</h1> -->
+      <h3>Autoevaluación de la calidad del manejo de la empresa</h3>
+      <div class="contenedorTabla">
+        <table id="tablaIndiceCapitulos">
+          <tr>
+            <th>#</th>
+            <th style="width: 350px;">Capítulo</th>
+            <th style="width: 65px;">Máx</th>
+            <th style="width: 65px;">Calif</th>
+            <th style="width: 40px;">%</th>
+            <th style="width: 40px;">ver</th>
+          </tr>
+          <tr id="lineaMenu"></tr>
+        </table>
+      </div>
     </form>
   </div>
-</body>
 
-<script>
-        localStorage.setItem('idioma', '1');
-</script>
-  <!-- <script>
+  <script>
+    localStorage.setItem('idioma', '1');
+  </script>
+
+<!-- <script>
     // Agrega un evento de clic al ícono de España
     document.getElementById('spainIcon').addEventListener('click', function () {
       // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de España
       localStorage.setItem('idioma', '1');
     });
-  </script> -->
+  </script>
 
-  <!-- <script>
+  <script>
     // Agrega un evento de clic al ícono de USA
     document.getElementById('usaIcon').addEventListener('click', function () {
       // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de USA
@@ -69,5 +77,19 @@
     });
   </script> -->
 
+<!-- <script>
+  // Obtener el nombre del usuario de localStorage
+  const username = localStorage.getItem('username');
+  
+  // Mostrar el nombre del usuario en el elemento con id "username"
+  if (username) {
+      document.getElementById('username').textContent = username;
+  } else {
+      // Si no hay un usuario en localStorage, redirigir a la página de login
+      window.location.href = '../login.html';
+  }
+</script> -->
+
 <script src="../../js/menu-General.js"></script>
+</body>
 </html>

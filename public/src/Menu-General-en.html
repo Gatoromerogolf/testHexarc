@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body>
+
+  <div class="survey-container">
+
+    <form id="survey-form">
+          <div class="containerTitulo">
+            <div class="left-icon">
+              <a href="../../index.html">
+                <img src="../img/contenido (1).png" width="30px">
+              </a>
+            </div>
+            <div class="right-icons">
+              <a href="Menu-General.html" id="spainIcon"> 
+                <img src="../img/espana.png" width="25px">
+              </a>
+              <a href="Menu-General-en.html" id="usaIcon">
+                <img src="../img/usa.png" width="25px">
+              </a>
+            </div>
+          </div>
+          
+          <h3>Company: 'Company Name'</h3>
+          <!-- <h3>Self-Assessment. Chapters.</h3> -->
+
+          <div class="contenedorTabla">
+            <table id="tablaIndice">
+              <tr>
+                <th>#</th>
+                <th style="width: 400px;">Chapter</th>
+                <th style="width: 40px;">Max</th>
+                <th style="width: 50px;">Score</th>
+                <th style="width: 40px;">%</th>
+              </tr>
+
+              <tr id="lineaMenu"></tr>
+
+            </table>
+          </div>
+    </form>
+  </div>
+
+
+    </section> -->
+  </div>
+</body>
+
+  <script>
+    // Agrega un evento de clic al ícono de España
+    document.getElementById('spainIcon').addEventListener('click', function () {
+      // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de España
+      localStorage.setItem('idioma', '1');
+    });
+  </script>
+
+  <script>
+    // Agrega un evento de clic al ícono de USA
+    document.getElementById('usaIcon').addEventListener('click', function () {
+      // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de USA
+      localStorage.setItem('idioma', '2');
+    });
+  </script>
+
+<script src="../../js/menu-General.js"></script>
+
+</html>

@@ -10,6 +10,19 @@ let checkboxesSeleccionados = [];
 
 // obtenerValoresSeleccionados :::::::::::::::::::::
 
+// modulo1.js
+function usarListaPrecios() {
+  if (global.listaPrecios) {
+    console.table(global.listaPrecios);
+    // Tu lógica con la lista de precios
+  } else {
+    console.error('La lista de precios no está disponible.');
+  }
+}
+
+usarListaPrecios();
+
+
 function obtenerValoresSeleccionados() {
   respuestas = [];
   const grupos = [
@@ -57,27 +70,26 @@ function obtenerValoresSeleccionados() {
     alert(`Falta infomar en estas filas: ${filasFaltantes}`);
   } else {
     //  inserta con 6 el valor de los checkbox para que se posicione en la ultima = 0
-      respuestas.splice(6, 0, 9);
+    respuestas.splice(6, 0, 9);
 
-      const advisoryBoard = document.querySelector(
-        `input[name="A-I-10"]:checked`
+    const advisoryBoard = document.querySelector(
+      `input[name="A-I-10"]:checked`
+    );
+    if (advisoryBoard.value == 1) {
+      // indica que se informó que tiene AB
+      const respuestaAB = document.querySelector(
+        `input[name="A-I-11"]:checked`
       );
-      
-      if (advisoryBoard.value == 1) {
-          // indica que se informó que tiene AB
-          const respuestaAB = document.querySelector(
-            `input[name="A-I-11"]:checked`
-          );
-          // si puso que tiene AB tiene que informar el campo 11
-          if (respuestaAB) {
-            console.log("entro por aca: " + respuestaAB.value);
-            //si respondio hay que insertar el valor en el arreglo
-            respuestas.splice(10, 0, respuestaAB.value);
-          } else {
-            alert(`No selecciono lo del AB en la fila 11`);
-          }
-          } else {
-            respuestas.splice(10, 0, '9'); // oone 9 como marca de no respuesta    
+      // si puso que tiene AB tiene que informar el campo 11
+      if (respuestaAB) {
+        console.log("entro por aca: " + respuestaAB.value);
+        //si respondio hay que insertar el valor en el arreglo
+        respuestas.splice(10, 0, respuestaAB.value);
+      } else {
+        alert(`No selecciono lo del AB en la fila 11`);
+      }
+      } else {
+        respuestas.splice(10, 0, '9'); // oone 9 como marca de no respuesta    
       }
 
 
@@ -100,8 +112,8 @@ function obtenerValoresSeleccionados() {
           } else {
             respuestas.splice(14, 0, '9'); // pone 9 como marca de no respuesta    
       }
-      
-                
+
+
     }
     console.log(`respuestas con 7 y 11 ${respuestas}`);
     return respuestas; // Devuelve el arreglo si necesitas hacer algo más con él
@@ -186,7 +198,7 @@ function calculaResultados() {
   for (let i = 0; i < respuestas.length; i++) {
     if (i === 6) continue;
     if (i === 10 && respuestas[10] == 9) continue;
-    if (i === 10 && respuestas[10] == 9) continue;
+    if (i === 14 && respuestas[14] == 9) continue;
     if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
     console.log(`i= ${i} ,
          valores ${valores} ,
@@ -219,6 +231,16 @@ document
   .addEventListener("submit", function (event) {
     valores = 0;
     event.preventDefault(); // Prevenir el envío del formulario
+
+    async function main() {
+      // lee la lista de precios
+      const listaPrecios = await leerListaPrecios();
+      console.table(listaPrecios);
+    }
+    
+    // Ejecuta la función main para leer los precios.
+    main();
+    
 
     // obtener los valores de radio
     obtenerValoresSeleccionados();
@@ -273,6 +295,52 @@ document
     }
   });
 
+
+  async function recuperarPreguntas() {
+    try {
+      const response = await fetch('/preguntas');
+      if (response.ok) {
+        const result = await response.json();
+        // console.log('Datos obtenidos de recuperarPreguntas:', result); // Agrega esta línea para verificar los datos obtenidos
+        return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+      } else {
+        console.error('Error al obtener las preguntas:', response.statusText);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+      return [];
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // limpiarSelecciones :::::::::::::::::::::::::::::::::
 
 function limpiarSelecciones() {
@@ -290,6 +358,11 @@ function limpiarSelecciones() {
     checkbox.checked = false;
   });
 
+  document.getElementById('lineaAB').style.display = 'none';
+  document.getElementById('lineaAB1').style.display = 'none';
+  document.getElementById('lineaAB2').style.display = 'none';
+  document.getElementById('lineaAB3').style.display = 'none';
+  document.getElementById('lineaAB4').style.display = 'none';
   document.getElementById('linea2').style.display = 'none';
   document.getElementById('linea3').style.display = 'none';
   document.getElementById('linea4').style.display = 'none';
@@ -299,6 +372,7 @@ function limpiarSelecciones() {
   document.getElementById('fila-15a').style.display = 'none';
   document.getElementById('fila-15b').style.display = 'none';
 }
+
 
 // ------------ ventana del final con resultados---------------
 
@@ -331,7 +405,7 @@ function continuar() {
 
   grabarResultados2(respuestas)
     .then(() => {
-      const usuario = localStorage.getItem('username');
+      const usuario =localStorage.getItem('username') // Obtener username
       const CUIT = localStorage.getItem('CUIT');
       actualizaUserIngreso(usuario, CUIT)
       window.location.href =
@@ -349,16 +423,19 @@ function continuar() {
 // }
 
 async function grabarResultados2(respuestas) {
-
   const capitulo = "A";
   const seccion = 1;
+  // const maximo = maximo;
   const score = valores;
   const respuesta = respuestas;
+  const porcentaje = porcientoFormateado;
 
   const body = {
     capitulo,
     seccion,
+    maximo, 
     score,
+    porcentaje,
     respuesta
   };
 
@@ -385,16 +462,14 @@ async function grabarResultados2(respuestas) {
 }
 
 
-
-
 // Función para actualizar el campo ingresado del usuario
-function actualizaUserIngreso(username, CUIT) {
+function actualizaUserIngreso(usuario, CUIT) {
   fetch('/api/updateIngresado', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username , CUIT })
+      body: JSON.stringify({ usuario , CUIT })
   })
   .then(response => response.json())
   .then(data => {
