@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const { conexion } = require("./db");
 const path = require('path');
 const session = require('express-session');
+const ExcelJS = require('exceljs')
 
 const app = express();
 
@@ -17,15 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Ruta para servir index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
-});
-
-
 // Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
-
 
 app.use(session({
     secret: 'mi-super-secreto', // Cambia esto por un secreto más seguro en producción
@@ -33,6 +27,12 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false } // Cambia esto a true si usas HTTPS
 }));
+
+// Ruta para servir index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+
 
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
@@ -42,24 +42,42 @@ app.post('/api/login', (req, res) => {
       } else if (results.length > 0) {
           const user = results[0]; // Accede a la primera fila de los resultados
           req.session.user = {
-             username: user.username,
-             firstName: user.Nombre,
-             lastName: user.Apellido,
-             CUIT: user.CUIT}; // Guarda el usuario como un objeto en la sesión
+            id: user.id,
+            username: user.username,
+            firstName: user.Nombre,
+            lastName: user.Apellido,
+            empresa: user.Empresa,
+            CUIT: user.CUIT}; // Guarda el usuario como un objeto en la sesión
           res.status(200).json({ 
             message: 'Login exitoso',
             user: {
+              id: user.id,
               username: user.username,
               firstName: user.Nombre,
               lastName: user.Apellido,
+              empresa: user.Empresa,
               CUIT: user.CUIT,
               ingresado: user.ingresado 
             }
           }); 
+          updateLoginTimestamp(user.id);
       } else {
           res.status(401).send('Credenciales inválidas');
       }
   });
+
+  function updateLoginTimestamp(id) {  // Función para actualizar el timestamp en el login
+    const query = 'UPDATE users SET visita = NOW() WHERE id = ?';
+    conexion.query(query, [id], (error, results) => {
+      if (error) {
+        console.error('Error al actualizar el timestamp:', error);
+      } else {
+        console.log('Timestamp actualizado correctamente para el usuario ID:', id);
+      }
+    });
+  }
+
+
 });
 
 // Ruta para actualizar el campo "ingresado" del usuario:::::::::::::::::::::::::::::::
@@ -370,58 +388,77 @@ app.post('/grabaParciales', (req, res) => {
   });
 });
 
-// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// Ruta para generar y descargar el archivo Excel
+app.get('/descargar-excel', async (req, res) => {
+  try {
+
+    // Acceder al usuario de la sesión
+    const usuario = req.session.user?.username;
+
+    if (!usuario) {
+      res.status(401).send('Usuario no autenticado');
+      return;
+    }
+
+    // Consulta a la base de datos
+    const query = 'SELECT * FROM parciales WHERE usuario = ?';
+    conexion.query(query, [usuario], async (error, results, fields) => {
+      if (error) {
+        console.error('Error al consultar la base de datos:', error);
+        res.status(500).send('Error al consultar la base de datos');
+        return;
+      }
+
+      // Crear un nuevo libro de trabajo
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('Respuestas');
+
+      results = results.map(row => ({
+        ...row,
+        score: parseFloat(row.score),
+        porcentaje: parseFloat(row.porcentaje)
+      }));      
+
+      // Configurar las columnas (esto debería coincidir con la estructura de tu tabla)
+      worksheet.columns = [
+        { header: 'CUIT', key: 'CUIT', width: 20 },
+        { header: 'Usuario', key: 'usuario', width: 25 },
+        { header: 'Cap', key: 'capitulo', width: 5 },
+        { header: 'Sec', key: 'seccion', width: 5 },
+        { header: 'Nro', key: 'numero', width: 5 },
+        { header: 'Afirmación', key: 'pregunta', width: 40 },
+        { header: 'Respta', key: 'respuesta', width: 8 }, // Configura el formato como número
+        { header: 'Score', key: 'parcial', width: 8, style: { numFmt: '0.0' }},
+      ];
+
+      worksheet.addRow([]); // Añade una fila vacía para separar el título
+
+      // Añadir filas
+      worksheet.addRows(results);
+
+      // Configurar los encabezados de respuesta para la descarga
+      res.setHeader('Content-Disposition', 'attachment; filename=Respuestas.xlsx');
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+      // Enviar el archivo Excel
+      await workbook.xlsx.write(res);
+      res.end();
+    });
+  } catch (error) {
+    console.error('Error al generar el archivo Excel:', error);
+    res.status(500).send('Error al generar el archivo Excel');
+  }
+});
+
+
+// Captura todas las otras rutas para mostrar un 404 :::::::::::::::::::::::::::::::::
+app.get('*', (req, res) => {
+  res.status(404).send('Page Not Found');
+});
+
 
 // Use PORT provided in environment or default to 3000
 const port = process.env.PORT || 3000;
 
 app.listen(port, "0.0.0.0", () => console.log(`Server is listening on port ${port}`));
 
-
-
-// Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
-
-// app.get("/api/preguntas", (req, res) => {
-//   conexion.query("SELECT * FROM preguntas", (err, data) => {
-//     if (err) {
-//       console.error("Error in query:", err);
-//       res.status(500).json({ error: "Error fetching data from database" });
-//       return;
-//     }
-//     res.status(200).json({
-//       status: "success",
-//       length: data.length,
-//       data,
-//     });
-//   });
-// });
-
-
-// Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
-// app.get('/preguntas', (req, res) => {
-//   const query = 'SELECT * FROM preguntas';
-
-//   conexion.query(query, (error, results, fields) => {
-//     if (error) {
-//       res.status(500).json({ error: 'Error al obtener los registros' });
-//       return;
-//     }
-//     res.json(results);
-//   });
-// });
-
-
-// app.get("/api/respuestas", (req, res) => {
-//   conexion.query("SELECT * FROM respuestas", (err, data) => {
-//     if (err) {
-//       console.error("Error in query:", err);
-//       res.status(500).json({ error: "Error fetching data from database" });
-//       return;
-//     }
-//     res.status(200).json({
-//       status: "success",
-//       length: data.length,
-//       data,
-//     });
-//   });
-// });
