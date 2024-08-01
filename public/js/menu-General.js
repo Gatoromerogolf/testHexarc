@@ -2,7 +2,15 @@ let tablaMenuA = [];
 let tablaMenuEs = [];
 let primeraVez = 0;
 let pagina = "";
-const CUIT = localStorage.getItem("CUIT");
+const CUIT =  localStorage.getItem('CUIT');
+const apellidouser = localStorage.getItem("apellido");
+const nombreUser = localStorage.getItem("nombre");
+const apenom = nombreUser + ' ' + apellidouser;
+const empresa = localStorage.getItem("empresa");
+
+document.getElementById("nombreEmpresa").textContent = empresa;
+document.getElementById("nombreUsuario").textContent = apenom;
+
 const capitulo = "A";
 respuestas = [];
 listaPrecios = [];
@@ -94,9 +102,7 @@ async function leeCapitulos(indice) {
 // ::::::::::::::::::::::------------------------------------------
 async function obtenerTotalCapitulos(CUIT, capitulo) {
   try {
-    const response = await fetch(
-      `/totalCapitulos?CUIT=${CUIT}&capitulo=${capitulo}`
-    );
+    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}&capitulo=${capitulo}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -123,7 +129,7 @@ function completarHtml() {
   let numeroConPunto = 0;
 
   //  Agrega a la tabla un ultimo registro de Resumen General
-  const elemento = [null, null, "Resumen General:", null, null, null];
+  const elemento = [null, null, "Resumen General:", null, null, null, null];
   tablaMenuEs.push(elemento);
 
   tablaMenuA = tablaMenuEs;
@@ -197,6 +203,8 @@ function completarHtml() {
     celdaPorciento.classList.add("ajustado-derecha");
 
     celdaPDF = lineaDatosFd.insertCell(-1);
+    celdaExl = lineaDatosFd.insertCell(-1);
+
     if (tablaMenuA[i][5] > 0) {
       // Crear el elemento <img>
       const imgPdf = document.createElement("img");
@@ -212,8 +220,26 @@ function completarHtml() {
         // Agregar el event listener para el clic
         generarPDF();
       });
+
+    // celdaExl = lineaDatosFd.insertCell(-1);
+      // Crear el elemento <img>
+      const imgExl = document.createElement("img");
+
+      // Establecer los atributos de la imagen
+      imgExl.src = "../img/excel.png";
+      imgExl.width = 20;
+      imgExl.style.display = "block";
+      imgExl.style.margin = "0 auto";
+
+      celdaExl.appendChild(imgExl); // Agregar la imagen a la celda
+      imgExl.addEventListener("click", function () {
+        // Agregar el event listener para el clic
+        generarExcel().catch(console.error);
+      });
+
     } else {
       celdaPDF.textContent = "";
+      celdaExl.textContent = "";
     }
 
     if (i == tablaMenuA.length - 1) {
@@ -304,22 +330,15 @@ async function recuperarRespuestas(CUIT, capitulo) {
 async function obtenerRespuestas(CUIT, capitulo) {
   // leo las respuestas del CUIT para el capítulo
   try {
-    const response = await fetch(
-      `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
-    );
+    const response = await fetch(`/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`);
     if (response.ok) {
       const result = await response.json();
       return result.records || []; // Devuelve los registros o un arreglo vacío
     } else {
-      console.error(
-        `Sin respuesta para capitulo ${capitulo} en obtenerRespuestas`
-      );
+      console.error(`Sin respuesta para capitulo ${capitulo} en obtenerRespuestas`);
     }
   } catch (error) {
-    console.error(
-      "Error al realizar la solicitud en obtenerRespuestas:",
-      error
-    );
+    console.error("Error al realizar la solicitud en obtenerRespuestas:", error);
   }
   return [];
 }
@@ -535,16 +554,43 @@ async function generarPDF() {
   doc.setFont("helvetica", "normal");
   doc.setTextColor("#007bff"); // Color azul brillante
 
-  doc.text(
-    `------------------- Informe de Datos para CUIT: ${CUIT},   Usuario: ${usuario} \n \n GOBIERNO CORPORATIVO`,
-    10,
-    10
-  );
+  const letraCapitulo = "A"; 
+  switch (letraCapitulo) {
+    case "A":
+      textoCapitulo = 'Gobierno Corporativo';
+      break;
+    case "B":
+      textoCapitulo = 'Apetito de Riesgo';
+      break;
+    case "C":
+      textoCapitulo = 'Riesgos de Mercado';
+      break;
+    case "D":
+      textoCapitulo = 'Riesgos de Procesos';
+      break;
+    case "E":
+      textoCapitulo = 'Situacion Financiera';
+      break;
+    case "F":
+      textoCapitulo = 'Generación de Resultados';
+      break;
+  }
 
-  doc.setFontSize(10);
-  doc.setFont("helvetica", "normal");
-  doc.setTextColor("#0000ff"); // Color azul brillante
-  doc.text(`\n\n C: Capitulo, S: Sección, Nro: Número`, 10, 20);
+  const tituloPdf = (`Informe para ${localStorage.getItem('empresa')}, CUIT: ${CUIT}                                      usuario:${localStorage.getItem('nombre')} ${localStorage.getItem('apellido')}` )
+    doc.text(tituloPdf, 10, 10)
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor("#0000ff"); // Color azul brillante
+
+  const titulo2Pdf = (`Capitulo: ${textoCapitulo}`)
+    doc.setFontSize(15);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor("#000000"); // Color azul brillante
+    doc.text(titulo2Pdf, 10, 18)
+
+    doc.setFontSize(9);
+    doc.setTextColor("#0000ff"); // Color azul brillante
+    doc.text(`\nS: Sección, Nro: Número`, 10, 20);
 
   const columnStyles = {
     Capitulo: { cellWidth: 5 },
@@ -649,7 +695,21 @@ async function grabarParciales(datos) {
     }
   } catch (error) {
     console.log("Error:", error);
-    alert("estamos en el error (ins 2): " + error.message);
+    // alert("estamos en el error (ins 2): " + error.message);
     throw error; // Rechaza la promesa en caso de error
   }
 }
+
+async function generarExcel() {
+  if (confirm()) {
+    // El usuario hizo clic en "Aceptar"
+    console.log('Usuario aceptó.');
+    window.location.href = '/descargar-excel';
+    console.log('Usuario aceptó.');
+    alert(('Se creará un archivo en formato Excel con el nombre "Respuestas" \n\nSe encontrará disponible en la carpeta de descargas\n\nRequiere generar primero el PDF '))
+  } else {
+    // El usuario hizo clic en "Cancelar"
+    console.log('Usuario canceló.');
+  }
+}
+

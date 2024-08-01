@@ -170,3 +170,66 @@ tr:first-of-type + tr {
   .ajustado-derecha{
     text-align: right;
   }
+
+  /* centrado superior de titulo */
+
+  
+  .header-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .logo {
+    width: 25px; /* Ajusta este valor según el tamaño de tus imágenes */
+    height: auto;
+  }
+  
+  .header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .company-name,
+  .user-name {
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .company-name {
+    font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+    font-weight: bold;
+  }
+  
+  .user-name {
+    font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
+    margin-top: 5px;
+    font-weight: 600;
+  }
+  
+  .dos-columnas-presentacion {
+    column-count: 2;
+}
+
+  
+.botonSiguiente {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-family:'Roboto', sans-serif;
+  color: white;
+  background-color: #007BFF;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.botonSiguiente:hover {
+  background-color: #0056b3;
+}

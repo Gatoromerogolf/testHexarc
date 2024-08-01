@@ -5,8 +5,15 @@ let maximo = 310; // 4 x 5 +  1 x 10  +  1 x 20
 let porcientoFormateado = 0;
 let puntajesIndividuales = [];
 let filasFaltantes = [];
-
+let isExiting = false;
 let checkboxesSeleccionados = [];
+
+const apellidouser = localStorage.getItem("apellido");
+const nombreUser = localStorage.getItem("nombre");
+const apenom = nombreUser + ' ' + apellidouser;
+const empresa = localStorage.getItem("empresa");
+document.getElementById("nombreEmpresa").textContent = empresa;
+document.getElementById("nombreUsuario").textContent = apenom;
 
 // OBTIENE LOS VALORES DE RADIO ::::::::::::::::::::::::::::::
 
@@ -235,6 +242,10 @@ document
 // Captura del formulario :::::::::::::::::::::::::::::::::::::
   .getElementById("formulario")
   .addEventListener("submit", function (event) {
+    if (isExiting) {      // Verifica si está para salir y evita la validación en ese caso
+      isExiting = false;  // Reinicia el indicador  para futuras operaciones
+      return;   // Omite la validación cuando se está intentando salir
+    }
     valores = 0;
     event.preventDefault(); // Prevenir el envío del formulario
 

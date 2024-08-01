@@ -534,3 +534,20 @@ h5 {
 .red-text {
   color: red;
 }
+
+.company-name,
+.user-name {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.company-name {
+  font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-weight: bold;
+}
+
+.user-name {
+  font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
+  margin-top: 5px;
+  font-weight: 600;
+}

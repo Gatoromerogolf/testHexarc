@@ -16,9 +16,9 @@
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
-          <div class="nav-icons">
-            <a href="MA-14.html"><img src="../img/anterior.png" alt="Avance"></a>
-            <a href="Menu-A.html"><img src="../img/siguiente.png" alt="Avance"></a>
+          <div class="header-center">
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
           </div>
           <div class="nav-iconsxx">
             <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
@@ -44,24 +44,14 @@
           <div id="ventanaSalida" >
             <!-- <div class="confirm-modal" id="confirm-modal">-->
               <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada, <br> pudiendo completarse posteriormente
-                  los items faltantes.
+                <p>La información registrada hasta el momento quedará almacenada.  <br> Si sale de la aplicación, podrá completar posteriormente los items faltantes.
                   <br>
-                </p>
-                <p>¿Está seguro que desea salir de la aplicación?</p>
-                <p>Indique Si, si desea suspender el registro de información</p>
-                <p>Indique NO, si desea continuar con la aplicación</p>            
-                <button id="confirm-yes">Sí</button>
-                <button id="confirm-no">No</button><br>
+                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
                 <button id="confirm-yes">Salir</button>
                 <button id="confirm-no">Continuar</button><br>
-                <button id="confirm-yes">Terminar sesión</button>
-                <button id="confirm-no">Continuar</button>
               </div>
-            <!-- </div> -->
           </div>
         </div>
-
 
           <table>
             <tr>
@@ -182,48 +172,34 @@
 </script>
 
 <script>
-
 document.getElementById('formulario').addEventListener('submit', function(event) {
       event.preventDefault();
     });
-
 const botonSalida = document.getElementById('boton-salir');
 const ventanaSale = document.getElementById('ventanaSalida');
 const botonYes = document.getElementById('confirm-yes');
 const botonNou = document.getElementById('confirm-no');
 
-
-// Agrega un evento al botón para mostrar la ventana
-botonSalida.addEventListener('click', () => {
+botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
   let isExiting = true;
   ventanaSale.style.display = 'block';
   document.getElementById('overlay').style.display = 'block';
-
 });
 
-// Agrega un evento para el botón NO
-botonNou.addEventListener('click', () => {
+botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
   isExiting = true;
   console.log ('dijo que NO')
     ventanaSale.style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-    // Continúa con la operación original de la página
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
 });
 
-// Agrega un evento para el botón SI
-botonYes.addEventListener('click', () => {
+botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
   console.log ('dijo que SI')
   isExiting = true;
-    // Redirige a una nueva página de destino (por ejemplo, Google)
-    // window.location.href = 'https://www.google.com';
   window.location.href = '../../index.html';
 });
-
 </script>
 
-
-<!-- <script src="../datos/tabla01.js"></script> -->
-<!-- <script src="../datos/tabla02.js"></script> -->
 <script src="../../js/ma-15.js"></script>
 
 </html>

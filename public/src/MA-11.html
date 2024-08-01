@@ -16,9 +16,9 @@
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
-          <div class="nav-icons">
-            <a href="MA-10.html"><img src="../img/anterior.png" alt="Avance"></a>
-            <a href="MA-12.html"><img src="../img/siguiente.png" alt="Avance"></a>
+          <div class="header-center">
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
           </div>
           <div class="nav-iconsxx">
             <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
@@ -35,7 +35,24 @@
             <h4 class="tituloSeccion"><a href="Menu-A.html">XI - El Directorio y las Gerencias</a></h4>
           </div>
 
-        <p style="font-size:12px">Seleccione la opción que corresponda a su organización</p>
+          <div class="salida">
+            <p>Seleccione la opción que corresponda a su organización.</p>
+            <button type="button" id="boton-salir">Salir</button>
+          </div>
+
+          <div id="overlay">
+            <div id="ventanaSalida">
+              <!-- <div class="confirm-modal" id="confirm-modal">-->
+              <div class="confirm-box">
+                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+                  completar posteriormente los items faltantes.
+                  <br>
+                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                <button id="confirm-yes">Salir</button>
+                <button id="confirm-no">Continuar</button><br>
+              </div>
+            </div>
+          </div>
 
         <table>
           <tr>
@@ -187,8 +204,35 @@
 
 </body>
 
-<!-- <script src="../datos/tabla01.js"></script> -->
-<!-- <script src="../datos/tabla02.js"></script> -->
+<script>
+  document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+
 <script src="../../js/ma-11.js"></script>
 
 </html>
