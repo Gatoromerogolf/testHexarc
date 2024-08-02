@@ -27,13 +27,5 @@ conexion.connect((err) => {
 console.log("CONNECTED to the database");
 });
 
-// // Ejemplo de una consulta
-// conexion.query('SELECT * FROM capitulos', (err, results, fields) => {
-//   if (err) {
-//       console.error('Error in query:', err);
-//       return;
-//   }
-//   console.log('Query results:', results);
-// });
 
 module.exports = { conexion };
