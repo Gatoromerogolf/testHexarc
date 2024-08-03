@@ -38,6 +38,21 @@ h3, h4 {
   margin-top: 0;
 }
 
+.survey-container-presentacion {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+
+  font-family: 'Abel', sans-serif;
+  font-size: 18px;
+  font-weight:500;
+  margin-top: 0x;
+}
+
+
 .survey-container {
   max-width: 700px;
   margin: 50px auto;
