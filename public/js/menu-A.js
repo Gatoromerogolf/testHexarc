@@ -6,6 +6,9 @@ const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
 const empresa = localStorage.getItem("empresa");
 
+document.getElementById("nombreEmpresa").textContent = empresa;
+document.getElementById("nombreUsuario").textContent = apenom;
+
 // lee la tabla de secciones.
 // fetch('http://localhost:3000/registros')
 
@@ -121,9 +124,6 @@ function actualizarHTML(tablaMenuEs) {
   let totalMax = 0;
   let totalCal = 0;
   let totalPor = 0;
-
-  document.getElementById("nombreEmpresa").textContent = empresa;
-  document.getElementById("nombreUsuario").textContent = apenom;
 
   // Define celdaMaximo, celdaPuntos, y celdaPorciento fuera del bucle
   let ultimaFila;
