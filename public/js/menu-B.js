@@ -1,6 +1,6 @@
 let tablaMenuApeRie = [
   ["I.",
-    "APE-RIE-1.html",
+    "../src/APE-RIE-1.html",
     "Valores y Comportamientos",
     ,
     ,
