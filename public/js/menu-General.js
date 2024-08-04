@@ -707,7 +707,7 @@ async function generarExcel() {
     console.log('Usuario aceptó.');
     window.location.href = '/descargar-excel';
     console.log('Usuario aceptó.');
-    alert(('Se creará un archivo en formato Excel con el nombre "Respuestas" \n\nSe encontrará disponible en la carpeta de descargas\n\nRequiere generar primero el PDF '))
+    alert(('Se creará un archivo en formato Excel con el nombre "Respuestas" \n\nSe encontrará disponible en la carpeta de descargas\n\nRequiere haber generado previamente el informe en PDF '))
   } else {
     // El usuario hizo clic en "Cancelar"
     console.log('Usuario canceló.');

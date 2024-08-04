@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const { conexion } = require("./db");
 const path = require('path');
 const session = require('express-session');
+const MySQLStore = require ('express-mysql-session')(session);
 const ExcelJS = require('exceljs')
 
 const app = express();
@@ -21,8 +22,26 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
 
+// const options = {
+//   host: viaduct.proxy.rlwy.net,
+//   port: 21820,
+//   user: root,
+//   password: oJVNwXXIFCKCZKWKijLUSccbRQnIjqTC,
+//   database: railway
+// }
+const options = {
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DB
+};
+
+const sessionStore = new MySQLStore(options);
+
 app.use(session({
-    secret: 'mi-super-secreto', // Cambia esto por un secreto más seguro en producción
+    secret: process.env.SESSION_SECRET, // Cambia esto por un secreto más seguro en producción
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false } // Cambia esto a true si usas HTTPS
