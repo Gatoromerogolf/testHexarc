@@ -15,44 +15,33 @@ body{
   background-size: cover;
 }
 
-/*display: flex;
-Establece el modelo de caja del elemento <body> a Flexbox. Permite que los elementos hijos directos del <body> se comporten como elementos flexibles (pueden alinearse y distribuirse de manera más flexible y eficiente en el espacio disponible.)
-
-align-items: center;
-Alinea los elementos hijos (flex items) verticalmente en el centro del contenedor flex (<body>). 
-
-justify-content: center;
-Alinea los elementos hijos (flex items) horizontalmente en el centro del contenedor flex. 
-
-min-height: 100vh;
-Establece la altura mínima del elemento <body> al 100% del viewport height (vh), lo que significa que el <body> tendrá al menos la altura completa de la ventana de visualización del navegador.
-
-En resumen, hacen que cualquier contenido dentro del <body> esté centrado vertical y horizontalmente.  Además, el uso de min-height: 100vh garantiza que el contenido siempre sea visible y centrado, incluso en pantallas con diferentes alturas.*/
 
 form{
   display: flex;
   flex-direction: column;
   background:#e6e6e6;
-  background: darkgray;
+  background: rgb(189, 219, 251);
   text-align: center;
-  padding: 20px 25px;
+  padding: 30px 30px;
   border-radius: 15px;
 }
 
 form .title{
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 750;
   margin-bottom: 30px;
 }
 
 form label{
   margin-bottom: 30px;
+  line-height: 30px; /* Ajusta este valor según sea necesario */
 }
 
 form label .fa-solid{
-  font-size: 15px;
+  font-size: 20px;
   color: black;
   margin-right: 10px;
+  line-height: 30px;
 }
 
 form label input{
@@ -60,8 +49,8 @@ form label input{
   border: none;
   color:black;
   border-bottom: solid 1px rgb(109, 105, 106);
-  padding: 0 5px;
-  font-size: 18px;
+  padding:10px 10px;
+  font-size: 15px;
 }
 
 form label input::placeholder{
