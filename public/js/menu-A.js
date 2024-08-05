@@ -90,6 +90,9 @@ async function obtenerSecciones(indice) {
     // elemento = [null, `##`, "Calificación general:", null, null];
     // tablaMenuEs.push(elemento);
     actualizarHTML(tablaMenuEs);
+    document.getElementById('tablaIndice').style.display = 'table';
+    document.getElementById('loading').style.display = 'none';
+    
   } catch (error) {
     console.error("Error en la función autoinvocada:", error);
   }
@@ -204,9 +207,14 @@ function actualizarHTML(tablaMenuEs) {
 
     const capitulo = "A";
     actualizaCapitulos(capitulo, totalMax, totalCal, totalPor);
-    // const var1 = JSON.parse(localStorage.getItem('porciento-A'));
+
   }
+
+
 }
+
+
+
 
 function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
   fetch("/total-Capitulo", {

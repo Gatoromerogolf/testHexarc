@@ -9,6 +9,7 @@ const path = require('path');
 const session = require('express-session');
 const MySQLStore = require ('express-mysql-session')(session);
 const ExcelJS = require('exceljs')
+const cron = require('node-cron');
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
 app.use(express.static(path.join(__dirname, '../public')));
+
+
 
 // Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
@@ -84,6 +87,27 @@ app.post('/api/login', (req, res) => {
           res.status(401).send('Credenciales inválidas');
       }
   });
+
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// Definir la tarea cron
+// cron.schedule('0 */4 * * *', () => { cada cuatro horas
+cron.schedule('*/30 * * * *', () => { // cada treinta minutos
+  console.log('Ejecutando tarea programada: registrando en la base de datos');
+
+  const query = 'INSERT INTO tablalogs (logs) VALUES (NOW())';
+
+  conexion.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al insertar en la base de datos:', err);
+      return;
+    }
+    console.log('Registro insertado correctamente:', results);
+  });
+});
+
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
   function updateLoginTimestamp(id) {  // Función para actualizar el timestamp en el login
     const query = 'UPDATE users SET visita = NOW() WHERE id = ?';

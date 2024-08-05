@@ -59,6 +59,8 @@ async function procesarCapitulos() {
     await leeCapitulos(i); // Espera a que cada llamada se complete antes de proceder
   }
   completarHtml(); // Llama a completarHtml después de procesar todos los capítulos
+  document.getElementById('tablaIndiceCapitulos').style.display = 'table';
+  document.getElementById('loading').style.display = 'none';
 }
 
 // ::::::::::::::::::::::------------------------------------------

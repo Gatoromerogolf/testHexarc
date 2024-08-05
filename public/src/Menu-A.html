@@ -9,6 +9,28 @@
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+  <style>
+    .loading {
+        display: none;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
 </head>
 
 <body>
@@ -27,7 +49,13 @@
 
       <h4>A. Calidad del manejo de los Riesgos de Gobierno Corporativo</h4>
       <div class="contenedorTabla">
-        <table id="tablaIndice">
+
+        <div id="loading" class="loading" style="display: block">
+          <div class="spinner"></div>
+          Cargando...Aguarde, por favor.
+        </div>
+
+        <table id="tablaIndice" style="display: none;">
           <tr>
             <th>#</th>
             <th style="width: 400px;">Sección</th>
@@ -35,7 +63,7 @@
             <th style="width: 50px;">Calif</th>
             <th style="width: 40px;">%</th>
           </tr>
-          <tr id="lineaMenu"></tr>
+          <tr id="lineaMenu"></tr> 
         </table>
       </div>
 
@@ -50,6 +78,21 @@
 </body>
 
 <script src="../../js/menu-A.js"></script>
+
+<!-- <script>
+  // Simulación de una función que carga datos
+  function loadData() {
+      document.getElementById('loading').style.display = 'block';
+      setTimeout(function() {
+          // Aquí iría tu lógica para cargar y mostrar los datos
+          document.getElementById('tablaIndice').style.display = 'table';
+          document.getElementById('loading').style.display = 'none';
+      }, 3000); // Simulación de 3 segundos de tiempo de carga
+  }
+
+  // Iniciar la carga de datos
+  loadData();
+</script> -->
 
 
 </html>
