@@ -16,6 +16,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
+
+  <style>
+    .loading {
+        display: none;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
 </head>
 
 <body>
@@ -35,7 +59,13 @@
       <!-- <h1>Bienvenido, <span id="username"></span>!</h1> -->
       <h3>Autoevaluación de la calidad del manejo de la empresa</h3>
       <div class="contenedorTabla">
-        <table id="tablaIndiceCapitulos">
+
+        <div id="loading" class="loading" style="display: block">
+          <div class="spinner"></div>
+          Cargando...
+        </div>
+
+        <table id="tablaIndiceCapitulos" style="display: none">
           <tr>
             <th>#</th>
             <th style="width: 350px;">Factor</th>
@@ -85,5 +115,6 @@
 </script> -->
 
 <script src="../../js/menu-General.js"></script>
+
 </body>
 </html>
