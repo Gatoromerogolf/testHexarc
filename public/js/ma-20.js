@@ -173,11 +173,11 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
 function continuar() {
   // cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
 
-  grabarResultados2(respuestas)
+  insertarExperiencia(respuestas)
     .then(() => {
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "MA-11.html"
+          ? "index.html"
           : "MA-11-en.html";
     })
     .catch((error) => {
@@ -187,7 +187,7 @@ function continuar() {
 }
 
 
-async function grabarResultados2(respuestas) {
+async function insertarExperiencia(respuestas) {
 
   const minutos = respuestas[0];
   const salida = respuestas[1];
