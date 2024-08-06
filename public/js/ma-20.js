@@ -19,7 +19,7 @@ document.getElementById("nombreUsuario").textContent = apenom;
 
 function obtenerValoresSeleccionados() {
   respuestas = [];
-  const grupos = ["A-20-1", "A-20-2", "A-20-3", "A-20-4", "A-20-5", "A-20-6", "A-20-7", "A-20-8", "A-20-9"];
+  const grupos = ["A-20-2", "A-20-3", "A-20-4", "A-20-5", "A-20-6", "A-20-7", "A-20-8", "A-20-9"];
 
   var indiceFilas = 0;
   filasFaltantes = [];
