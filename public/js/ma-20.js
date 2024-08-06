@@ -190,7 +190,7 @@ function continuar() {
 async function grabarResultados2(respuestas) {
 
   const capitulo = "A";
-  const seccion = 10;
+  const seccion = 20;
   const score = valores;
   const respuesta = respuestas;
   const porcentaje = porcientoFormateado;
