@@ -101,8 +101,8 @@ document
 
 // Si no hay faltantes sigue adelante:::::::::::::::::::::::::
     if (!(filasFaltantes.length > 0)) {
-      porcientoFormateado = calculaResultados();
-      porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
+      // porcientoFormateado = calculaResultados();
+      // porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
       // alert(
       //   `Calificación obtenida: \n
       //         Puntaje máximo de la sección: ${maximo} \n
@@ -110,19 +110,19 @@ document
       //         Porcentual: ${porcientoFormateado}%`
       // );
       // console.log("Mostrando alerta personalizada...");
-      mostrarMiAlerta(maximo, valores, porcientoFormateado);
-      console.log(`Suma puntos ${valores},
-                 valor máximo: ${maximo},
-                 porcentaje ${porcientoFormateado}`);
-      console.table(puntajesIndividuales);
+      // mostrarMiAlerta(maximo, valores, porcientoFormateado);
+      // console.log(`Suma puntos ${valores},
+      //            valor máximo: ${maximo},
+      //            porcentaje ${porcientoFormateado}`);
+      // console.table(puntajesIndividuales);
 
       // // Supongamos que calculas o recibes algún valor 'nuevoValor'
       // let nuevoValor = porcientoFormateado; // Función hipotética que genera un valor
 
       // Guardar el valor en LocalStorage
-      localStorage.setItem("maximo-10", JSON.stringify(maximo));
-      localStorage.setItem("valores-10", JSON.stringify(valores));
-      localStorage.setItem("porciento-10", JSON.stringify(porcientoFormateado));
+      // localStorage.setItem("maximo-10", JSON.stringify(maximo));
+      // localStorage.setItem("valores-10", JSON.stringify(valores));
+      // localStorage.setItem("porciento-10", JSON.stringify(porcientoFormateado));
 
       // window.location.href = "Menu-A.html";
     }
@@ -160,18 +160,18 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
   gauge.set(porcientoFormateado); // set actual value
 
   // Actualizar los contenidos
-  document.getElementById('maximo').textContent = maximo;
-  document.getElementById('calificacion').textContent = valores;
-  document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
+  // document.getElementById('maximo').textContent = maximo;
+  // document.getElementById('calificacion').textContent = valores;
+  // document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
 
 }
 
-function cerrarAlerta() {
-  document.getElementById("miAlerta").style.display = "none";
-}
+// function cerrarAlerta() {
+//   document.getElementById("miAlerta").style.display = "none";
+// }
 
 function continuar() {
-  cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+  // cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
 
   grabarResultados2(respuestas)
     .then(() => {
@@ -189,23 +189,31 @@ function continuar() {
 
 async function grabarResultados2(respuestas) {
 
-  const capitulo = "A";
-  const seccion = 20;
-  const score = valores;
-  const respuesta = respuestas;
-  const porcentaje = porcientoFormateado;
+  const minutos = respuestas[0];
+  const salida = respuestas[1];
+  const uno = respuestas[2];
+  const dos = respuestas[3];
+  const tres = respuestas[4];
+  const cinco = respuestas[5];
+  const seis = respuestas[6];
+  const siete = respuestas[7];
+  const comentarios = respuestas[8];
 
   const body = {
-    capitulo,
-    seccion,
-    maximo, 
-    score,
-    porcentaje,
-    respuesta
+    minutos,
+    salida,
+    uno, 
+    dos,
+    tres,
+    cuatro,
+    cinco,
+    seis,
+    siete,
+    comentarios
   };
 
   try {
-    const response = await fetch("/insertar2", {
+    const response = await fetch("/insertarExperiencia", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
