@@ -494,6 +494,39 @@ app.get('/descargar-excel', async (req, res) => {
 });
 
 
+// Inserción de registros en Experiencia :::::::::::::::::::::::::::::::::::::
+app.post('/insertarExperiencia', (req, res) => {
+  if (!req.session.user){
+      return res.status(401).json({ error: 'No estás autenticado' });
+  }
+
+  const { minutos, salida, uno, dos, tres, cuatro, cinco, seis, siete, comentarios } = req.body;
+  const usuario = req.session.user.username; // Obtener el usuario de la sesión
+  // const CUIT = req.session.user.CUIT;
+
+  if (!usuario) {
+      return res.status(400).json({ error: 'Usuario no definido en la sesión' });
+  }
+
+  // const respuestaJSON = JSON.stringify(respuesta);// Convertir el array de respuesta a un string JSON   
+  const nuevoResultado = 'INSERT INTO experiencia (usuario, minutos, salida, uno, dos, tres, cuatro, cinco, seis, siete, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  const datosAPasar = [usuario, minutos, salida, uno, dos, tres, cuatro, cinco, seis, siete, comentarios];
+
+  conexion.query(nuevoResultado, datosAPasar, function (error, lista) {
+      if (error) {
+          if (error.code === 'ER_DUP_ENTRY') {
+              res.status(409).json({ error: 'Ya existe una respuesta para esta combinación de capitulo y seccion' });
+          } else {
+          console.log('Error:', error);
+          res.status(500).json({ error: error.message });
+      }
+      } else {
+          // console.log(lista.insertId, lista.fieldCount);
+          res.status(200).json({ success: true });
+      }
+  });
+});
+
 // Captura todas las otras rutas para mostrar un 404 :::::::::::::::::::::::::::::::::
 app.get('*', (req, res) => {
   res.status(404).send('Page Not Found');
