@@ -28,6 +28,7 @@ function obtenerValoresSeleccionados() {
     const grupo = document.querySelector(
       `input[name="${nombreGrupo}"]:checked`
     );
+ 
     if (grupo) {
       respuestas.push(grupo.value); // Agrega el valor del radio seleccionado al arreglo
     } else {
@@ -101,6 +102,7 @@ document
 
 // Si no hay faltantes sigue adelante:::::::::::::::::::::::::
     if (!(filasFaltantes.length > 0)) {
+      continuar()
       // porcientoFormateado = calculaResultados();
       // porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
       // alert(
@@ -152,12 +154,12 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
   document.getElementById('miAlerta').style.display = 'block';
 
   //  crea el gauge despues de mostrar la alerta
-  const target = document.getElementById('gaugeChart'); // your canvas element
-  const gauge = new Gauge(target).setOptions(opts); // create gauge!
-  gauge.maxValue = 100; // set max gauge value
-  gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-  gauge.animationSpeed = 32; // set animation speed (32 is default value)
-  gauge.set(porcientoFormateado); // set actual value
+  // const target = document.getElementById('gaugeChart'); // your canvas element
+  // const gauge = new Gauge(target).setOptions(opts); // create gauge!
+  // gauge.maxValue = 100; // set max gauge value
+  // gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+  // gauge.animationSpeed = 32; // set animation speed (32 is default value)
+  // gauge.set(porcientoFormateado); // set actual value
 
   // Actualizar los contenidos
   // document.getElementById('maximo').textContent = maximo;
@@ -175,10 +177,7 @@ function continuar() {
 
   insertarExperiencia(respuestas)
     .then(() => {
-      window.location.href =
-        JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "index.html"
-          : "MA-11-en.html";
+      document.getElementById('miAlerta').style.display = 'block';
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);
@@ -186,18 +185,26 @@ function continuar() {
     });
 }
 
+function finalizar() {
+  window.location.href =
+  JSON.parse(localStorage.getItem("idioma")) == 1
+    ? "../index.html"
+    : "MA-11-en.html";
+}
 
 async function insertarExperiencia(respuestas) {
 
-  const minutos = respuestas[0];
-  const salida = respuestas[1];
-  const uno = respuestas[2];
-  const dos = respuestas[3];
-  const tres = respuestas[4];
+  const minutos = parseInt(document.querySelector('input[name="A-20-1"]').value, 10);
+  const salida = respuestas[0];
+  const uno = respuestas[1];
+  const dos = respuestas[2];
+  const tres = respuestas[3];
+  const cuatro = respuestas[4];
   const cinco = respuestas[5];
   const seis = respuestas[6];
   const siete = respuestas[7];
-  const comentarios = respuestas[8];
+  const comentarios = document.getElementById('comments').value;
+
 
   const body = {
     minutos,
@@ -226,11 +233,11 @@ async function insertarExperiencia(respuestas) {
     if (result.success) {
       console.log("no hay error");
     } else {
-      throw new Error(result.error || "Error desconocido ins 2");
+      throw new Error(result.error || "Error desconocido ins exper");
     }
   } catch (error) {
     console.log("Error:", error);
-    alert("estamos en el error (ins 2): " + error.message);
+    alert("estamos en el error (insexperiencia): " + error.message);
     throw error; // Rechaza la promesa en caso de error
   }
 }
