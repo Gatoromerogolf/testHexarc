@@ -92,7 +92,7 @@ app.post('/api/login', (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
-cron.schedule('0 * * * *', () => { // cada treinta minutos
+cron.schedule('0 */2 * * *', () => { // cada treinta minutos
   // console.log('Ejecutando tarea programada: registrando en la base de datos');
 
   const query = 'INSERT INTO tablalogs (logs) VALUES (NOW())';
