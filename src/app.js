@@ -20,18 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
 app.use(express.static(path.join(__dirname, '../public')));
 
-
-
 // Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
 
-// const options = {
-//   host: viaduct.proxy.rlwy.net,
-//   port: 21820,
-//   user: root,
-//   password: oJVNwXXIFCKCZKWKijLUSccbRQnIjqTC,
-//   database: railway
-// }
 const options = {
   host: process.env.MYSQL_HOST,
   port: process.env.MYSQL_PORT,
