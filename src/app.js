@@ -337,6 +337,8 @@ app.get('/textocheck', (req, res) => {
 app.get('/preguntas', (req, res) => {
   const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
 
+  console.log('entro a preguntar por preguntas')
+
   pool.query(query, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
