@@ -1,34 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1em;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .question-cell {
-            text-align: left;
-        }
-        .option-input {
-            margin-right: 5px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Encuesta</h1>
-    <form id="surveyForm">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Evaluación de riesgos</title>
+        <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+        <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+        <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 1em;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                background-color: #f4f4f4;
+            }
+            .question-cell {
+                text-align: left;
+            }
+            .option-input {
+                margin-right: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="survey-container">
+          <section class="main">
+            <section class="gobCorpo">
+              <div class="header-container">
+                <div class="header-center">
+                  <div id="nombreEmpresa" class="company-name"></div>
+                  <div id="nombreUsuario" class="user-name"></div>
+                </div>
+                <div class="nav-iconsxx">
+                  <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+                </div>
+                <div class="nav-iconsxx">
+                  <h5> Autoevaluación</h5>
+                </div>
+              </div>
+              <hr>
+      
+            <!-- <form id="formulario"> -->
+                <form id="surveyForm">
+      
+              <div class="center-container">
+                <h4 class="tituloSeccion"><a href="Menu-A.html">XIII - Sucesiones</a></h4>
+              </div>
+      
+              <div class="salida">
+                <p>Seleccione la opción que corresponda a su organización.</p>
+                <button type="button" id="boton-salir">Salir</button>
+              </div>
+      
+              <div id="overlay">
+                <div id="ventanaSalida">
+                  <!-- <div class="confirm-modal" id="confirm-modal">-->
+                  <div class="confirm-box">
+                    <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+                      completar posteriormente los items faltantes.
+                      <br>
+                    </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                    <button id="confirm-yes">Salir</button>
+                    <button id="confirm-no">Continuar</button><br>
+                  </div>
+                </div>
+              </div>
+
+    <!-- <form id="surveyForm"> -->
         <table>
             <thead>
                 <tr>
