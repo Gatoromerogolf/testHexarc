@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .question-cell {
+            text-align: left;
+        }
+        .option-input {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Encuesta</h1>
+    <form id="surveyForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Propuesta</th>
+                    <th>Opción 1</th>
+                    <th>Opción 2</th>
+                    <th>Opción 3</th>
+                    <th>Opción 4</th>
+                </tr>
+            </thead>
+            <tbody id="questionsTableBody">
+                <!-- Las preguntas se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
+        <button type="button" onclick="submitForm()">Enviar</button>
+    </form>
+
+    <script>
+        // Función para construir la tabla de preguntas
+        function buildForm(questions) {
+            const tableBody = document.getElementById('questionsTableBody');
+            questions.forEach(question => {
+                const row = document.createElement('tr');
+                
+                // Columna de la pregunta
+                const questionCell = document.createElement('td');
+                questionCell.classList.add('question-cell');
+                questionCell.textContent = question.text;
+                row.appendChild(questionCell);
+                
+                // Opciones
+                for (let i = 1; i <= 4; i++) {
+                    const optionCell = document.createElement('td');
+                    
+                    const optionInput = document.createElement('input');
+                    optionInput.type = 'radio';
+                    optionInput.name = `question_${question.id}`;
+                    optionInput.value = i;
+                    optionInput.classList.add('option-input');
+                    optionInput.id = `q${question.id}_o${i}`;
+                    
+                    // Añadir el input directamente en la celda
+                    optionCell.appendChild(optionInput);
+                    
+                    // Añadir el texto de la opción en la celda
+                    const optionText = document.createTextNode(`Opción ${i}`);
+                    optionCell.appendChild(optionText);
+                    
+                    row.appendChild(optionCell);
+                }
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Función para obtener las preguntas del servidor
+        function loadQuestions() {
+            fetch('/preguntas')
+                .then(response => response.json())
+                .then(data => buildForm(data))
+                .catch(error => console.error('Error al cargar las preguntas:', error));
+        }
+
+        // Cargar las preguntas cuando la página se cargue
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+
+        // Función para manejar el envío del formulario
+        function submitForm() {
+            const formData = new FormData(document.getElementById('surveyForm'));
+            const responses = [];
+            
+            formData.forEach((value, key) => {
+                // Suponiendo que cada pregunta tiene una identificación única
+                const questionId = key.split('_')[1];
+                responses[questionId - 1] = value;
+            });
+
+            console.log(responses);
+            // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
+        }
+    </script>
+</body>
+</html>
