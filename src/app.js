@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 // const mysql = require('mysql2');
-const { conexion } = require("./db");
+const { pool } = require("./db");
 const path = require('path');
 const session = require('express-session');
 const MySQLStore = require ('express-mysql-session')(session);
@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
-  conexion.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, results) => {
+  pool.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, results) => {
       if (err) {
           res.status(500).json({ error: 'Error en la base de datos' });
       } else if (results.length > 0) {
@@ -88,7 +88,7 @@ cron.schedule('0 */2 * * *', () => { // cada treinta minutos
 
   const query = 'INSERT INTO tablalogs (logs) VALUES (NOW())';
 
-  conexion.query(query, (err, results) => {
+  pool.query(query, (err, results) => {
     if (err) {
       console.error('Error al insertar en la base de datos:', err);
       return;
@@ -102,7 +102,7 @@ cron.schedule('0 */2 * * *', () => { // cada treinta minutos
 
   function updateLoginTimestamp(id) {  // Función para actualizar el timestamp en el login
     const query = 'UPDATE users SET visita = NOW() WHERE id = ?';
-    conexion.query(query, [id], (error, results) => {
+    pool.query(query, [id], (error, results) => {
       if (error) {
         console.error('Error al actualizar el timestamp:', error);
       } else {
@@ -120,7 +120,7 @@ app.post('/api/updateIngresado', (req, res) => {
   console.log (`llego a la api usuario ${username}, cuit ${CUIT}`)
   const query = 'UPDATE users SET ingresado = 1 WHERE username = ? AND CUIT = ?';
 
-  conexion.query(query, [username, CUIT], (error, results) => {
+  pool.query(query, [username, CUIT], (error, results) => {
     if (error) {
       console.error('Error al actualizar el campo ingresado:', error);
       res.status(500).json({ error: 'Error al actualizar el campo ingresado' });
@@ -144,7 +144,7 @@ app.get('/capitulos', (req, res) => {
   const indice = parseInt(req.query.indice) || 0;
   const query = 'SELECT * FROM capitulos WHERE ID = ?';
 
-  conexion.query(query, [indice], (error, results, fields) => {
+  pool.query(query, [indice], (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
@@ -171,7 +171,7 @@ app.get('/totalCapitulos', (req, res) => {
 
   const query = 'SELECT * FROM totalcapitulos WHERE CUIT = ? AND capitulo = ?';
 
-  conexion.query(query, [CUIT, capitulo], (error, results, fields) => {
+  pool.query(query, [CUIT, capitulo], (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
@@ -202,7 +202,7 @@ app.post('/total-Capitulo', (req, res) => {
   const nuevoTotal = 'INSERT INTO totalcapitulos (CUIT, capitulo, maximo, score, porcentaje) VALUES (?, ?, ?, ?, ?)';
   const datosAPasar = [CUIT, capitulo, maximo, score, porcentaje];
 
-  conexion.query(nuevoTotal, datosAPasar, function (error, lista) {
+  pool.query(nuevoTotal, datosAPasar, function (error, lista) {
       if (error) {
           if (error.code === 'ER_DUP_ENTRY') {
               console.log('Ya existe una respuesta para esta combinación de CUIT y Capitulo - sigue normal');                // Manejar el error de duplicación
@@ -221,7 +221,7 @@ app.post('/total-Capitulo', (req, res) => {
 app.get('/leeListaPrecios', (req, res) => {
   const query = 'SELECT * FROM listaprecios';
 
-  conexion.query(query, (error, results, fields) => {
+  pool.query(query, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -235,7 +235,7 @@ app.get('/secciones', (req, res) => {
   const indice = parseInt(req.query.indice) || 0;
   const query = 'SELECT * FROM secciones WHERE seccion = ?';
 
-  conexion.query(query, [indice], (error, results, fields) => {
+  pool.query(query, [indice], (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
@@ -263,7 +263,7 @@ app.get('/busca-respuesta', (req, res) => {
   const query = 'SELECT * FROM respuestas WHERE cuit = ? AND capitulo = ? AND seccion = ?';
   const values = [CUIT, capitulo, seccion];
 
-  conexion.query(query, values, (error, results, fields) => {
+  pool.query(query, values, (error, results, fields) => {
       if (error) {
           console.log ('primer error en el query')
         res.status(500).json({ error: 'Error al buscar el registro' });
@@ -292,7 +292,7 @@ app.get('/busca-respuesta-capitulo', (req, res) => {
   const query = 'SELECT * FROM respuestas WHERE cuit = ? AND capitulo = ?';
   const values = [CUIT, capitulo];
 
-  conexion.query(query, values, (error, results, fields) => {
+  pool.query(query, values, (error, results, fields) => {
       if (error) {
         console.log ('primer error en el query')
         res.status(500).json({ error: 'Error al buscar el registro' });
@@ -310,7 +310,7 @@ app.get('/busca-respuesta-capitulo', (req, res) => {
 app.get('/textorespuestas', (req, res) => {
   const query = 'SELECT * FROM textorespuestas';
 
-  conexion.query(query, (error, results, fields) => {
+  pool.query(query, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -324,7 +324,7 @@ app.get('/textorespuestas', (req, res) => {
 app.get('/textocheck', (req, res) => {
   const query = 'SELECT * FROM textocheck';
 
-  conexion.query(query, (error, results, fields) => {
+  pool.query(query, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -337,7 +337,7 @@ app.get('/textocheck', (req, res) => {
 app.get('/preguntas', (req, res) => {
   const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
 
-  conexion.query(query, (error, results, fields) => {
+  pool.query(query, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -349,7 +349,7 @@ app.get('/preguntas', (req, res) => {
 // Ruta para obtener todos las respuestas de la tabla ::::::::::::::::::::
 app.get('/respuestas', (req, res) => {
   const query = 'SELECT * FROM respuestas';
-  conexion.query(query, (error, results, fields) => {
+  pool.query(query, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -376,7 +376,7 @@ app.post('/insertar2', (req, res) => {
   const nuevoResultado = 'INSERT INTO respuestas (CUIT, usuario, capitulo, seccion, maximo, score, porcentaje, respuesta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
   const datosAPasar = [CUIT, usuario, capitulo, seccion, maximo, score, porcentaje, respuestaJSON];
 
-  conexion.query(nuevoResultado, datosAPasar, function (error, lista) {
+  pool.query(nuevoResultado, datosAPasar, function (error, lista) {
       if (error) {
           if (error.code === 'ER_DUP_ENTRY') {
               res.status(409).json({ error: 'Ya existe una respuesta para esta combinación de capitulo y seccion' });
@@ -408,7 +408,7 @@ app.post('/grabaParciales', (req, res) => {
   const nuevoParcial = 'INSERT INTO parciales (CUIT, usuario, capitulo, seccion, numero, pregunta, respuesta, parcial) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
   const datosAPasar = [CUIT, usuario, capitulo, seccion, numero, pregunta, respuestaJSON, parcial];
 
-  conexion.query(nuevoParcial, datosAPasar, function (error, lista) {
+  pool.query(nuevoParcial, datosAPasar, function (error, lista) {
       if (error) {
           if (error.code === 'ER_DUP_ENTRY') {
               res.status(409).json({ error: 'Ya existe una respuesta para esta combinación de capitulo y seccion' });
@@ -436,7 +436,7 @@ app.get('/descargar-excel', async (req, res) => {
 
     // Consulta a la base de datos
     const query = 'SELECT * FROM parciales WHERE usuario = ?';
-    conexion.query(query, [usuario], async (error, results, fields) => {
+    pool.query(query, [usuario], async (error, results, fields) => {
       if (error) {
         console.error('Error al consultar la base de datos:', error);
         res.status(500).send('Error al consultar la base de datos');
@@ -504,7 +504,7 @@ app.post('/insertarExperiencia', (req, res) => {
   const nuevoResultado = 'INSERT INTO experiencia (usuario, minutos, salida, uno, dos, tres, cuatro, cinco, seis, siete, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
   const datosAPasar = [usuario, minutos, salida, uno, dos, tres, cuatro, cinco, seis, siete, comentarios];
 
-  conexion.query(nuevoResultado, datosAPasar, function (error, lista) {
+  pool.query(nuevoResultado, datosAPasar, function (error, lista) {
       if (error) {
           if (error.code === 'ER_DUP_ENTRY') {
               res.status(409).json({ error: 'Ya existe una respuesta para esta combinación de capitulo y seccion' });
