@@ -91,6 +91,7 @@
             </tbody>
         </table>
         <button type="button" onclick="submitForm()">Enviar</button>
+        <button type="button" onclick="resetForm()">Borrar Respuestas</button>
     </form>
 
     <script>
@@ -143,19 +144,114 @@
         document.addEventListener('DOMContentLoaded', loadQuestions);
 
         // Función para manejar el envío del formulario
-        function submitForm() {
-            const formData = new FormData(document.getElementById('surveyForm'));
-            const responses = [];
+        // function submitForm() {
+        //     const formData = new FormData(document.getElementById('surveyForm'));
+        //     const responses = [];
             
-            formData.forEach((value, key) => {
-                // Suponiendo que cada pregunta tiene una identificación única
-                const questionId = key.split('_')[1];
-                responses[questionId - 1] = value;
-            });
+        //     formData.forEach((value, key) => {
+        //         // Suponiendo que cada pregunta tiene una identificación única
+        //         const questionId = key.split('_')[1];
+        //         responses[questionId - 1] = value;
+        //     });
 
-            console.log(responses);
+        //     console.log(responses);
+        //     // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
+        // }
+
+  // Función para manejar el envío del formulario
+      function submitForm() {
+        const questions = document.querySelectorAll('tbody tr');
+        const responses = [];
+        let allAnswered = true;
+        let unansweredQuestions = [];
+
+        questions.forEach((row, index) => {
+            const questionId = row.querySelector('input[type="radio"]').name.split('_')[1]; // Obtener el ID de la pregunta desde el name
+            const selectedOption = row.querySelector(`input[name="question_${questionId}"]:checked`);
+
+            if (selectedOption) {
+                responses.push(selectedOption.value);
+            } else {
+              unansweredQuestions.push(index + 1); // Agregar el número de la pregunta que falta responder
+            }
+        });
+
+        if (unansweredQuestions.length > 0) {
+        alert(`Por favor, selecciona una opción para las siguientes preguntas: ${unansweredQuestions.join(', ')}`);
+        } else {
+            console.log('Respuestas:', responses);
             // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
         }
+
+
+    //     if (unansweredQuestions.length > 0) {
+    //     alert(`Por favor, selecciona una opción para las siguientes preguntas: ${unansweredQuestions.join(', ')}`);
+    // } else {
+    //     // Enviar las respuestas al servidor
+    //     fetch('/guardarRespuestas', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(responses)
+    //     }).then(response => {
+    //         if (response.ok) {
+    //             // Redirigir a otra página después de guardar las respuestas
+    //             window.location.href = 'index.html';
+    //         } else {
+    //             // Manejar el error si la respuesta del servidor no es exitosa
+    //             alert('Hubo un problema al guardar las respuestas. Por favor, intenta nuevamente.');
+    //         }
+    //     }).catch(error => {
+    //         console.error('Error al enviar las respuestas:', error);
+    //         alert('Hubo un problema al conectar con el servidor. Por favor, intenta nuevamente.');
+    //     });
+    // }
+        // if (allAnswered) {
+        //     console.log('Respuestas:', responses);
+            // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
+            // fetch('/guardarRespuestas', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(responses)
+            // }).then(response => {
+            //     // Manejar la respuesta del servidor
+            // });
+        // }
+    }
+
+    function resetForm() {
+        location.reload(); // Recarga la página para restablecer el formulario
+    }
     </script>
 </body>
 </html>
+
+<!-- 
+
+Asignación de name
+
+optionInput.name = `question_${question.id}`;
+
+name: El atributo name es fundamental en los formularios HTML, ya que agrupa los inputs de radio de una misma pregunta. En este caso, el name de cada input de radio es question_ seguido del id de la pregunta (question.id). Esto asegura que todos los radios que pertenecen a la misma pregunta tengan el mismo name, lo que permite que solo una opción pueda ser seleccionada por pregunta.
+
+Asignación de id
+
+optionInput.id = `q${question.id}_o${i}`;
+
+id: El id es un identificador único para cada input de radio. En este caso, se compone de q seguido del id de la pregunta y _o seguido del número de la opción (i). Esto garantiza que cada input de radio tenga un identificador único en el documento.
+
+Validación y Envío de Respuestas
+
+Al momento de validar y procesar las respuestas, tu código anterior usa el name de los inputs para identificar la respuesta seleccionada. Dado que todos los inputs de una misma pregunta comparten el mismo name, pero tienen diferentes valores (1 a 4), la lógica de validación y procesamiento funcionará correctamente, siempre que se estén recorriendo y evaluando las preguntas correctamente.
+
+Consideraciones
+
+Si cada pregunta tiene un id único (y question.id es ese id), la asignación de nombres debería funcionar sin problemas. Asegúrate de que:
+
+question.id es único y consistente en toda la encuesta.
+
+Los inputs de radio se generan con el mismo name para cada pregunta pero con diferentes value.
+Con esta estructura, tu código debería estar agrupando correctamente las opciones de cada pregunta, permitiendo seleccionar solo una opción por pregunta, y el procesamiento de las respuestas debería funcionar como se espera. -->

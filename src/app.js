@@ -335,9 +335,7 @@ app.get('/textocheck', (req, res) => {
 
 // Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
 app.get('/preguntas', (req, res) => {
-  const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
-
-  console.log('entro a preguntar por preguntas')
+  const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero LIMIT 5';
 
   pool.query(query, (error, results, fields) => {
     if (error) {
