@@ -60,7 +60,8 @@ app.post('/api/login', (req, res) => {
             firstName: user.Nombre,
             lastName: user.Apellido,
             empresa: user.Empresa,
-            CUIT: user.CUIT}; // Guarda el usuario como un objeto en la sesión
+            CUIT: user.CUIT, // Guarda el usuario como un objeto en la sesión
+            idioma: user.idioma};
           res.status(200).json({ 
             message: 'Login exitoso',
             user: {
@@ -70,7 +71,8 @@ app.post('/api/login', (req, res) => {
               lastName: user.Apellido,
               empresa: user.Empresa,
               CUIT: user.CUIT,
-              ingresado: user.ingresado 
+              ingresado: user.ingresado,
+              idioma: user.idioma,
             }
           }); 
           updateLoginTimestamp(user.id);
@@ -142,7 +144,15 @@ app.get('/protected', (req, res) => {
 // Ruta para obtener los registros de la tabla capitulos ::::::::::::::::::::
 app.get('/capitulos', (req, res) => {
   const indice = parseInt(req.query.indice) || 0;
-  const query = 'SELECT * FROM capitulos WHERE ID = ?';
+  const idioma = parseInt(req.query.idioma) || 1; // Leer el valor de 'idioma' desde la URL, por defecto 1
+
+  console.log (`recibio idioma = ${idioma}`)
+ let query; 
+ if (idioma === 1) {
+    query = 'SELECT * FROM capitulos WHERE ID = ?';
+  } else {
+    query = 'SELECT * FROM capitulos_en WHERE ID = ?';
+  }
 
   pool.query(query, [indice], (error, results, fields) => {
       if (error) {
@@ -168,6 +178,7 @@ app.get('/totalCapitulos', (req, res) => {
       res.status(400).json({ error: 'Faltan parámetros CUIT o capitulo' });
       return;
     }
+
 
   const query = 'SELECT * FROM totalcapitulos WHERE CUIT = ? AND capitulo = ?';
 
