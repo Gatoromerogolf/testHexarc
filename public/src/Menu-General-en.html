@@ -9,56 +9,83 @@
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
+
+  <style>
+    .loading {
+        display: none;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
 
 </head>
 
 <body>
-
   <div class="survey-container">
-
     <form id="survey-form">
-          <div class="containerTitulo">
-            <div class="left-icon">
-              <a href="../../index.html">
-                <img src="../img/contenido (1).png" width="30px">
-              </a>
-            </div>
-            <div class="right-icons">
-              <a href="Menu-General.html" id="spainIcon"> 
-                <img src="../img/espana.png" width="25px">
-              </a>
-              <a href="Menu-General-en.html" id="usaIcon">
-                <img src="../img/usa.png" width="25px">
-              </a>
-            </div>
-          </div>
-          
-          <h3>Company: 'Company Name'</h3>
-          <!-- <h3>Self-Assessment. Chapters.</h3> -->
 
-          <div class="contenedorTabla">
-            <table id="tablaIndice">
-              <tr>
-                <th>#</th>
-                <th style="width: 400px;">Chapter</th>
-                <th style="width: 40px;">Max</th>
-                <th style="width: 50px;">Score</th>
-                <th style="width: 40px;">%</th>
-              </tr>
+      <div class="header-titulo">
+        <a href="../../index.html">
+        <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left"></a>
+        <div class="header-center">
+          <div id="nombreEmpresa" class="company-name"></div>
+          <div id="nombreUsuario" class="user-name"></div>
+        </div>
+        <!-- <img src="../img/espana.png" alt="Logo Derecha" class="logo right"> -->
+      </div>
 
-              <tr id="lineaMenu"></tr>
+      <!-- <h1>Bienvenido, <span id="username"></span>!</h1> -->
+      <h3>Self-assessment of the company's quality management.</h3>
+      <div class="contenedorTabla">
 
-            </table>
-          </div>
+        <div id="loading" class="loading" style="display: block">
+          <div class="spinner"></div>
+          Loading...
+        </div>
+
+        <table id="tablaIndiceCapitulos" style="display: none">
+          <tr>
+            <th>#</th>
+            <th style="width: 350px;">Factor</th>
+            <th style="width: 65px;">Máx</th>
+            <th style="width: 65px;">Score</th>
+            <th style="width: 40px;">%</th>
+            <th style="width: 40px;">PDF</th>
+            <th style="width: 40px;">xls</th>
+          </tr>
+          <tr id="lineaMenu"></tr>
+        </table>
+      </div>
     </form>
   </div>
 
+  <!-- <script>
+    localStorage.setItem('idioma', '1');
+  </script> -->
 
-    </section> -->
-  </div>
-</body>
-
-  <script>
+<!-- <script>
     // Agrega un evento de clic al ícono de España
     document.getElementById('spainIcon').addEventListener('click', function () {
       // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de España
@@ -72,8 +99,22 @@
       // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de USA
       localStorage.setItem('idioma', '2');
     });
-  </script>
+  </script> -->
+
+<!-- <script>
+  // Obtener el nombre del usuario de localStorage
+  const username = localStorage.getItem('username');
+  
+  // Mostrar el nombre del usuario en el elemento con id "username"
+  if (username) {
+      document.getElementById('username').textContent = username;
+  } else {
+      // Si no hay un usuario en localStorage, redirigir a la página de login
+      window.location.href = '../login.html';
+  }
+</script> -->
 
 <script src="../../js/menu-General.js"></script>
 
+</body>
 </html>

@@ -200,7 +200,7 @@ tr:first-of-type + tr {
   }
   
   .logo {
-    width: 25px; /* Ajusta este valor según el tamaño de tus imágenes */
+    width: 30px; /* Ajusta este valor según el tamaño de tus imágenes */
     height: auto;
   }
   

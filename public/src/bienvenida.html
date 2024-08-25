@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            background: url('../estilos/background financiero.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .block {
+            flex: 1;
+            padding: 40px 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .block:nth-child(1) {
+            background-color: #3b5998; /* Azul para el bloque en español */
+        }
+        .block:nth-child(2) {
+            background-color: #ff6f61; /* Naranja para el bloque en inglés */
+        }
+        .block h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .block p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .block button {
+            font-size: 16px;
+            padding: 5px 10px;
+            background-color: #fff;
+            color: #333; /* Color de texto oscuro para contraste */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .block button:hover {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="block">
+        <h1>Bienvenido</h1>
+        <h3><div class="nombreUsuario" class="user-name"></div></h3>
+        <p>Por favor, seleccione en qué idioma desea utilizar la autoevaluación.</p>
+        <p>Por favor, seleccione en qué idioma desea utilizar la autoevaluación.</p>
+        <p>Por favor, seleccione en qué idioma desea utilizar la autoevaluación.</p>
+        <p>Por favor, seleccione en qué idioma desea utilizar la autoevaluación.</p>
+        <p>Por favor, seleccione en qué idioma desea utilizar la autoevaluación.</p>
+        <p>Por favor, seleccione en qué idioma desea utilizar la autoevaluación.</p>
+
+        <button>Español</button>
+    </div>
+    <div class="block">
+        <h1>Welcome</h1>
+        <h3><div class="nombreUsuario" class="user-name"></div></h3>
+        <p>Please select the language you would like to use for the self-assessment.</p>
+        <button>English</button>
+    </div>
+</div>
+
+
+<script>
+    const apellidouser = localStorage.getItem("apellido");
+    const nombreUser = localStorage.getItem("nombre");
+    const apenom = nombreUser + ' ' + apellidouser;
+  
+    document.querySelectorAll(".nombreUsuario").forEach(element => {
+        element.textContent = apenom;
+        });
+  
+  </script>
+</body>
+</html>

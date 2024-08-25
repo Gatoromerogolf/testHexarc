@@ -36,41 +36,35 @@
       </div>
     </div>
 
-    <h2>Presentación</h2>
-    <p>Durante el desarrollo de esta autoevaluación se identificarán tres tipos de requerimientos de información:</p>
+    <h2>Introduction</h2>
+    <p>During the development of this self-assessment, three types of information requirements will be identified::</p>
     <ul>
-      <li>Aquellos que se respondan de forma afirmativa o negativa (SI - NO)</li>
-      <li>Los que soliciten informar cantidades o listar áreas, especialidades, etc. </li>
-      <li>Los que contengan una premisa o afirmación que debe ser evaluada según su grado de cumplimiento o aceptación
-        dentro de la organización</li>
+      <li>Those that require a yes or no answer (YES - NO)</li>
+      <li>Those that request reporting quantities or listing areas, specialties, etc. </li>
+      <li>Those that contain a premise or statement that must be evaluated based on its degree of compliance or acceptance within the organization.</li>
     </ul>
-    <p>La precisión en las respuestas brindadas y la franca valoración del cumplimiento de las afirmaciones permitirán
-      obtener una visión clara de la situación de la organización frente al desafío del manejo eficiente de los riesgos
-      del negocio.</p>
-    <p>Se evalúan los siguientes factores:</p>
+    <p>The accuracy of the provided responses and the honest assessment of the statements' compliance will allow for a clear understanding of the organization's situation in facing the challenge of efficient business risk management.</p>
+    <p>The following factors are evaluated::</p>
 
     <ol class="dos-columnas-presentacion" style="list-style-type: upper-alpha">
-      <li><strong>Manejo de los riesgos de Gobierno Corporativo</strong></li>
-      <li><strong>Manejo del Apetito de Riesgo</strong></li>
-      <li><strong>Manejo de los Riesgos de Mercado</strong></li>
-      <li><strong>Manejo de los Riesgos de Procesos</strong></li>
-      <li><strong>Situación Financiera</strong></li>
-      <li><strong>Generación de Resultados</strong></li>
+      <li><strong>Corporate Governance Risk Management</strong></li>
+      <li><strong>Risk Appetite Management</strong></li>
+      <li><strong>Market Risk Management</strong></li>
+      <li><strong>Process Risk Management</strong></li>
+      <li><strong>Financial Situation</strong></li>
+      <li><strong>Results Generation</strong></li>
     </ol>
 
-    <p>Todas las situaciones presentadas requieren la selección de al menos una respuesta, garantizando así una
-      evaluación completa y precisa de cada área.</p>
+    <p>All situations presented require the selection of at least one answer, ensuring a comprehensive and accurate evaluation of each area.</p>
 
-    <p>Este proceso puede realizarse en etapas, permitiendo el completamiento parcial de los items requeridos y
-      continuar posteriormente desde el último punto informado.</p>
+    <p>This process can be completed in stages, allowing for the partial completion of the required items and the ability to continue later from the last reported point.</p>
 
-    <p>La aplicación habilita el acceso a cada sección, una vez cumplimentada la sección anterior.</p>
+    <p>The application enables access to each section once the previous section has been completed.</p>
 
-    <p>Al finalizar todos los factores, se presenta un resumen general con el puntaje obtenido, proporcionando una
-      visión integral de la posición de la empresa frente al desafío de la gestión de riesgos.</p>
+    <p>Upon completion of all factors, a general summary with the score obtained is presented, providing an overall view of the company's position in facing the challenge of risk management.</p>
 
     <div class="centrado-flex">
-      <button class="botonSiguiente" id="boton-enviar" type="button">COMENZAR</button>
+      <button class="botonSiguiente" id="boton-enviar" type="button">START</button>
     </div>
 
   </div>
@@ -78,18 +72,18 @@
 
 <script>
   document.getElementById("boton-enviar").addEventListener('click', () => {
-    localStorage.setItem('idioma', '1');
+    localStorage.setItem('idioma', '2');
     const idioma = JSON.parse(localStorage.getItem('idioma'));
     // if (idioma == 2) {
-    //   window.location.href = "Menu-General-en.html";
+      window.location.href = "Menu-General-en.html";
     // } else {
-      window.location.href = "Menu-General.html";
+    //   window.location.href = "Menu-General.html";
     }
   );
 </script>
 
 <!-- <script>
-  localStorage.setItem('idioma', '1');
+  localStorage.setItem('idioma', '2');
 </script> -->
 
 <script>

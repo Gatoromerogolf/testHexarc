@@ -66,7 +66,11 @@ async function procesarCapitulos() {
 // ::::::::::::::::::::::------------------------------------------
 async function leeCapitulos(indice) {
   try {
-    const respuesta = await fetch(`/capitulos?indice=${indice}`);
+    // Obtener el valor de 'idioma' desde localStorage
+    const idioma = localStorage.getItem('idioma');
+
+    // Realizar la solicitud fetch pasando 'indice' y 'idioma' como parámetros en la URL
+    const respuesta = await fetch(`/capitulos?indice=${indice}&idioma=${idioma}`);
     if (!respuesta.ok) {
       console.log(`Error en lectura de capitulos`);
       return;
@@ -104,7 +108,10 @@ async function leeCapitulos(indice) {
 // ::::::::::::::::::::::------------------------------------------
 async function obtenerTotalCapitulos(CUIT, capitulo) {
   try {
-    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}&capitulo=${capitulo}`);
+    // Obtener el valor de 'idioma' desde localStorage
+    const idioma = localStorage.getItem('idioma');
+
+    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}&capitulo=${capitulo}&idioma=${idioma}`);
 
     if (response.ok) {
       const data = await response.json();
