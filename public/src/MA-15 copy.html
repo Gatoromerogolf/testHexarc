@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <div class="survey-container">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div class="header-center">
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+          <div class="nav-iconsxx">
+            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+          </div>
+          <div class="nav-iconsxx">
+            <h5> Autoevaluación</h5>
+          </div>
+        </div>
+        <hr>
+
+        <form id="formulario">
+
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A.html">XV - Secretaría del Directorio</a></h4>
+          </div>
+
+          <div class="salida">
+            <p>Seleccione la opción que corresponda a su organización.</p>
+            <button type="button" id="boton-salir">Salir</button>
+          </div>
+
+          <div id="overlay">
+          <div id="ventanaSalida" >
+            <!-- <div class="confirm-modal" id="confirm-modal">-->
+              <div class="confirm-box">
+                <p>La información registrada hasta el momento quedará almacenada.  <br> Si sale de la aplicación, podrá completar posteriormente los items faltantes.
+                  <br>
+                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                <button id="confirm-yes">Salir</button>
+                <button id="confirm-no">Continuar</button><br>
+              </div>
+          </div>
+        </div>
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Situación</th>
+              <th class="respuesta-col">No efectiva</th>
+              <th class="respuesta-col">Poco efectivo</th>
+              <th class="respuesta-col">Efectivo</th>
+              <th class="respuesta-col">Muy efectivo</th>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">1. La Secretaría se asegura del cumplimiento del Estatuto, el Código de
+                Gobierno y
+                el Reglamento del
+                Directorio, en su caso</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="1"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="2"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="3"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-1" value="4"><label for="A-15-1" class="radio-label"></label>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">2. Los directores evalúan a la Secretaría</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-2" value="1"><label for="A-15-2" class="radio-label">Si</label>
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio" name="A-15-2" value="2"><label for="A-15-2" class="radio-label">No</label>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Enviar</button>
+          </div>
+
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
+
+          <!-- </form> -->
+
+    </form>
+  </div>
+
+  </section>
+  </section>
+
+
+  <!-- ventana al final con resultados -->
+
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+        <!-- <button type="button" onclick="cerrarAlerta()">Cerrar</button> -->
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  function toggleRedTextAndDisableRadios(checkbox) {
+    var row = checkbox.closest('tr'); // Encuentra la fila (tr) más cercana
+    var radios = row.querySelectorAll('input[type="radio"]'); // Encuentra todos los radio buttons en la fila
+
+    if (checkbox.checked) {
+      row.classList.add('red-text');
+      radios.forEach(function (radio) {
+        radio.disabled = true; // Deshabilita cada radio button
+      });
+      alert("Al seleccionar esta opción, la situación planteada quedará pendiente de respuesta y se deshabilitará el marcado de opciones.\n\nCuando desee completar la respuesta puede regresar a esta página.\n\nLe recordaremos todas las situaciones pendientes de respuesta.\n\nPara responder a la situación pendiente, simplemente desmarque la casilla y  las opciones se habilitarán nuevamente.");
+    } else {
+      row.classList.remove('red-text');
+      radios.forEach(function (radio) {
+        radio.disabled = false; // Habilita cada radio button
+      });
+    }
+  }
+</script>
+
+<script>
+document.getElementById('formulario').addEventListener('submit', function(event) {
+      event.preventDefault();
+    });
+const botonSalida = document.getElementById('boton-salir');
+const ventanaSale = document.getElementById('ventanaSalida');
+const botonYes = document.getElementById('confirm-yes');
+const botonNou = document.getElementById('confirm-no');
+
+botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+  let isExiting = true;
+  ventanaSale.style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+});
+
+botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+  isExiting = true;
+  console.log ('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+});
+
+botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+  console.log ('dijo que SI')
+  isExiting = true;
+  window.location.href = '../../index.html';
+});
+</script>
+
+<script src="../../js/ma-15.js"></script>
+
+</html>

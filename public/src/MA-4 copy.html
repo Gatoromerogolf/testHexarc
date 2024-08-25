@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <div class="survey-container">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div class="header-center">
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+          <div class="nav-iconsxx">
+            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+          </div>
+          <div class="nav-iconsxx">
+            <h5> Autoevaluación</h5>
+          </div>
+        </div>
+        <hr>
+
+        <form id="formulario">
+
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A.html">IV - Comités del Directorio</a></h4>
+          </div>
+
+          <div class="salida">
+            <p>Seleccione la opción que corresponda a su organización.</p>
+            <button type="button" id="boton-salir">Salir</button>
+          </div>
+
+          <div id="overlay">
+            <div id="ventanaSalida">
+              <!-- <div class="confirm-modal" id="confirm-modal">-->
+              <div class="confirm-box">
+                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+                  completar posteriormente los items faltantes.
+                  <br>
+                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                <button id="confirm-yes">Salir</button>
+                <button id="confirm-no">Continuar</button><br>
+              </div>
+            </div>
+          </div>
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Situación</th>
+              <th class="respuesta-col">Si</th>
+              <th class="respuesta-col">No</th>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">1. Existe un Comité de Auditoría</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-1" value="1"
+                    onclick="manejarVisibilidadFila2()"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-1" value="2"
+                    onclick="manejarVisibilidadFila2()"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col" id="fila-2" style="display: none">2. El Auditor interno integra o concurre a
+                todas las reuniones del Comité de Auditoría</td>
+
+              <td class="respuesta-col" id="fila-2a" style="display: none">
+                <div class="radio-container"><input type="radio" name="A-4-2" value="1"></div>
+              </td>
+
+              <td class="respuesta-col" id="fila-2b" style="display: none">
+                <div class="radio-container"><input type="radio" name="A-4-2" value="2"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">3. Existe un Comité de Nominaciones y Sucesiones</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-3" value="1"
+                    onclick="mostrarOcultarComNomSuc(this.value)"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-3" value="2"
+                    onclick="mostrarOcultarComNomSuc(this.value)"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">4. Existe un Comité de Compensaciones</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-4" value="1"
+                    onclick="mostrarOcultarComCompen(this.value)"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-4" value="2"
+                    onclick="mostrarOcultarComCompen(this.value)"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">5. Existe un Comité de Tecnologías de la Información</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-5" value="1"
+                    onclick="mostrarOcultarComTecno(this.value)"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-5" value="2"
+                    onclick="mostrarOcultarComTecno(this.value)"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">6. Existe un Comité de Riesgos</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-6" value="1"
+                    onclick="mostrarOcultarComRiesgo(this.value)"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-6" value="2"
+                    onclick="mostrarOcultarComRiesgo(this.value)"></div>
+              </td>
+            </tr>
+            <tr></tr>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">7. Cada Comité del Directorio está compuesto por al menos un director
+                independiente</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-7" value="1"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-7" value="2"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="pregunta-col">Situación</th>
+              <th class="respuesta-col">No efectivo</th>
+              <th class="respuesta-col">Poco efectivo</th>
+              <th class="respuesta-col">Efectivo</th>
+              <th class="respuesta-col">Muy efectivo</th>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">8. La estructura de Comités del Directorio está documentada</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-8" value="1"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-8" value="2"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-8" value="3"></div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-4-8" value="4"></div>
+              </td>
+            </tr>
+
+
+
+            <tr>
+              <td class="pregunta-col">9. Cada Comité redacta un acta por cada reunión</td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-9" value="1"></div>
+              </td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-9" value="2"></div>
+              </td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-9" value="3"></div>
+              </td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-9" value="4"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">10. Cada Comité envía informes al Directorio</td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-10" value="1"></div>
+              </td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-10" value="2"></div>
+              </td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-10" value="3"></div>
+              </td>
+
+              <td class="respuesta-col" style="font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-10" value="4"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="tituloFrecuencia" style="display: none; font-weight: 600">--. Frecuencia de las reuniones del:
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col" id="reunionComAud" style="display: none">11. Comité de Auditoría</td>
+
+              <td class="respuesta-col" id="reunionComAud1" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-11" value="1">No hay</div>
+              </td>
+
+              <td class="respuesta-col" id="reunionComAud2" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-11" value="2">Mensual</div>
+              </td>
+
+              <td class="respuesta-col" id="reunionComAud3" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-11" value="3">Ad-hoc</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col" id="lineaNomSuc" style="display: none">12. Comité de Nominaciones y Sucesiones
+              </td>
+
+              <td class="respuesta-col" id="lineaNomSuc1" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-12" value="1">No hay</div>
+              </td>
+
+              <td class="respuesta-col" id="lineaNomSuc2" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-12" value="2">Anual</div>
+              </td>
+
+              <td class="respuesta-col" id="lineaNomSuc3" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-12" value="3">Ad-hoc</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col" id="comiteCompen" style="display: none">13. Comité de Compensaciones</td>
+
+              <td class="respuesta-col" id="comiteCompen1" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-13" value="1">No hay</div>
+              </td>
+
+              <td class="respuesta-col" id="comiteCompen2" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-13" value="2">Anual</div>
+              </td>
+
+              <td class="respuesta-col" id="comiteCompen3" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-13" value="3">Ad-hoc</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col" id="comiteTecno" style="display: none">14. Comité de Tecnologías de la
+                Información</td>
+
+              <td class="respuesta-col" id="comiteTecno1" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-14" value="1">No hay</div>
+              </td>
+
+              <td class="respuesta-col" id="comiteTecno2" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-14" value="2">Mensual</div>
+              </td>
+
+              <td class="respuesta-col" id="comiteTecno3" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-14" value="3">Ad-hoc</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col" id="comiteRiesgo" style="display: none">15. Comité de Riesgos</td>
+
+              <td class="respuesta-col" id="comiteRiesgo1" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-15" value="1">No hay</div>
+              </td>
+
+              <td class="respuesta-col" id="comiteRiesgo2" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-15" value="2">Mensual</div>
+              </td>
+
+              <td class="respuesta-col" id="comiteRiesgo3" style="display: none; font-size: 13px">
+                <div class="radio-container"><input type="radio" name="A-4-15" value="3">Ad-hoc</div>
+              </td>
+            </tr>
+          </table>
+
+
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Enviar</button>
+          </div>
+
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
+
+        </form>
+  </div>
+  </section>
+  </section>
+
+
+
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script>
+  function mostrarOcultarComAudit(valorSeleccionadoAB) {
+
+    // Muestra las líneas si el valor seleccionado es '1'
+    if (valorSeleccionadoAB === '1') {
+      document.getElementById('lineaComAud').style.display = 'block';
+      document.getElementById('lineaComAudS').style.display = 'inline-block';
+      document.getElementById('lineaComAudN').style.display = 'inline-block';
+      document.getElementById("reunionComAud").style.display = 'block';
+      document.getElementById("reunionComAud1").style.display = 'inline-block';
+      document.getElementById("reunionComAud2").style.display = 'inline-block';
+      document.getElementById("tituloFrecuencia").style.display = 'inline-block';
+
+    } else {
+      // Mostrar las líneas si se selecciona cualquier otro valor
+      document.getElementById('lineaComAud').style.display = 'none';
+      document.getElementById('lineaComAudS').style.display = 'none';
+      document.getElementById('lineaComAudN').style.display = 'none';
+      document.getElementById("reunionComAud").style.display = 'none';
+      document.getElementById("reunionComAud1").style.display = 'none';
+      document.getElementById("reunionComAud2").style.display = 'none';
+    }
+  }
+</script> -->
+
+  <script>
+    function mostrarOcultarComAudit(value) {
+      var displayStatus = (value == '1') ? 'table-row' : 'none';
+      document.getElementById('lineaComAud').style.display = displayStatus;
+    }
+  </script>
+
+  <script>
+    function mostrarOcultarComAltaG(valorSelec) {
+
+      // Muestra las líneas si el valor seleccionado es '1'
+      if (valorSelec === '1') {
+        document.getElementById('lineaAltaG').style.display = 'table-cell';
+        document.getElementById('lineaAltaG1').style.display = 'table-cell';
+        document.getElementById('lineaAltaG2').style.display = 'table-cell';
+        document.getElementById('lineaAltaG3').style.display = 'table-cell';
+        document.getElementById("tituloFrecuencia").style.display = 'table-cell';;
+      } else {
+        // Mostrar las líneas si se selecciona cualquier otro valor
+        document.getElementById('lineaAltaG').style.display = 'none';
+        document.getElementById('lineaAltaG1').style.display = 'none';
+        document.getElementById('lineaAltaG2').style.display = 'none';
+        document.getElementById('lineaAltaG3').style.display = 'none';
+      }
+    }
+  </script>
+
+  <script>
+    function mostrarOcultarComNomSuc(valorSelec) {
+
+      // Muestra las líneas si el valor seleccionado es '1'
+      if (valorSelec === '1') {
+        document.getElementById('lineaNomSuc').style.display = 'table-cell';
+        document.getElementById('lineaNomSuc1').style.display = 'table-cell';
+        document.getElementById('lineaNomSuc2').style.display = 'table-cell';
+        document.getElementById('lineaNomSuc3').style.display = 'table-cell';
+        document.getElementById("tituloFrecuencia").style.display = 'table-cell';
+      } else {
+        // Mostrar las líneas si se selecciona cualquier otro valor
+        document.getElementById('lineaNomSuc').style.display = 'none';
+        document.getElementById('lineaNomSuc1').style.display = 'none';
+        document.getElementById('lineaNomSuc2').style.display = 'none';
+        document.getElementById('lineaNomSuc3').style.display = 'none';
+      }
+    }
+  </script>
+
+  <script>
+    function mostrarOcultarComCompen(valorSelec) {
+      // Muestra las líneas si el valor seleccionado es '1'
+      if (valorSelec === '1') {
+        document.getElementById('comiteCompen').style.display = 'table-cell';
+        document.getElementById('comiteCompen1').style.display = 'table-cell';
+        document.getElementById('comiteCompen2').style.display = 'table-cell';
+        document.getElementById('comiteCompen3').style.display = 'table-cell';
+        document.getElementById("tituloFrecuencia").style.display = 'table-cell';
+      } else {
+        // Mostrar las líneas si se selecciona cualquier otro valor
+        document.getElementById('comiteCompen').style.display = 'none';
+        document.getElementById('comiteCompen1').style.display = 'none';
+        document.getElementById('comiteCompen2').style.display = 'none';
+        document.getElementById('comiteCompen3').style.display = 'none';
+      }
+    }
+  </script>
+
+  <script>
+    function mostrarOcultarComTecno(valorSelec) {
+      // Muestra las líneas si el valor seleccionado es '1'
+      if (valorSelec === '1') {
+        document.getElementById('comiteTecno').style.display = 'table-cell';
+        document.getElementById('comiteTecno1').style.display = 'table-cell';
+        document.getElementById('comiteTecno2').style.display = 'table-cell';
+        document.getElementById('comiteTecno3').style.display = 'table-cell';
+        document.getElementById("tituloFrecuencia").style.display = 'table-cell';
+      } else {
+        // Mostrar las líneas si se selecciona cualquier otro valor
+        document.getElementById('comiteTecno').style.display = 'none';
+        document.getElementById('comiteTecno1').style.display = 'none';
+        document.getElementById('comiteTecno2').style.display = 'none';
+        document.getElementById('comiteTecno3').style.display = 'none';
+      }
+    }
+  </script>
+
+  <script>
+    function mostrarOcultarComRiesgo(valorSelec) {
+      // Muestra las líneas si el valor seleccionado es '1'
+      if (valorSelec === '1') {
+        document.getElementById('comiteRiesgo').style.display = 'table-cell';
+        document.getElementById('comiteRiesgo1').style.display = 'table-cell';
+        document.getElementById('comiteRiesgo2').style.display = 'table-cell';
+        document.getElementById('comiteRiesgo3').style.display = 'table-cell';
+        document.getElementById("tituloFrecuencia").style.display = 'table-cell';
+      } else {
+        // Mostrar las líneas si se selecciona cualquier otro valor
+        document.getElementById('comiteRiesgo').style.display = 'none';
+        document.getElementById('comiteRiesgo1').style.display = 'none';
+        document.getElementById('comiteRiesgo2').style.display = 'none';
+        document.getElementById('comiteRiesgo3').style.display = 'none';
+      }
+
+    }
+  </script>
+
+  <script>
+    function manejarVisibilidadFila2() {
+      // Obtener el valor seleccionado en la pregunta "A-9-3"
+      var valorSeleccionado = document.querySelector('input[name="A-4-1"]:checked').value;
+      // Seleccionar la fila que queremos mostrar/ocultar
+      // var fila2 = document.getElementById('fila-2');
+
+      // Si el valor no es "1", ocultamos la fila, si no, la mostramos
+      if (valorSeleccionado === '1') {
+        // fila2.style.display = ' ';
+        document.getElementById('fila-2').style.display = 'table-cell';
+        document.getElementById('fila-2a').style.display = 'table-cell';
+        document.getElementById('fila-2b').style.display = 'table-cell';
+        document.getElementById('tituloFrecuencia').style.display = 'table-cell';
+        document.getElementById('reunionComAud').style.display = 'table-cell';
+        document.getElementById('reunionComAud1').style.display = 'table-cell';
+        document.getElementById('reunionComAud2').style.display = 'table-cell';
+        document.getElementById('reunionComAud3').style.display = 'table-cell';
+      } else {
+        // fila2.style.display = 'none';
+        document.getElementById('fila-2').style.display = 'none';
+        document.getElementById('fila-2a').style.display = 'none';
+        document.getElementById('fila-2b').style.display = 'none';
+        document.getElementById('reunionComAud').style.display = 'none';
+        document.getElementById('reunionComAud1').style.display = 'none';
+        document.getElementById('reunionComAud2').style.display = 'none';
+        document.getElementById('reunionComAud3').style.display = 'none';
+
+      }
+    }
+  </script>
+
+  <script>
+    document.getElementById('formulario').addEventListener('submit', function (event) {
+      event.preventDefault();
+    });
+    const botonSalida = document.getElementById('boton-salir');
+    const ventanaSale = document.getElementById('ventanaSalida');
+    const botonYes = document.getElementById('confirm-yes');
+    const botonNou = document.getElementById('confirm-no');
+
+    botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+      let isExiting = true;
+      ventanaSale.style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    });
+
+    botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+      isExiting = true;
+      console.log('dijo que NO')
+      ventanaSale.style.display = 'none';
+      document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+    });
+
+    botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+      console.log('dijo que SI')
+      isExiting = true;
+      window.location.href = '../../index.html';
+    });
+  </script>
+
+  <script src="../../js/ma-4.js"></script>
+
+</body>
+
+</html>

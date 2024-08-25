@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="survey-container">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div class="header-center">
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+          <div class="nav-iconsxx">
+            <h4>A - Corporate Governance Risk Management</h4>
+          </div>
+          <div class="nav-iconsxx">
+            <h5>Self-assessment</h5>
+          </div>
+        </div>
+        <hr>
+
+        <form id="formulario">
+
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A.html">II - Organizational Structure</a></h4>
+          </div>
+
+          <div class="salida">
+            <p>Select the option that corresponds to your organization.</p>
+            <button type="button" id="boton-salir">Salir</button>
+          </div>
+
+          <div id="overlay">
+          <div id="ventanaSalida" >
+            <!-- <div class="confirm-modal" id="confirm-modal">-->
+              <div class="confirm-box">
+                <p>The information recorded so far will be saved.  <br> If you exit the application, you can complete the missing items later.
+                  <br>
+                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <button id="confirm-yes">Exit</button>
+                <button id="confirm-no">Continue</button><br>
+              </div>
+          </div>
+        </div>
+
+          <!-- <p style="font-size:12px">Seleccione la opción que corresponda a su organización</p> -->
+
+          <ul class="listas">
+            <li>The Board of Directors has established a structure with the following effective roles:
+            </li>
+            <p style="font-size:12px">(marcar todos los que correspondan)</p>
+            <ul class="dos-columnas">
+              <li><input id="uno" type="checkbox" value="1"><label class="check" for="uno">Chief Executive Officer
+              </label></li>
+              <li><input id="dos" type="checkbox" value="2"><label class="check" for="dos">Chief Operating Officer
+              </label></li>
+              <li><input id="tres" type="checkbox" value="3"><label class="check" for="tres">Chief Financial Officer
+              </label></li>
+              <li><input id="cuatro" type="checkbox" value="4"><label class="check" for="cuatro">Chief Risk Officer
+              </label></li>
+              <li><input id="cinco" type="checkbox" value="5"><label class="check" for="cinco">Chief Technology Officer
+              </label></li>
+              <li><input id="seis" type="checkbox" value="6"><label class="check" for="seis">Chief People and Culture Officer
+              </label>
+              </li>
+              <li><input id="siete" type="checkbox" value="7"><label class="check" for="siete">Chief Innovation/Transformation Officer
+              </label></li>
+              <li><input id="ocho" type="checkbox" value="8"><label class="check" for="ocho">Chief Artificial Intelligence Officer
+              </label></li>
+              <li><input id="nueve" type="checkbox" value="9"><label class="check" for="nueve">Board od Directors Secretary
+              </label></li>
+              <li><input id="diez" type="checkbox" value="10"><label class="check" for="diez">Chief Legal Officer
+              </label></li>
+              <li><input id="once" type="checkbox" value="11"><label class="check" for="once">Management Committee
+              </label>
+              </li>
+              <li><input id="doce" type="checkbox" value="12"><label class="check" for="doce">Internal Auditor
+              </label>
+              </li>
+            </ul>
+          </ul>
+
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Enviar</button>
+          </div>
+
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
+
+        </form>
+  </div>
+
+  </section>
+  </section>
+
+
+  <!-- ventana al final con resultados -->
+
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Section summary</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Maximum possible score: <span id="maximo"></span></p>
+        <br>
+        <p>Score obtained: <span id="calificacion"></span></p>
+        <br>
+        <p>Percentage: <span id="porcentual"></span></p>
+
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
+
+        <button id="continuar" onclick="continuar()">Continue</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  document.getElementById('formulario').addEventListener('submit', function(event) {
+        event.preventDefault();
+      });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+  
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+  
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log ('dijo que NO')
+      ventanaSale.style.display = 'none';
+      document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+  
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log ('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+
+<script src="../../js/ma-2.js"></script>
+
+</html>
