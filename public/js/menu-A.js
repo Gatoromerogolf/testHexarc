@@ -5,6 +5,7 @@ const apellidouser = localStorage.getItem("apellido");
 const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
 const empresa = localStorage.getItem("empresa");
+const idioma = localStorage.getItem("idioma");
 
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
@@ -13,13 +14,14 @@ document.getElementById("nombreUsuario").textContent = apenom;
 // fetch('http://localhost:3000/registros')
 
 // Función para obtener los datos de la base de datos
-async function obtenerSecciones(indice) {
+async function obtenerSecciones(indice, idioma) {
   let linkPagina = "##";
   try {
     // Realizar la solicitud fetch
-    const response = await fetch(`/secciones?indice=${indice}`);
 
-    if (response.ok) {
+    const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}`);
+
+    if (response.ok) {indice=`${indice}`;
       // Obtener los datos en formato JSON
       const seccionRec = await response.json(); //registro seccion recibido
       if (seccionRec.length > 0) {
@@ -83,7 +85,7 @@ async function obtenerSecciones(indice) {
 (async function () {
   try {
     for (let indice = 1; indice < 16; indice++) {
-      const shouldTerminate = await obtenerSecciones(indice);
+      const shouldTerminate = await obtenerSecciones(indice, idioma);
       if (shouldTerminate) break;
     }
     // Una vez que se han obtenido todos los datos, actualizar el HTML
@@ -207,13 +209,8 @@ function actualizarHTML(tablaMenuEs) {
 
     const capitulo = "A";
     actualizaCapitulos(capitulo, totalMax, totalCal, totalPor);
-
   }
-
-
 }
-
-
 
 
 function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
