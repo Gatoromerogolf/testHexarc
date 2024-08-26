@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido a HexaRci</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -12,19 +18,31 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
+            /* font-family: Arial, sans-serif; */
             background-color: #f4f4f4;
             background: url('estilos/background financiero.jpg') no-repeat center center fixed;
             background-size: cover;
+            font-family:'Abel', sans-serif;
         }
         .welcome-button {
-            font-size: 24px;
-            padding: 15px 30px;
+            font-size: 22px;
+            padding: 15px 50px;
             background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: default;
+            font-family:'Abel', sans-serif;
+        }
+        .welcome-button-big {
+            font-size: 36px;
+            padding: 30px 60px;
+            background-color: #416942;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: default;
+            font-family:'Abel', sans-serif;
         }
         .ingreso-button {
             font-size: 18px;
@@ -45,8 +63,11 @@
 </head>
 <body>
 
-<button class="welcome-button">Bienvenido a HexaRci</button>
-<a href="/login.html" class="ingreso-button">Ingreso a la aplicación</a>
+<button class="welcome-button-big">HexaRCi</button>
+<br>
+<button class="welcome-button">Bienvenido a la aplicación - Wellcome to the application</button>
+<br>
+<a href="/login.html" class="ingreso-button">Ingreso - Enter</a>
 
 </body>
 </html>
