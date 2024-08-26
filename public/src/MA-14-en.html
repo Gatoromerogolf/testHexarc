@@ -11,60 +11,63 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
-<body>
+<body class="financiero">
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
-          <div class="header-center">
-            <div id="nombreEmpresa" class="company-name"></div>
-            <div id="nombreUsuario" class="user-name"></div>
+          <div class="nav-icons">
+            <div class="header-center">
+              <div id="nombreEmpresa" class="company-name"></div>
+              <div id="nombreUsuario" class="user-name"></div>
+            </div>
+          </div>
+          <div class="nav-iconstxt">
+            <h4>A - Corporate Governance Risk Management</h4>
           </div>
           <div class="nav-iconsxx">
-            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
-          </div>
-          <div class="nav-iconsxx">
-            <h5> Autoevaluación</h5>
+            <h5>Self-assessment</h5>
           </div>
         </div>
         <hr>
-  
+
         <form id="formulario">
   
           <div class="center-container">
-            <h4 class="tituloSeccion"><a href="Menu-A.html">XIV - Presidente del Directorio</a></h4>
+            <h4 class="tituloSeccion"><a href="Menu-A-en.html">XIV - Chairman of the Board
+            </a></h4>
           </div>
 
           <div class="salida">
-            <p>Seleccione la opción que corresponda a su organización.</p>
-            <button type="button" id="boton-salir">Salir</button>
+            <p style="font-size:12px">Select the option that corresponds to your organization.</p>
+            <button type="button" id="boton-salir">Exit</button>
           </div>
-
+  
           <div id="overlay">
             <div id="ventanaSalida">
               <!-- <div class="confirm-modal" id="confirm-modal">-->
               <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                  completar posteriormente los items faltantes.
+                <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                  missing items later.
                   <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-                <button id="confirm-yes">Salir</button>
-                <button id="confirm-no">Continuar</button><br>
+                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <button id="confirm-yes">Exit</button>
+                <button id="confirm-no">Continue</button><br>
               </div>
             </div>
           </div>
 
-        <table>
-          <tr>
-            <th class="pregunta-col">Situación</th>
-            <th class="respuesta-col">No efectiva</th>
-            <th class="respuesta-col">Poco efectivo</th>
-            <th class="respuesta-col">Efectivo</th>
-            <th class="respuesta-col">Muy efectivo</th>
-          </tr>
+          <table>
+            <tr>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Ineffective</th>
+              <th class="respuesta-col">Slightly effective</th>
+              <th class="respuesta-col">Effective</th>
+              <th class="respuesta-col">Highly effective</th>
+            </tr>
 
           <tr>
-            <td class="pregunta-col">1. Promueve una cultura de apertura, inclusión y un tono adecuado para el debate
+            <td class="pregunta-col">1. The Chairman promotes a culture of openness, inclusion, and appropriate debate tone
             </td>
 
             <td class="respuesta-col">
@@ -81,7 +84,7 @@
           </tr>
 
           <tr>
-            <td class="pregunta-col">2. Inculca la disciplina a todos los participantes contribuyendo a una reunión eficaz
+            <td class="pregunta-col">2. The Chairman instills discipline in all participants contributing to an effective meeting
             </td>
 
             <td class="respuesta-col">
@@ -98,7 +101,7 @@
           </tr>
 
           <tr>
-            <td class="pregunta-col">3. Focaliza al Directorio en los asuntos relevantes y se involucra cuando surgen conflictos de interés
+            <td class="pregunta-col">3. The Chairman focuses the Board on relevant issues and engages when conflicts of interest arise
             </td>
 
             <td class="respuesta-col">
@@ -115,7 +118,7 @@
           </tr>
 
           <tr>
-            <td class="pregunta-col">4. Fomenta y facilita debates de alta calidad
+            <td class="pregunta-col">4. The Chairman encourages and facilitates high-quality debates
             </td>
 
             <td class="respuesta-col">
@@ -132,7 +135,7 @@
           </tr>
 
           <tr>
-            <td class="pregunta-col">5. Establece sistemas para evaluar el funcionamiento del Directorio y el desempeño de sus miembros
+            <td class="pregunta-col">5. The Chairman establishes systems to evaluate the Board's functioning and the performance of its members
             </td>
 
             <td class="respuesta-col">
@@ -150,37 +153,37 @@
         </table>
 
         <div class="centrado-flex">
-          <button type="submit" id="boton-enviar">Enviar</button>
+          <button type="submit" id="boton-enviar">Send</button>
         </div>
 
         <div class="centrado-flex">
-          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Clear selections</button>
         </div>
 
       </form>
     </section>
   </section>
 
-
   <div id="miAlerta" class="alerta-oculto">
     <div class="alerta-contenido">
       <div class="alerta-cabecera">
-        <span>Resumen de la sección</span>
+        <span>Section summary</span>
       </div>
       <div class="alerta-cuerpo">
-        <p>Puntaje máximo posible: <span id="maximo"></span></p>
-        <p>Calificación obtenida: <span id="calificacion"></span></p>
-        <p>Porcentual: <span id="porcentual"></span></p>
+        <p>Maximum possible score: <span id="maximo"></span></p>
+        <br>
+        <p>Score obtained: <span id="calificacion"></span></p>
+        <br>
+        <p>Percentage: <span id="porcentual"></span></p>
 
-      <div class="gauge-container">
-        <canvas id="gaugeChart";></canvas>
-      </div>
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
 
-        <button id="continuar" onclick="continuar()">Continuar</button>
+        <button id="continuar" onclick="continuar()">Continue</button>
       </div>
     </div>
   </div>
-
 
 </body>
 
