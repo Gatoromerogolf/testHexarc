@@ -11,20 +11,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
-<body>
+<body class="financiero">
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
-          <div class="header-center">
-            <div id="nombreEmpresa" class="company-name"></div>
-            <div id="nombreUsuario" class="user-name"></div>
+          <div class="nav-icons">
+            <div class="header-center">
+              <div id="nombreEmpresa" class="company-name"></div>
+              <div id="nombreUsuario" class="user-name"></div>
+            </div>
+          </div>
+          <div class="nav-iconstxt">
+            <h4>A - Corporate Governance Risk Management</h4>
           </div>
           <div class="nav-iconsxx">
-            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
-          </div>
-          <div class="nav-iconsxx">
-            <h5> Autoevaluación</h5>
+            <h5>Self-assessment</h5>
           </div>
         </div>
         <hr>
@@ -32,60 +34,60 @@
         <form id="formulario">
 
           <div class="center-container">
-            <h4 class="tituloSeccion"><a href="Menu-A.html">VIII - Gestión de Riesgos</a></h4>
+            <h4 class="tituloSeccion"><a href="Menu-A-en.html">VIII - Risk Management
+            </a></h4>
           </div>
 
           <div class="salida">
-            <p>Seleccione la opción que corresponda a su organización.</p>
-            <button type="button" id="boton-salir">Salir</button>
+            <p style="font-size:12px">Select the option that corresponds to your organization.</p>
+            <button type="button" id="boton-salir">Exit</button>
           </div>
 
           <div id="overlay">
             <div id="ventanaSalida">
               <!-- <div class="confirm-modal" id="confirm-modal">-->
               <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                  completar posteriormente los items faltantes.
+                <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                  missing items later.
                   <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-                <button id="confirm-yes">Salir</button>
-                <button id="confirm-no">Continuar</button><br>
+                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <button id="confirm-yes">Exit</button>
+                <button id="confirm-no">Continue</button><br>
               </div>
             </div>
           </div>
 
           <table>
             <tr>
-              <th class="pregunta-col">Situación</th>
-              <th class="respuesta-col">No efectiva</th>
-              <th class="respuesta-col">Poco efectivo</th>
-              <th class="respuesta-col">Efectivo</th>
-              <th class="respuesta-col">Muy efectivo</th>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Yes</th>
+              <th class="respuesta-col">No</th>
+
             </tr>
 
             <tr>
-              <td class="pregunta-col">1. El Directorio ha determinado el apetito de riesgo para el negocio</td>
-
-              <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-1" value="1">Si
+              <td class="pregunta-col">1. The Board of Directors has set the risk appetite for the business
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-1" value="2">No
-              </td>
-
-              <!-- <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-1" value="3">
+                <div class="radio-container"><input type="radio" name="A-8-1" value="1">
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-1" value="4">
-              </td> -->
+                <div class="radio-container"><input type="radio" name="A-8-1" value="2">
+              </td>
             </tr>
 
             <tr>
-              <td class="pregunta-col">2. El Directorio cuenta con las políticas y procedimientos adecuados para
-                identificar los riesgos del negocio</td>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Ineffective</th>
+              <th class="respuesta-col">Slightly effective</th>
+              <th class="respuesta-col">Effective</th>
+              <th class="respuesta-col">Highly effective</th>
+            </tr>
+            <tr>
+              <td class="pregunta-col">2. The Board of Directors has the appropriate policies and procedures to identify the business risks
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-8-2" value="1">
@@ -105,8 +107,8 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">3. El Directorio cuenta con las políticas y procedimientos adecuados para
-                monitorear los riesgos</td>
+              <td class="pregunta-col">3. The Board of Directors has appropriate policies and procedures to monitor risks
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-8-3" value="1">
@@ -126,7 +128,8 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">4. La independencia y la calidad de la estructura y procedimientos para la gestión de riesgos están aseguradas</td>
+              <td class="pregunta-col">4. The independence and quality of the structure and procedures for risk management are ensured
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-8-4" value="1">
@@ -148,11 +151,11 @@
 
 
           <div class="centrado-flex">
-            <button type="submit" id="boton-enviar">Enviar</button>
+            <button type="submit" id="boton-enviar">Send</button>
           </div>
 
           <div class="centrado-flex">
-            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Clear selections</button>
           </div>
 
         </form>
@@ -162,18 +165,20 @@
     <div id="miAlerta" class="alerta-oculto">
       <div class="alerta-contenido">
         <div class="alerta-cabecera">
-          <span>Resumen de la sección</span>
+          <span>Section summary</span>
         </div>
         <div class="alerta-cuerpo">
-          <p>Puntaje máximo posible: <span id="maximo"></span></p>
-          <p>Calificación obtenida: <span id="calificacion"></span></p>
-          <p>Porcentual: <span id="porcentual"></span></p>
-
+          <p>Maximum possible score: <span id="maximo"></span></p>
+          <br>
+          <p>Score obtained: <span id="calificacion"></span></p>
+          <br>
+          <p>Percentage: <span id="porcentual"></span></p>
+  
           <div class="gauge-container">
             <canvas id="gaugeChart" ;></canvas>
           </div>
-
-          <button id="continuar" onclick="continuar()">Continuar</button>
+  
+          <button id="continuar" onclick="continuar()">Continue</button>
         </div>
       </div>
     </div>
