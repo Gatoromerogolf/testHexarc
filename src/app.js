@@ -146,7 +146,7 @@ app.get('/capitulos', (req, res) => {
   const indice = parseInt(req.query.indice) || 0;
   const idioma = parseInt(req.query.idioma) || 1; // Leer el valor de 'idioma' desde la URL, por defecto 1
 
-  console.log (`recibio idioma = ${idioma}`)
+
  let query; 
  if (idioma === 1) {
     query = 'SELECT * FROM capitulos WHERE ID = ?';
@@ -244,7 +244,14 @@ app.get('/leeListaPrecios', (req, res) => {
 // Ruta para obtener todos los registros de la tabla secciones ::::::::::::::::::::
 app.get('/secciones', (req, res) => {
   const indice = parseInt(req.query.indice) || 0;
-  const query = 'SELECT * FROM secciones WHERE seccion = ?';
+  const idioma = parseInt(req.query.idioma) || 2;
+
+  let query;
+  if (idioma === 1){
+    query = 'SELECT * FROM secciones WHERE seccion = ?'}
+  else{
+    query = 'SELECT * FROM secciones_en WHERE seccion = ?'
+  };
 
   pool.query(query, [indice], (error, results, fields) => {
       if (error) {
