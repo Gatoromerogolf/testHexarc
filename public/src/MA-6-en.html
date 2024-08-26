@@ -11,20 +11,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
-<body>
+<body class="financiero">
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
-          <div class="header-center">
-            <div id="nombreEmpresa" class="company-name"></div>
-            <div id="nombreUsuario" class="user-name"></div>
+          <div class="nav-icons">
+            <div class="header-center">
+              <div id="nombreEmpresa" class="company-name"></div>
+              <div id="nombreUsuario" class="user-name"></div>
+            </div>
+          </div>
+          <div class="nav-iconstxt">
+            <h4>A - Corporate Governance Risk Management</h4>
           </div>
           <div class="nav-iconsxx">
-            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
-          </div>
-          <div class="nav-iconsxx">
-            <h5> Autoevaluación</h5>
+            <h5>Self-assessment</h5>
           </div>
         </div>
         <hr>
@@ -32,39 +34,41 @@
         <form id="formulario">
 
           <div class="center-container">
-            <h4 class="tituloSeccion"><a href="Menu-A.html">VI - Información para el Directorio</a></h4>
+            <h4 class="tituloSeccion"><a href="Menu-A-en.html">VI - Information for the Board
+            </a></h4>
           </div>
 
           <div class="salida">
-            <p>Seleccione la opción que corresponda a su organización.</p>
-            <button type="button" id="boton-salir">Salir</button>
+            <p style="font-size:12px">Select the option that corresponds to your organization.</p>
+            <button type="button" id="boton-salir">Exit</button>
           </div>
 
           <div id="overlay">
             <div id="ventanaSalida">
               <!-- <div class="confirm-modal" id="confirm-modal">-->
               <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                  completar posteriormente los items faltantes.
+                <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                  missing items later.
                   <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-                <button id="confirm-yes">Salir</button>
-                <button id="confirm-no">Continuar</button><br>
+                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <button id="confirm-yes">Exit</button>
+                <button id="confirm-no">Continue</button><br>
               </div>
             </div>
           </div>
 
           <table>
             <tr>
-              <th class="pregunta-col">Situación</th>
-              <th class="respuesta-col">No efectivo</th>
-              <th class="respuesta-col">Poco efectivo</th>
-              <th class="respuesta-col">Efectivo</th>
-              <th class="respuesta-col">Muy efectivo</th>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Ineffective</th>
+              <th class="respuesta-col">Slightly effective</th>
+              <th class="respuesta-col">Effective</th>
+              <th class="respuesta-col">Highly effective</th>
             </tr>
 
             <tr>
-              <td class="pregunta-col">1. El Directorio recibe KPI´s suficientes y sólidos desde la Gerencia.</td>
+              <td class="pregunta-col">1. The Board of Directors receives sufficient and solid KPIs from Management
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-6-1" value="1">
@@ -84,8 +88,8 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">2. El Directorio ejerce consistentemente un desafío creíble a la información
-                gerencial</td>
+              <td class="pregunta-col">2. The Board of Directors consistently exercises credible challenges to management information
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-6-2" value="1">
@@ -105,7 +109,7 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">3. El Directorio aprueba los contratos significativos celebrados por la Gerencia
+              <td class="pregunta-col">3. The Board of Directors approves significant contracts entered into by management
               </td>
 
               <td class="respuesta-col">
@@ -120,39 +124,39 @@
           </table>
 
           <div class="centrado-flex">
-            <button type="submit" id="boton-enviar">Enviar</button>
+            <button type="submit" id="boton-enviar">Send</button>
           </div>
 
           <div class="centrado-flex">
-            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Clear selections</button>
           </div>
 
         </form>
       </section>
     </section>
 
-
-
     <div id="miAlerta" class="alerta-oculto">
       <div class="alerta-contenido">
         <div class="alerta-cabecera">
-          <span>Resumen de la sección</span>
+          <span>Section summary</span>
         </div>
         <div class="alerta-cuerpo">
-          <p>Puntaje máximo posible: <span id="maximo"></span></p>
-          <p>Calificación obtenida: <span id="calificacion"></span></p>
-          <p>Porcentual: <span id="porcentual"></span></p>
-
+          <p>Maximum possible score: <span id="maximo"></span></p>
+          <br>
+          <p>Score obtained: <span id="calificacion"></span></p>
+          <br>
+          <p>Percentage: <span id="porcentual"></span></p>
+  
           <div class="gauge-container">
             <canvas id="gaugeChart" ;></canvas>
           </div>
-
-          <button id="continuar" onclick="continuar()">Continuar</button>
+  
+          <button id="continuar" onclick="continuar()">Continue</button>
         </div>
       </div>
     </div>
-
-</body>
+    
+  </body>
 
 <script>
   document.getElementById('formulario').addEventListener('submit', function (event) {
