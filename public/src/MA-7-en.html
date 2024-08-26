@@ -11,20 +11,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
-<body>
+<body class="financiero">
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
-          <div class="header-center">
-            <div id="nombreEmpresa" class="company-name"></div>
-            <div id="nombreUsuario" class="user-name"></div>
+          <div class="nav-icons">
+            <div class="header-center">
+              <div id="nombreEmpresa" class="company-name"></div>
+              <div id="nombreUsuario" class="user-name"></div>
+            </div>
+          </div>
+          <div class="nav-iconstxt">
+            <h4>A - Corporate Governance Risk Management</h4>
           </div>
           <div class="nav-iconsxx">
-            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
-          </div>
-          <div class="nav-iconsxx">
-            <h5> Autoevaluación</h5>
+            <h5>Self-assessment</h5>
           </div>
         </div>
         <hr>
@@ -32,40 +34,41 @@
         <form id="formulario">
 
           <div class="center-container">
-            <h4 class="tituloSeccion"><a href="Menu-A.html">VII - Estrategia</a></h4>
+            <h4 class="tituloSeccion"><a href="Menu-A-en.html">VII - Strategy
+            </a></h4>
           </div>
 
           <div class="salida">
-            <p>Seleccione la opción que corresponda a su organización.</p>
-            <button type="button" id="boton-salir">Salir</button>
+            <p style="font-size:12px">Select the option that corresponds to your organization.</p>
+            <button type="button" id="boton-salir">Exit</button>
           </div>
 
           <div id="overlay">
             <div id="ventanaSalida">
               <!-- <div class="confirm-modal" id="confirm-modal">-->
               <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                  completar posteriormente los items faltantes.
+                <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                  missing items later.
                   <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-                <button id="confirm-yes">Salir</button>
-                <button id="confirm-no">Continuar</button><br>
+                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <button id="confirm-yes">Exit</button>
+                <button id="confirm-no">Continue</button><br>
               </div>
             </div>
           </div>
 
           <table>
             <tr>
-              <th class="pregunta-col">Situación</th>
-              <th class="respuesta-col">No efectivo</th>
-              <th class="respuesta-col">Poco efectivo</th>
-              <th class="respuesta-col">Efectivo</th>
-              <th class="respuesta-col">Muy efectivo</th>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Ineffective</th>
+              <th class="respuesta-col">Slightly effective</th>
+              <th class="respuesta-col">Effective</th>
+              <th class="respuesta-col">Highly effective</th>
             </tr>
 
             <tr>
-              <td class="pregunta-col">1. El Directorio participa en el proceso estratégico/táctico y aprueba el Plan
-                Estratégico</td>
+              <td class="pregunta-col">1.The Board of Directors participates in the strategic/tactical process and approves the Strategic Plan
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-7-1" value="1">
@@ -85,7 +88,8 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">2. La estrategia está documentada</td>
+              <td class="pregunta-col">2. The strategy is documented
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-7-2" value="1">
@@ -105,7 +109,7 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">3. La profundidad de las discusiones estratégicas en las reuniones es adecuada
+              <td class="pregunta-col">3. The depth of strategic discussions in the Board of Directors meetings is adequate
               </td>
 
               <td class="respuesta-col">
@@ -126,7 +130,8 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">4. El Directorio está al tanto de los cambios en la industria</td>
+              <td class="pregunta-col">4. The Board of Directors is aware of changes in the industry
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-7-4" value="1">
@@ -147,7 +152,8 @@
 
 
             <tr>
-              <td class="pregunta-col">5. El Directorio conoce la posición competitiva de los competidores</td>
+              <td class="pregunta-col">5. The Board of Directors is aware of the competitive position of the competitors
+              </td>
 
               <td class="respuesta-col">
                 <div class="radio-container"><input type="radio" name="A-7-5" value="1">
@@ -169,11 +175,11 @@
           </table>
 
           <div class="centrado-flex">
-            <button type="submit" id="boton-enviar">Enviar</button>
+            <button type="submit" id="boton-enviar">Send</button>
           </div>
 
           <div class="centrado-flex">
-            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Clear selections</button>
           </div>
 
         </form>
@@ -183,18 +189,20 @@
     <div id="miAlerta" class="alerta-oculto">
       <div class="alerta-contenido">
         <div class="alerta-cabecera">
-          <span>Resumen de la sección</span>
+          <span>Section summary</span>
         </div>
         <div class="alerta-cuerpo">
-          <p>Puntaje máximo posible: <span id="maximo"></span></p>
-          <p>Calificación obtenida: <span id="calificacion"></span></p>
-          <p>Porcentual: <span id="porcentual"></span></p>
-
+          <p>Maximum possible score: <span id="maximo"></span></p>
+          <br>
+          <p>Score obtained: <span id="calificacion"></span></p>
+          <br>
+          <p>Percentage: <span id="porcentual"></span></p>
+  
           <div class="gauge-container">
             <canvas id="gaugeChart" ;></canvas>
           </div>
-
-          <button id="continuar" onclick="continuar()">Continuar</button>
+  
+          <button id="continuar" onclick="continuar()">Continue</button>
         </div>
       </div>
     </div>
