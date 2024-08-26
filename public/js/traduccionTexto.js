@@ -11,7 +11,7 @@ const conexion = mysql.createPool({
 
 // Función para traducir texto usando Google Translate API
 async function traducirTexto(texto, sourceLang = 'es', targetLang = 'en') {
-  const apiKey = 'AIzaSyBaXewOWOWCakR2RlJN7VDzArPPg55gbBU';  // Reemplaza con tu clave de API de Google Translate
+  const apiKey = 'xxx';  // Reemplaza con tu clave de API de Google Translate
   const url = `https://translation.googleapis.com/language/translate/v2`;
 
   try {
