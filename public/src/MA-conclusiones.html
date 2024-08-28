@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    .centered {
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body id="conclusiones">
+  <div class="survey-container">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div class="header-center">
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+          <div class="nav-iconsxx">
+            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+          </div>
+          <div class="nav-iconsxx">
+            <h5> Autoevaluación</h5>
+          </div>
+        </div>
+        <hr>
+
+        <form id="formulario">
+
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A.html">Conclusiones generales</a></h4>
+          </div>
+
+
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Puntaje general obtenido. </th>
+            </tr>
+          </table>
+
+          <p>El Factor de calidad de administración del Gobierno Corporativo tiene en su estado ideal una calificación
+            máxima de 2300 puntos.</p>
+          <p>El resultado de la presente autoevaluación arroja un score de 865 puntos, que representa el 75% del valor
+            deseado.</p>
+
+          </table>
+
+          <h1>Aspectos que inciden negativamente en la evaluación general.</h1>
+          <p>Son aquellos que en esta evaluación han sido calificados con un puntaje inferior al 51% del total ideal
+            para la sección. </p>
+          <table>
+            <thead>
+              <tr>
+                <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+                <th colspan="4">Calificación: 0 - 50%</th>
+              </tr>
+              <tr>
+                <th>Ideal</th>
+                <th>Obtenida</th>
+                <th>%</th>
+                <th>Ver</th>
+              </tr>
+            </thead>
+            <tbody id="questionsTableBody">
+              <!-- <tr>
+                <td id="linea-conclusion"></td>
+              </tr> -->
+            </tbody>
+
+            <tr>
+              <td class="pregunta-col">El Directorio y su articulación con las Gerencias</td>
+              <td id="ideal-conc" class="centered">310</td>
+              <td id="obtenido-conc" class="centered">140</td>
+              <td id="porciento-conc" class="centered">45,16</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">Comité del Directorio</td>
+              <td id="ideal-conc" class="centered">310</td>
+              <td id="obtenido-conc" class="centered">115</td>
+              <td id="porciento-conc" class="centered">37,10</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">Información para el Directorio</td>
+              <td id="ideal-conc" class="centered">40</td>
+              <td id="obtenido-conc" class="centered">5</td>
+              <td id="porciento-conc" class="centered">12,50</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">Gestión de riesgos</td>
+              <td id="ideal-conc" class="centered">50</td>
+              <td id="obtenido-conc" class="centered">20</td>
+              <td id="porciento-conc" class="centered">40,0</td>
+            </tr>
+          </table>
+
+          <h1>Aspectos que .....algo habrá que decir. </h1>
+          <p>Son aquellos que en esta evaluación han sido calificados con un puntaje inferior al 71% del total ideal
+            para la sección. </p>
+          <table id="tabla-conclusiones">
+
+            <tr>
+              <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+              <th colspan="4">Calificación: 51 - 70%</th>
+            </tr>
+
+            <tr>
+              <th>Ideal</th>
+              <th>Obtenida</th>
+              <th>%</th>
+              <th>Ver</th>
+            </tr>
+            <tr>
+              <td id="seccion-conc">La composición y responsabilidad del Directorio</td>
+              <td id="ideal-conc" class="centered">910</td>
+              <td id="obtenido-conc" class="centered">618</td>
+              <td id="porciento-conc" class="centered">67,86</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">El Directorio y su articulación con las Gerencias</td>
+              <td id="ideal-conc" class="centered">310</td>
+              <td id="obtenido-conc" class="centered">140</td>
+              <td id="porciento-conc" class="centered">45,16</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">Comité del Directorio</td>
+              <td id="ideal-conc" class="centered">310</td>
+              <td id="obtenido-conc" class="centered">115</td>
+              <td id="porciento-conc" class="centered">37,10</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">Información para el Directorio</td>
+              <td id="ideal-conc" class="centered">40</td>
+              <td id="obtenido-conc" class="centered">5</td>
+              <td id="porciento-conc" class="centered">12,50</td>
+            </tr>
+            <tr>
+              <td class="pregunta-col">Gestión de riesgos</td>
+              <td id="ideal-conc" class="centered">50</td>
+              <td id="obtenido-conc" class="centered">20</td>
+              <td id="porciento-conc" class="centered">40,0</td>
+            </tr>
+          </table>
+
+          <!-- </form> -->
+
+        </form>
+  </div>
+
+  </section>
+  </section>
+
+
+  <!-- ventana al final con resultados -->
+
+</body>
+
+<script src="../../js/ma-conclusiones.js"></script>
+
+</html>

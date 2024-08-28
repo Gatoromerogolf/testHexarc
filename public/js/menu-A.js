@@ -42,7 +42,7 @@ async function obtenerSecciones(indice, idioma) {
         const respuesta = await buscaRespuesta(CUIT, capitulo, seccion);
         if (respuesta.exists) {
           // si lo encuentra, llena la tabla sin pasar el link
-          console.log(`Encontro registro ${seccion} en obtenerSecciones`);
+          // console.log(`Encontro registro ${seccion} en obtenerSecciones`);
           const registro = respuesta.record;
 
           const elemento = [
@@ -54,7 +54,7 @@ async function obtenerSecciones(indice, idioma) {
             // (respuesta.score / primerSeccion.max4 * 100).toFixed(2)
             registro.porcentaje,
           ];
-          console.log(elemento);
+          // console.log(elemento);
           tablaMenuEs.push(elemento);
         } else {
           // console.log (`no hay respuesta para seccion ${seccion}`);
@@ -123,7 +123,7 @@ async function buscaRespuesta(CUIT, capitulo, seccion) {
 
 // Función para actualizar el HTML con los datos de la tabla
 function actualizarHTML(tablaMenuEs) {
-  console.log(tablaMenuEs);
+  // console.log(tablaMenuEs);
 
   tablaMenuA = tablaMenuEs;
   let totalMax = 0;
@@ -155,7 +155,7 @@ function actualizarHTML(tablaMenuEs) {
     celdaMaximo.textContent = tablaMenuA[i][3] || "";
     celdaMaximo.classList.add("ajustado-derecha");
     totalMax += Number(tablaMenuA[i][3]);
-    console.log (`valores de i ${i} y total Max: ${totalMax}`)
+    // console.log (`valores de i ${i} y total Max: ${totalMax}`)
 
     let celdaPuntos = lineaDatosFd.insertCell(-1);
     celdaPuntos.textContent = tablaMenuA[i][4] || "";
@@ -179,7 +179,11 @@ function actualizarHTML(tablaMenuEs) {
     celdaNombre.textContent =  "";
     
     let celdaDescripcion = lineaDatosFd.insertCell(-1);
-    celdaDescripcion.textContent = "Calificacion general:";
+    if (idioma == 1 ){
+      celdaDescripcion.textContent = "Calificacion general:";
+    } else {
+      celdaDescripcion.textContent = "Total Score:";
+    }
 
     celdaDescripcion.style.fontSize = "18px"; // Cambiar el tamaño de la fuente
     celdaDescripcion.style.fontWeight = "bold"; // Hacer el texto en negrita
@@ -228,7 +232,7 @@ function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
       return response.text();
     })
     .then((data) => {
-      alert("Registro actualizado correctamente");
+      // alert("Registro actualizado correctamente");
       console.log(data);
     })
     .catch((error) => {

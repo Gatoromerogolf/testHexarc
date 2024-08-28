@@ -7,7 +7,7 @@ let puntajesIndividuales = [];
 let filasFaltantes = [];
 let maximo = 160;
 if (JSON.parse(localStorage.getItem('3o4Direct')) == 1) {
-      maximo =+ 10;
+      maximo += 10;
 }
 let isExiting = false;
 

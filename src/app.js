@@ -132,6 +132,32 @@ app.post('/api/updateIngresado', (req, res) => {
   });
 });
 
+// Ruta para actualizar el campo "idioma" del usuario:::::::::::::::::::::::::::::::
+app.post('/api/updateIdioma', (req, res) => {
+  const { username, CUIT, idioma } = req.body;
+
+  // Asegúrarse de validar los datos entrantes antes de usarlos
+  if (!username || !CUIT || !idioma) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
+
+  const query = `UPDATE users SET idioma = ?  WHERE username = ? AND CUIT = ?`;
+
+  pool.query(query, [idioma, username, CUIT], (error, results) => {
+    if (error) {
+      console.error('Error al actualizar el campo ingresado:', error);
+      res.status(500).json({ error: 'Error al actualizar el campo idioma' });
+      return;
+    }
+    res.json({ message: 'Campo idioma actualizado correctamente' });
+  });
+});
+
+
+
+
+
+
 // Ruta protegida que requiere autenticación :::::::::::::::::::::::::::::::::::::::::.
 app.get('/protected', (req, res) => {
   if (req.session.user) {
@@ -324,6 +350,43 @@ app.get('/busca-respuesta-capitulo', (req, res) => {
       });
     });
 
+// Ruta para buscar respuestas por cuit y capitulo.:::::::::::::::::::
+app.get('/busca-respuesta-capitulo-ordenado', (req, res) => {
+  const { CUIT, capitulo, orderField = 'porcentaje' } = req.query;
+
+  if (!CUIT || !capitulo || !orderField) {
+      res.status(400).json({ error: 'Faltan parámetros requeridos' });
+      console.log (`valores CUIT ${CUIT}, capitulo ${capitulo}`)
+      console.log (`salio en error por aca`)
+      return;
+    }
+
+  // Lista de campos permitidos para el ordenamiento
+  const validFields = ['porcentaje', 'maximo', 'score'];
+
+    // Validar que el campo de ordenamiento sea válido
+  if (!validFields.includes(orderField)) {
+    return res.status(400).send('Campo de ordenamiento inválido');
+  }
+
+  const query = `SELECT * FROM respuestas WHERE cuit = ? AND capitulo = ? ORDER BY ${orderField} ASC`;
+  const values = [CUIT, capitulo];
+
+  pool.query(query, values, (error, results, fields) => {
+      if (error) {
+        console.log ('primer error en el query')
+        res.status(500).json({ error: 'Error al buscar el registro' });
+        return;
+      }
+      if (results.length > 0) {
+        res.json({ exists: true, records: results});
+        console.table(results)
+      } else {
+        res.json({ exists: false });
+        }
+      });
+    });    
+
 // Ruta para obtener todos las respuestas de la tabla textorespuestas::::::::::::::::::::
 app.get('/textorespuestas', (req, res) => {
   const query = 'SELECT * FROM textorespuestas';
@@ -353,7 +416,7 @@ app.get('/textocheck', (req, res) => {
 
 // Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
 app.get('/preguntas', (req, res) => {
-  const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion';
+  const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
 
   pool.query(query, (error, results, fields) => {
     if (error) {

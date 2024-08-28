@@ -10,6 +10,9 @@ body {
   padding: 0;
   background-attachment: fixed;
 }
+#conclusiones {
+  font-family: "Abel", sans-serif;
+}
 
 /* Fondo específico para la clase fiananciero */
 body.financiero {
