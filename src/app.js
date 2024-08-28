@@ -18,7 +18,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
-app.use(express.static(path.join(__dirname, '../public')));
+// app.use(express.static(path.join(__dirname, '../public')));
+
+app.use(express.static(path.join(__dirname, '../public'), { index: 'index.html' }));
+
 
 // Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
@@ -42,9 +45,9 @@ app.use(session({
 }));
 
 // Ruta para servir index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public', 'index.html'));
+// });
 
 
 app.post('/api/login', (req, res) => {
@@ -269,24 +272,25 @@ app.get('/leeListaPrecios', (req, res) => {
 
 // Ruta para obtener todos los registros de la tabla secciones ::::::::::::::::::::
 app.get('/secciones', (req, res) => {
-  const indice = parseInt(req.query.indice) || 0;
+  const seccion = parseInt(req.query.indice) || 0;
   const idioma = parseInt(req.query.idioma) || 2;
+  const capitulo = req.query.capitulo || 'A';
 
+  console.log (`valores seccion ${seccion}, idioma ${idioma}, capitulo ${capitulo}`)
   let query;
   if (idioma === 1){
-    query = 'SELECT * FROM secciones WHERE seccion = ?'}
+    query = 'SELECT * FROM secciones WHERE seccion = ? AND capitulo = ?'}
   else{
-    query = 'SELECT * FROM secciones_en WHERE seccion = ?'
+    query = 'SELECT * FROM secciones_en WHERE seccion = ? AND capitulo = ?'
   };
 
-  pool.query(query, [indice], (error, results, fields) => {
+  pool.query(query, [seccion, capitulo], (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
         return;
       }
-  
-      if (results.length > 0) {  // Verificar si hay al menos un registro
+        if (results.length > 0) { 
         res.json(results);
       } else {
         res.status(404).json({ error: 'No se encontraron registros' });
@@ -380,7 +384,6 @@ app.get('/busca-respuesta-capitulo-ordenado', (req, res) => {
       }
       if (results.length > 0) {
         res.json({ exists: true, records: results});
-        console.table(results)
       } else {
         res.json({ exists: false });
         }

@@ -18,8 +18,9 @@ async function obtenerSecciones(indice, idioma) {
   let linkPagina = "##";
   try {
     // Realizar la solicitud fetch
+    const capitulo = "A";
 
-    const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}`);
+    const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
 
     if (response.ok) {indice=`${indice}`;
       // Obtener los datos en formato JSON
@@ -30,7 +31,6 @@ async function obtenerSecciones(indice, idioma) {
         // console.log (primerSeccion.max4)
         // leo la tabla de respuestas para saber si se completó
         const CUIT = localStorage.getItem("CUIT");
-        const capitulo = "A";
         const seccion = primerSeccion.seccion;
 
         const direct3o4 = "direct3o4";
