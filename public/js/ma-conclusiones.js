@@ -1,5 +1,4 @@
 
-
 let tablaMenuEs = [];
 let tablaMenuA = [];
 let primeraVez = 0;
@@ -8,145 +7,126 @@ const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
 const empresa = localStorage.getItem("empresa");
 const CUIT = localStorage.getItem("CUIT");
-const idioma = localStorage.getItem("idioma");
 const capitulo = "A";
+const idioma = Number(localStorage.getItem('idioma'))
 
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-async function ejecutarBusqueda (CUIT, capitulo) {
-    try {
-    // Espera a que la promesa de buscaRespuesta se resuelva
-    const respuestas = await buscaRespuesta(CUIT, capitulo);
-    if (respuestas.exists && respuestas.record.length > 0) {
-          console.table(respuestas.record); // Imprime el resultado de los registros obtenidos
+// Llama a la función asíncrona
+buscaPrintResultados(CUIT, capitulo);
+
+async function buscaPrintResultados (CUIT, capitulo) {
+  try {
+    const { exists, respuestas } = await buscaRespuesta(CUIT, capitulo);   // Espera a que la promesa de buscaRespuesta se resuelva
+    if (exists && respuestas.length > 0) {
+          actualizarHTML(respuestas); // Imprime el resultado de los registros obtenidos
         } else {
           console.log('No se encontraron registros.');
         }
-    }catch (error) {
-        console.error('Error al ejecutar la búsqueda:', error);
-    }   
+  }catch (error) {
+      console.error('Error al ejecutar la búsqueda:', error);
+  }   
 }
 
-// Llama a la función asíncrona
-ejecutarBusqueda(CUIT, capitulo);
-
 async function buscaRespuesta(CUIT, capitulo) {
-
   try {
     const response = await fetch(
       `/busca-respuesta-capitulo-ordenado?CUIT=${CUIT}&capitulo=${capitulo}`
     );
-    if (response.ok) {
-      const resultado = await response.json();
-      if (resultado.exists) {
-        // return { exists: true, score: result.score };
-        return { exists: true, record: resultado.records };
-
-      }
-    } else {
-      console.error(`Sin respuesta para en buscaRespuesta`);
+    if (!response.ok) {
+      throw new Error('Respuesta no OK de buscaRespuesta');
     }
+
+    const resultado = await response.json();
+    return { exists: resultado.exists, respuestas: resultado.records || []};
+    
   } catch (error) {
     console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+    return { exists: false, respuestas: [] };
   }
-  return { exists: false };
 }
+
 
 // Función para actualizar el HTML con los datos de la tabla
-function actualizarHTML(tablaMenuEs) {
-  // console.log(tablaMenuEs);
-
-  tablaMenuA = tablaMenuEs;
+async function actualizarHTML(respuestas) {
+  let tablaMenuA = respuestas.filter(respuesta => respuesta.porcentaje < 50);
+  // tablaMenuA = tablaMenuEs;
   let totalMax = 0;
   let totalCal = 0;
-  let totalPor = 0;
-
-  // Define celdaMaximo, celdaPuntos, y celdaPorciento fuera del bucle
-  let ultimaFila;
-  let celdaMaximo, celdaPuntos, celdaPorciento;
 
   //  llena la matriz
-  let lineaDatosFd = document.getElementById("lineaMenu");
+  let lineaDatosFd = document.getElementById("questionsTableBody");
+  await llenaUnaParte(tablaMenuA, lineaDatosFd);
 
+  tablaMenuA = respuestas.filter(respuesta => respuesta.porcentaje > 50 && respuesta.porcentaje < 70);
+  lineaDatosFd = document.getElementById("questions5170");
+  await llenaUnaParte(tablaMenuA, lineaDatosFd);
 
-  for (i = 0; i < tablaMenuA.length; i++) {
-    lineaDatosFd = tablaIndice.insertRow();
+  async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
+    // tablaMenuA.forEach(respuesta => {
+      for (const respuesta of tablaMenuA) {
+      let fila = document.createElement('tr');
 
-    let celdaNombre = lineaDatosFd.insertCell(-1);
-    celdaNombre.textContent = tablaMenuA[i][0];
-
-    const celdaEnlace = lineaDatosFd.insertCell(-1);
-    const enlace = document.createElement("a"); // Crear un elemento <a>
-    enlace.href = tablaMenuA[i][1]; // Establecer el atributo href con el valor correspondiente
-    enlace.textContent = tablaMenuA[i][2]; // Establecer el texto del enlace con el tercer elemento de la tabla
-    enlace.style.textDecoration = "none";  // Agregar el enlace como hijo de la celda
-    celdaEnlace.appendChild(enlace);
-
-    let celdaMaximo = lineaDatosFd.insertCell(-1);
-    celdaMaximo.textContent = tablaMenuA[i][3] || "";
-    celdaMaximo.classList.add("ajustado-derecha");
-    totalMax += Number(tablaMenuA[i][3]);
-    // console.log (`valores de i ${i} y total Max: ${totalMax}`)
-
-    let celdaPuntos = lineaDatosFd.insertCell(-1);
-    celdaPuntos.textContent = tablaMenuA[i][4] || "";
-    celdaPuntos.classList.add("ajustado-derecha");
-    // Convierte el valor a un número antes de sumarlo
-    totalCal += Number(tablaMenuA[i][4]);
-
-    let celdaPorciento = lineaDatosFd.insertCell(-1);
-    celdaPorciento.textContent = tablaMenuA[i][5] || "";
-    celdaPorciento.classList.add("ajustado-derecha");
-    // totalPor = (Number(tablaMenuA[i][4]) / Number(tablaMenuA[i][3]) * 100).toFixed(2);
-  }
-
-  // Procesa linea final, si la linea 14 tuvo resultados.
-  if (tablaMenuA[14][3] > 0) {
-    document.getElementById("botonSiguiente").style.display = "block";
-
-    lineaDatosFd = tablaIndice.insertRow();
-
-    let celdaNombre = lineaDatosFd.insertCell(-1);
-    celdaNombre.textContent =  "";
+      let celdaNombre = document.createElement('td');
+      const capitulo = "A";
+      const indice = respuesta.seccion;
+      const descripcion = await obtenerNombreSeccion(indice, idioma, capitulo);
+      // const descripcion = fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
+      celdaNombre.textContent = descripcion; // Ajusta según tu estructura de datos
+      fila.appendChild(celdaNombre);
     
-    let celdaDescripcion = lineaDatosFd.insertCell(-1);
-    if (idioma == 1 ){
-      celdaDescripcion.textContent = "Calificacion general:";
-    } else {
-      celdaDescripcion.textContent = "Total Score:";
+      let celdaMaximo = document.createElement('td');
+      celdaMaximo.textContent = respuesta.maximo;
+      celdaMaximo.classList.add("centered");
+      totalMax += Number(tablaMenuA.maximo);
+      fila.appendChild(celdaMaximo);
+
+      let celdaPuntos = document.createElement('td');
+      celdaPuntos.textContent = respuesta.score;
+      celdaPuntos.classList.add("centered");
+      // Convierte el valor a un número antes de sumarlo
+      totalCal += Number(tablaMenuA.score);
+      fila.appendChild(celdaPuntos);
+
+      let celdaPorciento = document.createElement('td');
+      celdaPorciento.textContent = respuesta.porcentaje;
+      celdaPorciento.classList.add("centered");
+      // totalPor = (Number(tablaMenuA[i][4]) / Number(tablaMenuA[i][3]) * 100).toFixed(2);
+      fila.appendChild(celdaPorciento);
+
+      lineaDatosFd.appendChild(fila);
+  }
+}}
+
+async function obtenerNombreSeccion(indice, idioma, capitulo) {
+  try {
+    const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.statusText}`);
     }
 
-    celdaDescripcion.style.fontSize = "18px"; // Cambiar el tamaño de la fuente
-    celdaDescripcion.style.fontWeight = "bold"; // Hacer el texto en negrita
-    celdaDescripcion.style.color = "black";
-    celdaDescripcion.style.textAlign = "center"; // Centrar el contenido horizontalmente
-    celdaDescripcion.style.display = "flex";
-    celdaDescripcion.style.justifyContent = "center";
-    celdaDescripcion.style.alignItems = "center";
-
-    celdaMaximo = lineaDatosFd.insertCell(-1);
-    celdaMaximo.textContent = totalMax;
-    celdaMaximo.classList.add("ajustado-derecha");
-    celdaMaximo.style.fontWeight = "bold"; // Hacer el texto en negrita
-
-    celdaPuntos = lineaDatosFd.insertCell(-1);
-    celdaPuntos.textContent = totalCal;
-    celdaPuntos.classList.add("ajustado-derecha");
-    celdaPuntos.style.fontWeight = "bold"; // Hacer el texto en negrita
-
-    celdaPorciento = lineaDatosFd.insertCell(-1);
-    totalPor = ((totalCal / totalMax ) *100).toFixed(2);
-    celdaPorciento.textContent = totalPor;
-    celdaPorciento.classList.add("ajustado-derecha");
-    celdaPorciento.style.fontWeight = "bold"; // Hacer el texto en negrita
-
-    localStorage.setItem("porciento-A", totalPor);
-
-    const capitulo = "A";
-    // actualizaCapitulos(capitulo, totalMax, totalCal, totalPor);
+    const data = await response.json();
+    if (data.length > 0) {
+      return data[0].descripcion; 
+    } else {
+      return 'Descripción no disponible';
+    }
+  } catch (error) {
+    console.error('Error al obtener la descripción:', error);
+    return 'Descripción no disponible';
   }
 }
+
+
+    // const celdaEnlace = lineaDatosFd.insertCell(-1);
+    // const enlace = document.createElement("a"); // Crear un elemento <a>
+    // enlace.href = tablaMenuA[i][1]; // Establecer el atributo href con el valor correspondiente
+    // enlace.textContent = tablaMenuA[i][2]; // Establecer el texto del enlace con el tercer elemento de la tabla
+    // enlace.style.textDecoration = "none";  // Agregar el enlace como hijo de la celda
+    // celdaEnlace.appendChild(enlace);
+
+    // console.log (`valores de i ${i} y total Max: ${totalMax}`)
 
 
 // function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
