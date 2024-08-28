@@ -73,24 +73,21 @@
 <script>
   document.getElementById("boton-enviar").addEventListener('click', () => {
     localStorage.setItem('idioma', '2');
-    const idioma = JSON.parse(localStorage.getItem('idioma'));
-    // if (idioma == 2) {
-      window.location.href = "Menu-General-en.html";
-    // } else {
-    //   window.location.href = "Menu-General.html";
+    const idioma = Number(localStorage.getItem('idioma')); // idioma tendrá el valor numérico 2
+    actualizarUserIdioma(username, CUIT, idioma);
+    window.location.href = "Menu-General-en.html";
     }
   );
 </script>
 
-<!-- <script>
-  localStorage.setItem('idioma', '2');
-</script> -->
 
 <script>
   const apellidouser = localStorage.getItem("apellido");
   const nombreUser = localStorage.getItem("nombre");
   const apenom = nombreUser + ' ' + apellidouser;
   const empresa = localStorage.getItem("empresa");
+  const username = localStorage.getItem("username")
+  const CUIT = localStorage.getItem("CUIT")
 
   document.getElementById("nombreEmpresa").textContent = empresa;
   document.getElementById("nombreUsuario").textContent = apenom;
@@ -99,19 +96,36 @@
 <script>
   // Agrega un evento de clic al ícono de España
   document.getElementById('spainIcon').addEventListener('click', function () {
-    // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de España
-    // localStorage.setItem('idioma', '1');
     window.location.href = "Presentacion.html";
   });
 
   // Agrega un evento de clic al ícono de USA
   document.getElementById('usaIcon').addEventListener('click', function () {
-    // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de USA
-    // localStorage.setItem('idioma', '2');
     window.location.href = "Presentacion-en.html";
   });
 </script>
 
-<!-- <script src="../../js/menu-General.js"></script> -->
+// Función para actualizar el campo ingresado del usuario
+<script>
+function actualizarUserIdioma( username, CUIT, idioma) {
+  fetch('/api/updateIdioma', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username , CUIT, idioma })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.message === 'Campo idioma actualizado correctamente') {
+          console.log('Campo idioma actualizado correctamente');
+      } else {
+          console.error('Error al actualizar el campo idioma');
+      }
+  })
+  .catch(error => {
+      console.error('Error en la solicitud de actualización:', error);
+  });
+}
 
 </html>

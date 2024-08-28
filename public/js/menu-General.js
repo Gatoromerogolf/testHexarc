@@ -7,6 +7,7 @@ const apellidouser = localStorage.getItem("apellido");
 const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
 const empresa = localStorage.getItem("empresa");
+const idioma = localStorage.getItem("idioma");
 
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
@@ -138,7 +139,15 @@ function completarHtml() {
   let numeroConPunto = 0;
 
   //  Agrega a la tabla un ultimo registro de Resumen General
-  const elemento = [null, null, "Resumen General:", null, null, null, null];
+  let textoFinal;
+  if (idioma == 1) {
+    textoFinal = 'Calificación General';
+  }
+    else {
+    textoFinal = 'Total Score';
+    }
+
+  const elemento = [null, null, textoFinal, null, null, null, null];
   tablaMenuEs.push(elemento);
 
   tablaMenuA = tablaMenuEs;
