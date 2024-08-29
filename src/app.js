@@ -276,7 +276,6 @@ app.get('/secciones', (req, res) => {
   const idioma = parseInt(req.query.idioma) || 2;
   const capitulo = req.query.capitulo || 'A';
 
-  console.log (`valores seccion ${seccion}, idioma ${idioma}, capitulo ${capitulo}`)
   let query;
   if (idioma === 1){
     query = 'SELECT * FROM secciones WHERE seccion = ? AND capitulo = ?'}
