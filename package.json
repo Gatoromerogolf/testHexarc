@@ -21,6 +21,7 @@
     "express": "^4.19.2",
     "express-mysql-session": "^3.0.3",
     "express-session": "^1.18.0",
+    "html2pdf.js": "^0.10.2",
     "mysql2": "^3.10.2",
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
