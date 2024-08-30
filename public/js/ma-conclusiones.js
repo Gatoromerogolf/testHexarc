@@ -9,6 +9,8 @@ const empresa = localStorage.getItem("empresa");
 const CUIT = localStorage.getItem("CUIT");
 const capitulo = "A";
 const idioma = Number(localStorage.getItem('idioma'))
+let totalMax = 0;
+let totalCal = 0;
 
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
@@ -50,21 +52,44 @@ async function buscaRespuesta(CUIT, capitulo) {
 
 // Función para actualizar el HTML con los datos de la tabla
 async function actualizarHTML(respuestas) {
-  let tablaMenuA = respuestas.filter(respuesta => respuesta.porcentaje < 50);
-  // tablaMenuA = tablaMenuEs;
-  let totalMax = 0;
-  let totalCal = 0;
 
-  //  llena la matriz
-  let lineaDatosFd = document.getElementById("questionsTableBody");
-  await llenaUnaParte(tablaMenuA, lineaDatosFd);
+  async function procesarCategoria(rango, elementoID) {
+    let tablaMenuA = respuestas.filter(respuesta => 
+      respuesta.porcentaje > rango.min && respuesta.porcentaje <= rango.max
+    );
 
-  tablaMenuA = respuestas.filter(respuesta => respuesta.porcentaje > 50 && respuesta.porcentaje < 70);
-  lineaDatosFd = document.getElementById("questions5170");
-  await llenaUnaParte(tablaMenuA, lineaDatosFd);
+    let lineaDatosFd = document.getElementById(elementoID);
+
+    if (tablaMenuA.length > 0) {
+      await llenaUnaParte(tablaMenuA, lineaDatosFd);
+    } else {
+      let fila = document.createElement('tr');
+      let celdaNombre = document.createElement('td');
+      celdaNombre.style.width = '500px';
+      celdaNombre.textContent = '*** No hay elementos en esta categoría ***';
+      celdaNombre.style.textAlign = 'center';
+      fila.appendChild(celdaNombre);
+      lineaDatosFd.appendChild(fila);
+    }
+  }
+
+  // Procesar las diferentes categorías
+  await procesarCategoria({ min: 0, max: 50 }, "questionsTableBody");
+  await procesarCategoria({ min: 50.01, max: 70 }, "questions5170");
+  await procesarCategoria({ min: 70.01, max: 90 }, "questions7190");
+  await procesarCategoria({ min: 90.01, max: 100 }, "questions90100");
+
+  document.getElementById("puntajeTotal").innerHTML = totalMax;
+  document.getElementById("puntajeObtenido").innerHTML = totalCal;
+  let porcentaje = (totalCal / totalMax) * 100.
+  document.getElementById("porcentajeObtenido").innerHTML = porcentaje.toFixed(2);
+
+  // generatePDF();
+}  
+
 
   async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
-    // tablaMenuA.forEach(respuesta => {
+
       for (const respuesta of tablaMenuA) {
       let fila = document.createElement('tr');
 
@@ -72,32 +97,40 @@ async function actualizarHTML(respuestas) {
       const capitulo = "A";
       const indice = respuesta.seccion;
       const descripcion = await obtenerNombreSeccion(indice, idioma, capitulo);
-      // const descripcion = fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
       celdaNombre.textContent = descripcion; // Ajusta según tu estructura de datos
+      celdaNombre.textContent = respuesta.seccion + '. ' + descripcion;
+      celdaNombre.style.width = '300px';
       fila.appendChild(celdaNombre);
     
       let celdaMaximo = document.createElement('td');
       celdaMaximo.textContent = respuesta.maximo;
       celdaMaximo.classList.add("centered");
-      totalMax += Number(tablaMenuA.maximo);
+      celdaMaximo.style.width = '45px';
+      totalMax += Number(respuesta.maximo);
       fila.appendChild(celdaMaximo);
 
       let celdaPuntos = document.createElement('td');
       celdaPuntos.textContent = respuesta.score;
       celdaPuntos.classList.add("centered");
-      // Convierte el valor a un número antes de sumarlo
-      totalCal += Number(tablaMenuA.score);
+      celdaPuntos.style.width = '45px';
+      totalCal += Number(respuesta.score);
       fila.appendChild(celdaPuntos);
 
       let celdaPorciento = document.createElement('td');
       celdaPorciento.textContent = respuesta.porcentaje;
       celdaPorciento.classList.add("centered");
-      // totalPor = (Number(tablaMenuA[i][4]) / Number(tablaMenuA[i][3]) * 100).toFixed(2);
+      celdaPorciento.style.width = '45px';
       fila.appendChild(celdaPorciento);
+
+      let celdaVer = document.createElement('td');
+      celdaVer.style.width = '35px';
+      celdaVer.classList.add("centered");
+      celdaVer.textContent = 'ver';
+      fila.appendChild(celdaVer);
 
       lineaDatosFd.appendChild(fila);
   }
-}}
+}
 
 async function obtenerNombreSeccion(indice, idioma, capitulo) {
   try {
@@ -117,6 +150,36 @@ async function obtenerNombreSeccion(indice, idioma, capitulo) {
     return 'Descripción no disponible';
   }
 }
+
+
+// function generatePDF() {
+//     // Prevenir la recarga de la página
+//     // event.preventDefault();
+    
+//     alert("Función generatePDF iniciada");
+//     var element = document.getElementById('content');
+//     if (!element) {
+//         alert("No se encontró el elemento #content");
+//         return;
+//     }
+//     alert("Elemento encontrado, comenzando html2pdf...");
+//     html2pdf()
+//       .from(element)
+//       .toPdf()
+//       .get('pdf')
+//       .then(pdf => {
+//         alert("Leyendo elemento");
+//         return pdf;
+//       })
+//       .save('Conclusiones_Gobierno_Corporativo.pdf')
+//       .then(() => {
+//         alert("PDF generado exitosamente");
+//       })
+//       .catch((error) => {
+//         alert("Error durante la generación del PDF:", error);
+//       });
+// }
+
 
 
     // const celdaEnlace = lineaDatosFd.insertCell(-1);

@@ -4,7 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evaluación de riesgos</title>
+  <title>Riesgos de Gobierno Corporativo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
   <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
@@ -22,7 +25,7 @@
 </head>
 
 <body id="conclusiones">
-  <div class="survey-container">
+  <div class="survey-container-conclusiones">
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
@@ -44,23 +47,33 @@
           <div class="center-container">
             <h4 class="tituloSeccion"><a href="Menu-A.html">Conclusiones preliminares</a></h4>
           </div>
-          <table>
-            <tr>
-              <th class="pregunta-col">Puntaje general obtenido. </th>
-            </tr>
+
+          <table class="table-conclusiones">
+            <p class="pconclusiones">La presente autoevaluación tiene como objetivo medir la efectividad de los procesos, principios y valores que conforman el Gobierno Corporativo de la organización. A través de este ejercicio, se ha analizado cómo la organización es estrategizada, administrada, controlada y transparentada, asignando una puntuación a cada elemento evaluado. Los resultados se presentan a continuación.</p>
+            
+            <table style="width: 300px">
+              <tr>
+                <th class="pregunta-col">Puntaje general</th>
+              </tr>
+            </table>
+            <p class="pconclusiones">La autoevaluación consiste en la asignación de una valoración cuantitativa a cada uno de los elementos analizados, reflejando su contribución al Gobierno Corporativo de la organización. Cada elemento evaluado posee un valor máximo, el cual representa el estándar ideal o deseado. En el contexto de esta evaluación, el puntaje máximo alcanzado ha sido:</p>
+            <div style="text-align: center;">
+              Máximo del factor:
+              <p id="puntajeTotal" style="display: inline; font-weight: bold; margin: 0;"></p>
+              <span>puntos |</span>
+              <span>Puntaje obtenido: <span id="puntajeObtenido" style="display: inline; font-weight: bold; margin: 0;"></span></span>
+              <span>| Porcentaje: <span id="porcentajeObtenido" style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+            </div>
+
+            <p class="pconclusiones">Este porcentaje ofrece una visión consolidada del desempeño global de la organización, englobando la calificación de los elementos distribuidos en los cuatro grupos que se detallan a continuación.
+
           </table>
 
-          <p>El Factor de calidad de administración del Gobierno Corporativo tiene en su estado ideal una calificación
-            máxima de 2300 puntos.</p>
-          <p>El resultado de la presente autoevaluación arroja un score de 865 puntos, que representa el 75% del valor
-            deseado.</p>
+          <br>
 
-          </table>
-
-          <h1>Aspectos que inciden negativamente en la evaluación general.</h1>
-          <p>Son aquellos que en esta evaluación han sido calificados con un puntaje inferior al 51% del total ideal
-            para la sección. </p>
-          <table>
+          <h1>Situaciones NO EFECTIVAS</h1>
+          <p class="pconclusiones">Los elementos que se encuentran en esta categoría han obtenido una puntuación que no ha logrado superar el 50% de la puntuación ideal. Estos aspectos requieren una atención prioritaria, ya que su falta de efectividad podría comprometer el cumplimiento de nuestras metas estratégicas y la buena gobernanza en la organización. Es fundamental identificar las causas de esta baja performance y desarrollar planes de mejora específicos.</p>
+          <table style="width: 510px">
             <thead>
               <tr>
                 <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
@@ -76,15 +89,14 @@
             <tbody id="questionsTableBody">
             </tbody>
           </table>
-
-          <h1>Aspectos que .....algo habrá que decir. </h1>
-          <p>Son aquellos que en esta evaluación han sido calificados con un puntaje inferior al 71% del total ideal
-            para la sección. </p>
-          <table>
+          <br>
+          <h1>Situaciones POCO EFECTIVAS </h1>
+          <p class="pconclusiones">Este grupo incluye aquellos elementos que han logrado una puntuación entre el 50% y el 70%. Aunque muestran cierta efectividad, estos aspectos necesitan mejoras sustanciales para alcanzar un nivel que garantice su pleno funcionamiento dentro de nuestra estructura de Gobierno Corporativo. Un enfoque en el fortalecimiento de estos elementos permitirá que se alineen mejor con las metas corporativas y principios rectores.</p>
+            <table style="width: 510px">
             <thead>
               <tr>
                 <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
-                <th colspan="4">Calificación: 51 - 70%</th>
+                <th colspan="4">Calificación: 50.01 - 70%</th>
               </tr>
               <tr>
                 <th>Ideal</th>
@@ -96,12 +108,72 @@
             <tbody id="questions5170">
             </tbody>
           </table>
+          <br>
+          <h1>Situaciones EFECTIVAS </h1>
+          <p class="pconclusiones">Los elementos clasificados como efectivos han obtenido una puntuación entre el 70% y el 90%. Estos aspectos demuestran un buen nivel de desempeño, contribuyendo de manera significativa a la gobernanza de la organización. No obstante, siempre es posible realizar ajustes y refinamientos que permitan consolidar estos logros y asegurar su sostenibilidad a largo plazo.</p>
+            <table style="width: 510px">
+            <thead>
+              <tr>
+                <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+                <th colspan="4">Calificación: 70.01 - 90%</th>
+              </tr>
+              <tr>
+                <th>Ideal</th>
+                <th>Obtenida</th>
+                <th>%</th>
+                <th>Ver</th>
+              </tr>
+            </thead>
+            <tbody id="questions7190">
+            </tbody>
+          </table>
+          <br>
+          <h1>Situaciones MUY EFECTIVAS </h1>
+          <p class="pconclusiones">Los elementos en esta categoría han logrado una puntuación superior al 90%, indicando que son altamente efectivos en el contexto del Gobierno Corporativo. Estos aspectos representan las mejores prácticas dentro de la organización y sirven como modelos a seguir en la búsqueda continua de la excelencia. Mantener y fortalecer estos elementos es crucial para asegurar la estabilidad y transparencia de la gobernanza.</p>
+            <table style="width: 510px">
+            <thead>
+              <tr>
+                <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+                <th colspan="4">Calificación: 90.01 - 100%</th>
+              </tr>
+              <tr>
+                <th>Ideal</th>
+                <th>Obtenida</th>
+                <th>%</th>
+                <th>Ver</th>
+              </tr>
+            </thead>
+            <tbody id="questions90100">
+            </tbody>
+          </table>
+
+          <br>
+          <br>
+          <table style="width: 300px">
+            <tr>
+              <th class="pregunta-col">CONCLUSION GENERAL</th>
+            </tr>
+          </table>
+
+            <p class="pconclusiones">Los resultados de esta autoevaluación reflejan un panorama diverso en la efectividad de los elementos que conforman nuestro Gobierno Corporativo. Si bien contamos con aspectos que han demostrado ser altamente efectivos, existen áreas críticas que requieren atención y mejora urgente. La implementación de planes de acción específicos para los elementos no efectivos y poco efectivos será esencial para elevar nuestro estándar de gobernanza y asegurar un alineamiento completo con nuestras metas estratégicas. En conjunto, los resultados nos proporcionan una hoja de ruta clara para fortalecer nuestras prácticas de gobierno y consolidar una gestión basada en principios sólidos y valores transparentes.</P>
+
+          <br>
+         
+        <div class="centrado-flex">
+          <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
+        </div>
 
         </form>
   </div>
 
   </section>
   </section>
+
+<script>
+    function printPage() {
+        window.print();
+    }
+</script>
 
 </body>
 
