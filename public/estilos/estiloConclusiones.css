@@ -12,9 +12,9 @@ body {
 }
 #conclusiones {
   font-family: "Abel", sans-serif;
-  font-weight: 550;
-  margin: 25px;
-  padding: 25px;
+  font-weight:500;
+  margin: 0px;
+  padding: 0px;
 }
 
 /* Fondo específico para la clase fiananciero */
@@ -50,6 +50,103 @@ body.calidad {
 
 h3 {
   margin-top: 0;
+}
+
+.TituloXXX {
+  display: flex;
+  align-items: center; /* Centra verticalmente la imagen y el texto */
+}
+
+/*----------------------  ENCABEZADO  ----------------------------------*/
+
+.survey-container-conclusiones {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-name,
+.user-name {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.company-name {
+  font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-weight: bold;
+}
+
+.user-name {
+  font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+
+/* ----------------- CONCLUSIONES PRELIMINARES E ICONO DE RETORNO ---------*/
+.contenedorTitulo {
+  display: flex;
+  align-items: center; /* Centra verticalmente la imagen y el texto */
+  justify-content: center;  /* Centra horizontalmente todo el contenido */
+  position: relative;
+}
+
+.logo-container {
+  position: absolute;
+  left: 10px;  /* Ajusta la posición de la imagen según sea necesario */
+}
+.center-container-titulo {
+  display: flex;
+  align-items: center;
+}
+
+.tituloSeccionContainer {
+  margin: 0;
+  font-size: 16px; /* Ajusta el tamaño del texto según sea necesario */
+  display: inline-block;
+  padding: 10px 50px 10px 50px; /* Espacio interior del rectángulo */
+  border: 2px solid rgba(0, 0, 0, 0.5); /* Borde del rectángulo */
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo transparente */
+  color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
+  border-radius: 5px; /* Bordes redondeados, opcional */
+  text-align: center;
+}
+
+.tituloSeccionContainer a {
+  text-decoration: none; /* Quitar el subrayado del enlace */
+  color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
+}
+
+.tituloSeccionContainer:hover {
+  background-color: rgba(206, 166, 166, 0.5); /* Fondo transparente */
+}
+/*-------------------------------  TEXTO CONCLUSIONES  -------------------*/
+
+.table-conclusiones {
+  width: 550px;
+}
+
+.pconclusiones {
+  width: 550px;
+  margin-left: 20px;
+  text-align: justify;
+}
+
+.container-resultados {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px 0; /* 10px de padding superior e inferior, sin padding lateral */
+  max-width: 500px; /* Define el ancho máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
 }
 
 .survey-container {
@@ -109,7 +206,7 @@ h5 {
   margin-left: auto; /* Push button to the right */
 }
 
-#tablaIndice {
+#tablaIndiceXXXXX {
   text-decoration: none;
   padding: 2px;
   display: block;
@@ -119,7 +216,7 @@ h5 {
   margin: auto; /* Centra horizontalmente */
 }
 
-#tablaIndice th {
+#tablaIndiceXXX th {
   background-color: #f0f0f0; /* Color de fondo */
   border: 1px solid #ccc; /* Borde */
   padding: 8px; /* Espaciado interno */
@@ -157,7 +254,7 @@ h5 {
 }
 
 /* -------------  ALERTA MAS LINDO ----*/
-.alerta-oculto {
+.alerta-ocultoXXX {
   display: none;
   position: fixed;
   left: 0;
@@ -168,7 +265,7 @@ h5 {
   z-index: 1000;
 }
 
-.alerta-contenido {
+.alerta-contenidoXXX {
   position: relative;
   width: 300px;
   margin: 5% auto;
@@ -178,7 +275,7 @@ h5 {
   font-family: "Roboto", sans-serif;
 }
 
-.alerta-cabecera {
+.alerta-cabeceraXXX {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,13 +285,13 @@ h5 {
   font-weight: bold; /* Negrita */
 }
 
-.alerta-cuerpo {
+.alerta-cuerpoXXX {
   margin: 0;
   font-size: 16px; /* Tamaño de la fuente */
   text-align: center;
 }
 
-.alerta-contenido-ResGral {
+.alerta-contenido-ResGralXXX {
   position: relative;
   width: 900px;
   /* marginxxx: 1% auto;
@@ -204,7 +301,7 @@ h5 {
   font-family: "Roboto", sans-serif;
 }
 
-.alerta-cabecera-ResGral {
+.alerta-cabecera-ResGralXXX {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,7 +313,7 @@ h5 {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-.alerta-cuerpo-ResGral {
+.alerta-cuerpo-ResGralXXX {
   margin: 0;
   font-size: 15px; /* Tamaño de la fuente */
   text-align: center;
@@ -402,10 +499,6 @@ tr:last-child td {
   box-shadow: 0 0 8px rgba(247, 6, 14, 0.6); /* Sombra de foco */
 }
 
-.center-container {
-  display: flex;
-  justify-content: center;
-}
 
 /* -----------BOTON SALIR ------------------------*/
 
@@ -541,7 +634,7 @@ tr:last-child td {
 .red-text {
   color: red;
 }
-
+/* 
 .company-name,
 .user-name {
   text-align: center;
@@ -549,35 +642,36 @@ tr:last-child td {
 }
 
 .company-name {
-  font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-size: 12px;
   font-weight: bold;
 }
 
 .user-name {
-  font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-size: 10px;
   margin-top: 5px;
   font-weight: 600;
 }
+ */
 
-.pconclusiones {
+/* .pconclusiones {
   width: 540px;
   margin-left: 20px;
   text-align: justify;
-}
+} */
 
 .font-style-conclu {
   font-size: 16px; /* Ajusta el tamaño de la fuente */
   font-family: "Abel", sans-serif; /* Define el tipo de la fuente */
   font-weight:400; /* Define el grosor de la fuente (opcional) */
 }
-.survey-container-conclusiones {
+/* .survey-container-conclusiones {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-}
+} */
 
 .table-conclusiones {
   width: 500px;
@@ -586,10 +680,7 @@ tr:last-child td {
 .table-cuadro-conclusiones{
   margin: 16px;
   padding: 0px;
-  width: 540px;
-}
-
-.table-cuadro-conclusiones {
+  width: 550px;
   font-size: 14px;
 }
 
@@ -631,29 +722,33 @@ tr:last-child td {
   width: 60%; /* Podrías querer cambiar esto para adaptarlo a tus necesidades */
 }
 
-
 .dialog-overlay {
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   overflow: auto; /* Habilita el scroll si es necesario */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: flex-start; /* Alinea al principio del contenedor verticalmente */
+}
+
+.dialog-container {
+  margin-top: 20px; /* Espacio desde el borde superior */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  width: 100%;
 }
 
 .dialog-box {
-  top: 10px;
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   width: 800px;
   max-height: 80vh;
   overflow-y: auto;
-  margin: auto;
 }
 
 .dialog-title {

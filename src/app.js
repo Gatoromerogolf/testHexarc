@@ -272,18 +272,20 @@ app.get('/leeListaPrecios', (req, res) => {
 
 // Ruta para obtener todos los registros de la tabla secciones ::::::::::::::::::::
 app.get('/secciones', (req, res) => {
-  const seccion = parseInt(req.query.indice) || 0;
-  const idioma = parseInt(req.query.idioma) || 2;
   const capitulo = req.query.capitulo || 'A';
+  const seccion = parseInt(req.query.indice) || 1
+  const idioma = parseInt(req.query.idioma) || 2;
+
 
   let query;
+
   if (idioma === 1){
-    query = 'SELECT * FROM secciones WHERE seccion = ? AND capitulo = ?'}
+    query = 'SELECT * FROM secciones WHERE capitulo = ? AND seccion = ?'}
   else{
-    query = 'SELECT * FROM secciones_en WHERE seccion = ? AND capitulo = ?'
+    query = 'SELECT * FROM secciones_en WHERE capitulo = ? AND seccion = ?'
   };
 
-  pool.query(query, [seccion, capitulo], (error, results, fields) => {
+  pool.query(query, [capitulo, seccion], (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
@@ -296,6 +298,42 @@ app.get('/secciones', (req, res) => {
       }
     });
   });
+
+
+// Ruta para obtener todos los registros de la tabla secciones ::::::::::::::::::::
+app.get('/seccionesTodas', (req, res) => {
+  const capitulo = req.query.capitulo || 'A';
+  const idioma = parseInt(req.query.idioma) || 2;
+
+
+  let query;
+
+  if (idioma === 1){
+    query = 'SELECT * FROM secciones WHERE capitulo = ?'}
+  else{
+    query = 'SELECT * FROM secciones_en WHERE capitulo = ?'
+  };
+
+  pool.query(query, [capitulo], (error, results, fields) => {
+      if (error) {
+        res.status(500).json({ error: 'Error al obtener los registros' });
+        console.log("error servidor al obtener registros");
+        return;
+      }
+        if (results.length > 0) { 
+        res.json(results);
+      } else {
+        res.status(404).json({ error: 'No se encontraron registros' });
+      }
+    });
+  });
+
+
+
+
+
+
+
 
 // Ruta para saber si existe respuesta para la seccion ::::::::::::::::::::
 app.get('/busca-respuesta', (req, res) => {
@@ -601,6 +639,53 @@ app.post('/insertarExperiencia', (req, res) => {
       }
   });
 });
+
+
+
+
+
+  // Ruta para obtener los registros de DATOS NETOS ::::::::::::::::::::
+  app.get('/leerDatosNetos', (req, res) => {
+    const query = 'SELECT * FROM netos';
+  
+    pool.query(query, (error, results, fields) => {
+        if (error) {
+          res.status(500).json({ error: 'Error al obtener los DatosFecha' });
+          console.log("error servidor al obtener registros");
+          return;
+        }
+  
+        if (results.length > 0) {
+          res.json(results);
+        } else {
+          res.status(404).json({ error: 'No se encontraron registros' });
+        }
+      });
+    });
+
+
+
+// Ruta para obtener los registros de la tabla FECHAS::::::::::::::::::::
+app.get('/leerDatosFechas', (req, res) => {
+  const query = 'SELECT * FROM fechas';
+
+  pool.query(query, (error, results, fields) => {
+      if (error) {
+        res.status(500).json({ error: 'Error al obtener los DatosFecha' });
+        console.log("error servidor al obtener registros");
+        return;
+      }
+
+      if (results.length > 0) {
+        res.json(results);
+      } else {
+        res.status(404).json({ error: 'No se encontraron registros' });
+      }
+    });
+  });
+
+
+
 
 // Captura todas las otras rutas para mostrar un 404 :::::::::::::::::::::::::::::::::
 app.get('*', (req, res) => {
