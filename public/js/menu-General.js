@@ -222,43 +222,62 @@ function completarHtml() {
     celdaPorciento.classList.add("ajustado-derecha");
 
     celdaPDF = lineaDatosFd.insertCell(-1);
-    celdaExl = lineaDatosFd.insertCell(-1);
+    // celdaExl = lineaDatosFd.insertCell(-1);
 
     if (tablaMenuA[i][5] > 0) {
-      // Crear el elemento <img>
-      const imgPdf = document.createElement("img");
+      // // Crear el elemento <img>
+      // const imgPdf = document.createElement("img");
 
-      // Establecer los atributos de la imagen
-      imgPdf.src = "../img/pdf (1).png";
-      imgPdf.width = 20;
-      imgPdf.style.display = "block";
-      imgPdf.style.margin = "0 auto";
+      // // Establecer los atributos de la imagen
+      // imgPdf.src = "../img/pdf (1).png";
+      // imgPdf.width = 20;
+      // imgPdf.style.display = "block";
+      // imgPdf.style.margin = "0 auto";
 
-      celdaPDF.appendChild(imgPdf); // Agregar la imagen a la celda
-      imgPdf.addEventListener("click", function () {
-        // Agregar el event listener para el clic
-        generarPDF();
-      });
+      // celdaPDF.appendChild(imgPdf); // Agregar la imagen a la celda
+      // imgPdf.addEventListener("click", function () {
+      //   // Agregar el event listener para el clic
+      //   generarPDF();
+      // });
+  // Crear el elemento <a> que actuará como enlace
+        const enlace = document.createElement("a");
+        enlace.href = "MA-conclusiones.html"; // Establecer el enlace al que se debe dirigir
+        enlace.style.display = "block"; // Asegúrate de que el enlace se muestre correctamente
 
-    // celdaExl = lineaDatosFd.insertCell(-1);
-      // Crear el elemento <img>
-      const imgExl = document.createElement("img");
+        // Crear el elemento <img>
+        const imgPdf = document.createElement("img");
 
-      // Establecer los atributos de la imagen
-      imgExl.src = "../img/excel.png";
-      imgExl.width = 20;
-      imgExl.style.display = "block";
-      imgExl.style.margin = "0 auto";
+        // Establecer los atributos de la imagen
+        imgPdf.src = "../img/pdf (1).png";
+        imgPdf.width = 20;
+        imgPdf.style.display = "block";
+        imgPdf.style.margin = "0 auto";
 
-      celdaExl.appendChild(imgExl); // Agregar la imagen a la celda
-      imgExl.addEventListener("click", function () {
-        // Agregar el event listener para el clic
-        generarExcel().catch(console.error);
-      });
+        // Agregar la imagen al enlace
+        enlace.appendChild(imgPdf);
+
+        // Agregar el enlace a la celda
+        celdaPDF.appendChild(enlace);
+
+    // // celdaExl = lineaDatosFd.insertCell(-1);
+    //   // Crear el elemento <img>
+    //   const imgExl = document.createElement("img");
+
+    //   // Establecer los atributos de la imagen
+    //   imgExl.src = "../img/excel.png";
+    //   imgExl.width = 20;
+    //   imgExl.style.display = "block";
+    //   imgExl.style.margin = "0 auto";
+
+    //   celdaExl.appendChild(imgExl); // Agregar la imagen a la celda
+    //   imgExl.addEventListener("click", function () {
+    //     // Agregar el event listener para el clic
+    //     generarExcel().catch(console.error);
+    //   });
 
     } else {
       celdaPDF.textContent = "";
-      celdaExl.textContent = "";
+      // celdaExl.textContent = "";
     }
 
     if (i == tablaMenuA.length - 1) {
@@ -414,6 +433,7 @@ async function cambiarDatos(lineToPrint) {
         return;
       }
 
+    // si es 41 recupera el substring que está en la posición 
       if (fila.tipo === 42 || fila.tipo === 43) {
         indicesCheck = arrayRespuesta;
       } else {
@@ -435,7 +455,7 @@ async function cambiarDatos(lineToPrint) {
       fila.respta = textoConcatenado;
 
       let restar = 0;
-      if ((fila.tipo = 41)) {
+      if ((fila.tipo == 41)) {
         restar = 1;
       }
 
