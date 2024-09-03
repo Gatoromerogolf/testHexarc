@@ -454,11 +454,31 @@ app.get('/textocheck', (req, res) => {
   });
 });
 
-// Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
-app.get('/preguntas', (req, res) => {
-  const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
+// // Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
+// app.get('/preguntas', (req, res) => {
+//   const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
 
-  pool.query(query, (error, results, fields) => {
+//   pool.query(query, (error, results, fields) => {
+//     if (error) {
+//       res.status(500).json({ error: 'Error al obtener los registros' });
+//       return;
+//     }
+//     res.json(results);
+//   });
+// });
+
+// Ruta para obtener preguntas, con un filtro opcional por capitulo
+app.get('/preguntas', (req, res) => {
+  const { capitulo } = req.query;  // Obtener el parámetro capitulo de la query string
+  let query = 'SELECT * FROM preguntas';
+  
+  if (capitulo) {
+    query += ' WHERE Capitulo = ?';
+  }
+  
+  query += ' ORDER BY Capitulo, Seccion, Numero';
+
+  pool.query(query, [capitulo], (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -466,6 +486,9 @@ app.get('/preguntas', (req, res) => {
     res.json(results);
   });
 });
+
+
+
 
 // Ruta para obtener todos las respuestas de la tabla ::::::::::::::::::::
 app.get('/respuestas', (req, res) => {

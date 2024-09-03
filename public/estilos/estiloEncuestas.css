@@ -79,6 +79,11 @@ h3 {
   gap: 15px; /* Espacio entre los iconos */
 }
 
+#formulario {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 h1,
 h2,
 h3 {
@@ -368,6 +373,7 @@ tr:last-child td {
   transition: all 0.3s; /* Transición suave para los cambios */
   font-size: 16px; /* Tamaño de la fuente */
   font-weight: bold; /* Negrita */
+  margin-top: 20px;
 }
 
 #boton-enviar:hover {
