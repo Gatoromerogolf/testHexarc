@@ -316,9 +316,30 @@ recuperarRespuestas(CUIT, capitulo);
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-async function recuperarPreguntas() {
+// async function recuperarPreguntas() {
+//   try {
+//     const response = await fetch("/preguntas");
+//     if (response.ok) {
+//       const result = await response.json();
+//       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+//     } else {
+//       console.error("Error al obtener las preguntas:", response.statusText);
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("Error al realizar la solicitud:", error);
+//     return [];
+//   }
+// }
+
+async function recuperarPreguntas(capitulo = null) {
   try {
-    const response = await fetch("/preguntas");
+    let url = "/preguntas";
+    if (capitulo !== null) {
+      url += `?capitulo=${encodeURIComponent(capitulo)}`;
+    }
+    
+    const response = await fetch(url);
     if (response.ok) {
       const result = await response.json();
       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
@@ -332,21 +353,48 @@ async function recuperarPreguntas() {
   }
 }
 
+
+
+
+
+
+
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-async function obtenerDatos() {
+// async function obtenerDatos() {
+//   try {
+//     const response = await fetch("/preguntas");
+//     if (response.ok) {
+//       const result = await response.json();
+//       // Devolver directamente los datos recibidos
+//       return result;
+//     } else {
+//       console.error(
+//         "Error al obtener los datos:",
+//         response.status,
+//         response.statusText
+//       );
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("Error al realizar la solicitud:", error);
+//     return [];
+//   }
+// }
+
+async function obtenerDatos(capitulo = null) {
   try {
-    const response = await fetch("/preguntas");
+    let url = "/preguntas";
+    if (capitulo !== null) {
+      url += `?capitulo=${encodeURIComponent(capitulo)}`;
+    }
+    
+    const response = await fetch(url);
     if (response.ok) {
       const result = await response.json();
-      // Devolver directamente los datos recibidos
-      return result;
+      return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
     } else {
-      console.error(
-        "Error al obtener los datos:",
-        response.status,
-        response.statusText
-      );
+      console.error("Error al obtener las preguntas:", response.statusText);
       return [];
     }
   } catch (error) {
@@ -354,6 +402,7 @@ async function obtenerDatos() {
     return [];
   }
 }
+
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
