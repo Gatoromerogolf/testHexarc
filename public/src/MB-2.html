@@ -276,7 +276,7 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">9. Se adapta rápidamente a los avances tecnológicos, inclusi si implica asumir
+              <td class="pregunta-col">9. Se adapta rápidamente a los avances tecnológicos, incluso si implica asumir
                 riesgos</td>
                 <td class="respuesta-col">
                   <div class="radio-container">
@@ -662,6 +662,25 @@
     </section>
     </section>
 
+    <div id="miAlerta" class="alerta-oculto">
+      <div class="alerta-contenido">
+        <div class="alerta-cabecera">
+          <span>Resumen de la sección</span>
+        </div>
+        <div class="alerta-cuerpo">
+          <p>Puntaje máximo posible: <span id="maximo"></span></p>
+          <p>Calificación obtenida: <span id="calificacion"></span></p>
+          <p>Porcentual: <span id="porcentual"></span></p>
+  
+        <div class="gauge-container">
+          <canvas id="gaugeChart";></canvas>
+        </div>
+  
+          <button id="continuar" onclick="continuar()">Continuar</button>
+        </div>
+      </div>
+    </div>
+
 </body>
 
 <script>
@@ -681,7 +700,7 @@
 
   botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
     isExiting = true;
-    console.log('dijo que NO')
+    // console.log('dijo que NO')
     ventanaSale.style.display = 'none';
     document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
   });
@@ -714,4 +733,5 @@
 
 </script>
 
+<script src="../../js/mb-2.js"></script>
 </html>

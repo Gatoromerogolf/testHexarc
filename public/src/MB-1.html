@@ -532,6 +532,26 @@
         </section>
       </section>
 
+      
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+      <div class="gauge-container">
+        <canvas id="gaugeChart";></canvas>
+      </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
     </body>
 
   <script>
@@ -583,5 +603,27 @@
     }
 
   </script>
+
+<!-- <script defer>
+  function limpiarSelecciones() {
+    // Obtener todos los inputs tipo radio y checkbox
+    var radios = document.querySelectorAll('input[type="radio"]');
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    // Desmarcar todos los radios
+    radios.forEach(function (radio) {
+      radio.checked = false;
+    });
+
+    // Desmarcar todos los checkboxes
+    checkboxes.forEach(function (checkbox) {
+      checkbox.checked = false;
+    });
+  }
+
+</script> -->
+
+<script src="../../js/mb-1.js"></script>
+
 
 </html>

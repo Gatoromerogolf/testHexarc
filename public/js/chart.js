@@ -29,18 +29,18 @@ function drawBackground(ctx, chartArea) {
 }
 
 const var1 = JSON.parse(localStorage.getItem('porciento-A'));
-let var2 = 3;
-let var3 = 3;
-let var4 = 3;
-const var5 = 3;
-const var6 = 3;
+let var2 = JSON.parse(localStorage.getItem('porciento-B'));
+let var3 = JSON.parse(localStorage.getItem('porciento-C')) || 3;
+let var4 = JSON.parse(localStorage.getItem('porciento-D')) || 3;
+const var5 = JSON.parse(localStorage.getItem('porciento-E')) || 3;
+const var6 = JSON.parse(localStorage.getItem('porciento-F')) || 3;
 
 const data = {
     labels: ['Gobierno Corporativo', 'Apetito de Riesgo', 'Riesgos de Mercado', 'Riesgos de Procesos', 'Situación Financiera', 'Calidad de los Resultados'],
     datasets: [{
         label: 'Porcentaje de Cumplimiento',
         data: [var1, var2, var3, var4, var5, var6],
-        backgroundColor: 'gray',
+        backgroundColor: '#D3D3D3',
         barThickness: 25
     }]
 };
