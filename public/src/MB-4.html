@@ -62,7 +62,7 @@
               <th class="respuesta-col">Razonable</th>
             </tr>
             <tr>
-              <td class="pregunta-col">1. La situación financiera es sólida (de Planilla de situación -financiera) como para afrontar un apetito de riesgo alto</td>
+              <td class="pregunta-col">1. La situación financiera es sólida como para afrontar un apetito de riesgo alto</td>
               <td class="respuesta-col">
                 <div class="radio-container">
                   <input type="radio"  name="B-4-1" value="1">
@@ -88,7 +88,7 @@
             </tr>
 
             <tr>
-              <td class="pregunta-col">2. La situación financiera es sólida como resultado de un Perfil de -ganancias sólido (de Planilla de Perfil de Ganancias)</td>
+              <td class="pregunta-col">2. La situación financiera es sólida como resultado de un Perfil de ganancias sólido</td>
               <td class="respuesta-col">
                 <div class="radio-container">
                   <input type="radio"  name="B-4-2" value="1">
@@ -570,6 +570,27 @@
         </form>
     </section>
   </section>
+
+    
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+      <div class="gauge-container">
+        <canvas id="gaugeChart";></canvas>
+      </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 <script>
@@ -622,4 +643,6 @@
 
 </script>
 
+
+<script src="../../js/mb-4.js"></script>
 </html>

@@ -14,7 +14,7 @@ document.getElementById("nombreUsuario").textContent = apenom;
 
 const capitulo = "A";
 respuestas = [];
-listaPrecios = [];
+let listaPrecios = [];
 let direct3o4 = 0;
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -86,7 +86,7 @@ async function leeCapitulos(indice) {
         const data = await obtenerTotalCapitulos(CUIT, capitulo);
         if (data && data.length > 0) {
           const { CUIT, capitulo, maximo, score, porcentaje } = data[0]; // Desestructura los valores
-          const elemento = [capitulo, "##", nombre, maximo, score, porcentaje];
+          const elemento = [capitulo, pagina, nombre, maximo, score, porcentaje];
           tablaMenuEs.push(elemento);
         } else {
           // Si no hay totales, maneja el caso especial
@@ -241,7 +241,32 @@ function completarHtml() {
       // });
   // Crear el elemento <a> que actuará como enlace
         const enlace = document.createElement("a");
-        enlace.href = "MA-conclusiones.html"; // Establecer el enlace al que se debe dirigir
+
+
+        switch (i) {
+          case 0:
+            enlace.href = "MA-conclusiones.html";
+            break;
+          case 1:
+            enlace.href = "MB-conclusiones.html";
+            break;
+          case 2:
+            enlace.href = "MC-conclusiones.html";
+            break;
+          case 3:
+            enlace.href = "MD-conclusiones.html";
+            break;
+          case 4:
+            enlace.href = "ME-conclusiones.html";
+            break;
+          case 5:
+            enlace.href = "MF-conclusiones.html";
+            break;
+          default:
+            // Opcional: puedes agregar un valor predeterminado en caso de que ninguna de las condiciones se cumpla
+            break;
+        }
+
         enlace.style.display = "block"; // Asegúrate de que el enlace se muestre correctamente
 
         // Crear el elemento <img>
