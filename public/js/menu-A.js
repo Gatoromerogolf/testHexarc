@@ -180,7 +180,7 @@ function actualizarHTML(tablaMenuEs) {
     
     let celdaDescripcion = lineaDatosFd.insertCell(-1);
     if (idioma == 1 ){
-      celdaDescripcion.textContent = "Calificacion general:";
+      celdaDescripcion.textContent = "Calificación general:";
     } else {
       celdaDescripcion.textContent = "Total Score:";
     }
