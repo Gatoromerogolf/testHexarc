@@ -158,6 +158,20 @@ app.post('/api/updateIdioma', (req, res) => {
 
 
 
+app.post('/updateDatosUsuario', (req, res) => {
+  const { fullName, organization, cuit, email, ria, newPassword, username } = req.body;
+
+  const query = 'UPDATE users SET fullName = ?, organization = ?, cuit = ?, email = ?, ria = ?, password = ?, username = ? WHERE userId = ?';
+  const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+  // pool.query(query, [fullName, organization, cuit, email, ria, hashedPassword, username, userId], (err, result) => {
+  //     if (err) throw err;
+
+  //     res.json({ success: true });
+  // });
+});
+
+
 
 
 
