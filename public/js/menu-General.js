@@ -245,10 +245,10 @@ function completarHtml() {
 
         switch (i) {
           case 0:
-            enlace.href = "MA-conclusiones.html";
+            enlace.href = idioma == 1 ? "MA-conclusiones.html" : "MA-conclusiones-en.html";
             break;
           case 1:
-            enlace.href = "MB-conclusiones.html";
+            enlace.href = idioma == 1 ? "MB-conclusiones.html" : "MB-conclusiones-en.html";
             break;
           case 2:
             enlace.href = "MC-conclusiones.html";

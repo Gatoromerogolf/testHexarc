@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risk Appetite</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body class="menu-a-page aperie">
+    <div class="survey-container">
+      <section class="main">
+        <section class="gobCorpo">
+          <div class="header-container">
+              <div class="header-center">
+                <div id="nombreEmpresa" class="company-name"></div>
+                <div id="nombreUsuario" class="user-name"></div>
+              </div>
+            <div class="nav-iconstxt">
+              <h4>A - Risk Appetite Management</a></h4>
+            </div>
+            <div class="nav-iconsxx">
+              <h5>Self-assessment</h5>
+            </div>
+          </div>
+          <hr>
+
+          <form id="formulario">
+
+            <div class="center-container">
+              <h4 class="tituloSeccion"><a href="Menu-B-en.html">III - Historical Circumstances</a></h4>
+            </div>
+
+            <div class="salida">
+              <p>Select the option that corresponds to your organization.</p>
+              <button type="button" id="boton-salir">Exit</button>
+            </div>
+  
+            <div id="overlay">
+              <div id="ventanaSalida">
+                <!-- <div class="confirm-modal" id="confirm-modal">-->
+                <div class="confirm-box">
+                  <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                    missing items later.
+                    <br>
+                  </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                  <button id="confirm-yes">Exit</button>
+                  <button id="confirm-no">Continue</button><br>
+                </div>
+              </div>
+            </div>
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Irrational</th>
+              <th class="respuesta-col">Unreasonable</th>
+              <th class="respuesta-col">Somewhat reasonable</th>
+              <th class="respuesta-col">Reasonable</th>
+            </tr>
+            <tr>
+              <td class="pregunta-col">1. It has not adopted cutting-edge technologies for its processes
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-1" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-1" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-1" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-1" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">2. It has not been involved in acquisitions of companies for significant values
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-2" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-2" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-2" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-2" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">3. It does not operate in highly competitive sectors where innovation and risk-taking are key
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-3" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-3" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-3" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-3" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">4. It does not seek to diversify its operations into various segments
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-4" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-4" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-4" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-4" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">5. It does not seek strategic partnerships and collaborations with other companies
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-5" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-5" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-5" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-5" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">6. It does not operate in industries with volatile supply chains or strong fluctuations in demand
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-6" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-6" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-6" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-6" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">7. No significant investments have been undertaken for new and significant projects in the last two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-7" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-7" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-7" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-7" value="4">
+                </div>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td class="pregunta-col">8. No acquisitions of companies or business units of companies have been made in the previous two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-8" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-8" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-8" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-8" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">9. No innovation projects with still uncertain results have been launched in the previous two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-9" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-9" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-9" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-9" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">10. No opportunities for development based on investments with high damage potential have been sought
+                </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-10" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-10" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-10" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-10" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">11. No opportunities for development based on investments with high damage potential have been sought
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-11" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-11" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-11" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-11" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">12. It has completed a comprehensive digital transformation process in a core or significant support area
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-12" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-12" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-12" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-3-12" value="4">
+                </div>
+              </td>
+            </tr>
+
+          </table>
+
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Send</button>
+          </div>
+
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Clear selections</button>
+          </div>
+
+        </form>
+    </section>
+  </section>
+  
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Section summary</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Maximum possible score: <span id="maximo"></span></p>
+        <br>
+        <p>Score obtained: <span id="calificacion"></span></p>
+        <br>
+        <p>Percentage: <span id="porcentual"></span></p>
+
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
+
+        <button id="continuar" onclick="continuar()">Continue</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+
+<script>
+  function toggleVisibility() {
+    var element = document.getElementById('myElement');
+    if (element.style.display === 'none') {
+      element.style.display = 'block';
+      // Asegúrate de darle tiempo al navegador para que reconozca el cambio de 'display'
+      setTimeout(() => {
+        element.style.opacity = 1;
+      }, 10);
+    } else {
+      element.style.opacity = 0;
+      // Espera a que termine la transición de opacidad para cambiar el display a 'none'
+      element.addEventListener('transitionend', function handler() {
+        element.style.display = 'none';
+        element.removeEventListener('transitionend', handler);
+      });
+    }
+  }
+
+</script>
+
+<script src="../../js/mb-3.js"></script>
+</html>
