@@ -32,22 +32,6 @@ async function ejecutarProceso() {
   console.log(`leyo textoRespuestas ${textoRespuestas[0].textos}`)
 }
 
-// async function recuperarPreguntas() {
-//   try {
-//     const response = await fetch("/preguntas");
-//     if (response.ok) {
-//       const result = await response.json();
-//       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
-//     } else {
-//       console.error("Error al obtener las preguntas:", response.statusText);
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud:", error);
-//     return [];
-//   }
-// }
-
 async function recuperarPreguntas(capitulo = 'A') {
   try {
     let url = "/preguntas";
@@ -68,11 +52,6 @@ async function recuperarPreguntas(capitulo = 'A') {
     return [];
   }
 }
-
-
-
-
-
 
 
 async function leeTextoCheck() {
@@ -414,8 +393,8 @@ function cerrarModal(idModal) {
       boton.setAttribute("data-nombre-seccion", nombreSeccion);
       boton.setAttribute("data-puntaje-obtenido", respuesta.score);
       boton.setAttribute("data-porciento-obtenido", respuesta.porcentaje);
-      boton.textContent = "Ver";
-      boton.style.width = '35px';
+      idioma == 1 ? (boton.textContent = "Ver") : (boton.textContent = "View");
+      boton.style.width = '40px';
       boton.classList.add("centered");
       let celdaVer = document.createElement('td');
       celdaVer.appendChild(boton)

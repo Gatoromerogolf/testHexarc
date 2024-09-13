@@ -248,3 +248,13 @@ tr:first-of-type + tr {
 .botonSiguiente:hover {
   background-color: #0056b3;
 }
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
