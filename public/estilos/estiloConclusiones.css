@@ -135,7 +135,8 @@ h3 {
 }
 
 .pconclusiones {
-  width: 550px;
+  /* width: 550px; */
+  width: 90%;
   margin-left: 20px;
   text-align: justify;
 }
