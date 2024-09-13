@@ -131,7 +131,8 @@ h3 {
 /*-------------------------------  TEXTO CONCLUSIONES  -------------------*/
 
 .table-conclusiones {
-  width: 550px;
+  /* width: 550px; */
+  width: 90%;
 }
 
 .pconclusiones {
@@ -681,7 +682,7 @@ tr:last-child td {
 .table-cuadro-conclusiones{
   margin: 16px;
   padding: 0px;
-  width: 550px;
+  width: 90%;
   font-size: 14px;
 }
 
