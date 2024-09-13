@@ -33,6 +33,7 @@
       </div>
     </div>
 
+    <div id="content" class="fade-in">
 
     <h2>Welcome</h2>
 
@@ -47,6 +48,9 @@
     <div class="centrado-flex">
       <button class="botonSiguiente" id="boton-enviar" type="button">CONTINUE</button>
     </div>
+
+    </div>
+
     </form>
   </div>
 </body>
@@ -72,7 +76,7 @@
   document.getElementById("nombreUsuario").textContent = apenom;
 
 </script>
-<script>
+<!-- <script>
   // Agrega un evento de clic al ícono de España
   document.getElementById('spainIcon').addEventListener('click', function () {
     window.location.href = "continuacion.html";
@@ -82,7 +86,35 @@
   document.getElementById('usaIcon').addEventListener('click', function () {
     window.location.href = "continuacion-en.html";
   });
+</script> -->
+
+<script>
+  // Agrega un evento de clic al ícono de España
+  document.getElementById('spainIcon').addEventListener('click', function () {
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
+    window.location.href = "continuacion.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
+  });
+
+  // Agrega un evento de clic al ícono de USA
+  document.getElementById('usaIcon').addEventListener('click', function () {
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
+    window.location.href = "continuacion-en.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
+  });
 </script>
+
+
+
+
 <script>
   function actualizarUserIdioma(username, CUIT, idioma) {
     fetch('/api/updateIdioma', {

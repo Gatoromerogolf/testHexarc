@@ -36,6 +36,7 @@
       </div>
     </div>
 
+    <div id="content" class="fade-in">
     <h2>Presentación</h2>
     <p>Durante el desarrollo de esta autoevaluación se identificarán tres tipos de requerimientos de información:</p>
     <ul>
@@ -72,6 +73,7 @@
     <div class="centrado-flex">
       <button class="botonSiguiente" id="boton-enviar" type="button">COMENZAR</button>
     </div>
+    </div>
 
   </div>
 </body>
@@ -102,13 +104,26 @@
 <script>
   // Agrega un evento de clic al ícono de España
   document.getElementById('spainIcon').addEventListener('click', function () {
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
     window.location.href = "Presentacion.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
   });
 
   // Agrega un evento de clic al ícono de USA
   document.getElementById('usaIcon').addEventListener('click', function () {
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
     window.location.href = "Presentacion-en.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
   });
+
 </script>
 
 // Función para actualizar el campo ingresado del usuario
