@@ -483,16 +483,33 @@ app.get('/textocheck', (req, res) => {
 
 // Ruta para obtener preguntas, con un filtro opcional por capitulo
 app.get('/preguntas', (req, res) => {
-  const { capitulo } = req.query;  // Obtener el parámetro capitulo de la query string
+  const { capitulo, seccion } = req.query;  // Obtener el parámetro capitulo de la query string
   let query = 'SELECT * FROM preguntas';
-  
-  if (capitulo) {
-    query += ' WHERE Capitulo = ?';
+  let params = [];
+
+  console.log ('llego hasta aca');
+
+    // Construir la consulta con filtros opcionales
+    if (capitulo || seccion) {
+      query += ' WHERE';
+
+      if (capitulo) {
+          query += ' Capitulo = ?';
+          params.push(capitulo);
+      }
+
+      if (seccion) {
+          if (capitulo) {
+              query += ' AND';
+          }
+          query += ' Seccion = ?';
+          params.push(seccion);
+      }
   }
-  
+
   query += ' ORDER BY Capitulo, Seccion, Numero';
 
-  pool.query(query, [capitulo], (error, results, fields) => {
+  pool.query(query, params, (error, results, fields) => {
     if (error) {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
@@ -500,7 +517,6 @@ app.get('/preguntas', (req, res) => {
     res.json(results);
   });
 });
-
 
 
 
