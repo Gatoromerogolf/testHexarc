@@ -47,7 +47,7 @@
     </form>
 
     <h2>Actualización de Datos</h2>
-    <form id="updateForm" style="display: none">
+    <form id="updateForm" style="display: block">
         <label for="fullName">Nombre y Apellido:</label>
         <input type="text" id="fullName" name="fullName" required>
 
@@ -61,11 +61,20 @@
         <input type="email" id="email" name="email" required>
 
         <label for="ria">¿La organización es del tipo RIA?</label>
+
         <select id="ria" name="ria" required>
-            <option value="">Seleccione</option>
+            <option value=""></option>
             <option value="Si">Si</option>
             <option value="No">No</option>
         </select>
+
+        <label for="ria">¿Sector económico?</label>
+
+        <select id="ria" name="ria" required>
+            <option value=""></option>
+            <option value="Si">Manufactura</option>
+            <option value="No">Servicios</option>
+        </select>        
 
         <label for="newPassword">Ingrese su nueva clave:</label>
         <input type="password" id="newPassword" name="newPassword" required>

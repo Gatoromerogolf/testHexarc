@@ -41,7 +41,7 @@
                   <div id="nombreUsuario" class="user-name"></div>
                 </div>
                 <div class="nav-iconsxx">
-                  <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+                  <h4> A - Manejo de los Riesgos de Procesos</h4>
                 </div>
                 <div class="nav-iconsxx">
                   <h5> Autoevaluación</h5>
@@ -53,7 +53,7 @@
                 <form id="surveyForm">
       
               <div class="center-container">
-                <h4 class="tituloSeccion"><a href="Menu-A.html">XIII - Sucesiones</a></h4>
+                <h4 class="tituloSeccion"><a href="Menu-D.html">I - Selección de cartera de productos</a></h4>
               </div>
       
               <div class="salida">
@@ -80,10 +80,10 @@
             <thead>
                 <tr>
                     <th>Propuesta</th>
-                    <th>Opción 1</th>
-                    <th>Opción 2</th>
-                    <th>Opción 3</th>
-                    <th>Opción 4</th>
+                    <th>No efectivo</th>
+                    <th>Poco efectivo</th>
+                    <th>Efectivo</th>
+                    <th>Muy efectivo</th>
                 </tr>
             </thead>
             <tbody id="questionsTableBody">
@@ -134,7 +134,16 @@
 
         // Función para obtener las preguntas del servidor
         function loadQuestions() {
-            fetch('/preguntas')
+            let url = '/preguntas';
+
+            // Agregar parámetros a la URL si existen
+            let capitulo = "D";
+            let seccion = 2;
+            if (capitulo || seccion) {
+                url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
+            }
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => buildForm(data))
                 .catch(error => console.error('Error al cargar las preguntas:', error));
@@ -143,20 +152,6 @@
         // Cargar las preguntas cuando la página se cargue
         document.addEventListener('DOMContentLoaded', loadQuestions);
 
-        // Función para manejar el envío del formulario
-        // function submitForm() {
-        //     const formData = new FormData(document.getElementById('surveyForm'));
-        //     const responses = [];
-            
-        //     formData.forEach((value, key) => {
-        //         // Suponiendo que cada pregunta tiene una identificación única
-        //         const questionId = key.split('_')[1];
-        //         responses[questionId - 1] = value;
-        //     });
-
-        //     console.log(responses);
-        //     // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
-        // }
 
   // Función para manejar el envío del formulario
       function submitForm() {

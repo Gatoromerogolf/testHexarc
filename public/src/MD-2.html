@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Evaluación de riesgos</title>
+        <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+        <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+        <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <style>
+            table {
+                width: 95%;
+                border-collapse: collapse;
+                margin-bottom: 1em;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                background-color: #f4f4f4;
+            }
+            .question-cell {
+                text-align: left;
+            }
+            .option-input {
+                margin-right: 5px;
+            }
+        </style>
+    </head>
+    <body class="menu-a-page procesos">
+        <div class="survey-container">
+          <section class="main">
+            <section class="gobCorpo">
+              <div class="header-container">
+                <div class="header-center">
+                  <div id="nombreEmpresa" class="company-name"></div>
+                  <div id="nombreUsuario" class="user-name"></div>
+                </div>
+                <div class="nav-iconsxx">
+                  <h4> A - Manejo de los Riesgos de Procesos</h4>
+                </div>
+                <div class="nav-iconsxx">
+                  <h5> Autoevaluación</h5>
+                </div>
+              </div>
+              <hr>
+      
+            <!-- <form id="formulario"> -->
+                <form id="surveyForm">
+      
+              <div class="center-container">
+                <h4 class="tituloSeccion"><a href="Menu-D.html">I - Selección de cartera de productos</a></h4>
+              </div>
+      
+              <div class="salida">
+                <p>Seleccione la opción que corresponda a su organización.</p>
+                <button type="button" id="boton-salir">Salir</button>
+              </div>
+      
+              <div id="overlay">
+                <div id="ventanaSalida">
+                  <!-- <div class="confirm-modal" id="confirm-modal">-->
+                  <div class="confirm-box">
+                    <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+                      completar posteriormente los items faltantes.
+                      <br>
+                    </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                    <button id="confirm-yes">Salir</button>
+                    <button id="confirm-no">Continuar</button><br>
+                  </div>
+                </div>
+              </div>
+
+    <!-- <form id="surveyForm"> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="pregunta-col">Situación</th>
+                    <th class="respuesta-col">No efectivo</th>
+                    <th class="respuesta-col">Poco efectivo</th>
+                    <th class="respuesta-col">Efectivo</th>
+                    <th class="respuesta-col">Muy efectivo</th>
+                </tr>
+            </thead>
+            <tbody id="questionsTableBody">
+                <!-- Las preguntas se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
+        <div class="centrado-flex">
+        <button type="button" id="boton-enviar" onclick="submitForm()">Enviar</button>
+        </div>
+        
+        <div class="centrado-flex">
+        <button type="button" id="boton-borrar" onclick="resetForm()">Limpiar selecciones</button>
+        </div>
+    </form>
+
+      
+    <div id="miAlerta" class="alerta-oculto">
+      <div class="alerta-contenido">
+        <div class="alerta-cabecera">
+          <span>Resumen de la sección</span>
+        </div>
+        <div class="alerta-cuerpo">
+          <p>Puntaje máximo posible: <span id="maximo"></span></p>
+          <p>Calificación obtenida: <span id="calificacion"></span></p>
+          <p>Porcentual: <span id="porcentual"></span></p>
+  
+        <div class="gauge-container">
+          <canvas id="gaugeChart";></canvas>
+        </div>
+  
+          <button id="continuar" onclick="continuar()">Continuar</button>
+        </div>
+      </div>
+    </div>
+
+<script>
+
+    const responses = [];
+    let puntajesIndividuales = [];
+    let valores = 0;
+    let precios = [];
+    let respuestas = [];
+
+        // Función para construir la tabla de preguntas
+        function buildForm(questions) {
+            const tableBody = document.getElementById('questionsTableBody');
+            questions.forEach(question => {
+                const row = document.createElement('tr');
+
+                // Numero de pregunta
+                const numeroCell = document.createElement('td');
+                numeroCell.classList.add('question-cell');
+                numeroCell.textContent = question.Numero;
+                row.appendChild(numeroCell);
+
+                // Columna de la pregunta
+                const questionCell = document.createElement('td');
+                questionCell.classList.add('question-cell');
+                questionCell.textContent = question.Descrip;
+                row.appendChild(questionCell);
+                
+                // Opciones
+                for (let i = 1; i <= 4; i++) {
+                    const optionCell = document.createElement('td');
+                    
+                    const optionInput = document.createElement('input');
+                    optionInput.type = 'radio';
+                    optionInput.name = `question_${question.id}`;
+                    optionInput.value = i;
+                    optionInput.classList.add('option-input');
+                    optionInput.id = `q${question.id}_o${i}`;
+                    
+                    // Añadir el input directamente en la celda
+                    optionCell.appendChild(optionInput);
+                    row.appendChild(optionCell);
+                }
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Función para obtener las preguntas del servidor
+        function loadQuestions() {
+            let url = '/preguntas';
+
+            // Agregar parámetros a la URL si existen
+            let capitulo = "D";
+            let seccion = 2;
+            if (capitulo || seccion) {
+                url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
+            }
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => buildForm(data))
+                .catch(error => console.error('Error al cargar las preguntas:', error));
+        }
+
+        // Cargar las preguntas cuando la página se cargue
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+
+
+  // Función para manejar el envío del formulario
+      function submitForm() {
+        const questions = document.querySelectorAll('tbody tr');
+        // const responses = [];
+        let allAnswered = true;
+        let unansweredQuestions = [];
+
+        questions.forEach((row, index) => {
+            const questionId = row.querySelector('input[type="radio"]').name.split('_')[1]; // Obtener el ID de la pregunta desde el name
+            const selectedOption = row.querySelector(`input[name="question_${questionId}"]:checked`);
+
+            if (selectedOption) {
+                responses.push(selectedOption.value);
+            } else {
+              unansweredQuestions.push(index + 1); // Agregar el número de la pregunta que falta responder
+            }
+        });
+
+        // if (unansweredQuestions.length > 0) {
+        // alert(`Por favor, selecciona una opción para las siguientes preguntas: ${unansweredQuestions.join(', ')}`);
+        // } else {
+            console.log('Respuestas:', responses);
+            // Si no hay faltantes sigue adelante:::::::::::::::::::::::::
+            porcientoFormateado = calculaResultados();
+            porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
+            mostrarMiAlerta(maximo, valores, porcientoFormateado);
+            console.log(`Suma puntos ${valores},
+                      valor máximo: ${maximo},
+                      porcentaje ${porcientoFormateado}`);
+            console.table(puntajesIndividuales);
+            // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
+        // }
+    }
+
+    function resetForm() {
+        location.reload(); // Recarga la página para restablecer el formulario
+    }
+    </script>
+
+
+<script>
+  function calculaResultados() {
+
+    // for (let i = 0; i < responses.length; i++) {
+    //   if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
+
+    //   console.log(`i= ${i} ,
+    //       valores ${valores} ,
+    //       respuestas: ${responses[i]};
+    //       indice del arreglo: ${responses[i]-1};
+    //       numero a sumar: ${Number (precios[i].precio[responses[i]-1])} `)
+
+    //       // vector de precio: ${precios[i].pregunta};
+
+    //   valores += Number (precios[i].precio[responses[i]-1]);
+
+    //   console.log(`valor despues calculo: ${valores}`);
+
+    // }
+    // const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
+    // return porcientoFormateado;
+  } 
+
+
+function continuar() {
+  cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+
+  grabarResultados2(respuestas)
+    .then(() => {
+      window.location.href =
+        JSON.parse(localStorage.getItem("idioma")) == 1
+          ? "MD-3.html"
+          : "MD-3-en.html";
+    })
+    .catch((error) => {
+      console.error("Error en grabarResultados:", error);
+      alert("Hubo un error al grabar los resultados: " + error.message);
+    });
+}
+
+async function grabarResultados2(respuestas) {
+
+const capitulo = "B";
+const seccion = 1;
+const score = valores;
+const respuesta = respuestas;
+const porcentaje = porcientoFormateado;
+
+const body = {
+  capitulo,
+  seccion,
+  maximo, 
+  score,
+  porcentaje,
+  respuesta
+};
+
+// try {
+//   const response = await fetch("/insertar2", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(body),
+//     credentials: "include",
+//   });
+
+//   const result = await response.json();
+//   if (result.success) {
+//     console.log("no hay error");
+//   } else {
+//     throw new Error(result.error || "Error desconocido ins 2");
+//   }
+// } catch (error) {
+//   console.log("Error:", error);
+//   alert("estamos en el error (ins 2): " + error.message);
+//   throw error; // Rechaza la promesa en caso de error
+// }
+}
+  
+function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
+  
+  // Mostrar la alerta personalizada
+  document.getElementById('miAlerta').style.display = 'block';
+  
+  //  crea el gauge despues de mostrar la alerta
+  const target = document.getElementById('gaugeChart'); // your canvas element
+  const gauge = new Gauge(target).setOptions(opts); // create gauge!
+  gauge.maxValue = 100; // set max gauge value
+  gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+  gauge.animationSpeed = 32; // set animation speed (32 is default value)
+  gauge.set(porcientoFormateado); // set actual value
+  
+  // Actualizar los contenidos
+  document.getElementById('maximo').textContent = maximo;
+  document.getElementById('calificacion').textContent = valores;
+  document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
+  
+  }
+  
+function cerrarAlerta() {
+  document.getElementById("miAlerta").style.display = "none";
+  }
+  
+  </script>
+
+
+
+<script>
+  
+// Armar velocimetro ::::::::::::::::::::::::::::::::::::::
+const opts = {
+  angle: -0.3,
+// The span of the gauge arc
+  lineWidth: 0.2, // The line thickness
+  radiusScale: 0.8, // Relative radius
+  pointer: {
+      length: 0.6, // // Relative to gauge radius
+      strokeWidth: 0.035, // The thickness
+      color: '#000000' // Fill color
+  },
+  limitMax: false,     // If false, max value increases automatically if value > maxValue
+  limitMin: false,     // If true, the min value of the gauge will be fixed
+  colorStart: '#6F6EA0',   // Colors
+  colorStop: '#C0C0DB',    // just experiment with them
+  strokeColor: '#EEEEEE',  // to see which ones work best for you
+  generateGradient: true,
+  highDpiSupport: true,     // High resolution support
+
+  // Custom segment colors
+  staticZones: [
+     {strokeStyle: "red", min: 0, max: 50}, // Red from 0 to 25
+     {strokeStyle: "orange", min: 50, max: 70}, // Red from 0 to 25
+     {strokeStyle: "green", min: 70, max: 90}, // Yellow from 50 to 75
+     {strokeStyle: "blue", min: 90, max: 100}  // Blue from 75 to 100
+  ],
+
+  staticLabels: {
+      font: "15px sans-serif",  // Specifies font
+      labels: [0, 50, 70, 90, 100],  // Print labels at these values
+      color: "#000000",  // Optional: Label text color
+      fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+  },
+};
+
+</script>
+
+<script>
+  const apellidouser = localStorage.getItem("apellido");
+  const nombreUser = localStorage.getItem("nombre");
+  const apenom = nombreUser + ' ' + apellidouser;
+  const empresa = localStorage.getItem("empresa");
+  document.getElementById("nombreEmpresa").textContent = empresa;
+  document.getElementById("nombreUsuario").textContent = apenom;
+</script>
+
+<script>
+  document.getElementById('surveyForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+
+</body>
+</html>
+

@@ -90,7 +90,8 @@ async function leeCapitulos(indice) {
           tablaMenuEs.push(elemento);
         } else {
           // Si no hay totales, maneja el caso especial
-          const elemento = [capitulo, "##", nombre, null, null, null];
+          // const elemento = [capitulo, "##", nombre, null, null, null];
+          const elemento = [capitulo, pagina, nombre, null, null, null];
           if (primeraVez == 0) {
             elemento[1] = pagina;
             primeraVez = 1;
