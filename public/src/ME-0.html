@@ -26,7 +26,7 @@
             <div id="nombreUsuario" class="user-name"></div>
           </div>
           <div class="nav-iconsxx">
-            <h4> A - Situación Financiera</h4>
+            <h4> E - Situación Financiera</h4>
           </div>
           <div class="nav-iconsxx">
             <h5> Autoevaluación</h5>
@@ -170,7 +170,8 @@
 
 
         <div class="centrado-flex">
-          <button type="submit" id="boton-enviar">Enviar</button>
+          <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
+          <button type="button" id="boton-enviar" onclick="resumenGeneral()">Enviar</button>
         </div>
 
         <div class="centrado-flex">
@@ -200,7 +201,16 @@
     </div>
   </div>
 
-  </body>
+  </body>´
+
+  <script>
+    const apellidouser = localStorage.getItem("apellido");
+    const nombreUser = localStorage.getItem("nombre");
+    const apenom = nombreUser + ' ' + apellidouser;
+    const empresa = localStorage.getItem("empresa");
+    document.getElementById("nombreEmpresa").textContent = empresa;
+    document.getElementById("nombreUsuario").textContent = apenom;
+  </script>
 
   <script>
     document.getElementById('formulario').addEventListener('submit', function (event) {
@@ -231,6 +241,21 @@
     });
   </script>
 
-  <script src="../../js/ma-13.js"></script>
+<script>
+function resumenGeneral() {
+    console.log('entro por aca')
+
+    window.location.href =
+        JSON.parse(localStorage.getItem("idioma")) == 1
+          ? "resumenGeneral3.html"
+          : "resumenGeneral3-en.html";
+
+}
+
+function limpiarSelecciones() {
+        location.reload(); // Recarga la página para restablecer el formulario
+    }
+</script>
+  <!-- <script src="../../js/ma-13.js"></script> -->
 
 </html>

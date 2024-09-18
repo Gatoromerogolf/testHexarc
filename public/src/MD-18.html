@@ -53,7 +53,7 @@
                 <form id="surveyForm">
       
               <div class="center-container">
-                <h4 class="tituloSeccion"><a href="Menu-D.html">I - Selección de cartera de productos</a></h4>
+                <h4 class="tituloSeccion"><a href="Menu-D.html">XVIII - Innovación</a></h4>
               </div>
       
               <div class="salida">
@@ -129,81 +129,81 @@
     let respuestas = [];
 
         // Función para construir la tabla de preguntas
-        function buildForm(questions) {
-            const tableBody = document.getElementById('questionsTableBody');
-            questions.forEach(question => {
-                const row = document.createElement('tr');
+    function buildForm(questions) {
+        const tableBody = document.getElementById('questionsTableBody');
+        questions.forEach(question => {
+            const row = document.createElement('tr');
 
-                // Numero de pregunta
-                const numeroCell = document.createElement('td');
-                numeroCell.classList.add('question-cell');
-                numeroCell.textContent = question.Numero;
-                row.appendChild(numeroCell);
+        // Numero de pregunta
+        const numeroCell = document.createElement('td');
+        numeroCell.classList.add('question-cell');
+        numeroCell.textContent = question.Numero;
+        row.appendChild(numeroCell);
 
-                // Columna de la pregunta
-                const questionCell = document.createElement('td');
-                questionCell.classList.add('question-cell');
-                questionCell.textContent = question.Descrip;
-                row.appendChild(questionCell);
+        // Columna de la pregunta
+        const questionCell = document.createElement('td');
+        questionCell.classList.add('question-cell');
+        questionCell.textContent = question.Descrip;
+        row.appendChild(questionCell);
                 
-                // Opciones
-                for (let i = 1; i <= 4; i++) {
-                    const optionCell = document.createElement('td');
-                    
-                    const optionInput = document.createElement('input');
-                    optionInput.type = 'radio';
-                    optionInput.name = `question_${question.id}`;
-                    optionInput.value = i;
-                    optionInput.classList.add('option-input');
-                    optionInput.id = `q${question.id}_o${i}`;
-                    
-                    // Añadir el input directamente en la celda
-                    optionCell.appendChild(optionInput);
-                    row.appendChild(optionCell);
-                }
-                
-                tableBody.appendChild(row);
-            });
+        // Opciones
+        for (let i = 1; i <= 4; i++) {
+            const optionCell = document.createElement('td');
+            
+            const optionInput = document.createElement('input');
+            optionInput.type = 'radio';
+            optionInput.name = `question_${question.id}`;
+            optionInput.value = i;
+            optionInput.classList.add('option-input');
+            optionInput.id = `q${question.id}_o${i}`;
+            
+            // Añadir el input directamente en la celda
+            optionCell.appendChild(optionInput);
+            row.appendChild(optionCell);
+        }
+        
+        tableBody.appendChild(row);
+    });
+    }
+
+    // Función para obtener las preguntas del servidor
+    function loadQuestions() {
+        let url = '/preguntas';
+
+        // Agregar parámetros a la URL si existen
+        let capitulo = "D";
+        let seccion = 18;
+        if (capitulo || seccion) {
+            url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
         }
 
-        // Función para obtener las preguntas del servidor
-        function loadQuestions() {
-            let url = '/preguntas';
+        fetch(url)
+            .then(response => response.json())
+            .then(data => buildForm(data))
+            .catch(error => console.error('Error al cargar las preguntas:', error));
+    }
 
-            // Agregar parámetros a la URL si existen
-            let capitulo = "D";
-            let seccion = 1;
-            if (capitulo || seccion) {
-                url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
-            }
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => buildForm(data))
-                .catch(error => console.error('Error al cargar las preguntas:', error));
-        }
-
-        // Cargar las preguntas cuando la página se cargue
-        document.addEventListener('DOMContentLoaded', loadQuestions);
+    // Cargar las preguntas cuando la página se cargue
+    document.addEventListener('DOMContentLoaded', loadQuestions);
 
 
   // Función para manejar el envío del formulario
-      function submitForm() {
-        const questions = document.querySelectorAll('tbody tr');
-        // const responses = [];
-        let allAnswered = true;
-        let unansweredQuestions = [];
+    function submitForm() {
+      const questions = document.querySelectorAll('tbody tr');
+      // const responses = [];
+      let allAnswered = true;
+      let unansweredQuestions = [];
 
-        questions.forEach((row, index) => {
-            const questionId = row.querySelector('input[type="radio"]').name.split('_')[1]; // Obtener el ID de la pregunta desde el name
-            const selectedOption = row.querySelector(`input[name="question_${questionId}"]:checked`);
+      questions.forEach((row, index) => {
+          const questionId = row.querySelector('input[type="radio"]').name.split('_')[1]; // Obtener el ID de la pregunta desde el name
+          const selectedOption = row.querySelector(`input[name="question_${questionId}"]:checked`);
 
-            if (selectedOption) {
-                responses.push(selectedOption.value);
-            } else {
-              unansweredQuestions.push(index + 1); // Agregar el número de la pregunta que falta responder
-            }
-        });
+          if (selectedOption) {
+              responses.push(selectedOption.value);
+          } else {
+            unansweredQuestions.push(index + 1); // Agregar el número de la pregunta que falta responder
+          }
+      });
 
         // if (unansweredQuestions.length > 0) {
         // alert(`Por favor, selecciona una opción para las siguientes preguntas: ${unansweredQuestions.join(', ')}`);
@@ -258,8 +258,8 @@ function continuar() {
     .then(() => {
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "MD-2.html"
-          : "MD-2-en.html";
+          ? "MD-19.html"
+          : "MD-19-en.html";
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);

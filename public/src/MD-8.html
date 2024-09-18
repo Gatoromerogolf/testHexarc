@@ -23,6 +23,7 @@
             th {
                 background-color: #f4f4f4;
             }
+
             tr:last-child td {
                 border-bottom: 1px solid #ddd; /* Aplica borde a la última fila si no está apareciendo */
             }
@@ -57,7 +58,7 @@
                 <form id="surveyForm">
       
               <div class="center-container">
-                <h4 class="tituloSeccion"><a href="Menu-D.html">III - Legales y cumplimiento</a></h4>
+                <h4 class="tituloSeccion"><a href="Menu-D.html">VIII - Marketing</a></h4>
               </div>
       
               <div class="salida">
@@ -176,7 +177,7 @@
 
             // Agregar parámetros a la URL si existen
             let capitulo = "D";
-            let seccion = 3;
+            let seccion = 8;
             if (capitulo || seccion) {
                 url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
             }
@@ -262,8 +263,8 @@ function continuar() {
     .then(() => {
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "MD-4.html"
-          : "MD-4-en.html";
+          ? "MD-9.html"
+          : "MD-9-en.html";
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);
