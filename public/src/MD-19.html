@@ -53,7 +53,7 @@
                 <form id="surveyForm">
       
               <div class="center-container">
-                <h4 class="tituloSeccion"><a href="Menu-D.html">I - Selección de cartera de productos</a></h4>
+                <h4 class="tituloSeccion"><a href="Menu-D.html">XIX - Gestión de Riesgos (Risk management)</a></h4>
               </div>
       
               <div class="salida">
@@ -172,7 +172,7 @@
 
             // Agregar parámetros a la URL si existen
             let capitulo = "D";
-            let seccion = 1;
+            let seccion = 19;
             if (capitulo || seccion) {
                 url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
             }
@@ -258,8 +258,8 @@ function continuar() {
     .then(() => {
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "MD-2.html"
-          : "MD-2-en.html";
+          ? "MD-20.html"
+          : "MD-20-en.html";
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);

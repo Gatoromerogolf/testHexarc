@@ -18,6 +18,22 @@ body.financiero {
   font-family: "Abel", sans-serif;
 }
 
+/* Fondo específico para la clase resultados */
+body.calidad {
+  background: url("background calidad.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Abel", sans-serif;
+}
+
+/* Fondo específico para la clase resultados */
+body.mercado {
+  background: url("background mercado.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Abel", sans-serif;
+  font-size: 15px;
+}
+
+
 h3 {
   margin-top: 0;
 }
