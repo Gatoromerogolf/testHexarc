@@ -119,10 +119,10 @@ async function buscaRespuesta(CUIT, capitulo, seccion) {
 
 
 // Función para actualizar el HTML con los datos de la tabla
-function actualizarHTML(tablaMenuEs) {
+function actualizarHTML(tablaMenuApeRie) {
   // console.log(tablaMenuEs);
 
-  tablaMenuA = tablaMenuEs;
+  let tablaMenuA = tablaMenuApeRie;
   let totalMax = 0;
   let totalCal = 0;
   let totalPor = 0;
