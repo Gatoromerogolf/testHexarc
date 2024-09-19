@@ -9,20 +9,23 @@ function drawBackground(ctx, chartArea) {
     // Rango inefectivo
     // ctx.fillStyle = 'rgba(255, 0, 0, 0.2)';
     ctx.fillStyle = 'red';
+    ctx.fillStyle = 'rgba(255, 87, 51, 0.5)';
     ctx.fillRect(chartArea.left, chartArea.top, (chartArea.width * 50) / 100, chartArea.height);
 
     // Rango poco efectivo
-    ctx.fillStyle = 'rgba(255, 165, 0, 0.2)';
     ctx.fillStyle = 'orange';
+    ctx.fillStyle = 'rgba(255, 197, 51, 0.5)';
     ctx.fillRect(chartArea.left + (chartArea.width * 50) / 100, chartArea.top, (chartArea.width * 20) / 100, chartArea.height);
 
     // Rango efectivo
     // ctx.fillStyle = 'rgba(255, 255, 0, 0.2)';
     ctx.fillStyle = 'green';
+    ctx.fillStyle = 'rgba(62, 229, 47, 0.5)';
     ctx.fillRect(chartArea.left + (chartArea.width * 70) / 100, chartArea.top, (chartArea.width * 20) / 100, chartArea.height);
 
     // Rango muy efectivo
     ctx.fillStyle = 'blue';
+    ctx.fillStyle = 'rgba(47, 135, 229, 0.5)';
     ctx.fillRect(chartArea.left + (chartArea.width * 90) / 100, chartArea.top, (chartArea.width * 10) / 100, chartArea.height);
 
     ctx.restore();
@@ -69,7 +72,7 @@ const options = {
         y: {
             title: {
                 display: true,
-                text: 'Áreas'
+                text: 'Factores'
             },
             ticks: {
                 color: 'black'
@@ -85,26 +88,26 @@ plugins: {
                 return [
                     {
                         text: 'Inefectivo',
-                        fillStyle: 'rgba(255, 0, 0)',
-                        strokeStyle: 'rgba(255, 0, 0)',
+                        fillStyle: 'rgba(255, 87, 51, 0.5)',
+                        strokeStyle: 'rgba(255, 87, 51)',
                         lineWidth: 1
                     },
                     {
                         text: 'Poco efectivo',
-                        fillStyle: 'orange',
-                        strokeStyle: 'rgba(255, 165, 0, 0.2)',
+                        fillStyle: 'rgba(255, 197, 51, 0.5)',
+                        strokeStyle: 'rgba(255, 197, 51, 0.5)',
                         lineWidth: 1
                     },
                     {
                         text: 'Efectivo',
-                        fillStyle: 'green',
-                        strokeStyle: 'rgba(255, 255, 0, 0.2)',
+                        fillStyle: 'rgba(62, 229, 47, 0.5)',
+                        strokeStyle: 'rgba(62, 229, 47, 0.5)',
                         lineWidth: 1
                     },
                     {
                         text: 'Muy efectivo',
-                        fillStyle: 'blue',
-                        strokeStyle: 'rgba(0, 255, 0, 0.2)',
+                        fillStyle: 'rgba(47, 135, 229, 0.5)',
+                        strokeStyle: 'rgba(47, 135, 229, 0.5)',
                         lineWidth: 1
                     }
                 ];
@@ -113,7 +116,7 @@ plugins: {
     },
         title: {
             display: true,
-            text: 'Cumplimiento por Área',
+            // text: 'Cumplimiento por Factor',
             font: {
                 size: 18
             }

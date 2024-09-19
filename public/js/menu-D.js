@@ -84,7 +84,7 @@ async function obtenerSecciones(indice, idioma) {
 
 (async function () {
   try {
-    for (let indice = 1; indice < 22; indice++) {
+    for (let indice = 1; indice < 23; indice++) {
       const shouldTerminate = await obtenerSecciones(indice, idioma);
       if (shouldTerminate) break;
     }
