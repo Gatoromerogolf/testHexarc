@@ -215,10 +215,6 @@ function actualizarHTML(tablaMenuApeRie) {
 
 
 
-
-
-
-
 // Recuperar el valor de LocalStorage
 // let valorMaximo = JSON.parse(localStorage.getItem('maximo'));
 // let valores = JSON.parse(localStorage.getItem('valores'));
