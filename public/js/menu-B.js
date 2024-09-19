@@ -25,8 +25,8 @@ async function obtenerSecciones(indice, idioma) {
       const seccionRec = await response.json(); //registro seccion recibido
       if (seccionRec.length > 0) {
         const primerSeccion = seccionRec[0];
-        console.log (primerSeccion)
-        console.log (primerSeccion.max4)
+        // console.log (primerSeccion)
+        // console.log (primerSeccion.max4)
         // leo la tabla de respuestas para saber si se completó
         const CUIT = localStorage.getItem("CUIT");
         const seccion = primerSeccion.seccion;
@@ -78,15 +78,25 @@ async function obtenerSecciones(indice, idioma) {
 }
 
 (async function () {
+  console.time("Total Tiempo de Ejecución");
   try {
+    console.time("Tiempo de obtenerSecciones");
     for (let indice = 1; indice < 5; indice++) {
       const shouldTerminate = await obtenerSecciones(indice, idioma);
       if (shouldTerminate) break;
     }
+
+    console.timeEnd("Tiempo de obtenerSecciones");
+
+    console.time("Tiempo de actualizarHTML");
     // Una vez que se han obtenido todos los datos, actualizar el HTML
     // elemento = [null, `##`, "Calificación general:", null, null];
     // tablaMenuEs.push(elemento);
     actualizarHTML(tablaMenuApeRie);
+
+    console.timeEnd("Tiempo de actualizarHTML");
+
+    console.timeEnd("Total Tiempo de Ejecución");
     document.getElementById('tablaIndice').style.display = 'table';
     // document.getElementById('loading').style.display = 'none';
     
@@ -98,7 +108,9 @@ async function obtenerSecciones(indice, idioma) {
 
 async function buscaRespuesta(CUIT, capitulo, seccion) {
   // console.log (`los 3 valores ${CUIT}, ${capitulo}, ${seccion}`)
+  // console.time('Tiempo total de buscar respuestas')
   try {
+    console.time("Tiempo de busca Respuesta cuit, capit, secc");
     const response = await fetch(
       `/busca-respuesta?CUIT=${CUIT}&capitulo=${capitulo}&seccion=${seccion}`
     );
@@ -106,6 +118,7 @@ async function buscaRespuesta(CUIT, capitulo, seccion) {
       const result = await response.json();
       if (result.exists) {
         // return { exists: true, score: result.score };
+        console.timeEnd("Tiempo de busca Respuesta cuit, capit, secc");
         return { exists: true, record: result.record };
       }
     } else {
@@ -212,84 +225,6 @@ function actualizarHTML(tablaMenuApeRie) {
     actualizaCapitulos(capitulo, totalMax, totalCal, totalPor);
   }
 }
-
-
-
-// Recuperar el valor de LocalStorage
-// let valorMaximo = JSON.parse(localStorage.getItem('maximo'));
-// let valores = JSON.parse(localStorage.getItem('valores'));
-// let valorPuntos = JSON.parse(localStorage.getItem('nuevoValor'));
-
-// for (i = 0; i < tablaMenuApeRie.length; i++) {
-//   tablaMenuApeRie[i][3] = 0;
-//   tablaMenuApeRie[i][4] = 0;
-//   tablaMenuApeRie[i][5] = 0;
-// }
-
-
-
-// for (i = 0; i < tablaMenuApeRie.length - 1; i++) {
-//   tablaMenuApeRie[4][3] += tablaMenuApeRie[i][3];
-//   tablaMenuApeRie[4][4] += tablaMenuApeRie[i][4];
-// }
-
-// if (tablaMenuApeRie[4][4] !== 0) {
-//   tablaMenuApeRie[4][5] = ((tablaMenuApeRie[i][4] / tablaMenuApeRie[4][3]) * 100).toFixed(2)
-// }
-
-// // console.log(`puntos: ${valorRecuperado} y el maximo: ${valorMaximo} y el de funcion 2 ${valorFuncion2}`);
-
-// //  llena la matriz 
-// let lineaDatosFd = document.getElementById("lineaMenu");
-
-// for (i = 0; i < tablaMenuApeRie.length; i++) {
-//   lineaDatosFd = tablaIndice.insertRow();
-
-//   let celdaNombre = lineaDatosFd.insertCell(-1);
-//   celdaNombre.textContent = tablaMenuApeRie[i][0];
-
-//   // Crear la segunda celda (columna) como un enlace:
-//   // un elemento <a> con el valor de tablaMenuA[i][1]
-//   // como su atributo href, y luego lo agregamos como hijo de la celda de enlace (celdaEnlace). 
-
-//   const celdaEnlace = lineaDatosFd.insertCell(-1);
-//   const enlace = document.createElement('a'); // Crear un elemento <a>
-//   enlace.href = tablaMenuApeRie[i][1]; // Establecer el atributo href con el valor correspondiente
-//   enlace.textContent = tablaMenuApeRie[i][2]; // Establecer el texto del enlace con el tercer elemento de la tabla
-//   enlace.style.textDecoration = 'none';
-
-//   if (i == tablaMenuApeRie.length-1){
-//     enlace.style.fontSize = '18px'; // Cambiar el tamaño de la fuente
-//     enlace.style.fontWeight = 'bold'; // Hacer el texto en negrita
-//     enlace.style.color='black';
-
-//     celdaEnlace.style.textAlign = 'center'; // Centrar el contenido horizontalmente
-//     celdaEnlace.style.display = 'flex';
-//     celdaEnlace.style.justifyContent = 'center';
-//     celdaEnlace.style.alignItems = 'center';
-//   }  
-
-//   celdaEnlace.appendChild(enlace); // Agregar el enlace como hijo de la celda
-
-//   celdaMaximo = lineaDatosFd.insertCell(-1);
-//   if (tablaMenuApeRie[i][3] === 0) {
-//     tablaMenuApeRie[i][3] = ""
-//   }
-//   celdaMaximo.textContent = tablaMenuApeRie[i][3];
-
-//   celdaPuntos = lineaDatosFd.insertCell(-1);
-//   if (tablaMenuApeRie[i][4] === 0) {
-//     tablaMenuApeRie[i][4] = ""
-//   }
-//   celdaPuntos.textContent = tablaMenuApeRie[i][4];
-
-//   celdaPorciento = lineaDatosFd.insertCell(-1);
-//   if (tablaMenuApeRie[i][5] === 0) {
-//     tablaMenuApeRie[i][5] = ""
-//   }
-//   celdaPorciento.textContent = tablaMenuApeRie[i][5];
-// }
-
 
 
 function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
