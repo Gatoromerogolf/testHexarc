@@ -487,7 +487,7 @@ app.get('/preguntas', (req, res) => {
   let query = 'SELECT * FROM preguntas';
   let params = [];
 
-  console.log ('llego hasta aca');
+  // console.log ('llego hasta aca');
 
     // Construir la consulta con filtros opcionales
     if (capitulo || seccion) {
@@ -665,7 +665,6 @@ app.post('/insertarExperiencia', (req, res) => {
       return res.status(401).json({ error: 'No estás autenticado' });
   }
 
-    console.log ('llego hasta aca')
   const { minutos, salida, uno, dos, tres, cuatro, cinco, seis, siete, comentarios } = req.body;
   const usuario = req.session.user.username; // Obtener el usuario de la sesión
   // const CUIT = req.session.user.CUIT;

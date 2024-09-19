@@ -729,3 +729,28 @@ tr:last-child td {
 .dialog-button:hover {
   background-color: #0056b3;
 }
+
+table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f4f4f4;
+}
+
+tr:last-child td {
+  border-bottom: 1px solid #ddd; /* Aplica borde a la última fila si no está apareciendo */
+}
+
+.question-cell {
+    text-align: left;
+}
+.option-input {
+    margin-right: 5px;
+}
