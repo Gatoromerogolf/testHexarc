@@ -22,8 +22,9 @@ form{
   background:#e6e6e6;
   /* background: rgb(3, 121, 247); */
   background-color: #416942;
+  background-color: #2F4F4F;
   text-align: center;
-  padding: 30px 60px;
+  padding: 30px 30px;
   border-radius: 15px;
 }
 
@@ -52,7 +53,7 @@ form label input{
   color:black;
   border-bottom: solid 1px rgb(109, 105, 106);
   padding:10px 30px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 form label input::placeholder{
@@ -71,7 +72,7 @@ form button{
   /* background:  #332d2d); */
   padding: 10px 15px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   width: 50%; /* Ajusta este valor según el ancho deseado */
   align-self: center; /* Centra el botón dentro del formulario */
   /* border-radius: 15px; */
