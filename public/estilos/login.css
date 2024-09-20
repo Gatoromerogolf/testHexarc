@@ -23,6 +23,7 @@ form{
   /* background: rgb(3, 121, 247); */
   background-color: #416942;
   background-color: #2F4F4F;
+  background-color: #696969;
   text-align: center;
   padding: 30px 30px;
   border-radius: 15px;
@@ -76,4 +77,5 @@ form button{
   width: 50%; /* Ajusta este valor según el ancho deseado */
   align-self: center; /* Centra el botón dentro del formulario */
   /* border-radius: 15px; */
+  border-radius: 10px;
 }
