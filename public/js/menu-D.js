@@ -47,7 +47,7 @@ async function obtenerSecciones(indice, idioma) {
 
           const elemento = [
             `${primerSeccion.seccionromano}`,
-            `##`,
+            `${primerSeccion.pagina}`,
             `${primerSeccion.descripcion}`,
             registro.maximo,
             registro.score,
@@ -60,7 +60,8 @@ async function obtenerSecciones(indice, idioma) {
           // console.log (`no hay respuesta para seccion ${seccion}`);
           const elemento = [
             `${primerSeccion.seccionromano}`,
-            "##",
+            // "##",
+            `${primerSeccion.pagina}`,
             `${primerSeccion.descripcion}`,
             null,
             null,

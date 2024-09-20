@@ -8,8 +8,8 @@
         <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
         <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-        <!-- <style>
+<!-- 
+        <style>
             table {
                 width: 95%;
                 border-collapse: collapse;
@@ -23,6 +23,11 @@
             th {
                 background-color: #f4f4f4;
             }
+
+            tr:last-child td {
+                border-bottom: 1px solid #ddd; /* Aplica borde a la última fila si no está apareciendo */
+            }
+
             .question-cell {
                 text-align: left;
             }
@@ -53,7 +58,7 @@
                 <form id="surveyForm">
       
               <div class="center-container">
-                <h4 class="tituloSeccion"><a href="Menu-D.html">X - Atención y satisfacción del cliente</a></h4>
+                <h4 class="tituloSeccion"><a href="Menu-D.html">I - Selección de cartera de productos - Documentación</a></h4>
               </div>
       
               <div class="salida">
@@ -172,7 +177,7 @@
 
             // Agregar parámetros a la URL si existen
             let capitulo = "D";
-            let seccion = 10;
+            let seccion = 901;
             if (capitulo || seccion) {
                 url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
             }
@@ -258,8 +263,8 @@ function continuar() {
     .then(() => {
       window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "MD-11.html"
-          : "MD-11-en.html";
+          ? "MD-2.html"
+          : "MD-2-en.html";
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);
