@@ -430,6 +430,7 @@ input[type="number"] {
 
 #boton-borrar {
   background-color: #fe0314; /* Color de fondo */
+  background-color: #708090; /* Color de fondo */
   color: white; /* Color de texto */
   padding: 12px 24px; /* Espaciado alrededor del texto */
   border: none; /* Sin bordes */
@@ -457,7 +458,7 @@ input[type="number"] {
 /* -----------BOTON SALIR ------------------------*/
 
 #boton-salir {
-  background-color: #f558b9; /* Color de fondo */
+  background-color: #7a60c1; /* Color de fondo */
   color: white; /* Color de texto */
   padding: 5px 30px 5px; /* Espaciado alrededor del texto */
   border: none; /* Sin bordes */
