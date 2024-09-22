@@ -38,15 +38,15 @@ async function filtrarPrecios() {
     // Llamar a la función para obtener los precios
     const listaPreciosB = await obtenerListaPreciosB();
     precios = listaPreciosB.filter (seccion => seccion.seccion == 3 && seccion.capitulo == "B");
-    console.table(precios);
+    // console.table(precios);
 
-    console.log(Object.keys(precios[0]));
+    // console.log(Object.keys(precios[0]));
 
     // Usar reduce para sumar el campo "maximo" de los registros filtrados
     maximo = precios.reduce((maximo, registro) => {
       return maximo + Number(registro.maximo);
     }, 0);  // El segundo parámetro (0) es el valor inicial del acumulador
-    console.log('Suma total de maximos:', maximo);
+    // console.log('Suma total de maximos:', maximo);
 
     //     ¿Cómo funciona reduce() aquí?
     // acumulador: Es el valor que acumula la suma en cada iteración. Inicia con el valor 0 (segundo parámetro de reduce).

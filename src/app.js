@@ -287,19 +287,30 @@ app.get('/leeListaPrecios', (req, res) => {
 // Ruta para obtener todos los registros de la tabla secciones ::::::::::::::::::::
 app.get('/secciones', (req, res) => {
   const capitulo = req.query.capitulo || 'A';
-  const seccion = parseInt(req.query.indice) || 1
+  const seccion = req.query.indice ? parseInt(req.query.indice) : null; // Null si no se pasa seccion
   const idioma = parseInt(req.query.idioma) || 2;
 
-
   let query;
+  let params;
+
+  //seleccion de tabla en base al idioma
 
   if (idioma === 1){
-    query = 'SELECT * FROM secciones WHERE capitulo = ? AND seccion = ?'}
+    query = 'SELECT * FROM secciones WHERE capitulo = ?'}
   else{
-    query = 'SELECT * FROM secciones_en WHERE capitulo = ? AND seccion = ?'
+    query = 'SELECT * FROM secciones_en WHERE capitulo = ?'
   };
 
-  pool.query(query, [capitulo, seccion], (error, results, fields) => {
+  // Si se especifica la sección, añadimos el filtro a la consulta
+  if (seccion !== null) {
+    query += ' AND seccion = ?';
+    params = [capitulo, seccion];
+  } else {
+    params = [capitulo]; // Sin filtro de sección
+  }
+
+  // Realización de la consulta
+  pool.query(query, params, (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
@@ -378,9 +389,12 @@ app.get('/busca-respuesta', (req, res) => {
       });
     });
 
+
 // Ruta para buscar respuestas por cuit y capitulo.:::::::::::::::::::
 app.get('/busca-respuesta-capitulo', (req, res) => {
   const { CUIT, capitulo } = req.query;
+
+  console.log(`CUIT recibido: ${CUIT}, Capítulo recibido: ${capitulo}`);
 
   if (!CUIT || !capitulo) {
       res.status(400).json({ error: 'Faltan parámetros requeridos' });
