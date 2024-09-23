@@ -186,6 +186,10 @@ tr:first-of-type + tr {
     text-align: right;
   }
 
+  .fuente-negrita{
+    font-weight: bold !important;
+  }
+
   /* centrado superior de titulo */
 
   

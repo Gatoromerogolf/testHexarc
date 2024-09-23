@@ -2,36 +2,48 @@ let tablaMenuA = [];
 let tablaMenuEs = [];
 let primeraVez = 0;
 let pagina = "";
-const CUIT =  localStorage.getItem('CUIT');
+
 const apellidouser = localStorage.getItem("apellido");
 const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
 const empresa = localStorage.getItem("empresa");
-const idioma = localStorage.getItem("idioma");
-
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-const capitulo = "A";
-respuestas = [];
+const idioma = localStorage.getItem("idioma");
+const CUIT =  localStorage.getItem('CUIT');
+
 let listaPrecios = [];
+let capitulos = [];
+let totalCapitulos = [];
+let respuestas = [];
 let direct3o4 = 0;
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-async function inicializarAplicacion() {
+(async function () {
   try {
     listaPrecios = await leerListaPrecios();
-    if (listaPrecios === null) {
-      console.error(
-        "No se pudo leer la lista de precios. Abortando inicialización."
-      );
-      return;
-    }
+    capitulos = await leeCapitulos();
+    totalCapitulos = await obtenerTotalCapitulos(CUIT);
+
+    console.log ('listaPrecios')
+    console.table (listaPrecios)  
+
+    console.log('capitulos')
+    console.table (capitulos);
+
+    console.log('total Capitulos')
+    console.table (totalCapitulos);
+
+    completarHtml(); // Llama a completarHtml después de procesar todos los capítulos
+
+    document.getElementById('tablaIndiceCapitulos').style.display = 'table';
+    document.getElementById('loading').style.display = 'none';
+
   } catch (error) {
     console.error("Error durante la inicialización de la aplicación:", error);
   }
-}
-inicializarAplicacion();
+})();
 
 async function leerListaPrecios() {
   try {
@@ -40,17 +52,18 @@ async function leerListaPrecios() {
       const result = await response.json();
       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
     } else {
-      console.error("Error al obtener las preguntas:", response.statusText);
+      console.error("Error al obtener la lista de precios", response.statusText);
       return [];
     }
   } catch (error) {
     console.error("Error al realizar la solicitud:", error);
     return [];
   }
+  return false; 
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-procesarCapitulos();
+// procesarCapitulos();
 
 // Función principal que controla la secuencia
 async function procesarCapitulos() {
@@ -63,56 +76,55 @@ async function procesarCapitulos() {
 }
 
 // ::::::::::::::::::::::------------------------------------------
-async function leeCapitulos(indice) {
+async function leeCapitulos() {
   try {
-    // Obtener el valor de 'idioma' desde localStorage
-    const idioma = localStorage.getItem('idioma');
-
-    // Realizar la solicitud fetch pasando 'indice' y 'idioma' como parámetros en la URL
-    const respuesta = await fetch(`/capitulos?indice=${indice}&idioma=${idioma}`);
-    if (!respuesta.ok) {
-      console.log(`Error en lectura de capitulos`);
-      return;
-    }
-    const capitulos = await respuesta.json();
-    if (capitulos.length > 0) {
-      const capLeido = capitulos[0];
-      const capitulo = capLeido.letra;
-      const nombre = capLeido.nombre;
-      pagina = capLeido.paginaCap;
-      try {
-        const data = await obtenerTotalCapitulos(CUIT, capitulo);
-        if (data && data.length > 0) {
-          const { CUIT, capitulo, maximo, score, porcentaje } = data[0]; // Desestructura los valores
-          const elemento = [capitulo, pagina, nombre, maximo, score, porcentaje];
-          tablaMenuEs.push(elemento);
-        } else {
-          // Si no hay totales, maneja el caso especial
-          // const elemento = [capitulo, "##", nombre, null, null, null];
-          const elemento = [capitulo, pagina, nombre, null, null, null];
-          if (primeraVez == 0) {
-            elemento[1] = pagina;
-            primeraVez = 1;
-          }
-          tablaMenuEs.push(elemento);
-        }
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
-      }
+    const respuesta = await fetch(`/capitulos?idioma=${idioma}`);
+    if (respuesta.ok) {
+      const capitulos = await respuesta.json();
+      return capitulos;
+    } else {
+      console.error("Error al obtener los datos");
     }
   } catch (error) {
-    console.error("Error en la solicitud:", error);
+    console.error("Error al realizar la solicitud:", error);
   }
+  return false;  
 }
 
+//     if (capitulos.length > 0) {
+//       const capLeido = capitulos[0];
+//       const capitulo = capLeido.letra;
+//       const nombre = capLeido.nombre;
+//       pagina = capLeido.paginaCap;
+//       try {
+//         const data = await obtenerTotalCapitulos(CUIT, capitulo);
+//         if (data && data.length > 0) {
+//           const { CUIT, capitulo, maximo, score, porcentaje } = data[0]; // Desestructura los valores
+//           const elemento = [capitulo, pagina, nombre, maximo, score, porcentaje];
+//           tablaMenuEs.push(elemento);
+//         } else {
+//           // Si no hay totales, maneja el caso especial
+//           // const elemento = [capitulo, "##", nombre, null, null, null];
+//           const elemento = [capitulo, pagina, nombre, null, null, null];
+//           if (primeraVez == 0) {
+//             elemento[1] = pagina;
+//             primeraVez = 1;
+//           }
+//           tablaMenuEs.push(elemento);
+//         }
+//       } catch (error) {
+//         console.error("Error al obtener los datos:", error);
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error en la solicitud:", error);
+//   }
+// }
+
 // ::::::::::::::::::::::------------------------------------------
-async function obtenerTotalCapitulos(CUIT, capitulo) {
+async function obtenerTotalCapitulos(CUIT) {
   try {
-    // Obtener el valor de 'idioma' desde localStorage
-    const idioma = localStorage.getItem('idioma');
-
-    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}&capitulo=${capitulo}&idioma=${idioma}`);
-
+    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
     if (response.ok) {
       const data = await response.json();
       return data; // Devuelve los datos obtenidos si la respuesta es exitosa
@@ -136,6 +148,7 @@ function completarHtml() {
   let totcalif = 0;
   let totporcien = 0;
   let numeroConPunto = 0;
+  let valoresCapitulo = undefined;
 
   //  Agrega a la tabla un ultimo registro de Resumen General
   let textoFinal;
@@ -148,85 +161,50 @@ function completarHtml() {
 
   const elemento = [null, null, textoFinal, null, null, null, null];
   tablaMenuEs.push(elemento);
-
   tablaMenuA = tablaMenuEs;
 
   let tablaIndice = document.getElementById("tablaIndiceCapitulos");
-  for (i = 0; i < tablaMenuA.length; i++) {
-    //lineaDatosFd = tablaIndice.insertRow();
+  capitulos.forEach((capitulo, indice, array) => {
     let lineaDatosFd = tablaIndice.insertRow();
 
     let celdaNombre = lineaDatosFd.insertCell(-1);
-    celdaNombre.textContent = tablaMenuA[i][0];
-
-    // Crear la segunda celda (columna) como un enlace:
-    // un elemento <a> con el valor de tablaMenuA[i][1]
-    // como su atributo href, y luego lo agregamos como hijo de la celda de enlace (celdaEnlace).
+    celdaNombre.textContent = capitulo.letra;
 
     const celdaEnlace = lineaDatosFd.insertCell(-1);
     const enlace = document.createElement("a"); // Crear un elemento <a>
-    enlace.href = tablaMenuA[i][1]; // Establecer el atributo href con el valor correspondiente
-    enlace.textContent = tablaMenuA[i][2]; // Establecer el texto del enlace con el tercer elemento de la tabla
+    enlace.href = capitulo.paginaCap; // Establecer el atributo href con el valor correspondiente
+    enlace.textContent = capitulo.nombre; // Establecer el texto del enlace con el tercer elemento de la tabla
     enlace.style.textDecoration = "none";
     enlace.style.color = "blue";
-
-    if (tablaMenuA[i][1] == "##") {
-      enlace.style.color = "gray";
-    }
-
-    // Agregar el enlace como hijo de la celda
-    if (i == tablaMenuA.length - 1) {
-      enlace.style.fontSize = "18px"; // Cambiar el tamaño de la fuente
-      enlace.style.fontWeight = "bold"; // Hacer el texto en negrita
-      enlace.style.color = "black";
-
-      celdaEnlace.style.textAlign = "center"; // Centrar el contenido horizontalmente
-      celdaEnlace.style.display = "flex";
-      celdaEnlace.style.justifyContent = "center";
-      celdaEnlace.style.alignItems = "center";
-    }
     celdaEnlace.appendChild(enlace);
 
-    celdaMaximo = lineaDatosFd.insertCell(-1);
-    if (tablaMenuA[i][3] === 0) {
-      tablaMenuA[i][3] = "";
-    }
-    if (tablaMenuA[i][3] > 0) {
-      numeroConPunto = formatearNumero(tablaMenuA[i][3]);
-    } else {
-      numeroConPunto = "";
-    }
-    celdaMaximo.textContent = numeroConPunto;
-    celdaMaximo.classList.add("ajustado-derecha");
-    totmaximo += tablaMenuA[i][3];
+  // si hay al menos un total de capitulos:
+    if (totalCapitulos) {
+        valoresCapitulo = totalCapitulos.find(totales => 
+            totales.CUIT === CUIT &&
+            totales.capitulo === capitulo.letra
+       )}
 
-    celdaPuntos = lineaDatosFd.insertCell(-1);
-    if (tablaMenuA[i][4] === 0) {
-      tablaMenuA[i][4] = "";
-    }
-    if (tablaMenuA[i][4] > 0) {
-      numeroConPunto = formatearNumero(tablaMenuA[i][4]);
-    } else {
-      numeroConPunto = "";
-    }
-    celdaPuntos.textContent = numeroConPunto;
-    celdaPuntos.classList.add("ajustado-derecha");
-    totcalif += Number(tablaMenuA[i][4]);
+    if (valoresCapitulo) { 
+        let celdaMaximo = lineaDatosFd.insertCell(-1);
+        numeroFormateadoMx = formatearNumero(valoresCapitulo.maximo);
+        celdaMaximo.textContent = numeroFormateadoMx;
+        celdaMaximo.classList.add("ajustado-derecha");
+        totmaximo += valoresCapitulo.maximo;
 
-    celdaPorciento = lineaDatosFd.insertCell(-1);
-    if (tablaMenuA[i][5] === 0) {
-      tablaMenuA[i][5] = "";
-    }
-    celdaPorciento.textContent = tablaMenuA[i][5];
-    celdaPorciento.classList.add("ajustado-derecha");
+        let celdaPuntos = lineaDatosFd.insertCell(-1);
+        celdaPuntos.textContent = valoresCapitulo.score;
+        celdaMaximo.classList.add("ajustado-derecha");
+        totcalif += Number(valoresCapitulo.score);
 
-    celdaPDF = lineaDatosFd.insertCell(-1);
-    // celdaExl = lineaDatosFd.insertCell(-1);
+        let celdaPorciento = lineaDatosFd.insertCell(-1);
+        celdaPorciento.textContent = valoresCapitulo.porcentaje;
+        celdaPorciento.classList.add("ajustado-derecha");
 
-    if (tablaMenuA[i][5] > 0) {
+        let celdaPDF = lineaDatosFd.insertCell(-1);
+      // celdaExl = lineaDatosFd.insertCell(-1);
         const enlace = document.createElement("a");
-
-        switch (i) {
+        switch (indice) {
           case 0:
             enlace.href = idioma == 1 ? "MA-conclusiones.html" : "MA-conclusiones-en.html";
             break;
@@ -249,11 +227,8 @@ function completarHtml() {
             // Opcional: valor predeterminado si ninguna de las condiciones se cumpla
             break;
         }
-
         enlace.style.display = "block"; 
         const imgPdf = document.createElement("img"); // Crear el elemento <img>
-
-        // Establecer los atributos de la imagen
         imgPdf.src = "../img/pdf (1).png";
         imgPdf.width = 20;
         imgPdf.style.display = "block";
@@ -261,35 +236,80 @@ function completarHtml() {
 
         enlace.appendChild(imgPdf); // Agregar la imagen al enlace
         celdaPDF.appendChild(enlace); // Agregar el enlace a la celda
+    }
+    else {
+      celdaMaximo = lineaDatosFd.insertCell(-1);
+      celdaMaximo.textContent = '';
 
-    } else {
-      celdaPDF.textContent = "";
-      // celdaExl.textContent = "";
+      celdaPuntos = lineaDatosFd.insertCell(-1);
+      celdaPuntos.textContent = '';
+
+      celdaPorciento = lineaDatosFd.insertCell(-1);
+      celdaPorciento.textContent = '';
+
+      celdaPDF = lineaDatosFd.insertCell(-1);
+      celdaPDF.textContent = '';
     }
 
-    if (i == tablaMenuA.length - 1) {
-      const numeroFormateadoMx = formatearNumero(totmaximo);
-      celdaMaximo.textContent = numeroFormateadoMx;
+    // if (i == tablaMenuA.length - 1) {
+    //   const numeroFormateadoMx = formatearNumero(totmaximo);
+    //   celdaMaximo.textContent = numeroFormateadoMx;
 
-      totcalif = totcalif.toFixed(2);
-      const numeroFormateado = formatearNumero(totcalif);
-      celdaPuntos.textContent = numeroFormateado;
+    //   totcalif = totcalif.toFixed(2);
+    //   const numeroFormateado = formatearNumero(totcalif);
+    //   celdaPuntos.textContent = numeroFormateado;
 
-      celdaPorciento.style.fontWeight = "bold"; // Hacer el texto en negrita
-      if (totmaximo > 0) {
-        celdaPorciento.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
-      } else {
-        celdaPorciento.textContent = "";
-      }
+    //   celdaPorciento.style.fontWeight = "bold"; // Hacer el texto en negrita
+    //   if (totmaximo > 0) {
+    //     celdaPorciento.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
+    //   } else {
+    //     celdaPorciento.textContent = "";
+    //   }
 
-      if (!totcalif > 0) {
-        celdaMaximo.textContent = "";
-        celdaPuntos.textContent = "";
-        celdaPorciento.textContent = "";
-      }
-    }
+    //   if (!totcalif > 0) {
+    //     celdaMaximo.textContent = "";
+    //     celdaPuntos.textContent = "";
+    //     celdaPorciento.textContent = "";
+    //   }
+    // }
+  })
+  let lineaDatosFd = tablaIndice.insertRow();
+
+  let celdaNombre = lineaDatosFd.insertCell(-1);
+  celdaNombre.textContent = '';
+
+  let celdaFactor = lineaDatosFd.insertCell(-1);
+  if (idioma == 1) {
+    celdaFactor.textContent = 'Calificación General';
   }
+    else {
+      celdaFactor.textContent = 'Total Score';
+  }
+  celdaFactor.style.fontWeight = "bold"; 
+  celdaFactor.style.fontSize = "16px";     // Aumentar tamaño de fuente
+  celdaFactor.style.textAlign = "center";  // Centrar texto horizontalmente
+
+  let celdaMaximoFin = lineaDatosFd.insertCell(-1);
+  numeroFormateadoMx = formatearNumero(totmaximo);
+  celdaMaximoFin.textContent = numeroFormateadoMx;
+  celdaMaximoFin.classList.add("ajustado-derecha", "fuente-negrita");
+  celdaMaximoFin.style.fontWeight = "bold"; 
+
+  totcalif = totcalif.toFixed(2);
+  let celdaMaximoCalFin = lineaDatosFd.insertCell(-1);
+  numeroFormateadoMx2 = formatearNumero(totcalif);
+  celdaMaximoCalFin.textContent = numeroFormateadoMx2;
+  celdaMaximoCalFin.classList.add("ajustado-derecha");
+  celdaMaximoCalFin.style.fontWeight = "bold"; 
+
+  let celdaPorCientoFin = lineaDatosFd.insertCell(-1);
+  celdaPorCientoFin.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
+
+
+
+
 }
+
 
 // ::::::::::::::::::::::------------------------------------------
 function formatearNumero(numero) {
@@ -298,7 +318,7 @@ function formatearNumero(numero) {
   return partes.join(",");
 }
 
-recuperarRespuestas(CUIT, capitulo);
+// recuperarRespuestas(CUIT, capitulo);
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function recuperarPreguntas(capitulo = null) {
@@ -737,4 +757,3 @@ async function generarExcel() {
     console.log('Usuario canceló.');
   }
 }
-
