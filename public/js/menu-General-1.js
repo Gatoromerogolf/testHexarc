@@ -18,7 +18,6 @@ let listaPrecios = [];
 let direct3o4 = 0;
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function inicializarAplicacion() {
   try {
     listaPrecios = await leerListaPrecios();
@@ -51,7 +50,6 @@ async function leerListaPrecios() {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 procesarCapitulos();
 
 // Función principal que controla la secuencia
@@ -226,21 +224,6 @@ function completarHtml() {
     // celdaExl = lineaDatosFd.insertCell(-1);
 
     if (tablaMenuA[i][5] > 0) {
-      // // Crear el elemento <img>
-      // const imgPdf = document.createElement("img");
-
-      // // Establecer los atributos de la imagen
-      // imgPdf.src = "../img/pdf (1).png";
-      // imgPdf.width = 20;
-      // imgPdf.style.display = "block";
-      // imgPdf.style.margin = "0 auto";
-
-      // celdaPDF.appendChild(imgPdf); // Agregar la imagen a la celda
-      // imgPdf.addEventListener("click", function () {
-      //   // Agregar el event listener para el clic
-      //   generarPDF();
-      // });
-  // Crear el elemento <a> que actuará como enlace
         const enlace = document.createElement("a");
 
         switch (i) {
@@ -263,14 +246,12 @@ function completarHtml() {
             enlace.href = "MF-conclusiones.html";
             break;
           default:
-            // Opcional: puedes agregar un valor predeterminado en caso de que ninguna de las condiciones se cumpla
+            // Opcional: valor predeterminado si ninguna de las condiciones se cumpla
             break;
         }
 
-        enlace.style.display = "block"; // Asegúrate de que el enlace se muestre correctamente
-
-        // Crear el elemento <img>
-        const imgPdf = document.createElement("img");
+        enlace.style.display = "block"; 
+        const imgPdf = document.createElement("img"); // Crear el elemento <img>
 
         // Establecer los atributos de la imagen
         imgPdf.src = "../img/pdf (1).png";
@@ -278,27 +259,8 @@ function completarHtml() {
         imgPdf.style.display = "block";
         imgPdf.style.margin = "0 auto";
 
-        // Agregar la imagen al enlace
-        enlace.appendChild(imgPdf);
-
-        // Agregar el enlace a la celda
-        celdaPDF.appendChild(enlace);
-
-    // // celdaExl = lineaDatosFd.insertCell(-1);
-    //   // Crear el elemento <img>
-    //   const imgExl = document.createElement("img");
-
-    //   // Establecer los atributos de la imagen
-    //   imgExl.src = "../img/excel.png";
-    //   imgExl.width = 20;
-    //   imgExl.style.display = "block";
-    //   imgExl.style.margin = "0 auto";
-
-    //   celdaExl.appendChild(imgExl); // Agregar la imagen a la celda
-    //   imgExl.addEventListener("click", function () {
-    //     // Agregar el event listener para el clic
-    //     generarExcel().catch(console.error);
-    //   });
+        enlace.appendChild(imgPdf); // Agregar la imagen al enlace
+        celdaPDF.appendChild(enlace); // Agregar el enlace a la celda
 
     } else {
       celdaPDF.textContent = "";
@@ -310,7 +272,6 @@ function completarHtml() {
       celdaMaximo.textContent = numeroFormateadoMx;
 
       totcalif = totcalif.toFixed(2);
-
       const numeroFormateado = formatearNumero(totcalif);
       celdaPuntos.textContent = numeroFormateado;
 
@@ -340,23 +301,6 @@ function formatearNumero(numero) {
 recuperarRespuestas(CUIT, capitulo);
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-// async function recuperarPreguntas() {
-//   try {
-//     const response = await fetch("/preguntas");
-//     if (response.ok) {
-//       const result = await response.json();
-//       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
-//     } else {
-//       console.error("Error al obtener las preguntas:", response.statusText);
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud:", error);
-//     return [];
-//   }
-// }
-
 async function recuperarPreguntas(capitulo = null) {
   try {
     let url = "/preguntas";
@@ -378,35 +322,7 @@ async function recuperarPreguntas(capitulo = null) {
   }
 }
 
-
-
-
-
-
-
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-// async function obtenerDatos() {
-//   try {
-//     const response = await fetch("/preguntas");
-//     if (response.ok) {
-//       const result = await response.json();
-//       // Devolver directamente los datos recibidos
-//       return result;
-//     } else {
-//       console.error(
-//         "Error al obtener los datos:",
-//         response.status,
-//         response.statusText
-//       );
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud:", error);
-//     return [];
-//   }
-// }
-
 async function obtenerDatos(capitulo = null) {
   try {
     let url = "/preguntas";
@@ -428,9 +344,7 @@ async function obtenerDatos(capitulo = null) {
   }
 }
 
-
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function recuperarRespuestas(CUIT, capitulo) {
   respuestas = await obtenerRespuestas(CUIT, capitulo);
   const primerRespuesta = respuestas[0];
@@ -438,7 +352,6 @@ async function recuperarRespuestas(CUIT, capitulo) {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function obtenerRespuestas(CUIT, capitulo) {
   // leo las respuestas del CUIT para el capítulo
   try {
@@ -456,7 +369,6 @@ async function obtenerRespuestas(CUIT, capitulo) {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function cambiarDatos(lineToPrint) {
   if (!Array.isArray(lineToPrint)) {
     console.error("lineToPrint no es un array:", lineToPrint);
@@ -644,7 +556,6 @@ async function leerTextoCheck() {
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function generarPDF() {
   const lineToPrint = await recuperarPreguntas();
   if (Array.isArray(lineToPrint)) {
@@ -689,7 +600,8 @@ async function generarPDF() {
       break;
   }
 
-  const tituloPdf = (`Informe para ${localStorage.getItem('empresa')}, CUIT: ${CUIT}                                      usuario:${localStorage.getItem('nombre')} ${localStorage.getItem('apellido')}` )
+  const tituloPdf = (`Informe para ${localStorage.getItem('empresa')}, CUIT: ${CUIT}   
+     usuario:${localStorage.getItem('nombre')} ${localStorage.getItem('apellido')}` )
     doc.text(tituloPdf, 10, 10)
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
