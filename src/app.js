@@ -186,46 +186,58 @@ app.get('/protected', (req, res) => {
 
 // Ruta para obtener los registros de la tabla capitulos ::::::::::::::::::::
 app.get('/capitulos', (req, res) => {
-  const indice = parseInt(req.query.indice) || 0;
+  const seccion = req.query.indice ? parseInt(req.query.indice) : null; // Null si no se pasa seccion
   const idioma = parseInt(req.query.idioma) || 1; // Leer el valor de 'idioma' desde la URL, por defecto 1
 
-
  let query; 
+ let params;
+
  if (idioma === 1) {
-    query = 'SELECT * FROM capitulos WHERE ID = ?';
+    query = 'SELECT * FROM capitulos';
   } else {
-    query = 'SELECT * FROM capitulos_en WHERE ID = ?';
+    query = 'SELECT * FROM capitulos_en';
+  };
+
+  // Si se especifica la sección, añadimos el filtro a la consulta
+  if (seccion !== null) {
+    query += ' WHERE seccion = ?';
+    params = [idioma, seccion];
+  } else {
+    params = [idioma]; // Sin filtro de sección o letra
   }
 
-  pool.query(query, [indice], (error, results, fields) => {
-      if (error) {
-        res.status(500).json({ error: 'Error al obtener los registros' });
-        console.log("error servidor al obtener registros");
-        return;
-      }
-
-      if (results.length > 0) {
-        res.json(results);
-      } else {
-        res.status(404).json({ error: 'No se encontraron registros' });
-      }
-    });
+  pool.query(query, params, (error, results, fields) => {
+    if (error) {
+      res.status(500).json({ error: 'Error al obtener los registros' });
+      console.log("error servidor al obtener registros");
+      return;
+    }
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.status(404).json({ error: 'No se encontraron registros' });
+    }
+  });
   });
 
 // Ruta para obtener los totales de la tabla totalcapitulos ::::::::::::::::::::
 app.get('/totalCapitulos', (req, res) => {
   const CUIT = req.query.CUIT;
-  const capitulo = req.query.capitulo;
+  const capitulo = req.query.capitulo ? parseInt(req.query.capitulo) : null; // Null si no se pasa seccion
 
-  if (!CUIT || !capitulo) {
-      res.status(400).json({ error: 'Faltan parámetros CUIT o capitulo' });
-      return;
-    }
+  let params;
 
+  let query = 'SELECT * FROM totalcapitulos WHERE CUIT = ?';
 
-  const query = 'SELECT * FROM totalcapitulos WHERE CUIT = ? AND capitulo = ?';
+  // Si se especifica el capitulo, añadimos el filtro a la consulta
+  if (capitulo !== null) {
+    query += ' AND capitulo = ?';
+    params = [CUIT, capitulo];
+  } else {
+    params = [CUIT]; // Sin filtro de sección
+  }
 
-  pool.query(query, [CUIT, capitulo], (error, results, fields) => {
+  pool.query(query, params, (error, results, fields) => {
       if (error) {
         res.status(500).json({ error: 'Error al obtener los registros' });
         console.log("error servidor al obtener registros");
@@ -311,17 +323,17 @@ app.get('/secciones', (req, res) => {
 
   // Realización de la consulta
   pool.query(query, params, (error, results, fields) => {
-      if (error) {
-        res.status(500).json({ error: 'Error al obtener los registros' });
-        console.log("error servidor al obtener registros");
-        return;
-      }
-        if (results.length > 0) { 
-        res.json(results);
-      } else {
-        res.status(404).json({ error: 'No se encontraron registros' });
-      }
-    });
+    if (error) {
+      res.status(500).json({ error: 'Error al obtener los registros' });
+      console.log("error servidor al obtener registros");
+      return;
+    }
+      if (results.length > 0) { 
+      res.json(results);
+    } else {
+      res.status(404).json({ error: 'No se encontraron registros' });
+    }
+  });
   });
 
 
@@ -352,11 +364,6 @@ app.get('/seccionesTodas', (req, res) => {
       }
     });
   });
-
-
-
-
-
 
 
 
