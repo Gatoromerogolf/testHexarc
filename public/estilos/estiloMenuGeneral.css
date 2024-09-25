@@ -21,12 +21,21 @@ body.financiero {
 body.aperie {
   background: url('background aperie.jpg') no-repeat center center fixed;
   background-size: cover;
+  font-family: "Abel", sans-serif;
+  font-size: 16px;
 }
 
 /* Fondo específico para la clase fiananciero */
 body.menugral {
   background: url('background menugral.webp') no-repeat center center fixed;
   background-size: cover;
+}
+
+body.gobcorpo {
+  background: url('background gobcorpo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Abel", sans-serif;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4 {
@@ -36,7 +45,13 @@ h1, h2, h3, h4 {
 
 h3, h4 {
   margin-top: 0;
+  font-family: "Abel", sans-serif;
 }
+
+h4 {
+  font-size: 18px;
+}
+
 
 .survey-container-presentacion {
   max-width: 850px;
@@ -52,12 +67,11 @@ h3, h4 {
   margin-top: 0x;
 }
 
-
 .survey-container {
   max-width: 850px;
   margin: 50px auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  background-color: rgba(255, 255, 255, 0.96); /* Fondo blanco con opacidad */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
 }
@@ -101,7 +115,8 @@ h1, h2, h3, h4 {
     padding:2px ;
     display:block;
     font-family:'Roboto', sans-serif;
-    font-size: 15px; /* Tamaño del texto */
+    font-family: "Abel", sans-serif;
+    font-size: 18px; /* Tamaño del texto */
     color: #333; /* Color del texto */
     margin: auto; /* Centra horizontalmente */
 }
@@ -112,6 +127,7 @@ h1, h2, h3, h4 {
     padding: 8px; /* Espaciado interno */
     text-align: center; /* Alineación del texto */
     font-family:'Roboto', sans-serif;
+    font-family: "Abel", sans-serif;
   }
 
   #tablaIndiceCapitulos tr {
@@ -123,7 +139,8 @@ h1, h2, h3, h4 {
   padding:2px ;
   display:block;
   font-family:'Roboto', sans-serif;
-  font-size: 15px; /* Tamaño del texto */
+  font-family: "Abel", sans-serif;
+  font-size: 17px; /* Tamaño del texto */
   color: #333; /* Color del texto */
   margin: auto; /* Centra horizontalmente */
 }
@@ -134,10 +151,12 @@ h1, h2, h3, h4 {
   padding: 8px; /* Espaciado interno */
   text-align: center; /* Alineación del texto */
   font-family:'Roboto', sans-serif;
+  font-family: "Abel", sans-serif;
 }
 
 #tablaIndice tr {
   height: 20px; /* Ajusta esta altura según tus necesidades */
+  font-family: "Abel", sans-serif;
 }
 
 table {

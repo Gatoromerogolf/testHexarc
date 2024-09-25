@@ -1,5 +1,6 @@
 body {
   font-family: "Roboto", Arial, sans-serif;
+  font-family: "Abel", sans-serif;
   /* background-image: url('../img/reuniones.png'); ../estilos/estiloMenuGeneral.css */
   background-image: url("background.jpg"); /*../estilos/estiloMenuGeneral.css*/
   background-image: url("../estilos/background.jpg"); /*../estilos/estiloMenuGeneral.css */
@@ -50,6 +51,10 @@ body.calidad {
 
 h3 {
   margin-top: 0;
+}
+
+.selecOpcion {
+  font-size: 16px; 
 }
 
 .survey-container {
@@ -106,7 +111,7 @@ h5 {
 }
 
 .salida p {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0; /* Remove default margin */
 }
 
@@ -305,14 +310,16 @@ th {
   border-bottom: 1px solid #ccc;
   background-color: #f2f2f2;
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-family: "Abel", sans-serif;
+  font-size: 16px;
 }
 td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-family: "Abel", sans-serif;
+  font-size: 16px;
 }
 
 /* Eliminar el borde en el último elemento para evitar doble línea */
@@ -533,7 +540,7 @@ tr:last-child td {
 .listas li label.check {
   display: inline-block;
   margin-left: 5px; /* Espaciado desde el texto al primer boton checkbox */
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .listas li.full-width {
@@ -546,7 +553,7 @@ tr:last-child td {
 }
 
 .tablaCheckbox {
-  width: 100%; /* Ajusta este valor según sea necesario para coincidir con las otras tablas */
+  width: 95%; /* Ajusta este valor según sea necesario para coincidir con las otras tablas */
   margin: 0 auto; /* Esto centra el contenedor en el medio de la página */
 }
 

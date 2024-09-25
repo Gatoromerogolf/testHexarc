@@ -33,9 +33,26 @@ body.mercado {
   font-size: 15px;
 }
 
+body.aperie {
+  background: url("background aperie.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Abel", sans-serif;
+  font-size: 15px;
+}
+
+body.gobcorpo {
+  background: url("background gobcorpo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Abel", sans-serif;
+  font-size: 15px;
+}
 
 h3 {
   margin-top: 0;
+}
+
+h4 {
+  font-size: 18px;
 }
 
 .survey-container {
@@ -597,7 +614,7 @@ input[type="number"] {
 }
 
 .company-name {
-  font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-size: 14px; /* Ajusta el tamaño de la fuente según sea necesario */
   font-weight: bold;
 }
 

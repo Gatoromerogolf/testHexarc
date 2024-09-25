@@ -135,7 +135,6 @@ function actualizarHTML2(secciones) {
     if (indice === array.length - 1) {
       ultimaRespuestaSeccion = respuestaSeccion;
     }
-
   })
 
   // Procesa linea final, si tiene respuesta para la ultima seccion.
@@ -182,7 +181,7 @@ function actualizarHTML2(secciones) {
 
     localStorage.setItem("porciento-B", totalPor);
 
-    const capitulo = "B";
+    // const capitulo = "B";
     actualizaCapitulos(capitulo, totalMax, totalCal, totalPor);
   }
 }
@@ -203,11 +202,9 @@ function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
       return response.text();
     })
     .then((data) => {
-      // alert("Registro actualizado correctamente");
       console.log(data);
     })
     .catch((error) => {
-      alert("Actualiza Capitulos - Hubo un problema con la actualización");
       console.error(error);
     });
 }
