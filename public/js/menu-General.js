@@ -26,14 +26,14 @@ let direct3o4 = 0;
     capitulos = await leeCapitulos();
     totalCapitulos = await obtenerTotalCapitulos(CUIT);
 
-    console.log ('listaPrecios')
-    console.table (listaPrecios)  
+    // console.log ('listaPrecios')
+    // console.table (listaPrecios)  
 
-    console.log('capitulos')
-    console.table (capitulos);
+    // console.log('capitulos')
+    // console.table (capitulos);
 
-    console.log('total Capitulos')
-    console.table (totalCapitulos);
+    // console.log('total Capitulos')
+    // console.table (totalCapitulos);
 
     completarHtml(); // Llama a completarHtml después de procesar todos los capítulos
 
@@ -90,36 +90,6 @@ async function leeCapitulos() {
   }
   return false;  
 }
-
-//     if (capitulos.length > 0) {
-//       const capLeido = capitulos[0];
-//       const capitulo = capLeido.letra;
-//       const nombre = capLeido.nombre;
-//       pagina = capLeido.paginaCap;
-//       try {
-//         const data = await obtenerTotalCapitulos(CUIT, capitulo);
-//         if (data && data.length > 0) {
-//           const { CUIT, capitulo, maximo, score, porcentaje } = data[0]; // Desestructura los valores
-//           const elemento = [capitulo, pagina, nombre, maximo, score, porcentaje];
-//           tablaMenuEs.push(elemento);
-//         } else {
-//           // Si no hay totales, maneja el caso especial
-//           // const elemento = [capitulo, "##", nombre, null, null, null];
-//           const elemento = [capitulo, pagina, nombre, null, null, null];
-//           if (primeraVez == 0) {
-//             elemento[1] = pagina;
-//             primeraVez = 1;
-//           }
-//           tablaMenuEs.push(elemento);
-//         }
-//       } catch (error) {
-//         console.error("Error al obtener los datos:", error);
-//       }
-//     }
-//   } catch (error) {
-//     console.error("Error en la solicitud:", error);
-//   }
-// }
 
 // ::::::::::::::::::::::------------------------------------------
 async function obtenerTotalCapitulos(CUIT) {
@@ -187,6 +157,7 @@ function completarHtml() {
 
     if (valoresCapitulo) { 
         let celdaMaximo = lineaDatosFd.insertCell(-1);
+        // valoresCapitulo.maximo = valoresCapitulo.maximo.toFixed(2);
         numeroFormateadoMx = formatearNumero(valoresCapitulo.maximo);
         celdaMaximo.textContent = numeroFormateadoMx;
         celdaMaximo.classList.add("ajustado-derecha");
@@ -250,29 +221,8 @@ function completarHtml() {
       celdaPDF = lineaDatosFd.insertCell(-1);
       celdaPDF.textContent = '';
     }
-
-    // if (i == tablaMenuA.length - 1) {
-    //   const numeroFormateadoMx = formatearNumero(totmaximo);
-    //   celdaMaximo.textContent = numeroFormateadoMx;
-
-    //   totcalif = totcalif.toFixed(2);
-    //   const numeroFormateado = formatearNumero(totcalif);
-    //   celdaPuntos.textContent = numeroFormateado;
-
-    //   celdaPorciento.style.fontWeight = "bold"; // Hacer el texto en negrita
-    //   if (totmaximo > 0) {
-    //     celdaPorciento.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
-    //   } else {
-    //     celdaPorciento.textContent = "";
-    //   }
-
-    //   if (!totcalif > 0) {
-    //     celdaMaximo.textContent = "";
-    //     celdaPuntos.textContent = "";
-    //     celdaPorciento.textContent = "";
-    //   }
-    // }
   })
+
   let lineaDatosFd = tablaIndice.insertRow();
 
   let celdaNombre = lineaDatosFd.insertCell(-1);
@@ -286,7 +236,7 @@ function completarHtml() {
       celdaFactor.textContent = 'Total Score';
   }
   celdaFactor.style.fontWeight = "bold"; 
-  celdaFactor.style.fontSize = "16px";     // Aumentar tamaño de fuente
+  celdaFactor.style.fontSize = "17px";     // Aumentar tamaño de fuente
   celdaFactor.style.textAlign = "center";  // Centrar texto horizontalmente
 
   let celdaMaximoFin = lineaDatosFd.insertCell(-1);
@@ -304,12 +254,9 @@ function completarHtml() {
 
   let celdaPorCientoFin = lineaDatosFd.insertCell(-1);
   celdaPorCientoFin.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
-
-
-
+  celdaPorCientoFin.style.fontWeight = "bold"; 
 
 }
-
 
 // ::::::::::::::::::::::------------------------------------------
 function formatearNumero(numero) {

@@ -26,7 +26,7 @@
             <div id="nombreUsuario" class="user-name"></div>
           </div>
           <div class="nav-iconsxx">
-            <h4> F - Generación de Resultados</h4>
+            <h4> E - Situación Financiera</h4>
           </div>
           <div class="nav-iconsxx">
             <h5> Autoevaluación</h5>
@@ -43,8 +43,8 @@
           <button type="button" id="boton-salir">Salir</button>
         </div>
         <div>
-        <p>Informar las siguientes variables con la mayor precisión disponible, considerando el último estado contable, ejercicio, año calendario, etc. etc. etc.</p>
-      <p>Informar valores sin puntos de millar</p></div>
+        <p>Resultados</p>
+      <p></p></div>
 
         <div id="overlay">
           <div id="ventanaSalida">
@@ -62,77 +62,91 @@
 
         <table id="tabla-financiera">
           <tr>
-            <th class="pregunta-financiera">Variable</th>
-            <th class="respuesta-financiera">Valor</th>
+            <th class="pregunta-financiera">Indicador</th>
+            <th class="respuesta-financiera">Resultado</th>
+            <th class="respuesta-financiera">Ponderación</th>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">1. Ingresos del período actual (en millones de pesos??)
+            <td class="pregunta-financiera">1. Evolución de los ingresos
             </td>
             <td class="respuesta-financiera">
               <input type="number" name="E-1"></td>
+              <td class="respuesta-col">
+                <div class="radio-container">15%</div>
+              </td>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">2. Ingresos del período anterior</td>
+            <td class="pregunta-financiera">2. Margen Bruto</td>
             <td class="respuesta-financiera">
               <input type="number" name="E-2" ></td>
+              <td class="respuesta-col">
+                <div class="radio-container">10%</div>
+              </td>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">3. Utilidad Bruta</td>
+            <td class="pregunta-financiera">3. Margen Neto</td>
             <td class="respuesta-financiera">
               <input type="number" name="E-3"></td>
+              <td class="respuesta-col">
+                <div class="radio-container">20%</div>
+              </td>
           </tr>
           
           <tr>
-            <td class="pregunta-financiera">4. Utilidad Neta</td>
+            <td class="pregunta-financiera">4. Utilidad antes de intereses, impuestos, depreciación y amortización (EBITDA)</td>
             <td class="respuesta-financiera">
               <input type="number" name="E-4"></td>
+              <td class="respuesta-col">
+                <div class="radio-container">20%</div>
+              </td>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">5. Utilidad antes de intereses, impuestos y amortizaciones</td>
+            <td class="pregunta-financiera">5. Rendimiento sobre el Capital (ROE)</td>
             <td class="respuesta-financiera">
               <input type="number" name="E-5"></td>
+              <td class="respuesta-col">
+                <div class="radio-container">15%</div>
+              </td>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">6. Patrimonio Neto</td>
+            <td class="pregunta-financiera">6. Rendimiento sobre los Activos (ROA)</td>
             <td class="respuesta-financiera">
               <input type="number" name="E-6"></td>
+              <td class="respuesta-col">
+                <div class="radio-container">10%</div>
+          </tr>  
+
+          <tr>
+            <td class="pregunta-financiera">7. Resultados extraordinarios</td>
+            <td class="respuesta-financiera">
+              <input type="number" name="E-6"></td>
+              <td class="respuesta-col">
+                <div class="radio-container">10%</div>
           </tr>        
-
           <tr>
-            <td class="pregunta-financiera">7. Ventas</td>
+            <td class="pregunta-financiera" style="text-align: right; font-weight: bold">Resultado Final</td>
             <td class="respuesta-financiera">
-              <input type="number" name="E-7"></td>
-          </tr>   
-          
-          <tr>
-            <td class="pregunta-financiera">8. Activo</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-9"></td>
-          </tr>   
-          
-          <tr>
-            <td class="pregunta-financiera">9. Resultados extraordinarios</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-10"></td>
-          </tr> 
-
+              <input type="number" name="E-6"></td>
+              <td class="respuesta-col">
+                <div class="radio-container"></div>
+          </tr>  
         </table>
 
         <br>
-        
-        <div class="centrado-flex">
-          <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
-          <button type="button" id="boton-enviar" onclick="resultados()">Enviar</button>
-        </div>
 
         <div class="centrado-flex">
-          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
+          <button type="button" id="boton-enviar" onclick="resumenGeneral()">Continuar</button>
         </div>
+
+        <!-- <div class="centrado-flex">
+          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+        </div> -->
 
       </form>
     </section>
@@ -198,11 +212,14 @@
   </script>
 
 <script>
-function resultados() {
+function resumenGeneral() {
+    console.log('entro por aca')
+
     window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
-        ? "MF-1.html"
-        : "MF-1-en.html";
+          ? "resumenGeneral3.html"
+          : "resumenGeneral3-en.html";
+
 }
 
 function limpiarSelecciones() {

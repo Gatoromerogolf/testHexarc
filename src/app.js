@@ -110,9 +110,10 @@ cron.schedule('0 */2 * * *', () => { // cada treinta minutos
     pool.query(query, [id], (error, results) => {
       if (error) {
         console.error('Error al actualizar el timestamp:', error);
-      } else {
-        console.log('Timestamp actualizado correctamente para el usuario ID:', id);
       }
+      //  else {
+      //   console.log('Timestamp actualizado correctamente para el usuario ID:', id);
+      // }
     });
   }
 
@@ -122,7 +123,6 @@ cron.schedule('0 */2 * * *', () => { // cada treinta minutos
 // Ruta para actualizar el campo "ingresado" del usuario:::::::::::::::::::::::::::::::
 app.post('/api/updateIngresado', (req, res) => {
   const { username, CUIT } = req.body;
-  console.log (`llego a la api usuario ${username}, cuit ${CUIT}`)
   const query = 'UPDATE users SET ingresado = 1 WHERE username = ? AND CUIT = ?';
 
   pool.query(query, [username, CUIT], (error, results) => {
@@ -157,7 +157,6 @@ app.post('/api/updateIdioma', (req, res) => {
 });
 
 
-
 app.post('/updateDatosUsuario', (req, res) => {
   const { fullName, organization, cuit, email, ria, newPassword, username } = req.body;
 
@@ -170,8 +169,6 @@ app.post('/updateDatosUsuario', (req, res) => {
   //     res.json({ success: true });
   // });
 });
-
-
 
 
 
@@ -401,7 +398,7 @@ app.get('/busca-respuesta', (req, res) => {
 app.get('/busca-respuesta-capitulo', (req, res) => {
   const { CUIT, capitulo } = req.query;
 
-  console.log(`CUIT recibido: ${CUIT}, Capítulo recibido: ${capitulo}`);
+  // console.log(`CUIT recibido: ${CUIT}, Capítulo recibido: ${capitulo}`);
 
   if (!CUIT || !capitulo) {
       res.status(400).json({ error: 'Faltan parámetros requeridos' });
@@ -461,6 +458,32 @@ app.get('/busca-respuesta-capitulo-ordenado', (req, res) => {
         }
       });
     });    
+
+// Definir la ruta DELETE para eliminar un registro
+app.delete('/eliminarRepuesta', (req, res) => {
+  const { CUIT, capitulo, seccion } = req.body; // Se reciben los datos desde el cuerpo de la solicitud
+
+  if (!CUIT || !capitulo || !seccion) {
+    return res.status(400).send('Faltan parámetros');
+  }
+
+  const query = `DELETE FROM respuestas WHERE CUIT = ? AND capitulo = ? AND seccion = ?`;
+
+  // Ejecutar la consulta en MySQL
+  connection.execute(query, [CUIT, capitulo, seccion], (error, results) => {
+    if (error) {
+      console.error('Error al eliminar el registro:', error);
+      return res.status(500).send('Error en la base de datos');
+    }
+    if (results.affectedRows > 0) {
+      res.send('Registro eliminado exitosamente');
+    } else {
+      res.status(404).send('Registro no encontrado');
+    }
+  });
+});
+
+
 
 // Ruta para obtener todos las respuestas de la tabla textorespuestas::::::::::::::::::::
 app.get('/textorespuestas', (req, res) => {

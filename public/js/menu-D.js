@@ -221,7 +221,6 @@ function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
       console.log(data);
     })
     .catch((error) => {
-      alert("Actualiza Capitulos - Hubo un problema con la actualización");
       console.error(error);
     });
 }

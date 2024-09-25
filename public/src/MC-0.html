@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
   
   
     <style>
@@ -58,7 +58,7 @@
               <div id="nombreUsuario" class="user-name"></div>
             </div>
             <div class="nav-iconsxx">
-              <h4> C - Manejo de los Riesgos de Mercado</h4>
+              <h4> C - Calidad del manejo de los Riesgos de Mercado</h4>
             </div>
             <div class="nav-iconsxx">
               <h5> Autoevaluación</h5>
@@ -249,7 +249,6 @@
 
     cargarRegistros(); // Cargar los registros de checkbox 
 
-
   // Manejar el envío del formulario
   document.getElementById('checklist-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita el envío estándar
@@ -257,23 +256,6 @@
     const checkboxes = document.querySelectorAll('input[name="registro"]');
     const seleccionados = Array.from(checkboxes).map(checkbox => checkbox.checked ? 1 : 0);
 
-    console.log (seleccionados)
-
-    // Enviar los datos seleccionados al backend
-    // fetch('/procesar', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ seleccionados })
-    // })
-    // .then(response => response.text())
-    // .then(data => {
-    //   alert(data); // Mostrar respuesta del servidor
-    // })
-    // .catch(error => {
-    //   console.error('Error al enviar los datos:', error);
-    // });
   });
 
 </script>

@@ -14,9 +14,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 
+
 </head>
 
-<body class="financiero">
+<body class="calidad">
   <div class="survey-container">
     <section class="main">
       <section class="gobCorpo">
@@ -34,230 +35,331 @@
         </div>
         <hr>
 
-      <form id="formulario">
+        <form id="formulario">
 
-        <div class="salida">
-          <a href="javascript:void(0);" onclick="window.history.back();">
-            <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
-          </a>
-          <button type="button" id="boton-salir">Salir</button>
-        </div>
-        <div>
-        <p>Informar las siguientes variables con la mayor precisión disponible, considerando el último estado contable, ejercicio, año calendario, etc. etc. etc.</p>
-      <p>Informar valores sin puntos de millar</p></div>
+          <div class="salida">
+            <a href="javascript:void(0);" onclick="window.history.back();">
+              <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
+            </a>
+            <button type="button" id="boton-salir">Salir</button>
+          </div>
+          <div>
+            <p>Informar las siguientes variables con la mayor precisión disponible, considerando el último estado contable, ejercicio, año calendario, etc. etc. etc.</p>
+          <p></p></div>
 
-        <div id="overlay">
-          <div id="ventanaSalida">
-            <!-- <div class="confirm-modal" id="confirm-modal">-->
-            <div class="confirm-box">
-              <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                completar posteriormente los items faltantes.
-                <br>
-              </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-              <button id="confirm-yes">Salir</button>
-              <button id="confirm-no">Continuar</button><br>
+          <div id="overlay">
+            <div id="ventanaSalida">
+              <!-- <div class="confirm-modal" id="confirm-modal">-->
+              <div class="confirm-box">
+                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+                  completar posteriormente los items faltantes.
+                  <br>
+                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                <button id="confirm-yes">Salir</button>
+                <button id="confirm-no">Continuar</button><br>
+              </div>
             </div>
           </div>
-        </div>
 
-        <table id="tabla-financiera">
-          <tr>
-            <th class="pregunta-financiera">Variable</th>
-            <th class="respuesta-financiera">Valor</th>
-          </tr>
+          <table id="tabla-financiera">
+            <tr>
+              <th class="pregunta-col">Situación</th>
+              <th class="respuesta-col">Crítica</th>
+              <th class="respuesta-col">Débil</th>
+              <th class="respuesta-col">Moderada</th>
+              <th class="respuesta-col">Fuerte</th>
+            </tr>
 
+            <tr>
+              <td class="pregunta-col">1. Capital de Trabajo.</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="1">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="2">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="3">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-1" value="4">
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">2. Flujo de fondos derivados de las operaciones</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+              </td>
+            </tr>
+
+
+            <tr>
+              <td class="pregunta-col">3. Indice de cobertura de intereses</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+              </td>
+            </tr>
+
+            
+            <tr>
+              <td class="pregunta-col">4. Ciclo de Conversión de Caja</td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+              </td>
+            </tr>
+
+
+          
           <tr>
-            <td class="pregunta-financiera">1. Ingresos del período actual (en millones de pesos??)
+            <td class="pregunta-col">5. Días de venta en la calle</td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="1">
             </td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-1"></td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+            </td>
           </tr>
 
-          <tr>
-            <td class="pregunta-financiera">2. Ingresos del período anterior</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-2" ></td>
-          </tr>
-
-          <tr>
-            <td class="pregunta-financiera">3. Utilidad Bruta</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-3"></td>
-          </tr>
           
           <tr>
-            <td class="pregunta-financiera">4. Utilidad Neta</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-4"></td>
-          </tr>
+            <td class="pregunta-col">6. Días de deuda en la calle</td>
 
-          <tr>
-            <td class="pregunta-financiera">5. Utilidad antes de intereses, impuestos y amortizaciones</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-5"></td>
-          </tr>
-
-          <tr>
-            <td class="pregunta-financiera">6. Patrimonio Neto</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-6"></td>
-          </tr>        
-
-          <tr>
-            <td class="pregunta-financiera">7. Utilidad antes de intereses, impuestos y amortizaciones</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-7"></td>
-          </tr>   
-          
-          <tr>
-            <td class="pregunta-financiera">8. Patrimonio Neto</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-8"></td>
-          </tr> 
-
-          <tr>
-            <td class="pregunta-financiera">9. Activo</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-9"></td>
-          </tr>   
-          
-          <tr>
-            <td class="pregunta-financiera">10. Resultados extraordinarios</td>
-            <td class="respuesta-financiera">
-              <input type="number" name="E-10"></td>
-          </tr> 
-<!-- 
-          <tr>
-            <td class="pregunta-col">4. Monto de Ventas</td>
             <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-5" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+            </td>
           </tr>
 
           <tr>
-            <td class="pregunta-col">5. Utilidad antes de intereses, impuestos y amortizaciones</td>
+            <td class="pregunta-col">7. Rotación de Inventarios</td>
+
             <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-6" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+            </td>
           </tr>
 
           <tr>
-            <td class="pregunta-col">6. Patrimonio Neto</td>
+            <td class="pregunta-col">8. Indice Deuda/Capital</td>
+
             <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-7" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+            </td>
           </tr>
 
           <tr>
-            <td class="pregunta-col">7. Utilidad antes de intereses, impuestos y amortizaciones</td>
+            <td class="pregunta-col">9. Liquidez</td>
+
             <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-8" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+            </td>
           </tr>
 
-          <tr>
-            <td class="pregunta-col">8. Patrimonio Neto</td>
+          <tr></tr>
+            <td class="pregunta-col">10. Liquidez Seca</td>
+
             <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-8" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-6-2" value="1">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="2">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="3">
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-6-2" value="4">
+            </td>
           </tr>
 
-          <tr>
-            <td class="pregunta-col">9. Activo</td>
-            <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-8" value="1"></label>
-          </tr>
-
-          <tr>
-            <td class="pregunta-col">10. Resultados extraordinarios</td>
-            <td class="respuesta-col">
-              <div class="radio-containerxx"><input type="number" name="E-8" value="1"></label>
-          </tr> -->
         </table>
 
+          <br>
 
-        <div class="centrado-flex">
-          <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
-          <button type="button" id="boton-enviar" onclick="resumenGeneral()">Enviar</button>
-        </div>
+          <div class="centrado-flex">
+            <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
+             <button type="button" id="boton-enviar" onclick="resumenGeneral()">Enviar</button>
+          </div>
 
-        <div class="centrado-flex">
-          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
-        </div>
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
 
-      </form>
+        </form>
+      </section>
     </section>
-  </section>
 
-  <div id="miAlerta" class="alerta-oculto">
-    <div class="alerta-contenido">
-      <div class="alerta-cabecera">
-        <span>Resumen de la sección</span>
-      </div>
-      <div class="alerta-cuerpo">
-        <p>Puntaje máximo posible: <span id="maximo"></span></p>
-        <p>Calificación obtenida: <span id="calificacion"></span></p>
-        <p>Porcentual: <span id="porcentual"></span></p>
 
-        <div class="gauge-container">
-          <canvas id="gaugeChart" ;></canvas>
+
+    <div id="miAlerta" class="alerta-oculto">
+      <div class="alerta-contenido">
+        <div class="alerta-cabecera">
+          <span>Resumen de la sección</span>
         </div>
+        <div class="alerta-cuerpo">
+          <p>Puntaje máximo posible: <span id="maximo"></span></p>
+          <p>Calificación obtenida: <span id="calificacion"></span></p>
+          <p>Porcentual: <span id="porcentual"></span></p>
 
-        <button id="continuar" onclick="continuar()">Continuar</button>
+          <div class="gauge-container">
+            <canvas id="gaugeChart" ;></canvas>
+          </div>
+
+          <button id="continuar" onclick="continuar()">Continuar</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  </body>´
-
-  <script>
-    const apellidouser = localStorage.getItem("apellido");
-    const nombreUser = localStorage.getItem("nombre");
-    const apenom = nombreUser + ' ' + apellidouser;
-    const empresa = localStorage.getItem("empresa");
-    document.getElementById("nombreEmpresa").textContent = empresa;
-    document.getElementById("nombreUsuario").textContent = apenom;
-  </script>
-
-  <script>
-    document.getElementById('formulario').addEventListener('submit', function (event) {
-      event.preventDefault();
-    });
-    const botonSalida = document.getElementById('boton-salir');
-    const ventanaSale = document.getElementById('ventanaSalida');
-    const botonYes = document.getElementById('confirm-yes');
-    const botonNou = document.getElementById('confirm-no');
-
-    botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
-      let isExiting = true;
-      ventanaSale.style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
-    });
-
-    botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
-      isExiting = true;
-      console.log('dijo que NO')
-      ventanaSale.style.display = 'none';
-      document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
-    });
-
-    botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
-      console.log('dijo que SI')
-      isExiting = true;
-      window.location.href = '../../index.html';
-    });
-  </script>
+</body>
 
 <script>
-function resumenGeneral() {
-    console.log('entro por aca')
+  document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
 
-    window.location.href =
-        JSON.parse(localStorage.getItem("idioma")) == 1
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+
+<script>
+  function resumenGeneral() {
+      console.log('entro por aca')
+  
+      window.location.href =
+          JSON.parse(localStorage.getItem("idioma")) == 1
           ? "resumenGeneral3.html"
           : "resumenGeneral3-en.html";
+  }
+  
+  function limpiarSelecciones() {
+          location.reload(); // Recarga la página para restablecer el formulario
+      }
+  </script>
 
-}
+<script src="../../js/ma-6.js"></script>
 
-function limpiarSelecciones() {
-        location.reload(); // Recarga la página para restablecer el formulario
-    }
-</script>
-  <!-- <script src="../../js/ma-13.js"></script> -->
 
 </html>
