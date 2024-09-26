@@ -39,7 +39,7 @@ const var5 = JSON.parse(localStorage.getItem('porciento-E')) || 3;
 const var6 = JSON.parse(localStorage.getItem('porciento-F')) || 3;
 
 const data = {
-    labels: ['Gobierno Corporativo', 'Apetito de Riesgo', 'Riesgos de Mercado', 'Riesgos de Procesos', 'Situación Financiera', 'Calidad de los Resultados'],
+    labels: ['Gobierno Corporativo', 'Apetito de Riesgo', 'Riesgos de Mercado', 'Riesgos de Procesos', 'Situación Financiera', 'Generación de Resultados'],
     datasets: [{
         label: 'Porcentaje de Cumplimiento',
         data: [var1, var2, var3, var4, var5, var6],
