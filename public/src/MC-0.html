@@ -29,6 +29,11 @@
             background-color: #f4f4f4;
         }
 
+        /* Subrayar la última fila */
+        tr:last-child td {
+            border-bottom: 1px solid #ddd; /* Puedes ajustar el grosor y el color */
+        }
+
         .checkbox-matriz {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* 3 columnas */
@@ -80,9 +85,9 @@
         <button type="button" id="boton-salir">Salir</button>
       </div>
       <div>
-        <p>Seleccione la opción que corresponda a su organización</p>
+        <p>Seleccione la opción que mejor refleje el grado de cumplimiento de la situación descripta dentro de su organización, siendo 'Muy efectivo' en el caso de coincidencia o certeza total y 'No efectivo', en el caso de nula aplicación.</p>
       </div>
-    
+      <br>
       <div id="overlay">
         <div id="ventanaSalida">
           <!-- <div class="confirm-modal" id="confirm-modal">-->
@@ -114,6 +119,7 @@
   </tbody>
 </table>
 
+<br>
 
 <h3>Factores que se han tenido en cuenta en la creación de la estrategia, para el corto y mediano plazo:</h3>
   <p>(Marque todos los que correspondan)</p>
