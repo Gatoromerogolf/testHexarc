@@ -43,7 +43,7 @@
           <button type="button" id="boton-salir">Salir</button>
         </div>
         <div>
-        <p>Resultados</p>
+        <h3>Resultados</h3>
       <p></p></div>
 
         <div id="overlay">
@@ -64,72 +64,64 @@
           <tr>
             <th class="pregunta-financiera">Indicador</th>
             <th class="respuesta-financiera">Resultado</th>
-            <th class="respuesta-financiera">Ponderación</th>
+            <th class="respuesta-financiera">Score</th>
+            <th class="respuesta-financiera">Calificación</th>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">1. Evolución de los ingresos
-            </td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-                <div class="radio-container">> 80%</div>
-            </td>
-          </tr>
+            <td class="pregunta-financiera">1. Evolución de los ingresos</td>
+              <td class="respuesta-financiera" id="evolIngresos" style="text-align: right"></td>
+              <td class="respuesta-col" id="evolIngresos-Sco" style="text-align: center"></td>
+              <td class="respuesta-col" id="evolIngresos-Cal" style="text-align: center"></td>
+            </tr>
 
           <tr>
             <td class="pregunta-financiera">2. Margen Bruto</td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container">> 60%</div>
-            </td>
+            <td class="respuesta-financiera" id="margenBruto" style="text-align: right"></td>
+            <td class="respuesta-col" id="margenBruto-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="margenBruto-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
             <td class="pregunta-financiera">3. Margen Neto</td>
-            <td class="respuesta-financiera">Medio Bajo</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> = 0</div>
-            </td>
+            <td class="respuesta-financiera" id="margenNeto" style="text-align: right"></td>
+            <td class="respuesta-col" id="margenNeto-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="margenNeto-Cal" style="text-align: center"></td>
           </tr>
           
           <tr>
             <td class="pregunta-financiera">4. Utilidad antes de intereses, impuestos, depreciación y amortización (EBITDA)</td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> > 40%</div>
-            </td>
+            <td class="respuesta-financiera" id="utilidadAntes" style="text-align: right"></td>
+            <td class="respuesta-col" id="utilidadAntes-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="utilidadAntes-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
             <td class="pregunta-financiera">5. Rendimiento sobre el Capital (ROE)</td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> > 20%</div>
-            </td>
+            <td class="respuesta-financiera" id="rendiCapital" style="text-align: right"></td>
+            <td class="respuesta-col" id="rendiCapital-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="rendiCapital-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
             <td class="pregunta-financiera">6. Rendimiento sobre los Activos (ROA)</td>
-            <td class="respuesta-financiera">Bajo</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0%</div>
-            </td>
-          </tr> 
+            <td class="respuesta-financiera" id="rendiActivos" style="text-align: right"></td>
+            <td class="respuesta-col" id="rendiActivos-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="rendiActivos-Cal" style="text-align: center"></td>
+          </tr>
 
           <tr>
             <td class="pregunta-financiera">7. Resultados extraordinarios</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0% - 20% ></0></div>
-            </td>
-          </tr>       
+            <td class="respuesta-financiera" id="resulExtra" style="text-align: right"></td>
+            <td class="respuesta-col" id="resulExtra-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="resulExtra-Cal" style="text-align: center"></td>
+          </tr>
 
           <tr>
             <td class="pregunta-financiera" style="text-align: right; font-weight: bold">Resultado Final</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 60% - 80% > </div>
-            </td>
+            <td></td>
+            <td class="respuesta-financiera" id="resultado" style="text-align: center; font-weight: bold"></td></td>
+            <td class="respuesta-col" id="resultado-Cal" style="text-align: center; ; font-weight: bold"></td>
           </tr>
         </table>
 
@@ -208,6 +200,213 @@
   </script>
 
 <script>
+  // lee valores cargados
+  let respuestas = [];
+  const capitulo = "F";
+  const CUIT = localStorage.getItem("CUIT");
+  let datoParaMirar;
+
+// Función principal que espera que la función asíncrona termine
+async function iniciarProceso() {
+  try {
+    respuestas = await leerRespuestas(CUIT, capitulo);
+    datoParaMirar = respuestas.records[0];
+
+    realizaCalculos(datoParaMirar);
+  }
+    catch (error) {
+    console.error("Error en la función autoinvocada:", error);
+  }
+};
+
+iniciarProceso();
+
+async function leerRespuestas(CUIT, capitulo) {
+  try {
+    const response = await fetch(
+      `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
+    );
+    if (response.ok) {
+      const result = await response.json();
+      console.log (result.records)
+      if (result.exists) {
+        return { exists: true, records: result.records };
+      }
+    } else {
+      console.error(`Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`);
+    }
+  } catch (error) {
+    console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+  }
+  return { exists: false };
+}
+
+function realizaCalculos() {
+  console.log ('muestra cuit', datoParaMirar.CUIT);
+  let totalScore = 0;
+  let puntos = 0;
+  let texto;
+  let primero = ((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[1])/datoParaMirar.respuesta[1] * 100).toFixed(2);
+  document.getElementById("evolIngresos").textContent = primero;
+  if (primero > 80) {
+      texto = "Muy bueno";
+      puntos = 30;
+  } else if (primero > 0 && primero <= 80) {
+      texto = "Bueno";
+      puntos = 23;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 15;
+  } else {
+      texto = "Muy malo";
+      puntos = 8;
+  }
+
+  totalScore += puntos; 
+  document.getElementById("evolIngresos-Sco").textContent = puntos;
+  document.getElementById("evolIngresos-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[2] / datoParaMirar.respuesta[6])*100).toFixed(2);
+  document.getElementById("margenBruto").textContent = primero;
+  if (primero > 60) {
+      texto = "Muy bueno";
+      puntos = 20;
+  } else if (primero > 0 && primero <= 60) {
+      texto = "Bueno";
+      puntos = 15;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 10;
+  } else {
+      texto = "Muy malo";
+      puntos = 5;
+  }
+  totalScore += puntos; 
+  document.getElementById("margenBruto-Sco").textContent = puntos;
+  document.getElementById("margenBruto-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[3] / datoParaMirar.respuesta[6])*100).toFixed(2);
+  document.getElementById("margenNeto").textContent = primero;
+  if (primero > 30) {
+      texto = "Muy bueno";
+      puntos = 40;
+  } else if (primero > 0 && primero <= 30) {
+      texto = "Bueno";
+      puntos = 30;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 20;
+  } else {
+      texto = "Muy malo";
+      puntos = 10;
+  }
+  totalScore += puntos; 
+  document.getElementById("margenNeto-Sco").textContent = puntos;
+  document.getElementById("margenNeto-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[4] / datoParaMirar.respuesta[6])*100).toFixed(2);
+  document.getElementById("utilidadAntes").textContent = primero;
+  if (primero > 40) {
+      texto = "Muy bueno";
+      puntos = 40;
+  } else if (primero > 0 && primero <= 40) {
+      texto = "Bueno";
+      puntos = 30;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 20;
+  } else {
+      texto = "Muy malo";
+      puntos = 10;
+  }
+  totalScore += puntos; 
+  document.getElementById("utilidadAntes-Sco").textContent = puntos;
+  document.getElementById("utilidadAntes-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[3] / datoParaMirar.respuesta[5])*100).toFixed(2);
+  document.getElementById("rendiCapital").textContent = primero;
+  if (primero > 20) {
+      texto = "Muy bueno";
+      puntos = 30;
+  } else if (primero > 0 && primero <= 20) {
+      texto = "Bueno";
+      puntos = 23;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 15;
+  } else {
+      texto = "Muy malo";
+      puntos = 8;
+  }
+  totalScore += puntos; 
+  document.getElementById("rendiCapital-Sco").textContent = puntos;
+  document.getElementById("rendiCapital-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[3] / datoParaMirar.respuesta[7])*100).toFixed(2);
+  document.getElementById("rendiActivos").textContent = primero;
+  if (primero > 40) {
+      texto = "Muy bueno";
+      puntos = 20;
+  } else if (primero >0 && primero <= 40) {
+      texto = "Bueno";
+      puntos = 15;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 10;
+  } else {
+      texto = "Muy malo";
+      puntos = 5;
+  }
+  totalScore += puntos; 
+  document.getElementById("rendiActivos-Sco").textContent = puntos;  
+  document.getElementById("rendiActivos-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[8] / datoParaMirar.respuesta[6])*100).toFixed(2);
+  document.getElementById("resulExtra").textContent = primero;
+  if (primero > 20) {
+      texto = "Muy bueno";
+      puntos = 20;
+  } else if (primero > 0 && primero <= 20) {
+      texto = "Bueno";
+      puntos = 15;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 10;
+  } else {
+      texto = "Muy malo";
+      puntos = 5;
+  }
+  totalScore += puntos; 
+  document.getElementById("resulExtra-Sco").textContent = puntos;
+  document.getElementById("resulExtra-Cal").textContent = texto;
+
+
+  console.log (totalScore);
+
+  document.getElementById("resultado").textContent = totalScore;
+  if (totalScore == 200) {
+        texto = "Muy bueno";
+        document.getElementById("resultado-Cal").className = "texto-azul"; 
+    } else if (totalScore >= 150 && totalScore < 200) {
+        texto = "Bueno";
+        document.getElementById("resultado-Cal").className = "texto-verde"; 
+    } else if (totalScore >= 100 && totalScore < 150) {
+        texto = "Malo";
+        document.getElementById("resultado-Cal").className = "texto-amarillo"; 
+    } else {
+        texto = "Muy malo";
+        document.getElementById("resultado-Cal").className = "texto-rojo"; 
+    }
+    document.getElementById("resultado-Cal").textContent = texto;
+
+    let puntaje = (totalScore / 200 * 100).toFixed(2);
+    localStorage.setItem('porciento-F', puntaje);
+
+}
+
+</script>
+<script>
+
 function resumenGeneral() {
     console.log('entro por aca')
 
