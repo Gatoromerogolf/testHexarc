@@ -351,7 +351,7 @@ input[type="number"] {
 
 /* Asegúrate de que la tabla ocupe todo el espacio disponible */
 #tabla-financiera {
-  width: 75%;
+  width: 80%;
   border-collapse: collapse;
   margin-left: 60px;
 }

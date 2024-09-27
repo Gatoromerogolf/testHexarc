@@ -14,6 +14,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 
+<style>
+  .respuesta-financiera {
+    text-align: 'right';
+  }
+
+  .texto-rojo {
+  color: red;
+}
+
+  .texto-azul {
+    color: rgb(20, 3, 173);
+}
+
+.texto-verde {
+    color: rgb(13, 202, 39);
+}
+  .texto-amarillo {
+    color: rgb(231, 235, 43);
+}
+</style>
+
 </head>
 
 <body class="financiero">
@@ -43,7 +64,7 @@
           <button type="button" id="boton-salir">Salir</button>
         </div>
         <div>
-        <p>Resultados</p>
+        <h3>Resultados</h3>
       <p></p></div>
 
         <div id="overlay">
@@ -64,21 +85,20 @@
           <tr>
             <th class="pregunta-financiera">Indicador</th>
             <th class="respuesta-financiera">Resultado</th>
-            <th class="respuesta-financiera">Ponderación</th>
+            <th class="respuesta-financiera">Score</th>
+            <th class="respuesta-financiera">Calificación</th>
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">1. Capital de trabajo
-            </td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-                <div class="radio-container">> 80%</div>
-            </td>
+            <td class="pregunta-financiera">1. Capital de trabajo</td>
+            <td class="respuesta-financiera" id="capitalTrabajo" style="text-align: right"></td>
+            <td class="respuesta-col" id="capitalTrabajo-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="capitalTrabajo-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
             <td class="pregunta-financiera">2. Flujo de fondos derivados de las operaciones</td>
-            <td class="respuesta-financiera">Alto</td>
+            <td class="respuesta-financiera" style="text-align: right">Alto</td>
             <td class="respuesta-col">
               <div class="radio-container">> 60%</div>
             </td>
@@ -86,74 +106,65 @@
 
           <tr>
             <td class="pregunta-financiera">3. Indice de cobertura de intereses</td>
-            <td class="respuesta-financiera">Medio Bajo</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> = 0</div>
-            </td>
+            <td class="respuesta-financiera" id="indCobInt" style="text-align: right"></td>
+            <td class="respuesta-col" id="indCobInt-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="indCobInt-Cal" style="text-align: center"></td>
           </tr>
           
           <tr>
             <td class="pregunta-financiera">4. Ciclo de Conversión de Caja</td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> > 40%</div>
-            </td>
+            <td class="respuesta-financiera" id="cicloConvCaja" style="text-align: right">Alto</td>
+            <td class="respuesta-col" id="cicloConvCaja-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="cicloConvCaja-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
             <td class="pregunta-financiera">5. Dias de venta en la calle</td>
-            <td class="respuesta-financiera">Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> > 20%</div>
-            </td>
+            <td class="respuesta-financiera" id="diasVentaCalle" style="text-align: right"></td>
+            <td class="respuesta-col" id="diasVentaCalle-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="diasVentaCalle-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
             <td class="pregunta-financiera">6. Dias de deuda en la calle</td>
-            <td class="respuesta-financiera">Bajo</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0%</div>
-            </td>
+            <td class="respuesta-financiera" id="diasDeudaCalle" style="text-align: right"></td>
+            <td class="respuesta-col" id="diasDeudaCalle-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="diasDeudaCalle-Cal" style="text-align: center"></td>
           </tr> 
 
           <tr>
             <td class="pregunta-financiera">7. Rotación de inventarios</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0% - 20% ></0></div>
-            </td>
+            <td class="respuesta-financiera" id="rotacion" style="text-align: right"></td>
+            <td class="respuesta-col" id="rotacion-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="rotacion-Cal" style="text-align: center"></td>
           </tr>       
 
           <tr>
             <td class="pregunta-financiera">8. Indice Deuda / Capital</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0% - 20% ></0></div>
-            </td>
+            <td class="respuesta-financiera" id="indiceDeuda" style="text-align: right"></td>
+            <td class="respuesta-col" id="indiceDeuda-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="indiceDeuda-Cal" style="text-align: center"></td>
           </tr>  
 
           <tr>
             <td class="pregunta-financiera">9. Liquidez</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0% - 20% ></0></div>
-            </td>
+            <td class="respuesta-financiera" id="liquidez" style="text-align: right"></td>
+            <td class="respuesta-col" id="liquidez-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="liquidez-Cal" style="text-align: center"></td>
           </tr>  
 
           <tr>
             <td class="pregunta-financiera">10. Liquidez seca</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 0% - 20% ></0></div>
-            </td>
+            <td class="respuesta-financiera" id="liquidezSeca" style="text-align: right"></td>
+            <td class="respuesta-col" id="liquidezSeca-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="liquidezSeca-Cal" style="text-align: center"></td>
           </tr> 
 
           <tr>
             <td class="pregunta-financiera" style="text-align: right; font-weight: bold">Resultado Final</td>
-            <td class="respuesta-financiera">Medio Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container"> < 60% - 80% > </div>
-            </td>
+            <td></td>
+            <td class="respuesta-financiera" id="resultado" style="text-align: center; font-weight: bold"></td></td>
+            <td class="respuesta-col" id="resultado-Cal" style="text-align: center; ; font-weight: bold"></td>
           </tr>
         </table>
 
@@ -200,9 +211,7 @@
     const empresa = localStorage.getItem("empresa");
     document.getElementById("nombreEmpresa").textContent = empresa;
     document.getElementById("nombreUsuario").textContent = apenom;
-  </script>
 
-  <script>
     document.getElementById('formulario').addEventListener('submit', function (event) {
       event.preventDefault();
     });
@@ -231,6 +240,249 @@
     });
   </script>
 
+<script>
+  // lee valores cargados
+let respuestas = [];
+const capitulo = "E";
+const CUIT = localStorage.getItem("CUIT");
+let datoParaMirar;
+
+// Función principal que espera que la función asíncrona termine
+async function iniciarProceso() {
+  try {
+    respuestas = await leerRespuestas(CUIT, capitulo);
+    datoParaMirar = respuestas.records[0];
+
+    realizaCalculos(datoParaMirar);
+  }
+    catch (error) {
+    console.error("Error en la función autoinvocada:", error);
+  }
+};
+
+iniciarProceso();
+
+async function leerRespuestas(CUIT, capitulo) {
+  try {
+    const response = await fetch(
+      `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
+    );
+    if (response.ok) {
+      const result = await response.json();
+      console.log (result.records)
+      if (result.exists) {
+        return { exists: true, records: result.records };
+      }
+    } else {
+      console.error(`Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`);
+    }
+  } catch (error) {
+    console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+  }
+  return { exists: false };
+}
+
+function realizaCalculos() {
+  console.log ('muestra cuit', datoParaMirar.CUIT);
+  let totalScore = 0;
+  let puntos = 0;
+  let texto;
+  let primero = (datoParaMirar.respuesta[0] / datoParaMirar.respuesta[1]).toFixed(2);
+  document.getElementById("capitalTrabajo").textContent = primero;
+  if (primero > 1) {
+      texto = "Muy bueno";
+      puntos = 20;
+  } else if (primero == 1) {
+      texto = "Bueno";
+      puntos = 15;
+  } else if (primero > 0,5 && primero < 1) {
+      texto = "Malo";
+      puntos = 10;
+  } else {
+      texto = "Muy malo";
+      puntos = 5;
+  }
+
+  totalScore += puntos; 
+  document.getElementById("capitalTrabajo-Sco").textContent = puntos;
+  document.getElementById("capitalTrabajo-Cal").textContent = texto;
+
+  primero = (datoParaMirar.respuesta[3] / datoParaMirar.respuesta[4]).toFixed(2);
+  document.getElementById("indCobInt").textContent = primero;
+  if (primero > 2) {
+      texto = "Muy bueno";
+      puntos = 16;
+  } else if (primero > 1 && primero <= 2) {
+      texto = "Bueno";
+      puntos = 12;
+  } else if (primero > 0,5 && primero <= 1) {
+      texto = "Malo";
+      puntos = 8;
+  } else {
+      texto = "Muy malo";
+      puntos = 4;
+  }
+  totalScore += puntos; 
+  document.getElementById("indCobInt-Sco").textContent = puntos;
+  document.getElementById("indCobInt-Cal").textContent = texto;
+
+  primero = datoParaMirar.respuesta[5] + datoParaMirar.respuesta[6];
+  document.getElementById("cicloConvCaja").textContent = primero;
+  if (primero < 70) {
+      texto = "Muy bueno";
+      puntos = 24;
+  } else if (primero >= 70 && primero < 140) {
+      texto = "Bueno";
+      puntos = 18;
+  } else if (primero >= 140 && primero < 210) {
+      texto = "Malo";
+      puntos = 12;
+  } else {
+      texto = "Muy malo";
+      puntos = 6;
+  }
+  totalScore += puntos; 
+  document.getElementById("cicloConvCaja-Sco").textContent = puntos;
+  document.getElementById("cicloConvCaja-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[7] / datoParaMirar.respuesta[8])*360).toFixed(2);
+  document.getElementById("diasVentaCalle").textContent = primero;
+  if (primero < 30) {
+      texto = "Muy bueno";
+      puntos = 24;
+  } else if (primero >= 30 && primero < 60) {
+      texto = "Bueno";
+      puntos = 18;
+  } else if (primero >= 60 && primero < 90) {
+      texto = "Malo";
+      puntos = 12;
+  } else {
+      texto = "Muy malo";
+      puntos = 6;
+  }
+  totalScore += puntos; 
+  document.getElementById("diasVentaCalle-Sco").textContent = puntos;
+  document.getElementById("diasVentaCalle-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[9] / datoParaMirar.respuesta[10])*360).toFixed(2);
+  document.getElementById("diasDeudaCalle").textContent = primero;
+  if (primero > 90) {
+      texto = "Muy bueno";
+      puntos = 24;
+  } else if (primero > 60 && primero <= 90) {
+      texto = "Bueno";
+      puntos = 18;
+  } else if (primero > 30 && primero <= 60) {
+      texto = "Malo";
+      puntos = 12;
+  } else {
+      texto = "Muy malo";
+      puntos = 6;
+  }
+  totalScore += puntos; 
+  document.getElementById("diasDeudaCalle-Sco").textContent = puntos;
+  document.getElementById("diasDeudaCalle-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[11] / datoParaMirar.respuesta[12])*360).toFixed(2);
+  document.getElementById("rotacion").textContent = primero;
+  if (primero < 40) {
+      texto = "Muy bueno";
+      puntos = 16;
+  } else if (primero >= 40 && primero < 80) {
+      texto = "Bueno";
+      puntos = 12;
+  } else if (primero >= 80 && primero < 120) {
+      texto = "Malo";
+      puntos = 8;
+  } else {
+      texto = "Muy malo";
+      puntos = 4;
+  }
+  totalScore += puntos; 
+  document.getElementById("rotacion-Sco").textContent = puntos;  
+  document.getElementById("rotacion-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[2] / datoParaMirar.respuesta[14])*100).toFixed(2);
+  document.getElementById("indiceDeuda").textContent = primero;
+  if (primero < 100) {
+      texto = "Muy bueno";
+      puntos = 16;
+  } else if (primero >= 100 && primero < 150) {
+      texto = "Bueno";
+      puntos = 12;
+  } else if (primero >= 150 && primero < 200) {
+      texto = "Malo";
+      puntos = 8;
+  } else {
+      texto = "Muy malo";
+      puntos = 4;
+  }
+  totalScore += puntos; 
+  document.getElementById("indiceDeuda-Sco").textContent = puntos;
+  document.getElementById("indiceDeuda-Cal").textContent = texto;
+
+  primero = datoParaMirar.respuesta[0] - datoParaMirar.respuesta[1];
+  document.getElementById("liquidez").textContent = primero;
+  if (primero > 150) {
+      texto = "Muy bueno";
+      puntos = 24;
+  } else if (primero <= 150 && primero > 0) {
+      texto = "Bueno";
+      puntos = 18;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 12;
+  } else {
+      texto = "Muy malo";
+      puntos = 6;
+  }
+  totalScore += puntos; 
+  document.getElementById("liquidez-Sco").textContent = puntos;
+  document.getElementById("liquidez-Cal").textContent = texto;
+
+  primero = ((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[11]) / datoParaMirar.respuesta[1]).toFixed(2);
+  document.getElementById("liquidezSeca").textContent = primero;
+  if (primero > 120) {
+      texto = "Muy bueno";
+      puntos = 16;      
+  } else if (primero >= 0 && primero <= 120) {
+      texto = "Bueno";
+      puntos = 12;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 8;
+  } else {
+      texto = "Muy malo";
+      puntos = 4;
+  }
+  totalScore += puntos; 
+  document.getElementById("liquidezSeca-Sco").textContent = puntos;
+  document.getElementById("liquidezSeca-Cal").textContent = texto;
+
+  console.log (totalScore);
+
+  document.getElementById("resultado").textContent = totalScore;
+  if (totalScore == 200) {
+        texto = "Muy bueno";
+        document.getElementById("resultado-Cal").className = "texto-azul"; 
+    } else if (totalScore >= 150 && totalScore < 200) {
+        texto = "Bueno";
+        document.getElementById("resultado-Cal").className = "texto-verde"; 
+    } else if (totalScore >= 100 && totalScore < 150) {
+        texto = "Malo";
+        document.getElementById("resultado-Cal").className = "texto-amarillo"; 
+    } else {
+        texto = "Muy malo";
+        document.getElementById("resultado-Cal").className = "texto-rojo"; 
+    }
+    document.getElementById("resultado-Cal").textContent = texto;
+
+    let puntaje = (totalScore / 200 * 100).toFixed(2);
+    localStorage.setItem('porciento-E', puntaje);
+
+}
+
+</script>
 <script>
 function resumenGeneral() {
     console.log('entro por aca')

@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 
-
 </head>
 
 <body class="calidad">
@@ -35,254 +34,297 @@
         </div>
         <hr>
 
-        <form id="formulario">
+  <form id="formulario">
+    <div class="salida">
+      <a href="javascript:void(0);" onclick="window.history.back();">
+        <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
+      </a>
+      <button type="button" id="boton-salir">Salir</button>
+    </div>
+    <div>
+      <p>Informar las siguientes variables considerando el último estado contable, ejercicio, año calendario, etc. etc. etc.</p>
+      <p></p>
+    </div>
 
-          <div class="salida">
-            <a href="javascript:void(0);" onclick="window.history.back();">
-              <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
-            </a>
-            <button type="button" id="boton-salir">Salir</button>
-          </div>
-          <div>
-            <p>Informar las siguientes variables con la mayor precisión disponible, considerando el último estado contable, ejercicio, año calendario, etc. etc. etc.</p>
-          <p></p></div>
+    <div id="overlay">
+      <div id="ventanaSalida">
+        <!-- <div class="confirm-modal" id="confirm-modal">-->
+        <div class="confirm-box">
+          <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+            completar posteriormente los items faltantes.
+            <br>
+          </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+          <button id="confirm-yes">Salir</button>
+          <button id="confirm-no">Continuar</button><br>
+        </div>
+      </div>
+    </div>
 
-          <div id="overlay">
-            <div id="ventanaSalida">
-              <!-- <div class="confirm-modal" id="confirm-modal">-->
-              <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                  completar posteriormente los items faltantes.
-                  <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-                <button id="confirm-yes">Salir</button>
-                <button id="confirm-no">Continuar</button><br>
-              </div>
-            </div>
-          </div>
-
-          <table id="tabla-financiera">
-            <thead>
-            <tr>
-              <th class="pregunta-financiera">#</th>
-              <th class="pregunta-financiera">Variable</th>
-              <th class="respuesta-financiera">Valor</th>
-            </tr>
-          </thead>
+    <table id="tabla-financiera">
+      <thead>
+      <tr>
+        <th class="pregunta-financiera">#</th>
+        <th class="pregunta-financiera">Variable</th>
+        <th class="respuesta-financiera">Valor</th>
+        <th class="respuesta-financiera">Valor</th>
+      </tr>
+    </thead>
   
-          <tbody id="questionsTableBody">
-            <!-- Las preguntas se agregarán aquí dinámicamente -->
-        </tbody>
+    <tbody id="questionsTableBody">
+        <!-- Las preguntas se agregarán aquí dinámicamente -->
+    </tbody>
     </table>
 
           <br>
 
-          <div class="centrado-flex">
-            <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
-             <button type="submit" id="boton-enviar">Enviar</button>
-          </div>
+    <div class="centrado-flex">
+      <!-- <button type="submit" id="boton-enviar">Enviar</button> -->
+        <button type="button" id="boton-enviar" >Enviar</button>
+    </div>
 
-          <div class="centrado-flex">
-            <button type="button" id="boton-borrar" onclick="resetForm()">Limpiar selecciones</button>
-          </div>
+    <div class="centrado-flex">
+      <button type="button" id="boton-borrar" onclick="resetForm()">Limpiar selecciones</button>
+    </div>
 
-        </form>
-      <!-- </section>
-    </section> -->
+  </form>
 
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
 
-    <div id="miAlerta" class="alerta-oculto">
-      <div class="alerta-contenido">
-        <div class="alerta-cabecera">
-          <span>Resumen de la sección</span>
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
         </div>
-        <div class="alerta-cuerpo">
-          <p>Puntaje máximo posible: <span id="maximo"></span></p>
-          <p>Calificación obtenida: <span id="calificacion"></span></p>
-          <p>Porcentual: <span id="porcentual"></span></p>
 
-          <div class="gauge-container">
-            <canvas id="gaugeChart" ;></canvas>
-          </div>
-
-          <button id="continuar" onclick="continuar()">Continuar</button>
-        </div>
+        <button id="continuar" onclick="continuar()">Continuar</button>
       </div>
     </div>
+  </div>
 
 </body>
 
 <script>
 
-const responses = [];
-    let puntajesIndividuales = [];
-    let valores = 0;
-    let precios = [];
-    let respuestas = [];
-
-  // Función para construir la tabla de preguntas
-  function buildForm(questions) {
-      const tableBody = document.getElementById('questionsTableBody');
-      questions.forEach(question => {
-          const row = document.createElement('tr');
-
-          // Numero de pregunta
-          const numeroCell = document.createElement('td');
-          numeroCell.classList.add('question-cell');
-          numeroCell.textContent = question.Numero;
-          row.appendChild(numeroCell);
-
-          // Columna de la pregunta
-          const questionCell = document.createElement('td');
-          questionCell.classList.add('question-cell');
-          questionCell.textContent = question.Descrip;
-          row.appendChild(questionCell);
-          
-          // Campo numérico para la respuesta del usuario
-          const inputCell = document.createElement('td');
-          
-          const numberInput = document.createElement('input');
-          numberInput.type = 'number';
-          numberInput.name = `question_${question.id}`;
-          numberInput.classList.add('number-input');
-          numberInput.id = `q${question.id}_input`;
-          numberInput.min = 1;  // Mínimo valor permitido, ajusta según sea necesario
-          numberInput.max = 10000000;  // Máximo valor permitido, ajusta según sea necesario
-          numberInput.style.width = '150px';  // Ajusta el ancho según lo que necesites
-                      
-          // Añadir el campo numérico directamente en la celda
-          inputCell.appendChild(numberInput);
-          row.appendChild(inputCell);
-          
-          tableBody.appendChild(row);
-      });
-  }
-
-  // Función para obtener las preguntas del servidor
-  function loadQuestions() {
-      let url = '/preguntas';
-
-      // Agregar parámetros a la URL si existen
-      let capitulo = "E";
-      let seccion = 1;
-      if (capitulo || seccion) {
-          url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
-      }
-
-      fetch(url)
-          .then(response => response.json())
-          .then(data => buildForm(data))
-          .catch(error => console.error('Error al cargar las preguntas:', error));
-  }
-
-        // Cargar las preguntas cuando la página se cargue
+// Cargar las preguntas cuando la página se cargue
 document.addEventListener('DOMContentLoaded', loadQuestions);
 
+// Función para obtener las preguntas del servidor
+function loadQuestions() {
+  let url = '/preguntas';
+
+  // Agregar parámetros a la URL si existen
+  let capitulo = "E";
+  let seccion = 1;
+  if (capitulo || seccion) {
+      url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
+  }
+  fetch(url)
+      .then(response => response.json())
+      .then(data => buildForm(data))
+      .catch(error => console.error('Error al cargar las preguntas:', error));
+}
+
+const responses = [];
+let puntajesIndividuales = [];
+let valores = 0;
+let precios = [];
+let respuestas = [];
+
+  // Función para construir la tabla de preguntas
+function buildForm(questions) {
+  const tableBody = document.getElementById('questionsTableBody');
+  questions.forEach(question => {
+    const row = document.createElement('tr');
+
+    // Numero de pregunta
+    const numeroCell = document.createElement('td');
+    numeroCell.classList.add('question-cell');
+    numeroCell.textContent = question.Numero;
+    row.appendChild(numeroCell);
+
+    // Columna de la pregunta
+    const questionCell = document.createElement('td');
+    questionCell.classList.add('question-cell');
+    questionCell.textContent = question.Descrip;
+    row.appendChild(questionCell);
+    
+    // Campo numérico para la respuesta del usuario
+    const inputCell = document.createElement('td');
+    
+    const numberInput = document.createElement('input');
+    numberInput.type = 'number';
+    numberInput.name = `question_${question.id}`;
+    numberInput.classList.add('number-input');
+    numberInput.id = `q${question.id}_input`;
+    numberInput.min = 1;  // Mínimo valor permitido, ajusta según sea necesario
+    numberInput.max = 1000000000;  // Máximo valor permitido, ajusta según sea necesario
+    numberInput.style.width = '150px';  // Ajusta el ancho según lo que necesites
+    numberInput.style.textAlign = 'right';
+                
+    // Añadir el campo numérico directamente en la celda
+    inputCell.appendChild(numberInput);
+    row.appendChild(inputCell);
+    
+    // Crear la celda donde se mostrará el número formateado
+    const numeroFormateadoCell = document.createElement('td');
+    numeroFormateadoCell.style.textAlign = 'right';
+    row.appendChild(numeroFormateadoCell);
+
+    // Escuchar el evento 'input' o 'change' para formatear el número
+    numberInput.addEventListener('change', function() {
+      const value = parseFloat(numberInput.value); // Convertimos el valor a un número
+
+        // Validamos que sea un número válido
+      if (!isNaN(value)) {
+        // Formatear el número con puntos de millar
+        // const numeroFormateado = new Intl.NumberFormat('es-ES').format(value);
+        const numeroFormateado = value.toLocaleString('es-ES');
+        numeroFormateadoCell.textContent = numeroFormateado; // Mostrar el número formateado en la celda
+      } else {
+        // Si no es un número válido, limpiar la celda formateada
+        numeroFormateadoCell.textContent = '';
+      }
+    });
+
+    tableBody.appendChild(row);
+  }) 
+}
+
+//   // Cargar las preguntas cuando la página se cargue
+// document.addEventListener('DOMContentLoaded', loadQuestions);
+
+// const numberFields = document.querySelectorAll('input[type="number"]');
+// // Escuchar el evento keydown en cada campo
+// numberFields.forEach(function(numberField) {
+//   numberField.addEventListener('keydown', function(event) {
+//     if (event.key === 'Enter') {
+//       event.preventDefault(); // Previene el comportamiento de Enter
+//     }
+//   });
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const numberFields = document.querySelectorAll('input[type="number"]');
+
+  numberFields.forEach(function(numberField) {
+    numberField.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    });
+  });
+});
+
+
+// Seleccionar el formulario
+const form = document.querySelector('#formulario');
+
+// Evitar que el formulario se envíe al presionar Enter en cualquier campo
+form.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevenir el comportamiento de envío del formulario
+    }
+});
 
 // Procesar el envío del formulario
-document.getElementById('formulario').onsubmit = function(event) {
-    event.preventDefault(); // Evita el envío del formulario para poder procesarlo manualmente
+// document.getElementById('formulario').onsubmit = function(event) {
+//   event.preventDefault(); // Evita el envío del formulario para poder procesarlo manualmente
+document.getElementById('boton-enviar').addEventListener('click', function(event) {
+  event.preventDefault(); // Evita cualquier acción predeterminada del botón
 
-    const responses = [];
-    const faltantes = [];
-    let formValid = true; // Variable para controlar la validez del formulario
+  const responses = [];
+  const faltantes = [];
+  let formValid = true; // Variable para controlar la validez del formulario
 
-    const inputs = document.querySelectorAll('input[type="number"]'); // Seleccionamos todos los inputs numéricos
+  const inputs = document.querySelectorAll('input[type="number"]'); // Seleccionamos todos los inputs numéricos
 
-    inputs.forEach((input, index) => {
-        const value = parseFloat(input.value); // Convertimos el valor a un número
+  inputs.forEach((input, index) => {
+    const value = parseFloat(input.value); // Convertimos el valor a un número
+    const formateadoId = `formateado${index + 1}`; // ID del span para mostrar el número formateado
+    const formateadoElement = document.getElementById(formateadoId);
 
-        // Validamos que el campo no esté vacío y sea mayor que 0
-        if (isNaN(value) || value <= 0) {
-            faltantes.push({ index: index +1, input: input }); // Guardamos el índice y la referencia del campo faltante
-            input.classList.add('error'); // Agregamos una clase para resaltar el campo en error
-            formValid = false;
-        } else {
-            responses.push(value); // Solo agregamos valores válidos al arreglo
-            input.classList.remove('error'); // Eliminamos la clase de error si el campo es válido
-        }
-
-    });
-    if(!formValid) {
-      alert (`Falta informar en campos ${faltantes.map(f => f.index).join(', ')}`);
-      // Aquí puedes enfocarte en el primer campo que necesita corrección
-      faltantes[0].input.focus();
-      return;
+    // Validamos que el campo no esté vacío y sea mayor que 0
+    if (isNaN(value) || value <= 0) {
+        faltantes.push({ index: index +1, input: input }); // Guardamos el índice y la referencia del campo faltante
+        input.classList.add('error'); // Agregamos una clase para resaltar el campo en error
+        // formateadoElement.textContent = ''; // Limpiar el campo formateado si hay error
+        formValid = false;
+    } else {
+        responses.push(value); // Solo agregamos valores válidos al arreglo
+        input.classList.remove('error'); // Eliminamos la clase de error si el campo es válido
     }
-    console.log(responses); // Aquí puedes hacer lo que necesites con las respuestas
-    grabarResultados2(responses)
+  });
 
-};
+  if(!formValid) {
+    alert (`Falta informar en campos ${faltantes.map(f => f.index).join(', ')}`);
+    // Aquí puedes enfocarte en el primer campo que necesita corrección
+    faltantes[0].input.focus();
+    return;
+  }
+  
+  console.log(responses); // Aquí puedes hacer lo que necesites con las respuestas
+  grabaResultados(responses)
+});
 
 // Agregar estilos para resaltar los campos con error
 document.head.insertAdjacentHTML('beforeend', `
-    <style>
-        .error {
-            border: 2px solid red;
-        }
-    </style>
+  <style>
+    .error {
+      border: 2px solid red;
+    }
+  </style>
 `);
 
-        // if (unansweredQuestions.length > 0) {
-        // alert(`Por favor, selecciona una opción para las siguientes preguntas: ${unansweredQuestions.join(', ')}`);
-        // } else {
-            // console.log('Respuestas:', responses);
-            // // Si no hay faltantes sigue adelante:::::::::::::::::::::::::
-            // porcientoFormateado = calculaResultados();
-            // porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
-            // mostrarMiAlerta(maximo, valores, porcientoFormateado);
-            // console.log(`Suma puntos ${valores},
-            //           valor máximo: ${maximo},
-            //           porcentaje ${porcientoFormateado}`);
-            // console.table(puntajesIndividuales);
-            // Aquí puedes enviar 'responses' al servidor o procesarlo como desees
-        // }
-
-  function resetForm() {
-      location.reload(); // Recarga la página para restablecer el formulario
-  }
-  </script>
-
+function resetForm() {
+    location.reload(); // Recarga la página para restablecer el formulario
+}
+</script>
 
 <script>
-  function calculaResultados() {
+function calculaResultados() {
 
-    // for (let i = 0; i < responses.length; i++) {
-    //   if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
+  // for (let i = 0; i < responses.length; i++) {
+  //   if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
 
-    //   console.log(`i= ${i} ,
-    //       valores ${valores} ,
-    //       respuestas: ${responses[i]};
-    //       indice del arreglo: ${responses[i]-1};
-    //       numero a sumar: ${Number (precios[i].precio[responses[i]-1])} `)
+  //   console.log(`i= ${i} ,
+  //       valores ${valores} ,
+  //       respuestas: ${responses[i]};
+  //       indice del arreglo: ${responses[i]-1};
+  //       numero a sumar: ${Number (precios[i].precio[responses[i]-1])} `)
 
-    //       // vector de precio: ${precios[i].pregunta};
+  //       // vector de precio: ${precios[i].pregunta};
 
-    //   valores += Number (precios[i].precio[responses[i]-1]);
+  //   valores += Number (precios[i].precio[responses[i]-1]);
 
-    //   console.log(`valor despues calculo: ${valores}`);
+  //   console.log(`valor despues calculo: ${valores}`);
 
-    // }
-    // const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
-    // return porcientoFormateado;
-  } 
-
+  // }
+  // const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
+  // return porcientoFormateado;
+} 
 
 // function continuar() {
 //   cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
 
-function grabarResultados2(responses) {
-    console.log('no hace nada')
-    .then(() => {
-      window.location.href =
-        JSON.parse(localStorage.getItem("idioma")) == 1
-          ? "ME-1.html"
-          : "Me-1-en.html";
-    })
-    .catch((error) => {
-      console.error("Error en grabarResultados:", error);
-      alert("Hubo un error al grabar los resultados: " + error.message);
-    });
+function grabaResultados(responses) {
+  calculaResultados();
+  grabarResultados2(responses)
+  .then(() => {
+    window.location.href =
+      JSON.parse(localStorage.getItem("idioma")) == 1
+        ? "ME-1.html"
+        : "ME-1-en.html";
+  })
+  .catch((error) => {
+    console.error("Error en grabarResultados:", error);
+    alert("Hubo un error al grabar los resultados: " + error.message);
+  });
 }
 
 async function grabarResultados2(responses) {
@@ -316,12 +358,12 @@ try {
   const result = await response.json();
   if (result.success) {
     console.log("no hay error");
+    return result;
   } else {
     throw new Error(result.error || "Error desconocido ins 2");
   }
   } catch (error) {
   console.log("Error:", error);
-  // alert("estamos en el error (ins 2): " + error.message);
   throw error; // Rechaza la promesa en caso de error
   }
 }
@@ -343,16 +385,14 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
   document.getElementById('maximo').textContent = maximo;
   document.getElementById('calificacion').textContent = valores;
   document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
-  
-  }
+
+}
   
 function cerrarAlerta() {
   document.getElementById("miAlerta").style.display = "none";
-  }
+}
   
-  </script>
-
-
+</script>
 
 <script>
   
@@ -401,10 +441,10 @@ const opts = {
   document.getElementById("nombreEmpresa").textContent = empresa;
   document.getElementById("nombreUsuario").textContent = apenom;
 
+  // document.getElementById('formulario').addEventListener('submit', function (event) {
+  //   event.preventDefault();
+  // });
 
-  document.getElementById('formulario').addEventListener('submit', function (event) {
-    event.preventDefault();
-  });
   const botonSalida = document.getElementById('boton-salir');
   const ventanaSale = document.getElementById('ventanaSalida');
   const botonYes = document.getElementById('confirm-yes');
@@ -440,12 +480,9 @@ const opts = {
           : "ME-1-en.html";
   }
   
-  // function limpiarSelecciones() {
-  //         location.reload(); // Recarga la página para restablecer el formulario
-  //     }
+
   </script>
 
 <!-- <script src="../../js/ma-6.js"></script> -->
-
 
 </html>
