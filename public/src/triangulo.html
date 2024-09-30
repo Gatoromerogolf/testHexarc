@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triángulo Invertido Dinámico</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="trianguloCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const porcentajeVariable = 80; // Porcentaje que determina el área sombreada
+
+        function dibujarTriangulo(porcentaje) {
+            const canvas = document.getElementById('trianguloCanvas');
+            const ctx = canvas.getContext('2d');
+            const ancho = canvas.width;
+            const altura = canvas.height;
+            const centroX = ancho / 2;
+            const base = 300; // Longitud de la base del triángulo
+            const alturaTriangulo = 260; // Altura del triángulo
+
+            ctx.clearRect(0, 0, ancho, altura); // Limpiar el canvas
+
+            // Dibuja el contorno del triángulo invertido
+            ctx.beginPath();
+            ctx.moveTo(centroX, alturaTriangulo); // Vértice superior
+            ctx.lineTo(centroX - base / 2, altura); // Esquina inferior izquierda
+            ctx.lineTo(centroX + base / 2, altura); // Esquina inferior derecha
+            ctx.closePath();
+            ctx.strokeStyle = 'black';
+            ctx.stroke(); // Dibuja el contorno del triángulo
+
+            // Función para calcular la coordenada 'y' para un porcentaje dado del área
+            function calcularYPorPorcentaje(p) {
+                return alturaTriangulo + ((altura - alturaTriangulo) * p / 100);
+            }
+
+            // Sombreado en colores según el porcentaje
+            function sombrearTriangulo(pInicio, pFin, color) {
+                const yInicio = calcularYPorPorcentaje(pInicio);
+                const yFin = calcularYPorPorcentaje(pFin);
+
+                ctx.beginPath();
+                ctx.moveTo(centroX, alturaTriangulo); // Vértice superior
+                ctx.lineTo(centroX - base / 2, altura); // Lado izquierdo del triángulo
+                ctx.lineTo(centroX + base / 2, altura); // Lado derecho del triángulo
+                ctx.lineTo(centroX, alturaTriangulo); // Cierra el triángulo
+
+                // Crear un recorte triangular
+                ctx.clip();
+
+                // Dibujar un rectángulo que será recortado por el triángulo
+                ctx.fillStyle = color;
+                ctx.fillRect(0, yInicio, ancho, yFin - yInicio);
+                
+                // Finaliza el recorte
+                ctx.restore();
+            }
+
+            // Sombreado por áreas
+            if (porcentaje > 0) {
+                sombrearTriangulo(0, Math.min(50, porcentaje), 'red');
+            }
+            if (porcentaje > 50) {
+                sombrearTriangulo(50, Math.min(70, porcentaje), 'yellow');
+            }
+            if (porcentaje > 70) {
+                sombrearTriangulo(70, Math.min(90, porcentaje), 'green');
+            }
+            if (porcentaje > 90) {
+                sombrearTriangulo(90, Math.min(100, porcentaje), 'blue');
+            }
+        }
+
+        // Dibuja el triángulo con el porcentaje dado
+        dibujarTriangulo(porcentajeVariable);
+    </script>
+</body>
+</html>

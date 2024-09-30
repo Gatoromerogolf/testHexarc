@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triángulo Coloreado</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="trianguloCanvas" width="400" height="300"></canvas>
+
+    <script>
+        const valor = 100; // Cambia este valor para probar diferentes porcentajes
+
+        function dibujarTrianguloConColores(valor) {
+            const canvas = document.getElementById('trianguloCanvas');
+            const ctx = canvas.getContext('2d');
+            const ancho = canvas.width;
+            const alto = canvas.height;
+
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, ancho, alto);
+
+            // Definir las proporciones de color
+            const rangos = [
+                { limite: 10, color: 'red' },
+                { limite: 70, color: 'yellow' },
+                { limite: 90, color: 'green' },
+                { limite: 50, color: 'blue' }
+            ];
+
+            let alturaMaxima = alto; // Altura total del triángulo
+            let inicioY = alto; // Inicio de la altura desde la base
+
+            // Dibujar el triángulo
+            ctx.beginPath();
+            ctx.moveTo(ancho / 2, 0); // Vértice superior
+            ctx.lineTo(0, alto); // Vértice inferior izquierdo
+            ctx.lineTo(ancho, alto); // Vértice inferior derecho
+            ctx.closePath();
+            ctx.fillStyle = 'white'; // Fondo del triángulo
+            ctx.fill();
+
+            // Colorear cada sección del triángulo
+            let porcentajeRestante = valor; // Porcentaje que queda por colorear
+
+            for (let i = 0; i < rangos.length; i++) {
+                const rango = rangos[i];
+                const limite = rango.limite;
+
+                if (porcentajeRestante <= 0) break; // Si no queda porcentaje, salir
+
+                ctx.fillStyle = rango.color;
+
+                // Determinar la altura a colorear para este rango
+                let alturaAColorear = (limite / 100) * alturaMaxima; // Altura máxima para este rango
+                if (porcentajeRestante < limite) {
+                    alturaAColorear = (porcentajeRestante / 100) * alturaMaxima; // Ajustar si el porcentaje es menor
+                }
+
+                // Dibujar el área en el triángulo
+                ctx.beginPath();
+                ctx.moveTo(ancho / 2, 0); // Vértice superior
+                ctx.lineTo(0, alto); // Vértice inferior izquierdo
+                ctx.lineTo(ancho, alto); // Vértice inferior derecho
+                ctx.lineTo(ancho / 2, alto - alturaAColorear); // Punto de corte en la altura a colorear
+                ctx.closePath();
+                ctx.fill();
+
+                // Actualizar el porcentaje restante
+                porcentajeRestante -= (limite - (i > 0 ? rangos[i - 1].limite : 0));
+            }
+
+            // Dibujar el contorno del triángulo
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+        }
+
+        // Dibuja el triángulo con el valor dado
+        dibujarTrianguloConColores(valor);
+    </script>
+</body>
+</html>

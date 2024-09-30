@@ -98,10 +98,9 @@
 
           <tr>
             <td class="pregunta-financiera">2. Flujo de fondos derivados de las operaciones</td>
-            <td class="respuesta-financiera" style="text-align: right">Alto</td>
-            <td class="respuesta-col">
-              <div class="radio-container">> 60%</div>
-            </td>
+            <td class="respuesta-financiera" id="flujoFondos" style="text-align: right"></td>
+            <td class="respuesta-col" id="flujoFondos-Sco" style="text-align: center"></td>
+            <td class="respuesta-col" id="flujoFondos-Cal" style="text-align: center"></td>
           </tr>
 
           <tr>
@@ -287,6 +286,7 @@ function realizaCalculos() {
   let totalScore = 0;
   let puntos = 0;
   let texto;
+
   let primero = (datoParaMirar.respuesta[0] / datoParaMirar.respuesta[1]).toFixed(2);
   document.getElementById("capitalTrabajo").textContent = primero;
   if (primero > 1) {
@@ -302,10 +302,34 @@ function realizaCalculos() {
       texto = "Muy malo";
       puntos = 5;
   }
-
   totalScore += puntos; 
   document.getElementById("capitalTrabajo-Sco").textContent = puntos;
   document.getElementById("capitalTrabajo-Cal").textContent = texto;
+
+  primero = datoParaMirar.respuesta[2];
+  document.getElementById("flujoFondos").textContent = primero;
+  let compara = 0;
+  // tengo que calcular el EBITDA para comparar contra ese
+  // utilidad / Ventas * 100
+  compara = (datoParaMirar.respuesta[14] / datoParaMirar.respuesta[8] * 100).toFixed(2);
+  if (primero > compara) {
+      texto = "Muy bueno";
+      puntos = 20;
+  } else if (primero > 0 && primero <= compara) {
+      texto = "Bueno";
+      puntos = 15;
+  } else if (primero == 0) {
+      texto = "Malo";
+      puntos = 10;
+  } else {
+      texto = "Muy malo";
+      puntos = 5;
+  }
+  totalScore += puntos; 
+  document.getElementById("flujoFondos-Sco").textContent = puntos;
+  document.getElementById("flujoFondos-Cal").textContent = texto;
+
+
 
   primero = (datoParaMirar.respuesta[3] / datoParaMirar.respuesta[4]).toFixed(2);
   document.getElementById("indCobInt").textContent = primero;
@@ -326,6 +350,7 @@ function realizaCalculos() {
   document.getElementById("indCobInt-Sco").textContent = puntos;
   document.getElementById("indCobInt-Cal").textContent = texto;
 
+
   primero = datoParaMirar.respuesta[5] + datoParaMirar.respuesta[6];
   document.getElementById("cicloConvCaja").textContent = primero;
   if (primero < 70) {
@@ -344,6 +369,7 @@ function realizaCalculos() {
   totalScore += puntos; 
   document.getElementById("cicloConvCaja-Sco").textContent = puntos;
   document.getElementById("cicloConvCaja-Cal").textContent = texto;
+
 
   primero = ((datoParaMirar.respuesta[7] / datoParaMirar.respuesta[8])*360).toFixed(2);
   document.getElementById("diasVentaCalle").textContent = primero;
@@ -364,6 +390,7 @@ function realizaCalculos() {
   document.getElementById("diasVentaCalle-Sco").textContent = puntos;
   document.getElementById("diasVentaCalle-Cal").textContent = texto;
 
+
   primero = ((datoParaMirar.respuesta[9] / datoParaMirar.respuesta[10])*360).toFixed(2);
   document.getElementById("diasDeudaCalle").textContent = primero;
   if (primero > 90) {
@@ -382,6 +409,7 @@ function realizaCalculos() {
   totalScore += puntos; 
   document.getElementById("diasDeudaCalle-Sco").textContent = puntos;
   document.getElementById("diasDeudaCalle-Cal").textContent = texto;
+
 
   primero = ((datoParaMirar.respuesta[11] / datoParaMirar.respuesta[12])*360).toFixed(2);
   document.getElementById("rotacion").textContent = primero;
@@ -402,7 +430,8 @@ function realizaCalculos() {
   document.getElementById("rotacion-Sco").textContent = puntos;  
   document.getElementById("rotacion-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[2] / datoParaMirar.respuesta[14])*100).toFixed(2);
+
+  primero = ((datoParaMirar.respuesta[1] / datoParaMirar.respuesta[13])*100).toFixed(2);
   document.getElementById("indiceDeuda").textContent = primero;
   if (primero < 100) {
       texto = "Muy bueno";
@@ -421,7 +450,8 @@ function realizaCalculos() {
   document.getElementById("indiceDeuda-Sco").textContent = puntos;
   document.getElementById("indiceDeuda-Cal").textContent = texto;
 
-  primero = datoParaMirar.respuesta[0] - datoParaMirar.respuesta[1];
+
+  primero = ((datoParaMirar.respuesta[0] / datoParaMirar.respuesta[1])*100).toFixed(2);
   document.getElementById("liquidez").textContent = primero;
   if (primero > 150) {
       texto = "Muy bueno";
@@ -440,7 +470,8 @@ function realizaCalculos() {
   document.getElementById("liquidez-Sco").textContent = puntos;
   document.getElementById("liquidez-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[11]) / datoParaMirar.respuesta[1]).toFixed(2);
+
+  primero = (((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[11]) / datoParaMirar.respuesta[1])*100).toFixed(2);
   document.getElementById("liquidezSeca").textContent = primero;
   if (primero > 120) {
       texto = "Muy bueno";

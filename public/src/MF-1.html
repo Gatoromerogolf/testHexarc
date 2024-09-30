@@ -14,6 +14,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 
+<style>
+  .respuesta-financiera {
+    text-align: 'right';
+  }
+
+  .texto-rojo {
+  color: red;
+}
+
+  .texto-azul {
+    color: rgb(20, 3, 173);
+}
+
+.texto-verde {
+    color: rgb(13, 202, 39);
+}
+  .texto-amarillo {
+    color: rgb(231, 235, 43);
+}
+</style>
+
 </head>
 
 <body class="financiero">
@@ -209,10 +230,13 @@
 // Función principal que espera que la función asíncrona termine
 async function iniciarProceso() {
   try {
-    respuestas = await leerRespuestas(CUIT, capitulo);
+    respuestas = await leerRespuestas(CUIT, "E");
     datoParaMirar = respuestas.records[0];
 
-    realizaCalculos(datoParaMirar);
+    respuestasF = await leerRespuestas(CUIT, "F")
+    datoParaMirarF = respuestasF.records[0];
+
+    realizaCalculos(datoParaMirar, datoParaMirarF);
   }
     catch (error) {
     console.error("Error en la función autoinvocada:", error);
@@ -241,160 +265,165 @@ async function leerRespuestas(CUIT, capitulo) {
   return { exists: false };
 }
 
-function realizaCalculos() {
+function realizaCalculos(datoParaMirar, datoParaMirarF) {
   console.log ('muestra cuit', datoParaMirar.CUIT);
   let totalScore = 0;
   let puntos = 0;
   let texto;
-  let primero = ((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[1])/datoParaMirar.respuesta[1] * 100).toFixed(2);
+
+  let primero = ((datoParaMirarF.respuesta[0] - datoParaMirarF.respuesta[1])/datoParaMirarF.respuesta[1] * 100).toFixed(2);
   document.getElementById("evolIngresos").textContent = primero;
   if (primero > 80) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 30;
   } else if (primero > 0 && primero <= 80) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 23;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 15;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 8;
   }
-
   totalScore += puntos; 
   document.getElementById("evolIngresos-Sco").textContent = puntos;
   document.getElementById("evolIngresos-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[2] / datoParaMirar.respuesta[6])*100).toFixed(2);
+
+  primero = ((datoParaMirarF.respuesta[2] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("margenBruto").textContent = primero;
   if (primero > 60) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 20;
   } else if (primero > 0 && primero <= 60) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 15;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 10;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 5;
   }
   totalScore += puntos; 
   document.getElementById("margenBruto-Sco").textContent = puntos;
   document.getElementById("margenBruto-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[3] / datoParaMirar.respuesta[6])*100).toFixed(2);
+
+  primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("margenNeto").textContent = primero;
   if (primero > 30) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 40;
   } else if (primero > 0 && primero <= 30) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 30;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 20;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 10;
   }
   totalScore += puntos; 
   document.getElementById("margenNeto-Sco").textContent = puntos;
   document.getElementById("margenNeto-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[4] / datoParaMirar.respuesta[6])*100).toFixed(2);
+
+  primero = ((datoParaMirar.respuesta[14] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("utilidadAntes").textContent = primero;
   if (primero > 40) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 40;
   } else if (primero > 0 && primero <= 40) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 30;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 20;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 10;
   }
   totalScore += puntos; 
   document.getElementById("utilidadAntes-Sco").textContent = puntos;
   document.getElementById("utilidadAntes-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[3] / datoParaMirar.respuesta[5])*100).toFixed(2);
+
+  primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[13])*100).toFixed(2);
   document.getElementById("rendiCapital").textContent = primero;
   if (primero > 20) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 30;
   } else if (primero > 0 && primero <= 20) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 23;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 15;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 8;
   }
   totalScore += puntos; 
   document.getElementById("rendiCapital-Sco").textContent = puntos;
   document.getElementById("rendiCapital-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[3] / datoParaMirar.respuesta[7])*100).toFixed(2);
+
+  primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[0])*100).toFixed(2);
   document.getElementById("rendiActivos").textContent = primero;
   if (primero > 40) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 20;
   } else if (primero >0 && primero <= 40) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 15;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 10;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 5;
   }
   totalScore += puntos; 
   document.getElementById("rendiActivos-Sco").textContent = puntos;  
   document.getElementById("rendiActivos-Cal").textContent = texto;
 
-  primero = ((datoParaMirar.respuesta[8] / datoParaMirar.respuesta[6])*100).toFixed(2);
+
+  primero = ((datoParaMirarF.respuesta[4] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("resulExtra").textContent = primero;
   if (primero > 20) {
-      texto = "Muy bueno";
+      texto = "Alto";
       puntos = 20;
   } else if (primero > 0 && primero <= 20) {
-      texto = "Bueno";
+      texto = "Medio Alto";
       puntos = 15;
   } else if (primero == 0) {
-      texto = "Malo";
+      texto = "Medio Bajo";
       puntos = 10;
   } else {
-      texto = "Muy malo";
+      texto = "Bajo";
       puntos = 5;
   }
   totalScore += puntos; 
   document.getElementById("resulExtra-Sco").textContent = puntos;
   document.getElementById("resulExtra-Cal").textContent = texto;
 
-
   console.log (totalScore);
 
   document.getElementById("resultado").textContent = totalScore;
   if (totalScore == 200) {
-        texto = "Muy bueno";
+        texto = "Alto";
         document.getElementById("resultado-Cal").className = "texto-azul"; 
     } else if (totalScore >= 150 && totalScore < 200) {
-        texto = "Bueno";
+        texto = "Medio Alto";
         document.getElementById("resultado-Cal").className = "texto-verde"; 
     } else if (totalScore >= 100 && totalScore < 150) {
-        texto = "Malo";
+        texto = "Medio Bajo";
         document.getElementById("resultado-Cal").className = "texto-amarillo"; 
     } else {
-        texto = "Muy malo";
+        texto = "Bajo";
         document.getElementById("resultado-Cal").className = "texto-rojo"; 
     }
     document.getElementById("resultado-Cal").textContent = texto;

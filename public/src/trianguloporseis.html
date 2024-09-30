@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexágono con Triángulos Coloreados</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="hexagonoCanvas" width="600" height="600"></canvas>
+
+    <script>
+        const valores = [60, 90, 40, 80, 70, 50]; // Valores de cada triángulo en porcentaje
+
+        function dibujarHexagonoConTriangulos(valores) {
+            const canvas = document.getElementById('hexagonoCanvas');
+            const ctx = canvas.getContext('2d');
+            const ancho = canvas.width;
+            const altura = canvas.height;
+            const centroX = ancho / 2;
+            const centroY = altura / 2;
+            const radio = 200; // Radio del hexágono (distancia del centro a los vértices)
+            const anguloIncremento = Math.PI / 3; // Ángulo entre cada triángulo (60 grados)
+
+            ctx.clearRect(0, 0, ancho, altura); // Limpiar el canvas
+
+            // Función para calcular el sombreado del triángulo según el porcentaje y color
+            function sombrearTriangulo(porcentaje, anguloInicial) {
+                const rangos = [
+                    { limite: 50, color: 'red' },
+                    { limite: 70, color: 'yellow' },
+                    { limite: 90, color: 'green' },
+                    { limite: 100, color: 'blue' }
+                ];
+
+                let angulo = anguloInicial;
+
+                // Dibujar las secciones del triángulo
+                rangos.forEach(rango => {
+                    if (porcentaje > rango.limite - (rango.limite === 100 ? 10 : 20)) {
+                        const pFin = Math.min(porcentaje, rango.limite);
+
+                        const radioFin = (pFin / 100) * radio;
+
+                        ctx.beginPath();
+                        ctx.moveTo(centroX, centroY); // Desde el centro
+                        ctx.lineTo(
+                            centroX + radioFin * Math.cos(angulo),
+                            centroY + radioFin * Math.sin(angulo)
+                        );
+                        ctx.lineTo(
+                            centroX + radioFin * Math.cos(angulo + anguloIncremento),
+                            centroY + radioFin * Math.sin(angulo + anguloIncremento)
+                        );
+                        ctx.closePath();
+                        ctx.fillStyle = rango.color;
+                        ctx.fill();
+                    }
+                });
+            }
+
+            // Dibujar los 6 triángulos
+            for (let i = 0; i < 6; i++) {
+                const anguloInicial = i * anguloIncremento;
+                sombrearTriangulo(valores[i], anguloInicial);
+
+                // Dibujar los bordes del triángulo
+                ctx.beginPath();
+                ctx.moveTo(centroX, centroY);
+                ctx.lineTo(
+                    centroX + radio * Math.cos(anguloInicial),
+                    centroY + radio * Math.sin(anguloInicial)
+                );
+                ctx.lineTo(
+                    centroX + radio * Math.cos(anguloInicial + anguloIncremento),
+                    centroY + radio * Math.sin(anguloInicial + anguloIncremento)
+                );
+                ctx.closePath();
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+            }
+
+            // Dibujar el contorno del hexágono
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angulo = i * anguloIncremento;
+                const x = centroX + radio * Math.cos(angulo);
+                const y = centroY + radio * Math.sin(angulo);
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+        }
+
+        // Dibuja el hexágono con los valores dados
+        dibujarHexagonoConTriangulos(valores);
+    </script>
+</body>
+</html>
