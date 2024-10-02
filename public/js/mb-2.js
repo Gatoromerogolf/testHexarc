@@ -32,16 +32,11 @@ async function obtenerListaPreciosB() {
   }
 }
 
-
 async function filtrarPrecios() {
   try {
     // Llamar a la función para obtener los precios
     const listaPreciosB = await obtenerListaPreciosB();
     precios = listaPreciosB.filter (seccion => seccion.seccion == 2 && seccion.capitulo == "B");
-    // console.table(precios);
-
-    // console.log(Object.keys(precios[0]));
-
     // Usar reduce para sumar el campo "maximo" de los registros filtrados
     maximo = precios.reduce((maximo, registro) => {
       return maximo + Number(registro.maximo);

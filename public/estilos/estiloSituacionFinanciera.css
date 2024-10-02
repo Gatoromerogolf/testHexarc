@@ -112,6 +112,12 @@ h5 {
   margin-left: auto; /* Push button to the right */
 }
 
+#tip {
+  font-size: 14px;
+  font-style: italic;
+  color: blue;
+}
+
 /* #tablaIndice {
   text-decoration: none;
   padding: 2px;
