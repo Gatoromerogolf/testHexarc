@@ -165,7 +165,7 @@ function completarHtml() {
 
         let celdaPuntos = lineaDatosFd.insertCell(-1);
         celdaPuntos.textContent = valoresCapitulo.score;
-        celdaMaximo.classList.add("ajustado-derecha");
+        celdaPuntos.classList.add("ajustado-derecha");
         totcalif += Number(valoresCapitulo.score);
 
         let celdaPorciento = lineaDatosFd.insertCell(-1);
