@@ -140,11 +140,8 @@ function actualizarHTML2(secciones) {
   // Procesa linea final, si tiene respuesta para la ultima seccion.
 
   if (ultimaRespuestaSeccion) {
-
     document.getElementById("botonSiguiente").style.display = "block";
-
     lineaDatosFd = tablaIndice.insertRow();
-
     let celdaNombre = lineaDatosFd.insertCell(-1);
     celdaNombre.textContent =  "";
     

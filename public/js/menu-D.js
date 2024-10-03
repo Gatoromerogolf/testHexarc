@@ -123,19 +123,19 @@ function actualizarHTML(secciones) {
 
       if (respuestaSeccion) {
         let celdaMaximo = lineaDatosFd.insertCell(-1);
-        celdaMaximo.textContent = tablaMenuA[i][3] || "";
+        celdaMaximo.textContent = respuestaSeccion.maximo || "";
         celdaMaximo.classList.add("ajustado-derecha");
-        totalMax += Number(tablaMenuA[i][3]);
+        totalMax += Number(respuestaSeccion.maximo);
         // console.log (`valores de i ${i} y total Max: ${totalMax}`)
 
         let celdaPuntos = lineaDatosFd.insertCell(-1);
-        celdaPuntos.textContent = tablaMenuA[i][4] || "";
+        celdaPuntos.textContent = respuestaSeccion.score || "";
         celdaPuntos.classList.add("ajustado-derecha");
         // Convierte el valor a un número antes de sumarlo
-        totalCal += Number(tablaMenuA[i][4]);
+        totalCal += Number(respuestaSeccion.score);
 
         let celdaPorciento = lineaDatosFd.insertCell(-1);
-        celdaPorciento.textContent = tablaMenuA[i][5] || "";
+        celdaPorciento.textContent = respuestaSeccion.porcentaje || "";
         celdaPorciento.classList.add("ajustado-derecha");
         // totalPor = (Number(tablaMenuA[i][4]) / Number(tablaMenuA[i][3]) * 100).toFixed(2);
       }
@@ -157,14 +157,11 @@ function actualizarHTML(secciones) {
   // Procesa linea final, si la linea 14 tuvo resultados.
 
   if (ultimaRespuestaSeccion) {
-  // if (tablaMenuA[tablaMenuA.length - 1][3] > 0) {
+
     document.getElementById("botonSiguiente").style.display = "block";
-
     lineaDatosFd = tablaIndice.insertRow();
-
     let celdaNombre = lineaDatosFd.insertCell(-1);
     celdaNombre.textContent =  "";
-    
     let celdaDescripcion = lineaDatosFd.insertCell(-1);
     if (idioma == 1 ){
       celdaDescripcion.textContent = "Calificación general:";

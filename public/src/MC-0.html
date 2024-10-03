@@ -8,7 +8,6 @@
     <link href="../estilos/estiloSituacionFinanciera.css" rel="stylesheet">
     <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
@@ -213,7 +212,6 @@
   });
   }
 
-
   // Función para obtener las preguntas del servidor
   function cargarPrimerasPreguntas() {
     let url = '/preguntas';
@@ -354,24 +352,22 @@ async function filtrarPrecios() {
 
 
 function valorizarRadios() {
-      // Limitar a las primeras 14 respuestas
-      const respuestasLimitadas = respuestas.slice(0, 14);
-      respuestasLimitadas.forEach((respuesta, index) => {
-        if (respuesta >= 1 && respuesta <= 4) {
-            // Accede al precio correspondiente (restamos 1 para ajustar el índice)
-            // let fila = precios[index];
-            // let unitario = fila.precio[respuesta-1];
-            let precioCorrespondiente = precios[index].precio[respuesta - 1]; 
-            total += Number(precioCorrespondiente); // Sumar el precio al total
-        }
-    });
+  // Limitar a las primeras 14 respuestas
+  const respuestasLimitadas = respuestas.slice(0, 14);
+  respuestasLimitadas.forEach((respuesta, index) => {
+    if (respuesta >= 1 && respuesta <= 4) {
+      // Accede al precio correspondiente (restamos 1 para ajustar el índice)
+      // let fila = precios[index];
+      // let unitario = fila.precio[respuesta-1];
+      let precioCorrespondiente = precios[index].precio[respuesta - 1]; 
+      total += Number(precioCorrespondiente); // Sumar el precio al total
+    }
+  });
 
-    console.log('Total valorizado:', total); // Muestra el total en la consola
+  console.log('Total valorizado:', total); // Muestra el total en la consola
 
-    total += cantidadSeleccionados * 10;
-    return total; // Devuelve el total si lo necesitas
-
-    
+  total += cantidadSeleccionados * 10;
+  return total; // Devuelve el total si lo necesitas
 }
 
 
@@ -390,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document
   .getElementById('surveyForm')
   .addEventListener('submit', function(event) {
-    if (isExiting) {      // Verifica si está para salir y evita la validación en ese caso
+    if (isExiting) { // Verifica si está para salir y evita la validación en ese caso
       isExiting = false;  // Reinicia el indicador  para futuras operaciones
       return;   // Omite la validación cuando se está intentando salir
     }
@@ -400,8 +396,6 @@ document
   // Si las respuestas son válidas (no hay filas sin seleccionar), procede
 
   if (!faltantes) {
-  // if (respuestas) {
-      // Aquí puedes procesar las respuestas o continuar con el envío
 
       valores = valorizarRadios(precios);
 
@@ -509,18 +503,13 @@ function continuar() {
     //   alert("Hubo un error al grabar los resultados: " + error.message);
     // });
 
-
   actualizaCapitulos(capitulo, maximo, valores, porcientoFormateado);
   localStorage.setItem("porciento-C", porcientoFormateado);
   window.location.href = "resumenGeneral3.html";
 }
 
-
-
 async function grabarResultados2(respuestas) {
 
-// const capitulo = "C";
-// const seccion = 1;
 const score = valores;
 const respuesta = respuestas;
 const porcentaje = porcientoFormateado;

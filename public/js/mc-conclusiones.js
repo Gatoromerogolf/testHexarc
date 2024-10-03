@@ -401,7 +401,6 @@ function cerrarModal(idModal) {
       fila.appendChild(celdaVer);
 
       lineaDatosFd.appendChild(fila); 
-  
   }
 }
 
