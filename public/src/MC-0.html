@@ -315,8 +315,7 @@
   }
     cargarRegistros(); // Cargar los registros de checkbox 
 
-
-  async function obtenerListaPreciosB() {
+async function obtenerListaPreciosB() {
   try {
     const response = await fetch('/leeListaPrecios'); // Usa la URL correcta para tu API
     if (response.ok) {
@@ -350,7 +349,6 @@ async function filtrarPrecios() {
   }
 }
 
-
 function valorizarRadios() {
   // Limitar a las primeras 14 respuestas
   const respuestasLimitadas = respuestas.slice(0, 14);
@@ -370,7 +368,6 @@ function valorizarRadios() {
   return total; // Devuelve el total si lo necesitas
 }
 
-
 // Prevenir el comportamiento por defecto al presionar Enter en el formulario
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('surveyForm').addEventListener('keypress', function (event) {
@@ -380,7 +377,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-
 
   // Manejar el envío del formulario
 document
@@ -412,7 +408,6 @@ document
   const seleccionados = Array.from(checkboxes).map(checkbox => checkbox.checked ? 1 : 0);
 
 });
-
 
   const apellidouser = localStorage.getItem("apellido");
   const nombreUser = localStorage.getItem("nombre");
@@ -448,40 +443,36 @@ document
     window.location.href = '../../index.html';
   });
 
-  function resumenGeneral() {
-      window.location.href =
-          JSON.parse(localStorage.getItem("idioma")) == 1
-            ? "resumenGeneral3.html"
-            : "resumenGeneral3-en.html";
-  }
-  
-  function limpiarSelecciones() {
-    const radios = document.querySelectorAll('input[type="radio"]');
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    
-    radios.forEach(radio => radio.checked = false);
-    checkboxes.forEach(checkbox => checkbox.checked = false);
+function resumenGeneral() {
+  window.location.href =
+    JSON.parse(localStorage.getItem("idioma")) == 1
+      ? "resumenGeneral3.html"
+      : "resumenGeneral3-en.html";
 }
-
+  
+function limpiarSelecciones() {
+  const radios = document.querySelectorAll('input[type="radio"]');
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  
+  radios.forEach(radio => radio.checked = false);
+  checkboxes.forEach(checkbox => checkbox.checked = false);
+}
 
 function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
 
-// Mostrar la alerta personalizada
-document.getElementById('miAlerta').style.display = 'block';
+  document.getElementById('miAlerta').style.display = 'block';
 
-//  crea el gauge despues de mostrar la alerta
-const target = document.getElementById('gaugeChart'); // your canvas element
-const gauge = new Gauge(target).setOptions(opts); // create gauge!
-gauge.maxValue = 100; // set max gauge value
-gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-gauge.animationSpeed = 32; // set animation speed (32 is default value)
-gauge.set(porcientoFormateado); // set actual value
+  const target = document.getElementById('gaugeChart'); // your canvas element
+  const gauge = new Gauge(target).setOptions(opts); // create gauge!
+  gauge.maxValue = 100; // set max gauge value
+  gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+  gauge.animationSpeed = 32; // set animation speed (32 is default value)
+  gauge.set(porcientoFormateado); // set actual value
 
-// Actualizar los contenidos
-document.getElementById('maximo').textContent = maximo;
-document.getElementById('calificacion').textContent = valores;
-document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
-
+  // Actualizar los contenidos
+  document.getElementById('maximo').textContent = maximo;
+  document.getElementById('calificacion').textContent = valores;
+  document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
 }
 
 function cerrarAlerta() {
@@ -492,16 +483,6 @@ function continuar() {
   cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
 
   grabarResultados2(respuestas);
-    // .then(() => {
-    //   window.location.href =
-    //     JSON.parse(localStorage.getItem("idioma")) == 1
-    //       ? "resumenGeneral3.html"
-    //       : "Menu-General-en.html";
-    // })
-    // .catch((error) => {
-    //   console.error("Error en grabarResultados:", error);
-    //   alert("Hubo un error al grabar los resultados: " + error.message);
-    // });
 
   actualizaCapitulos(capitulo, maximo, valores, porcientoFormateado);
   localStorage.setItem("porciento-C", porcientoFormateado);

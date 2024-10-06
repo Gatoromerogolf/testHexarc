@@ -226,6 +226,10 @@
   const capitulo = "F";
   const CUIT = localStorage.getItem("CUIT");
   let datoParaMirar;
+  let maximo = 200;
+  let puntaje = 0;
+  let totalScore = 0;
+  let porcientoFormateado = 0;
 
 // Función principal que espera que la función asíncrona termine
 async function iniciarProceso() {
@@ -267,7 +271,7 @@ async function leerRespuestas(CUIT, capitulo) {
 
 function realizaCalculos(datoParaMirar, datoParaMirarF) {
   console.log ('muestra cuit', datoParaMirar.CUIT);
-  let totalScore = 0;
+  totalScore = 0;
   let puntos = 0;
   let texto;
 
@@ -290,7 +294,6 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   document.getElementById("evolIngresos-Sco").textContent = puntos;
   document.getElementById("evolIngresos-Cal").textContent = texto;
 
-
   primero = ((datoParaMirarF.respuesta[2] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("margenBruto").textContent = primero;
   if (primero > 60) {
@@ -309,7 +312,6 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   totalScore += puntos; 
   document.getElementById("margenBruto-Sco").textContent = puntos;
   document.getElementById("margenBruto-Cal").textContent = texto;
-
 
   primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("margenNeto").textContent = primero;
@@ -330,7 +332,6 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   document.getElementById("margenNeto-Sco").textContent = puntos;
   document.getElementById("margenNeto-Cal").textContent = texto;
 
-
   primero = ((datoParaMirar.respuesta[14] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("utilidadAntes").textContent = primero;
   if (primero > 40) {
@@ -349,7 +350,6 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   totalScore += puntos; 
   document.getElementById("utilidadAntes-Sco").textContent = puntos;
   document.getElementById("utilidadAntes-Cal").textContent = texto;
-
 
   primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[13])*100).toFixed(2);
   document.getElementById("rendiCapital").textContent = primero;
@@ -370,7 +370,6 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   document.getElementById("rendiCapital-Sco").textContent = puntos;
   document.getElementById("rendiCapital-Cal").textContent = texto;
 
-
   primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[0])*100).toFixed(2);
   document.getElementById("rendiActivos").textContent = primero;
   if (primero > 40) {
@@ -389,7 +388,6 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   totalScore += puntos; 
   document.getElementById("rendiActivos-Sco").textContent = puntos;  
   document.getElementById("rendiActivos-Cal").textContent = texto;
-
 
   primero = ((datoParaMirarF.respuesta[4] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("resulExtra").textContent = primero;
@@ -433,22 +431,101 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
 
 }
 
-</script>
-<script>
-
 function resumenGeneral() {
     console.log('entro por aca')
 
-    window.location.href =
+    porcientoFormateado = ((totalScore / maximo) * 100).toFixed(2);
+    mostrarMiAlerta(maximo, totalScore, porcientoFormateado);
+}
+
+function continuar() {
+  document.getElementById("miAlerta").style.display = "none";
+  actualizaCapitulos(capitulo, maximo, totalScore, porcientoFormateado);
+  localStorage.setItem("porciento-F", porcientoFormateado);
+  window.location.href =
         JSON.parse(localStorage.getItem("idioma")) == 1
           ? "resumenGeneral3.html"
           : "resumenGeneral3-en.html";
-
 }
 
+function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
+  fetch("/total-Capitulo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ capitulo, maximo, score, porcentaje }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error en la actualización");
+      }
+      return response.text();
+    })
+    .then((data) => {
+      // alert("Registro actualizado correctamente");
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 function limpiarSelecciones() {
         location.reload(); // Recarga la página para restablecer el formulario
-    }
+}
+
+function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
+
+  document.getElementById('miAlerta').style.display = 'block';
+
+  const target = document.getElementById('gaugeChart'); // your canvas element
+  const gauge = new Gauge(target).setOptions(opts); // create gauge!
+  gauge.maxValue = 100; // set max gauge value
+  gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+  gauge.animationSpeed = 32; // set animation speed (32 is default value)
+  gauge.set(porcientoFormateado); // set actual value
+
+  // Actualizar los contenidos
+  document.getElementById('maximo').textContent = maximo;
+  document.getElementById('calificacion').textContent = valores;
+  document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
+}    
+
+// Armar velocimetro ::::::::::::::::::::::::::::::::::::::
+const opts = {
+  angle: -0.3,
+// The span of the gauge arc
+  lineWidth: 0.2, // The line thickness
+  radiusScale: 0.8, // Relative radius
+  pointer: {
+      length: 0.6, // // Relative to gauge radius
+      strokeWidth: 0.035, // The thickness
+      color: '#000000' // Fill color
+  },
+  limitMax: false,     // If false, max value increases automatically if value > maxValue
+  limitMin: false,     // If true, the min value of the gauge will be fixed
+  colorStart: '#6F6EA0',   // Colors
+  colorStop: '#C0C0DB',    // just experiment with them
+  strokeColor: '#EEEEEE',  // to see which ones work best for you
+  generateGradient: true,
+  highDpiSupport: true,     // High resolution support
+
+  // Custom segment colors
+  staticZones: [
+     {strokeStyle: "red", min: 0, max: 50}, // Red from 0 to 25
+     {strokeStyle: "orange", min: 50, max: 70}, // Red from 0 to 25
+     {strokeStyle: "green", min: 70, max: 90}, // Yellow from 50 to 75
+     {strokeStyle: "blue", min: 90, max: 100}  // Blue from 75 to 100
+  ],
+
+  staticLabels: {
+      font: "15px sans-serif",  // Specifies font
+      labels: [0, 50, 70, 90, 100],  // Print labels at these values
+      color: "#000000",  // Optional: Label text color
+      fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+  },
+};   
+
 </script>
   <!-- <script src="../../js/ma-13.js"></script> -->
 
