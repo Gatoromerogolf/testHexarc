@@ -193,9 +193,9 @@ function actualizarHTML(secciones) {
     celdaPorciento.classList.add("ajustado-derecha");
     celdaPorciento.style.fontWeight = "bold"; // Hacer el texto en negrita
 
-    localStorage.setItem("porciento-A", totalPor);
+    localStorage.setItem("porciento-D", totalPor);
 
-    const capitulo = "A";
+    // const capitulo = "D";
     actualizaCapitulos(capitulo, totalMax, totalCal, totalPor);
   }
 }

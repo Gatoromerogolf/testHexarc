@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riesgos de Gobierno Corporativo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    .centered {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body id="conclusiones">
+  <div class="survey-container-conclusiones">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div>
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+            <h4> A - Generación de Resultados</h4>
+            <h5> Autoevaluación</h5>
+        </div>
+        <hr>
+
+        <!-- <form id="formulario"> -->
+          <div class="contenedorTitulo">
+            <div class="logo-container">
+              <a href="Menu-General.html">
+                <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
+                        height: auto">;
+              </a>
+            </div>
+            <div class="center-container-titulo">
+              <h4 class="tituloSeccionContainer"><a href="Menu-A.html">Conclusiones preliminares</a></h4>
+            </div>
+          </div>
+
+  <table class="table-conclusiones">
+    <p class="pconclusiones">Algo habrá que decir.....
+      </p>
+
+    <table style="width: 300px">
+      <tr>
+        <th class="pregunta-col">Puntaje general</th>
+      </tr>
+    </table>
+
+    <p class="pconclusiones">La autoevaluación asigna un valor numérico a cada uno de los aspectos evaluados, mostrando su impacto en el Apetito de Riesgo de la organización. Cada aspecto tiene un valor máximo que simboliza el nivel óptimo o esperado. En esta evaluación, el puntaje más alto obtenido es:</p>
+    
+    <div class="container-resultados">
+            Máximo del factor:
+      <p id="puntajeTotal" style="display: inline; font-weight: bold; margin: 0;"></p>
+      <span>puntos |</span>
+      <span>Puntaje obtenido: <span id="puntajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span></span>
+      <span>| Porcentaje: <span id="porcentajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+    </div>
+
+
+    <p class="pconclusiones">Texto para completar....
+  </table>
+
+        <br>
+
+  <h1>Situaciones NO EFECTIVAS</h1>
+  <p class="pconclusiones">Esto no aplica</p>
+
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 0 - 50%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+      <tbody id="questionsTableBody" style="font-size: 12px; font-family: Abel">
+      </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones POCO EFECTIVAS</h1>
+  <p class="pconclusiones">ESto no aplica</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 50.01 - 70%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions5170">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones EFECTIVAS</h1>
+  <p class="pconclusiones">ESto no aplica.
+  </p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 70.01 - 90%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions7190">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones MUY EFECTIVAS</h1>
+  <p class="pconclusiones">Esto no aplica</p>
+
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 90.01 - 100%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions90100">
+    </tbody>
+  </table>
+  <br>
+  <br>
+
+  <table style="width: 300px">
+    <tr>
+      <th class="pregunta-col">CONCLUSION GENERAL</th>
+    </tr>
+  </table>
+
+  <p class="pconclusiones">Alguien dirá algo.....</P>
+
+  <br>
+
+  <div class="centrado-flex">
+    <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
+  </div>
+
+        </form>
+  </div>
+
+    </section>
+  </section>
+
+  <div id="modalGeneral" class="dialog-overlay" style="display:none;">
+    <div class="dialog-container">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <span class="dialog-title">Matriz de Datos  |</span>
+        <button id="closeDialog" class="dialog-close">&times;</button>
+      </div>
+      <div style="text-align: center;">
+        Sección:
+        <p id="nombreSeccion" style="display: inline; font-weight: bold; margin: 0;"></p>
+        <span> |</span>
+        <span>Puntaje obtenido: <span id="nombrePuntaje"
+            style="display: inline; font-weight: bold; margin: 0;"></span></span>
+        <span>| Porcentaje: <span id="nombrePorciento"
+            style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+      </div>
+      <div class="dialog-content">
+        <p id="tituloModalGeneral"></p>
+        <!-- <table id="tablaModalGeneral"> -->
+          <table id="dataTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Sec</th>
+                <th>Nro</th>
+                <th>Consigna</th>
+                <th>Respuesta</th>
+                <th>Obs.</th>
+              </tr>
+            </thead>
+            <tbody id="lineaModalGeneral">
+              <!-- Las filas dinámicas se insertarán aquí -->
+            </tbody>
+          </table>
+      </div>
+    <!-- </div> -->
+    <div class="dialog-footer">
+        <button onclick="cerrarModal('modalGeneral')" class="dialog-button">Cerrar</button>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <script>
+    function printPage() {
+      window.print();
+    }
+  </script>
+
+<script>
+document.getElementById("closeDialog").addEventListener("click", function() {
+  document.getElementById("modalGeneral").style.display = "none";
+});
+</script>
+
+</body>
+
+<!-- <script src="../../js/md-conclusiones.js"></script> -->
+
+</html>
