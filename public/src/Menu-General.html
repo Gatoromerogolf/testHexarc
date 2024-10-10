@@ -82,12 +82,29 @@
           <tr id="lineaMenu"></tr>
         </table>
       </div>
+        <div class="centrado-flex">
+          <button type="button" onclick="generaInfoFinal()" id="boton-enviar" style="display: none">Informe Final</button>
+        </div>
+      </div>
     </form>
   </div>
 
 
+
   <script>
-    localStorage.setItem('idioma', '1');
+  // Guardar 'idioma' en localStorage como un valor de cadena
+  localStorage.setItem('idioma', '1');
+
+  function generaInfoFinal(event) {
+    // No necesitas JSON.parse() para un valor simple como '1'
+    console.log ('entro en la funcion del boton')
+    const idioma = localStorage.getItem("idioma");
+    
+    // Comparar directamente el valor con '1'
+    window.location.href = idioma === '1' 
+      ? "elHexagono.html" 
+      : "elHexagono-en.html";
+  }
   </script>
 
 <!-- <script>

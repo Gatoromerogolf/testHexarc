@@ -281,3 +281,15 @@ tr:first-of-type + tr {
   opacity: 0;
   transition: opacity 1s ease-out;
 }
+
+#boton-enviar {
+  background-color: #4caf50; /* Color de fondo */
+  color: white; /* Color de texto */
+  padding: 12px 24px; /* Espaciado alrededor del texto */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano al pasar el mouse */
+  transition: all 0.3s; /* Transición suave para los cambios */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+}

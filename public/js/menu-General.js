@@ -26,15 +26,6 @@ let direct3o4 = 0;
     capitulos = await leeCapitulos();
     totalCapitulos = await obtenerTotalCapitulos(CUIT);
 
-    // console.log ('listaPrecios')
-    // console.table (listaPrecios)  
-
-    // console.log('capitulos')
-    // console.table (capitulos);
-
-    // console.log('total Capitulos')
-    // console.table (totalCapitulos);
-
     completarHtml(); // Llama a completarHtml después de procesar todos los capítulos
 
     document.getElementById('tablaIndiceCapitulos').style.display = 'table';
@@ -174,6 +165,7 @@ function completarHtml() {
 
         let celdaPDF = lineaDatosFd.insertCell(-1);
       // celdaExl = lineaDatosFd.insertCell(-1);
+        const boton = document.getElementById("boton-enviar");
         const enlace = document.createElement("a");
         switch (indice) {
           case 0:
@@ -193,6 +185,7 @@ function completarHtml() {
             break;
           case 5:
             enlace.href = "MF-conclusiones.html";
+            boton.style.display = "block"; // O "flex" si quieres mantener la alineación fle
             break;
           default:
             // Opcional: valor predeterminado si ninguna de las condiciones se cumpla
