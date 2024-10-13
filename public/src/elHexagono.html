@@ -188,7 +188,7 @@
                 }
               }
               ctx.closePath();
-              ctx.fillStyle = 'rgba(173, 216, 230, 0.5)'; // Color celeste con opacidad 0.5
+              ctx.fillStyle = 'rgba(173, 216, 230, 0.7)'; // Color celeste con opacidad 0.5
               ctx.fill(); // Rellena el área del hexágono externo con fondo celeste
               ctx.strokeStyle = 'black';
               ctx.stroke(); // Dibuja el borde exterior del hexágono
@@ -207,7 +207,7 @@
                 }
               }
               ctx.closePath();
-              ctx.fillStyle = 'rgba(255, 255, 0, 0.5)'; // Color de relleno amarillo con transparencia
+              ctx.fillStyle = 'rgba(255, 255, 0, 0.7)'; // Color de relleno amarillo con transparencia
               ctx.fill(); // Rellena el área del hexágono amarillo
               ctx.strokeStyle = 'yellow';
               ctx.stroke(); // Dibuja el borde del hexágono amarillo
@@ -226,7 +226,7 @@
                 }
               }
               ctx.closePath();
-              ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Color de relleno verde con transparencia
+              ctx.fillStyle = 'rgba(0, 255, 0, 0.7)'; // Color de relleno verde con transparencia
               ctx.fill(); // Rellena el área del hexágono verde
               ctx.strokeStyle = 'green';
               ctx.stroke(); // Dibuja el borde del hexágono verde
@@ -245,7 +245,7 @@
                 }
               }
               ctx.closePath();
-              ctx.fillStyle = 'rgba(255, 0, 0, 0.8)'; // Color de relleno rojo con menos transparencia
+              ctx.fillStyle = 'rgba(255, 0, 0, 0.9)'; // Color de relleno rojo con menos transparencia
               ctx.fill(); // Rellena el área del hexágono rojo
               ctx.strokeStyle = 'red';
               ctx.stroke(); // Dibuja el borde del hexágono rojo
@@ -279,18 +279,18 @@
                 }
               }
               ctx.closePath();
-              ctx.fillStyle = 'rgba(0, 150, 255, 0.5)'; // Color de relleno con transparencia
+              ctx.fillStyle = 'rgba(0, 150, 255, 0.7)'; // Color de relleno con transparencia
               ctx.fill(); // Rellena el área del hexágono dinámico
               ctx.strokeStyle = 'blue';
               ctx.stroke(); // Dibuja el borde de la forma rellena
 
               // Agregar el valor de cada variable dentro de su triángulo
-              ctx.font = '14px Abel strong';
+              ctx.font = '15px Abel strong';
               ctx.fillStyle = 'black';
               for (let i = 0; i < 6; i++) {
                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
                 const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
-                const radioTexto = radioMax * porcentaje * 0.6; // Posición del texto, más cerca del centro
+                const radioTexto = radioMax * porcentaje * 0.9; // Posición del texto, más cerca del centro
 
                 // Coordenadas del texto basado en el porcentaje
                 const xTexto = centerX + radioTexto * Math.cos(angulo);
@@ -314,18 +314,35 @@
 
               // Agregar los rótulos fuera del hexágono en dos filas
               ctx.font = '15px "Abel", strong';
-              ctx.fillStyle = 'blue'; // Color de los rótulos
+              ctx.fillStyle = 'red'; // Color de los rótulos
               for (let i = 0; i < 6; i++) {
                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
                 const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
                 const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
 
+                //     // Modificar la posición del rótulo cuando i = 3
+                // if (i === 3) {
+                //     xRotulo -= 50; // Ajustar este valor para moverlo más a la izquierda
+                // }
+
                 // Dividir el rótulo en dos palabras (puedes ajustar esto si tus rótulos tienen más o menos de dos palabras)
                 const palabras = rotulos[i].split(' ');
 
-                // Dibujar cada palabra en una línea
-                ctx.fillText(palabras[0], xRotulo - 15, yRotulo - 5); // Primera palabra, un poco más arriba
-                ctx.fillText(palabras[1], xRotulo - 15, yRotulo + 15); // Segunda palabra, un poco más abajo
+                // // Dibujar cada palabra en una línea
+                // ctx.fillText(palabras[0], xRotulo - 15, yRotulo - 5); // Primera palabra, un poco más arriba
+                // ctx.fillText(palabras[1], xRotulo - 15, yRotulo + 15); // Segunda palabra, un poco más abajo
+                    // Dibujar cada palabra en una línea, ajustando el texto correctamente
+                // ctx.fillText(palabras[0], xRotulo - 20, yRotulo - 5); // Primera palabra
+                // ctx.fillText(palabras[1], xRotulo - 20, yRotulo + 15); // Segunda palabra
+
+                if (i === 3) {
+                  ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5); // Primera palabra
+                  ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 15); // Segunda palabra
+                } else {
+                  ctx.fillText(palabras[0], xRotulo - 20, yRotulo - 5); // Primera palabra
+                  ctx.fillText(palabras[1], xRotulo - 20, yRotulo + 15); // Segunda palabra
+                }
+
               }
 
 
