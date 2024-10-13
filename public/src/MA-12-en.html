@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body class="financiero">
+  <div class="survey-container">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div class="nav-icons">
+            <div class="header-center">
+              <div id="nombreEmpresa" class="company-name"></div>
+              <div id="nombreUsuario" class="user-name"></div>
+            </div>
+          </div>
+          <div class="nav-iconstxt">
+            <h4>A - Corporate Governance Risk Management</h4>
+          </div>
+          <div class="nav-iconsxx">
+            <h5>Self-assessment</h5>
+          </div>
+        </div>
+        <hr>
+
+        <form id="formulario">
+  
+          <div class="center-container">
+            <h4 class="tituloSeccion"><a href="Menu-A-en.html">XII - Business culture and conduct
+            </a></h4>
+          </div>
+
+          <div class="salida">
+            <p style="font-size:12px">Select the option that corresponds to your organization.</p>
+            <button type="button" id="boton-salir">Exit</button>
+          </div>
+
+          <div id="overlay">
+            <div id="ventanaSalida">
+              <!-- <div class="confirm-modal" id="confirm-modal">-->
+              <div class="confirm-box">
+                <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                  missing items later.
+                  <br>
+                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <button id="confirm-yes">Exit</button>
+                <button id="confirm-no">Continue</button><br>
+              </div>
+            </div>
+          </div>
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Ineffective</th>
+              <th class="respuesta-col">Slightly effective</th>
+              <th class="respuesta-col">Effective</th>
+              <th class="respuesta-col">Highly effective</th>
+            </tr>
+
+          <tr>
+            <td class="pregunta-col">1. The Board of Directors clearly understands the company's cultural initiatives
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-1" value="1"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-1" value="2"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-1" value="3"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-1" value="4"></label>
+          </tr>
+
+          <tr>
+            <td class="pregunta-col">2. The Board of Directors receives sufficient information to monitor the company's culture and ethical behavior
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-2" value="1"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-2" value="2"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-2" value="3"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-2" value="4"></label>
+          </tr>
+
+          <tr>
+            <td class="pregunta-col">3. The Board of Directors receives sufficient information to monitor the company's risk awareness
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-3" value="1"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-3" value="2"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-3" value="3"></label>
+
+            <td class="respuesta-col">
+              <div class="radio-container"><input type="radio" name="A-12-3" value="4"></label>
+          </tr>
+        </table>
+
+        <div class="centrado-flex">
+          <button type="submit" id="boton-enviar">Send</button>
+        </div>
+
+        <div class="centrado-flex">
+          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Clear selections</button>
+        </div>
+
+      </form>
+    </section>
+  </section>
+
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Section summary</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Maximum possible score: <span id="maximo"></span></p>
+        <br>
+        <p>Score obtained: <span id="calificacion"></span></p>
+        <br>
+        <p>Percentage: <span id="porcentual"></span></p>
+
+        <div class="gauge-container">
+          <canvas id="gaugeChart" ;></canvas>
+        </div>
+
+        <button id="continuar" onclick="continuar()">Continue</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+<script src="../../js/ma-12.js"></script>
+
+</html>

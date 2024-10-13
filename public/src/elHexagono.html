@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+
+
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+
+    .canvas-container {
+      display: flex;
+      justify-content: center;
+      /* Centra horizontalmente */
+      align-items: center;
+      /* Centra verticalmente */
+      height: 100vh;
+      /* Altura del contenedor (ajusta según necesites) */
+    }
+
+  </style>
+</head>
+
+<body id="conclusiones">
+  <div class="survey-container-conclusiones">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div>
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+          <h4> Autoevaluación de la calidad del manejo de la empresa</h4>
+          <h5> Autoevaluación</h5>
+        </div>
+        <hr>
+
+        <!-- <form id="formulario"> -->
+        <div class="contenedorTitulo">
+          <div class="logo-container">
+            <a href="Menu-General.html">
+              <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
+                          height: auto">;
+            </a>
+          </div>
+          <div class="center-container-titulo">
+            <h4 class="tituloSeccionContainer"><a href="Menu-General.html">Tu hexágono !!!!!</a></h4>
+          </div>
+        </div>
+        <br><br>
+
+        <div class="canvas-container">
+          <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
+        </div>
+
+        <script>
+
+          const apellidouser = localStorage.getItem("apellido");
+          const nombreUser = localStorage.getItem("nombre");
+          const apenom = nombreUser + ' ' + apellidouser;
+          const empresa = localStorage.getItem("empresa");
+          const CUIT = localStorage.getItem("CUIT");
+
+          document.getElementById("nombreEmpresa").textContent = empresa;
+          document.getElementById("nombreUsuario").textContent = apenom;
+
+
+          let var1 = 3;
+          let var2 = 3;
+          let var3 = 3;
+          let var4 = 3;
+          let var5 = 3;
+          let var6 = 3;
+
+          // Función autoinvocada - Ejecución inmediata
+          (async function () {
+            try {
+              // Espera a que la función `leerTotalCapitulos` se complete antes de continuar
+              totalCapitulos = await leerTotalCapitulos(CUIT);
+
+              // Ejecuta el código que depende de `totalCapitulos` aquí, ya que ahora tienes los datos
+              if (totalCapitulos && totalCapitulos.exists) {
+                console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
+                // Aquí puedes colocar más lógica que depende de los datos de `totalCapitulos`
+                ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
+              } else {
+                console.log("No se encontraron capítulos.");
+              }
+            } catch (error) {
+              console.error("Error en la función autoinvocada:", error);
+            }
+          })();
+
+          async function leerTotalCapitulos() {
+            try {
+              const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
+              if (response.ok) {
+                totalCapitulos = await response.json(); //registro seccion recibido en formato JSON
+                console.table(totalCapitulos);
+                return { exists: true, records: totalCapitulos };
+              } else {
+                console.error("Error al obtener los datos");
+              }
+            } catch (error) {
+              console.error("Error al realizar la solicitud:", error);
+            }
+            return false;
+          }
+
+          function ejecutarGrafico(datos) {
+            if (totalCapitulos && totalCapitulos.exists) {
+              totalCapitulos.records.forEach((datos) => {
+                switch (datos.capitulo) {
+                  case "A":
+                    var1 = datos.porcentaje; // Asigna el porcentaje a var1
+                    break;
+                  case "B":
+                    var2 = datos.porcentaje; // Asigna el porcentaje a var2
+                    break;
+                  case "C":
+                    var3 = datos.porcentaje; // Asigna el porcentaje a var3
+                    break;
+                  case "D":
+                    var4 = datos.porcentaje; // Asigna el porcentaje a var4
+                    break;
+                  case "E":
+                    var5 = datos.porcentaje; // Asigna el porcentaje a var5
+                    break;
+                  case "F":
+                    var6 = datos.porcentaje; // Asigna el porcentaje a var6
+                    break;
+                  default:
+                    console.warn(`Capítulo no reconocido: ${datos.CAPITULO}`);
+                    break;
+                }
+              });
+            }
+
+            // Mostrar las variables después de asignarles valores
+            console.log({ var1, var2, var3, var4, var5, var6 });
+
+            const variables = [var1, var2, var3, var4, var5, var6]; // Porcentajes de cada área (0 a 100)
+            const rotulos = ['Gobierno Corporativo', 'Apetito Riesgo', 'Riesgos Mercado', 'Riesgos Procesos', 'Situación Financiera', 'Generación Resultados']; // Rótulos para cada eje
+
+            function dibujarHexagono(variables, rotulos) {
+              const canvas = document.getElementById('hexagonoCanvas');
+              const ctx = canvas.getContext('2d');
+              const centerX = canvas.width / 2;
+              const centerY = canvas.height / 2;
+              const radioMax = 170; // Radio máximo (el tamaño máximo del hexágono)
+              const radio90 = radioMax * 0.9; // Radio del hexágono amarillo (90%)
+              const radio70 = radioMax * 0.7; // Radio del hexágono verde (70%)
+              const radio50 = radioMax * 0.5; // Radio del hexágono rojo (50%)
+
+              ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
+
+              // Dibuja el fondo celeste del hexágono principal (100% del hexágono externo)
+              ctx.beginPath();
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radioMax * Math.cos(angulo);
+                const y = centerY + radioMax * Math.sin(angulo);
+
+                if (i === 0) {
+                  ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono externo
+                }
+              }
+              ctx.closePath();
+              ctx.fillStyle = 'rgba(173, 216, 230, 0.5)'; // Color celeste con opacidad 0.5
+              ctx.fill(); // Rellena el área del hexágono externo con fondo celeste
+              ctx.strokeStyle = 'black';
+              ctx.stroke(); // Dibuja el borde exterior del hexágono
+
+              // Dibuja el hexágono amarillo (90% del hexágono externo)
+              ctx.beginPath();
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radio90 * Math.cos(angulo);
+                const y = centerY + radio90 * Math.sin(angulo);
+
+                if (i === 0) {
+                  ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono amarillo
+                }
+              }
+              ctx.closePath();
+              ctx.fillStyle = 'rgba(255, 255, 0, 0.5)'; // Color de relleno amarillo con transparencia
+              ctx.fill(); // Rellena el área del hexágono amarillo
+              ctx.strokeStyle = 'yellow';
+              ctx.stroke(); // Dibuja el borde del hexágono amarillo
+
+              // Dibuja el hexágono verde (70% del hexágono externo)
+              ctx.beginPath();
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radio70 * Math.cos(angulo);
+                const y = centerY + radio70 * Math.sin(angulo);
+
+                if (i === 0) {
+                  ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono verde
+                }
+              }
+              ctx.closePath();
+              ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Color de relleno verde con transparencia
+              ctx.fill(); // Rellena el área del hexágono verde
+              ctx.strokeStyle = 'green';
+              ctx.stroke(); // Dibuja el borde del hexágono verde
+
+              // Dibuja el hexágono rojo (50% del hexágono externo)
+              ctx.beginPath();
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radio50 * Math.cos(angulo);
+                const y = centerY + radio50 * Math.sin(angulo);
+
+                if (i === 0) {
+                  ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono rojo
+                }
+              }
+              ctx.closePath();
+              ctx.fillStyle = 'rgba(255, 0, 0, 0.8)'; // Color de relleno rojo con menos transparencia
+              ctx.fill(); // Rellena el área del hexágono rojo
+              ctx.strokeStyle = 'red';
+              ctx.stroke(); // Dibuja el borde del hexágono rojo
+
+              // Dibuja las líneas desde el centro hacia los vértices
+              ctx.beginPath();
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radioMax * Math.cos(angulo);
+                const y = centerY + radioMax * Math.sin(angulo);
+
+                ctx.moveTo(centerX, centerY); // Empieza desde el centro
+                ctx.lineTo(x, y); // Línea desde el centro hasta el borde
+              }
+              ctx.strokeStyle = 'gray';
+              ctx.stroke(); // Dibuja las líneas radiales
+
+              // Dibuja el área basada en las variables (llenado parcial)
+              ctx.beginPath();
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
+                const radio = radioMax * porcentaje; // Ajusta el radio según el porcentaje
+                const x = centerX + radio * Math.cos(angulo);
+                const y = centerY + radio * Math.sin(angulo);
+
+                if (i === 0) {
+                  ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                  ctx.lineTo(x, y); // Dibuja las líneas para el área rellena
+                }
+              }
+              ctx.closePath();
+              ctx.fillStyle = 'rgba(0, 150, 255, 0.5)'; // Color de relleno con transparencia
+              ctx.fill(); // Rellena el área del hexágono dinámico
+              ctx.strokeStyle = 'blue';
+              ctx.stroke(); // Dibuja el borde de la forma rellena
+
+              // Agregar el valor de cada variable dentro de su triángulo
+              ctx.font = '14px Abel strong';
+              ctx.fillStyle = 'black';
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
+                const radioTexto = radioMax * porcentaje * 0.6; // Posición del texto, más cerca del centro
+
+                // Coordenadas del texto basado en el porcentaje
+                const xTexto = centerX + radioTexto * Math.cos(angulo);
+                const yTexto = centerY + radioTexto * Math.sin(angulo);
+
+                // Dibujar el valor de la variable en la posición calculada
+                ctx.fillText(`${variables[i]}%`, xTexto - 15, yTexto + 5); // Ajuste menor para centrar el texto
+              }
+
+              // // Agregar los rótulos fuera del hexágono
+              // ctx.font = '14px Abel strong';
+              // ctx.fillStyle = 'red'; // Color de los rótulos
+              // for (let i = 0; i < 6; i++) {
+              //   const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+              //   const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
+              //   const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
+
+              //   // Dibujar el rótulo en la posición calculada
+              //   ctx.fillText(rotulos[i], xRotulo - 15, yRotulo + 5); // Ajuste menor para centrar el texto
+              // }
+
+              // Agregar los rótulos fuera del hexágono en dos filas
+              ctx.font = '15px "Abel", strong';
+              ctx.fillStyle = 'blue'; // Color de los rótulos
+              for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
+                const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
+
+                // Dividir el rótulo en dos palabras (puedes ajustar esto si tus rótulos tienen más o menos de dos palabras)
+                const palabras = rotulos[i].split(' ');
+
+                // Dibujar cada palabra en una línea
+                ctx.fillText(palabras[0], xRotulo - 15, yRotulo - 5); // Primera palabra, un poco más arriba
+                ctx.fillText(palabras[1], xRotulo - 15, yRotulo + 15); // Segunda palabra, un poco más abajo
+              }
+
+
+            }
+
+            dibujarHexagono(variables, rotulos);
+          }
+        </script>
+  </div>
+  </form>
+  </div>
+</body>
+
+</html>

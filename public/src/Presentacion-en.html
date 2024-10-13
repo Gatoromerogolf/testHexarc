@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="financiero">
+
+  <div class="survey-container-presentacion" style="max-width: 900px;">
+    <!-- <form id="survey-form"> -->
+    <!-- <div class="containerTituloxx"> -->
+    <div class="header-titulo">
+      <a href="../index.html">
+        <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
+      </a>
+      <div class="header-center">
+        <div id="nombreEmpresa" class="company-name"></div>
+        <div id="nombreUsuario" class="user-name"></div>
+      </div>
+      <div>
+        <img src="../img/usa.png" alt="Logo Derecha" class="logo right" id="usaIcon">
+        <img src="../img/espana.png" alt="Logo Derecha" class="logo right" id="spainIcon">
+      </div>
+    </div>
+
+    <div id="content" class="fade-in">
+    <h2>Introduction</h2>
+    <p>During the development of this self-assessment, three types of information requirements will be identified::</p>
+    <ul>
+      <li>Those that require a yes or no answer (YES - NO)</li>
+      <li>Those that request reporting quantities or listing areas, specialties, etc. </li>
+      <li>Those that contain a premise or statement that must be evaluated based on its degree of compliance or acceptance within the organization.</li>
+    </ul>
+    <p>The accuracy of the provided responses and the honest assessment of the statements' compliance will allow for a clear understanding of the organization's situation in facing the challenge of efficient business risk management.</p>
+    <p>The following factors are evaluated::</p>
+
+    <ol class="dos-columnas-presentacion" style="list-style-type: upper-alpha">
+      <li><strong>Corporate Governance Risk Management</strong></li>
+      <li><strong>Risk Appetite Management</strong></li>
+      <li><strong>Market Risk Management</strong></li>
+      <li><strong>Process Risk Management</strong></li>
+      <li><strong>Financial Situation</strong></li>
+      <li><strong>Results Generation</strong></li>
+    </ol>
+
+    <p>All situations presented require the selection of at least one answer, ensuring a comprehensive and accurate evaluation of each area.</p>
+
+    <p>This process can be completed in stages, allowing for the partial completion of the required items and the ability to continue later from the last reported point.</p>
+
+    <p>The application enables access to each section once the previous section has been completed.</p>
+
+    <p>Upon completion of all factors, a general summary with the score obtained is presented, providing an overall view of the company's position in facing the challenge of risk management.</p>
+
+    <div class="centrado-flex">
+      <button class="botonSiguiente" id="boton-enviar" type="button">START</button>
+    </div>
+  </div>
+
+  </div>
+</body>
+
+<script>
+  document.getElementById("boton-enviar").addEventListener('click', () => {
+    localStorage.setItem('idioma', '2');
+    const idioma = Number(localStorage.getItem('idioma')); // idioma tendrá el valor numérico 2
+    actualizarUserIdioma(username, CUIT, idioma);
+    window.location.href = "Menu-General-en.html";
+    }
+  );
+</script>
+
+
+<script>
+  const apellidouser = localStorage.getItem("apellido");
+  const nombreUser = localStorage.getItem("nombre");
+  const apenom = nombreUser + ' ' + apellidouser;
+  const empresa = localStorage.getItem("empresa");
+  const username = localStorage.getItem("username")
+  const CUIT = localStorage.getItem("CUIT")
+
+  document.getElementById("nombreEmpresa").textContent = empresa;
+  document.getElementById("nombreUsuario").textContent = apenom;
+
+</script>
+<!-- <script>
+  // Agrega un evento de clic al ícono de España
+  document.getElementById('spainIcon').addEventListener('click', function () {
+    window.location.href = "Presentacion.html";
+  });
+
+  // Agrega un evento de clic al ícono de USA
+  document.getElementById('usaIcon').addEventListener('click', function () {
+    window.location.href = "Presentacion-en.html";
+  });
+</script> -->
+
+<script>
+  // Agrega un evento de clic al ícono de España
+  document.getElementById('spainIcon').addEventListener('click', function () {
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
+    window.location.href = "Presentacion.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
+  });
+
+  // Agrega un evento de clic al ícono de USA
+  document.getElementById('usaIcon').addEventListener('click', function () {
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
+    window.location.href = "Presentacion-en.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
+  });
+
+</script>
+
+
+// Función para actualizar el campo ingresado del usuario
+<script>
+function actualizarUserIdioma( username, CUIT, idioma) {
+  fetch('/api/updateIdioma', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username , CUIT, idioma })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.message === 'Campo idioma actualizado correctamente') {
+          console.log('Campo idioma actualizado correctamente');
+      } else {
+          console.error('Error al actualizar el campo idioma');
+      }
+  })
+  .catch(error => {
+      console.error('Error en la solicitud de actualización:', error);
+  });
+}
+</script>
+
+</html>

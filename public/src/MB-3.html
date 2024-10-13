@@ -1,73 +1,98 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evaluación de riesgos</title>
+  <title>Apetito de riesgo</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
   <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
-  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+  
 </head>
 
 <body class="menu-a-page aperie">
+    <div class="survey-container">
+      <section class="main">
+        <section class="gobCorpo">
+          <div class="header-container">
+              <div class="header-center">
+                <div id="nombreEmpresa" class="company-name"></div>
+                <div id="nombreUsuario" class="user-name"></div>
+              </div>
+            <div class="nav-iconstxt">
+              <h4>B - Manejo del Apetito de Riesgo</a></h4>
+            </div>
+            <div class="nav-iconsxx">
+              <h5> Autoevaluación</h5>
+            </div>
+          </div>
+          <hr>
 
-  <div class="survey-container">
-    <section class="main">
-      <section class="gobCorpo">
-        <div class="header-container">
-          <div class="nav-icons">
-            <a href="Ape-rie-2.html"><img src="../img/anterior.png" alt="Avance"></a>
-            <a href="ape-rie-4.html"><img src="../img/siguiente.png" alt="Avance"></a>
-          </div>
-          <div class="nav-iconstxt">
-            <h4><a href="Menu-Ape-rie.html">A - Manejo del Apetito de Riesgo</a></h4>
-          </div>
-          <div class="nav-iconsxx">
-            <h5> Autoevaluación</h5>
-          </div>
-        </div>
-        <hr>
-        <form id="formulario">
+          <form id="formulario">
 
-          <div class="center-container">
-            <h4 class="tituloSeccion"><a href="Menu-ape-rie.html">III - Circunstancias históricas</a></h4>
-          </div>
+            <div class="center-container">
+              <h4 class="tituloSeccion"><a href="Menu-B.html">III - Circunstancias históricas</a></h4>
+            </div>
 
-          <p style="font-size:12px">Seleccione la opción que corresponda a su organización.</p>
+            <div class="salida">
+              <p>Seleccione la opción que mejor refleje el grado de cumplimiento de la situación descripta en su organización, donde 'Razonable' indica coincidencia o certeza total, e 'Irracional' refleja la ausencia de aplicación.</p>
+              <button type="button" id="boton-salir">Salir</button>
+            </div>
+            <br>
+            <div id="overlay">
+              <div id="ventanaSalida">
+                <!-- <div class="confirm-modal" id="confirm-modal">-->
+                <div class="confirm-box">
+                  <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
+                    completar posteriormente los items faltantes.
+                    <br>
+                  </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                  <button id="confirm-yes">Salir</button>
+                  <button id="confirm-no">Continuar</button><br>
+                </div>
+              </div>
+            </div>
+
 
           <table>
             <tr>
-              <th class="pregunta-col">AFIRMACIÓN</th>
-              <th class="respuesta-col">Irracional</th>
-              <th class="respuesta-col">Poco razonable</th>
-              <th class="respuesta-col">Algo razonable</th>
-              <th class="respuesta-col">Razonable</th>
-            </tr>
+              <!-- <th class="respuesta-colxxx">Situación</th>
+              <th class="respuesta-colxxx">Irracional</th>
+              <th class="respuesta-colxxx">Poco razonable</th>
+              <th class="respuesta-colxxx">Algo razonable</th>
+              <th class="respuesta-colxxx">Razonable</th> -->
+              <th>Situación</th>
+              <th>Irracional</th>
+              <th>Poco razonable</th>
+              <th>Algo razonable</th>
+              <th>Razonable</th>
+          </tr>
             <tr>
               <td class="pregunta-col">1. No ha adoptado tecnologías de vanguardia para sus procesos</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-1" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-1" value="2">
                 </div>
               </td>
+
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-1" value="3">
                 </div>
               </td>
+
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAmarillo" name="color" value="Amarillo">
-                  <label for="colorAmarillo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-1" value="4">
                 </div>
               </td>
             </tr>
@@ -76,26 +101,24 @@
               <td class="pregunta-col">2. No se ha involucrado en adquisiciones de empresas por valores significativos</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-2" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-2" value="2">
                 </div>
               </td>
+
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-2" value="3">
                 </div>
               </td>
+
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-2" value="4">
                 </div>
               </td>
             </tr>
@@ -104,26 +127,24 @@
               <td class="pregunta-col">3. No opera en sectores altamente competitivos donde la innovación y la asunción de riesgos es clave</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-3" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-3" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-3" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-3" value="4">
                 </div>
               </td>
             </tr>
@@ -132,26 +153,24 @@
               <td class="pregunta-col">4. No busca diversificar sus operaciones en varios segmentos</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-4" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-4" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-4" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-4" value="4">
                 </div>
               </td>
             </tr>
@@ -160,26 +179,24 @@
               <td class="pregunta-col">5. No busca asociaciones y colaboraciones estratégicas con otras empresas</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-5" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-5" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-5" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-5" value="4">
                 </div>
               </td>
             </tr>
@@ -188,26 +205,24 @@
               <td class="pregunta-col">6. No opera en industrias con cadenas de suministro volátiles o con fuertes fluctuaciones en la demanda</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-6" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-6" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-6" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-6" value="4">
                 </div>
               </td>
             </tr>
@@ -216,26 +231,24 @@
               <td class="pregunta-col">7. No se han encarado en los dos últimos años inversiones para proyectos nuevos y significativos</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-7" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-7" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-7" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-7" value="4">
                 </div>
               </td>
             </tr>
@@ -245,26 +258,24 @@
               <td class="pregunta-col">8. No se han efectuado en los dos últimos años adquisiciones de compañias o unidades de negocio de compañias</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-8" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-8" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-8" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-8" value="4">
                 </div>
               </td>
             </tr>
@@ -273,26 +284,24 @@
               <td class="pregunta-col">9. No se han lanzado en los dos últimos años proyectos de innovación con todavía resultado incierto</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-9" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-9" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-9" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-9" value="4">
                 </div>
               </td>
             </tr>
@@ -301,26 +310,24 @@
               <td class="pregunta-col">10. No se han buscado oportunidades de desarrollo basadas en inversiones con alto poder de daño.</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-10" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-10" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-10" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-10" value="4">
                 </div>
               </td>
             </tr>
@@ -329,26 +336,24 @@
               <td class="pregunta-col">11. No ha tenido que enfrentar dificultades de carácter financiero en el pasado</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-11" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-11" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-11" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-11" value="4">
                 </div>
               </td>
             </tr>
@@ -357,26 +362,24 @@
               <td class="pregunta-col">12. Se ha completado un proceso de transformación digital en un área core o de soporte significativa en forma integral</td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorRojo" name="color1" value="Rojo">
-                  <label for="colorRojo" class="radio-label"></label>
+                  <input type="radio"  name="B-3-12" value="1">
                 </div>
               </td>
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorAzul" name="color1" value="Azul">
-                  <label for="colorAzul" class="radio-label"></label>
+                  <input type="radio"  name="B-3-12" value="2">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-12" value="3">
                 </div>
               </td>
-              <td>
+
+              <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" id="colorVerde" name="color1" value="Verde">
-                  <label for="colorVerde" class="radio-label"></label>
+                  <input type="radio"  name="B-3-12" value="4">
                 </div>
               </td>
             </tr>
@@ -394,8 +397,57 @@
         </form>
     </section>
   </section>
+
   
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+      <div class="gauge-container">
+        <canvas id="gaugeChart";></canvas>
+      </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
 </body>
+
+<script>
+  document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
 
 <script>
   function toggleVisibility() {
@@ -418,4 +470,5 @@
 
 </script>
 
+<script src="../../js/mb-3.js"></script>
 </html>

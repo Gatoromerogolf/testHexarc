@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riesgos de Gobierno Corporativo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    .centered {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body id="conclusiones">
+  <div class="survey-container-conclusiones">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div>
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+            <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+            <h5> Autoevaluación</h5>
+        </div>
+        <hr>
+
+        <!-- <form id="formulario"> -->
+          <div class="contenedorTitulo">
+            <div class="logo-container">
+              <a href="Menu-General.html">
+                <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
+                        height: auto">;
+              </a>
+            </div>
+            <div class="center-container-titulo">
+              <h4 class="tituloSeccionContainer"><a href="Menu-A.html">Conclusiones preliminares</a></h4>
+            </div>
+          </div>
+
+  <table class="table-conclusiones">
+    <p class="pconclusiones">La presente autoevaluación tiene como objetivo medir la efectividad de los procesos,
+      principios y valores que conforman el Gobierno Corporativo de la organización. A través de este ejercicio,
+      se ha analizado cómo la organización es estrategizada, administrada, controlada y transparentada, asignando
+      una puntuación a cada elemento evaluado. Los resultados se presentan a continuación.</p>
+
+    <table style="width: 300px">
+      <tr>
+        <th class="pregunta-col">Puntaje general</th>
+      </tr>
+    </table>
+
+    <p class="pconclusiones">La autoevaluación consiste en la asignación de una valoración cuantitativa a cada uno
+      de los elementos analizados, reflejando su contribución al Gobierno Corporativo de la organización. Cada
+      elemento evaluado posee un valor máximo, el cual representa el estándar ideal o deseado. En el contexto de
+      esta evaluación, el puntaje máximo alcanzado ha sido:</p>
+
+
+<!--     <div style="text-align: center; border: 1px solid black; border-radius: 5px; padding: 10px 0;"">
+      Máximo del factor:
+      <p id="puntajeTotal" style="display: inline; font-weight: bold; margin: 0;"></p>
+      <span>puntos |</span>
+      <span>Puntaje obtenido: <span id="puntajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span></span>
+      <span>| Porcentaje: <span id="porcentajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+    </div> -->
+
+    
+    <div class="container-resultados">
+            Máximo del factor:
+      <p id="puntajeTotal" style="display: inline; font-weight: bold; margin: 0;"></p>
+      <span>puntos |</span>
+      <span>Puntaje obtenido: <span id="puntajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span></span>
+      <span>| Porcentaje: <span id="porcentajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+    </div>
+
+
+    <p class="pconclusiones">Este porcentaje ofrece una visión consolidada del desempeño global de la
+      organización, englobando la calificación de los elementos distribuidos en los cuatro grupos que se detallan
+      a continuación.
+  </table>
+
+        <br>
+
+  <h1>Situaciones NO EFECTIVAS</h1>
+  <p class="pconclusiones">Los elementos que se encuentran en esta categoría han obtenido una puntuación que no ha
+          logrado superar el 50% de la puntuación ideal. Estos aspectos requieren una atención prioritaria, ya que su
+          falta de efectividad podría comprometer el cumplimiento de nuestras metas estratégicas y la buena gobernanza
+          en la organización. Es fundamental identificar las causas de esta baja performance y desarrollar planes de
+          mejora específicos.</p>
+
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 0 - 50%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+      <tbody id="questionsTableBody" style="font-size: 12px; font-family: Abel">
+      </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones POCO EFECTIVAS </h1>
+  <p class="pconclusiones">Este grupo incluye aquellos elementos que han logrado una puntuación entre el 50% y el
+          70%. Aunque muestran cierta efectividad, estos aspectos necesitan mejoras sustanciales para alcanzar un nivel
+          que garantice su pleno funcionamiento dentro de nuestra estructura de Gobierno Corporativo. Un enfoque en el
+          fortalecimiento de estos elementos permitirá que se alineen mejor con las metas corporativas y principios
+          rectores.</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 50.01 - 70%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions5170">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones EFECTIVAS </h1>
+  <p class="pconclusiones">Los elementos clasificados como efectivos han obtenido una puntuación entre el 70% y el
+    90%. Estos aspectos demuestran un buen nivel de desempeño, contribuyendo de manera significativa a la
+    gobernanza de la organización. No obstante, siempre es posible realizar ajustes y refinamientos que permitan
+    consolidar estos logros y asegurar su sostenibilidad a largo plazo.</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 70.01 - 90%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions7190">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones MUY EFECTIVAS </h1>
+  <p class="pconclusiones">Los elementos en esta categoría han logrado una puntuación superior al 90%, indicando
+    que son altamente efectivos en el contexto del Gobierno Corporativo. Estos aspectos representan las mejores
+    prácticas dentro de la organización y sirven como modelos a seguir en la búsqueda continua de la excelencia.
+    Mantener y fortalecer estos elementos es crucial para asegurar la estabilidad y transparencia de la
+    gobernanza.</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 90.01 - 100%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions90100">
+    </tbody>
+  </table>
+  <br>
+  <br>
+
+  <table style="width: 300px">
+    <tr>
+      <th class="pregunta-col">CONCLUSION GENERAL</th>
+    </tr>
+  </table>
+
+  <p class="pconclusiones">Clasificación: Efectivo
+
+    Su puntaje refleja un desempeño sólido en los aspectos evaluados del gobierno corporativo. Esto indica que su organización ha implementado prácticas y políticas que cumplen con los estándares esperados y están bien alineadas con los principios de buen gobierno. Se observan áreas de fortaleza en la gestión y supervisión, así como un compromiso notable con la transparencia y la rendición de cuentas.
+    
+    Aunque se ha alcanzado un nivel efectivo, es recomendable seguir evaluando y ajustando los procesos para mantener o incluso mejorar esta clasificación en el futuro. La revisión continua y la adaptación a las mejores prácticas en gobernanza pueden ofrecer nuevas oportunidades para optimizar aún más la eficacia y el cumplimiento en su organización.</P>
+
+    <p class="pconclusiones">     
+      Clasificación: No Efectivo
+      Su puntaje indica que hay áreas significativas que requieren atención y mejora en el gobierno corporativo de su organización. Las prácticas y políticas actuales no cumplen con los estándares esperados y hay deficiencias en la gestión y supervisión. Es crucial identificar y abordar las debilidades para mejorar el desempeño general y alinear mejor las prácticas con los principios de buen gobierno. Se recomienda desarrollar un plan de acción detallado para corregir estas deficiencias y buscar asesoramiento para implementar mejoras efectivas.</p>
+
+  <p class="pconclusiones">Clasificación: Poco Efectivo
+
+    Su puntaje sugiere que, aunque hay algunas prácticas de gobierno corporativo implementadas, existen varias áreas que aún necesitan ser mejoradas. La organización muestra un compromiso moderado con las prácticas de gobernanza, pero es necesario fortalecer los aspectos críticos para alcanzar un nivel más alto de efectividad. Se aconseja revisar y optimizar las políticas y procedimientos existentes, enfocándose en las áreas de debilidad para lograr un mayor alineamiento con las mejores prácticas de gobernanza.</p>
+
+      <p class="pconclusiones">Clasificación: Muy Efectivo
+
+        Su puntaje refleja un excelente desempeño en los aspectos evaluados del gobierno corporativo. La organización ha adoptado y mantenido prácticas de gobernanza ejemplares, que cumplen y superan los estándares esperados. Hay una clara evidencia de una sólida gestión, supervisión y un alto nivel de transparencia y rendición de cuentas. Mantener este alto nivel de efectividad es crucial, y se recomienda seguir innovando y adaptando las mejores prácticas para asegurar la sostenibilidad y la excelencia continua en la gobernanza.</p>
+
+  <br>
+
+  <div class="centrado-flex">
+    <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
+  </div>
+
+        </form>
+  </div>
+
+    </section>
+  </section>
+
+  <div id="modalGeneral" class="dialog-overlay" style="display:none;">
+    <div class="dialog-container">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <span class="dialog-title">Matriz de Datos  |</span>
+        <button id="closeDialog" class="dialog-close">&times;</button>
+      </div>
+      <div style="text-align: center;">
+        Sección:
+        <p id="nombreSeccion" style="display: inline; font-weight: bold; margin: 0;"></p>
+        <span> |</span>
+        <span>Puntaje obtenido: <span id="nombrePuntaje"
+            style="display: inline; font-weight: bold; margin: 0;"></span></span>
+        <span>| Porcentaje: <span id="nombrePorciento"
+            style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+      </div>
+      <div class="dialog-content">
+        <p id="tituloModalGeneral"></p>
+        <!-- <table id="tablaModalGeneral"> -->
+          <table id="dataTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Sec</th>
+                <th>Nro</th>
+                <th>Consigna</th>
+                <th>Respuesta</th>
+                <th>Obs.</th>
+              </tr>
+            </thead>
+            <tbody id="lineaModalGeneral">
+              <!-- Las filas dinámicas se insertarán aquí -->
+            </tbody>
+          </table>
+      </div>
+    <!-- </div> -->
+    <div class="dialog-footer">
+        <button onclick="cerrarModal('modalGeneral')" class="dialog-button">Cerrar</button>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <script>
+    function printPage() {
+      window.print();
+    }
+  </script>
+
+<script>
+document.getElementById("closeDialog").addEventListener("click", function() {
+  document.getElementById("modalGeneral").style.display = "none";
+});
+</script>
+
+</body>
+
+<script src="../../js/ma-conclusiones.js"></script>
+
+</html>

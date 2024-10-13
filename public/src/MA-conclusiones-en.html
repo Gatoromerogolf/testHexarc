@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riesgos de Gobierno Corporativo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    .centered {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body id="conclusiones">
+  <div class="survey-container-conclusiones">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div>
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+            <h4> A - Corporate Governance Risk Management</h4>
+            <h5> Self-assessment</h5>
+        </div>
+        <hr>
+
+        <!-- <form id="formulario"> -->
+          <div class="contenedorTitulo">
+            <div class="logo-container">
+              <a href="Menu-General-en.html">
+                <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
+                        height: auto">;
+              </a>
+            </div>
+            <div class="center-container-titulo">
+              <h4 class="tituloSeccionContainer"><a href="Menu-A.html">Preliminary conclusions</a></h4>
+            </div>
+          </div>
+
+  <table class="table-conclusiones">
+    <p class="pconclusiones">The purpose of this self-assessment is to measure the effectiveness of the processes, principles, and values that shape the Corporate Governance of the organization. Through this exercise, an analysis has been conducted to assess how the organization is strategized, managed, controlled, and made transparent, assigning a score to each evaluated element. The results are presented below.</p>
+
+    <table style="width: 300px">
+      <tr>
+        <th class="pregunta-col">Overall score</th>
+      </tr>
+    </table>
+
+    <p class="pconclusiones">The self-assessment consists of assigning a quantitative score to each of the analyzed elements, reflecting its contribution to the Corporate Governance of the organization. Each evaluated element has a maximum value, representing the ideal or desired standard. In the context of this evaluation, the maximum score achieved has been:</p>
+
+    
+    <div class="container-resultados">
+            Maximum factor:
+      <p id="puntajeTotal" style="display: inline; font-weight: bold; margin: 0;"></p>
+      <span>points |</span>
+      <span>Score obtained: <span id="puntajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span></span>
+      <span>| Percentage: <span id="porcentajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+    </div>
+
+
+    <p class="pconclusiones">This percentage provides a consolidated view of the organization's overall performance, encompassing the rating of elements distributed across the four groups detailed below.
+  </table>
+
+        <br>
+
+  <h1>INEFFECTIVE Situations</h1>
+  <p class="pconclusiones">The elements in this category have scored below 50% of the ideal score. These aspects require immediate attention, as their lack of effectiveness could compromise the achievement of our strategic goals and the organization's good governance. It is essential to identify the causes of this poor performance and develop specific improvement plans.</p>
+
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Section</th>
+        <th colspan="4">Rating: 0 - 50%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>View</th>
+      </tr>
+    </thead>
+      <tbody id="questionsTableBody" style="font-size: 12px; font-family: Abel">
+      </tbody>
+  </table>
+  <br>
+
+  <h1>INEFFECTIVE Situations</h1>
+  <p class="pconclusiones">This group includes elements that have scored between 50% and 70%. While they show some effectiveness, these aspects require substantial improvements to reach a level that ensures their full functionality within our Corporate Governance structure. Focusing on strengthening these elements will allow them to better align with corporate goals and guiding principles.</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Section</th>
+        <th colspan="4">Rating: 50.01 - 70%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody id="questions5170">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>EFFECTIVE Situations</h1>
+  <p class="pconclusiones">The elements classified as effective have scored between 70% and 90%. These aspects demonstrate a good level of performance, contributing significantly to the organization's governance. However, there is always room for adjustments and refinements to consolidate these achievements and ensure their long-term sustainability.</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Section</th>
+        <th colspan="4">Rating: 70.01 - 90%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody id="questions7190">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>HIGHLY EFFECTIVE Situations </h1>
+  <p class="pconclusiones">The elements in this category have scored above 90%, indicating they are highly effective within the Corporate Governance context. These aspects represent best practices within the organization and serve as models to follow in the ongoing pursuit of excellence. Maintaining and strengthening these elements is crucial to ensuring the stability and transparency of governance.</p>
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Section</th>
+        <th colspan="4">Rating: 90.01 - 100%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Real</th>
+        <th>%</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody id="questions90100">
+    </tbody>
+  </table>
+  <br>
+  <br>
+
+  <table style="width: 300px">
+    <tr>
+      <th class="pregunta-col">OVERALL CONCLUSION</th>
+    </tr>
+  </table>
+
+  <p class="pconclusiones">Los resultados de esta autoevaluación reflejan un panorama diverso en la efectividad de
+    los elementos que conforman el Gobierno Corporativo. Si bien se cuenta con aspectos que han demostrado ser
+    altamente efectivos, existen áreas críticas que requieren atención y mejora urgente. La implementación de
+    planes de acción específicos para los elementos no efectivos y poco efectivos será esencial para elevar el
+    estándar de gobernanza y asegurar un alineamiento completo con las metas estratégicas. En conjunto, los
+    resultados proporcionan una hoja de ruta clara para fortalecer las prácticas de gobierno y consolidar una
+    gestión basada en principios sólidos y valores transparentes.</P>
+
+  <br>
+
+  <div class="centrado-flex">
+    <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
+  </div>
+
+        </form>
+  </div>
+
+    </section>
+  </section>
+
+  <div id="modalGeneral" class="dialog-overlay" style="display:none;">
+    <div class="dialog-container">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <span class="dialog-title">Matriz de Datos  |</span>
+        <button id="closeDialog" class="dialog-close">&times;</button>
+      </div>
+      <div style="text-align: center;">
+        Sección:
+        <p id="nombreSeccion" style="display: inline; font-weight: bold; margin: 0;"></p>
+        <span> |</span>
+        <span>Puntaje obtenido: <span id="nombrePuntaje"
+            style="display: inline; font-weight: bold; margin: 0;"></span></span>
+        <span>| Porcentaje: <span id="nombrePorciento"
+            style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+      </div>
+      <div class="dialog-content">
+        <p id="tituloModalGeneral"></p>
+        <!-- <table id="tablaModalGeneral"> -->
+          <table id="dataTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Sec</th>
+                <th>Nro</th>
+                <th>Consigna</th>
+                <th>Respuesta</th>
+                <th>Obs.</th>
+              </tr>
+            </thead>
+            <tbody id="lineaModalGeneral">
+              <!-- Las filas dinámicas se insertarán aquí -->
+            </tbody>
+          </table>
+      </div>
+    <!-- </div> -->
+    <div class="dialog-footer">
+        <button onclick="cerrarModal('modalGeneral')" class="dialog-button">Cerrar</button>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <script>
+    function printPage() {
+      window.print();
+    }
+  </script>
+
+<script>
+document.getElementById("closeDialog").addEventListener("click", function() {
+  document.getElementById("modalGeneral").style.display = "none";
+});
+</script>
+
+</body>
+
+<script src="../../js/ma-conclusiones.js"></script>
+
+</html>

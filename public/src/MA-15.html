@@ -9,6 +9,10 @@
   <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -36,10 +40,10 @@
           </div>
 
           <div class="salida">
-            <p>Seleccione la opción que corresponda a su organización.</p>
+            <p>Seleccione la opción que mejor refleje el grado de cumplimiento de la situación descripta en su organización, donde 'Muy efectivo' indica coincidencia o certeza total, y 'No efectivo' refleja la ausencia de aplicación.</p>
             <button type="button" id="boton-salir">Salir</button>
           </div>
-
+          <br>
           <div id="overlay">
           <div id="ventanaSalida" >
             <!-- <div class="confirm-modal" id="confirm-modal">-->
@@ -92,19 +96,27 @@
                 </div>
               </td>
             </tr>
+          </table>
+          
+          <table>
+            <tr>
+              <th class="pregunta-col">Situación</th>
+              <th class="respuesta-col">Si</th>
+              <th class="respuesta-col">No</th>
 
+            </tr>
             <tr>
               <td class="pregunta-col">2. Los directores evalúan a la Secretaría</td>
 
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" name="A-15-2" value="1"><label for="A-15-2" class="radio-label">Si</label>
+                  <input type="radio" name="A-15-2" value="1"><label for="A-15-2" class="radio-label"></label>
                 </div>
               </td>
 
               <td class="respuesta-col">
                 <div class="radio-container">
-                  <input type="radio" name="A-15-2" value="2"><label for="A-15-2" class="radio-label">No</label>
+                  <input type="radio" name="A-15-2" value="2"><label for="A-15-2" class="radio-label"></label>
                 </div>
               </td>
             </tr>

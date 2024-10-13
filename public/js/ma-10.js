@@ -103,21 +103,13 @@ document
     if (!(filasFaltantes.length > 0)) {
       porcientoFormateado = calculaResultados();
       porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
-      // alert(
-      //   `Calificación obtenida: \n
-      //         Puntaje máximo de la sección: ${maximo} \n
-      //         Calificación: ${valores} \n
-      //         Porcentual: ${porcientoFormateado}%`
-      // );
-      // console.log("Mostrando alerta personalizada...");
+
       mostrarMiAlerta(maximo, valores, porcientoFormateado);
       console.log(`Suma puntos ${valores},
                  valor máximo: ${maximo},
                  porcentaje ${porcientoFormateado}`);
       console.table(puntajesIndividuales);
 
-      // // Supongamos que calculas o recibes algún valor 'nuevoValor'
-      // let nuevoValor = porcientoFormateado; // Función hipotética que genera un valor
 
       // Guardar el valor en LocalStorage
       localStorage.setItem("maximo-10", JSON.stringify(maximo));

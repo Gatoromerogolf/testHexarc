@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risk Appetite</title>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body class="menu-a-page aperie">
+    <div class="survey-container">
+      <section class="main">
+        <section class="gobCorpo">
+          <div class="header-container">
+              <div class="header-center">
+                <div id="nombreEmpresa" class="company-name"></div>
+                <div id="nombreUsuario" class="user-name"></div>
+              </div>
+            <div class="nav-iconstxt">
+              <h4>B - Risk Appetite Management</a></h4>
+            </div>
+            <div class="nav-iconsxx">
+              <h5>Self-assessment</h5>
+            </div>
+          </div>
+          <hr>
+
+          <form id="formulario">
+
+            <div class="center-container">
+              <h4 class="tituloSeccion"><a href="Menu-B-en.html">IV - Current Circumstances</a></h4>
+            </div>
+
+            <div class="salida">
+              <p>Select the option that corresponds to your organization.</p>
+              <button type="button" id="boton-salir">Exit</button>
+            </div>
+  
+            <div id="overlay">
+              <div id="ventanaSalida">
+                <!-- <div class="confirm-modal" id="confirm-modal">-->
+                <div class="confirm-box">
+                  <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
+                    missing items later.
+                    <br>
+                  </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                  <button id="confirm-yes">Exit</button>
+                  <button id="confirm-no">Continue</button><br>
+                </div>
+              </div>
+            </div>
+
+          <table>
+            <tr>
+              <th class="pregunta-col">Situation</th>
+              <th class="respuesta-col">Irrational</th>
+              <th class="respuesta-col">Unreasonable</th>
+              <th class="respuesta-col">Somewhat reasonable</th>
+              <th class="respuesta-col">Reasonable</th>
+            </tr>
+            <tr>
+              <td class="pregunta-col">1. The financial situation is solid enough to support a high-risk appetite
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-1" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-1" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-1" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-1" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">2. The financial situation is solid due to a solid Earnings Profile
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-2" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-2" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-2" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-2" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">3. The financial situation is solid due to a solid Earnings Profile (from Earnings Profile Statement)
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-3" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-3" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-3" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-3" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">4. There is no high turnover of staff
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-4" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-4" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-4" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-4" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">5. All physical assets are adequately insured
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-5" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-5" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-5" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-5" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">6. The company is not exposed to significant tax, labor, or other contingent liabilities
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-6" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-6" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-6" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-6" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">7. The financial structure in foreign currency is appropriately balanced
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-7" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-7" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-7" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-7" value="4">
+                </div>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td class="pregunta-col">8. All intellectual properties are adequately protected
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-8" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-8" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-8" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-8" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">9. There is no high exposure to international markets
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-9" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-9" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-9" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-9" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">10. The company is not benefiting from state-sponsored promotion schemes
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-10" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-10" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-10" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-10" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">11. There are no investments in financial assets abroad in countries with a high country risk
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-11" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-11" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-11" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-11" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">12. There are no production plants in countries with high legal insecurity
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-12" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-12" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-12" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-12" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">13. The main activities do not depend on government permits or concessions
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-13" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-13" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-13" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-13" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">14. No significant investments have been made in new technologies in the last two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-14" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-14" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-14" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-14" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">15. No significant investments have been made in highly volatile markets in the previous two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-15" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-15" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-15" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-15" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">16. No considerable investments have been made in high-risk R&D projects in the last two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-16" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-16" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-16" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-16" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">17. No new products not tested in the market have been launched in the previous two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-17" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-17" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-17" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-17" value="4">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="pregunta-col">18. No investments have been made in new international markets for the company in the last two years
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-18" value="1">
+                </div>
+              </td>
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-18" value="2">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-18" value="3">
+                </div>
+              </td>
+
+              <td class="respuesta-col">
+                <div class="radio-container">
+                  <input type="radio"  name="B-4-18" value="4">
+                </div>
+              </td>
+            </tr>
+
+          <tr>
+            <td class="pregunta-col">19. No speculative financial strategies have been implemented in the last two years
+            </td>
+            <td class="respuesta-col">
+              <div class="radio-container">
+                <input type="radio"  name="B-4-19" value="1">
+              </div>
+            </td>
+            <td class="respuesta-col">
+              <div class="radio-container">
+                <input type="radio"  name="B-4-19" value="2">
+              </div>
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container">
+                <input type="radio"  name="B-4-19" value="3">
+              </div>
+            </td>
+
+            <td class="respuesta-col">
+              <div class="radio-container">
+                <input type="radio"  name="B-4-19" value="4">
+              </div>
+            </td>
+          </tr>
+
+
+          </table>
+
+          <div class="centrado-flex">
+            <button type="submit" id="boton-enviar">Enviar</button>
+          </div>
+
+          <div class="centrado-flex">
+            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
+          </div>
+
+        </form>
+    </section>
+  </section>
+
+    
+  <div id="miAlerta" class="alerta-oculto">
+    <div class="alerta-contenido">
+      <div class="alerta-cabecera">
+        <span>Resumen de la sección</span>
+      </div>
+      <div class="alerta-cuerpo">
+        <p>Puntaje máximo posible: <span id="maximo"></span></p>
+        <p>Calificación obtenida: <span id="calificacion"></span></p>
+        <p>Porcentual: <span id="porcentual"></span></p>
+
+      <div class="gauge-container">
+        <canvas id="gaugeChart";></canvas>
+      </div>
+
+        <button id="continuar" onclick="continuar()">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+  const botonSalida = document.getElementById('boton-salir');
+  const ventanaSale = document.getElementById('ventanaSalida');
+  const botonYes = document.getElementById('confirm-yes');
+  const botonNou = document.getElementById('confirm-no');
+
+  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+    let isExiting = true;
+    ventanaSale.style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  });
+
+  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+    isExiting = true;
+    console.log('dijo que NO')
+    ventanaSale.style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+  });
+
+  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+    console.log('dijo que SI')
+    isExiting = true;
+    window.location.href = '../../index.html';
+  });
+</script>
+
+<script>
+  function toggleVisibility() {
+    var element = document.getElementById('myElement');
+    if (element.style.display === 'none') {
+      element.style.display = 'block';
+      // Asegúrate de darle tiempo al navegador para que reconozca el cambio de 'display'
+      setTimeout(() => {
+        element.style.opacity = 1;
+      }, 10);
+    } else {
+      element.style.opacity = 0;
+      // Espera a que termine la transición de opacidad para cambiar el display a 'none'
+      element.addEventListener('transitionend', function handler() {
+        element.style.display = 'none';
+        element.removeEventListener('transitionend', handler);
+      });
+    }
+  }
+
+</script>
+
+
+<script src="../../js/mb-4.js"></script>
+</html>

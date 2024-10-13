@@ -1,0 +1,474 @@
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  /* background-image: url('../img/reuniones.png'); ../estilos/estiloMenuGeneral.css */
+  background-image: url("background.jpg"); /*../estilos/estiloMenuGeneral.css*/
+  background-image: url("../estilos/background.jpg"); /*../estilos/estiloMenuGeneral.css */
+  background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed;
+}
+#conclusiones {
+  font-family: "Abel", sans-serif;
+  font-weight:500;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Fondo específico para la clase fiananciero */
+body.financiero {
+  background: url("background financiero.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Abel", sans-serif;
+}
+
+/* Fondo específico para la clase apetito riesgo */
+body.aperie {
+  background: url("background aperie.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase mercado */
+body.mercado {
+  background: url("background mercado.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase procesos */
+body.procesos {
+  background: url("background procesos.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Fondo específico para la clase clidad */
+body.calidad {
+  background: url("background calidad.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.TituloXXX {
+  display: flex;
+  align-items: center; /* Centra verticalmente la imagen y el texto */
+}
+
+/*----------------------  ENCABEZADO  ----------------------------------*/
+
+
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-name,
+.user-name {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.company-name {
+  font-size: 12px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-weight: bold;
+}
+
+.user-name {
+  font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+
+/* ----------------- CONCLUSIONES PRELIMINARES E ICONO DE RETORNO ---------*/
+.contenedorTitulo {
+  display: flex;
+  align-items: center; /* Centra verticalmente la imagen y el texto */
+  justify-content: center;  /* Centra horizontalmente todo el contenido */
+  position: relative;
+}
+
+.logo-container {
+  position: absolute;
+  left: 10px;  /* Ajusta la posición de la imagen según sea necesario */
+}
+.center-container-titulo {
+  display: flex;
+  align-items: center;
+}
+
+.tituloSeccionContainer {
+  margin: 0;
+  font-size: 16px; /* Ajusta el tamaño del texto según sea necesario */
+  display: inline-block;
+  padding: 10px 50px 10px 50px; /* Espacio interior del rectángulo */
+  border: 2px solid rgba(0, 0, 0, 0.5); /* Borde del rectángulo */
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo transparente */
+  color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
+  border-radius: 5px; /* Bordes redondeados, opcional */
+  text-align: center;
+}
+
+.tituloSeccionContainer a {
+  text-decoration: none; /* Quitar el subrayado del enlace */
+  color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
+}
+
+.tituloSeccionContainer:hover {
+  background-color: rgba(206, 166, 166, 0.5); /* Fondo transparente */
+}
+/*-------------------------------  TEXTO CONCLUSIONES  -------------------*/
+
+
+.containerTitulo {
+  display: flex; /* Flexbox para la disposición de los elementos */
+  justify-content: space-between; /* Distribuye el espacio*/
+  align-items: center; /* Centra verticalmente*/
+  padding: 5px; /* Espacio alrededor del contenido*/
+}
+
+h1,
+h2,
+h3 {
+  text-align: center;
+  color: #333333;
+}
+
+h5 {
+  color: #686767;
+}
+
+.salida {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salida p {
+  font-size: 12px;
+  margin: 0; /* Remove default margin */
+}
+
+.salida button {
+  margin-left: auto; /* Push button to the right */
+}
+
+.botonSiguiente {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 15px;
+  /* font-family: "Abel", sans-serif; */
+  color: white;
+  background-color: #007bff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.botonSiguiente:hover {
+  background-color: #0056b3;
+}
+
+.centrado-flex {
+  margin: 5px;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  /*align-items: center; Centra verticalmente*/
+  /*height: 100vh; /* Altura completa de la ventana del navegador */
+}
+
+/* ajusta los valores de totales de Menu-A*/
+.ajustado-derecha {
+  text-align: right;
+}
+
+/* -------------  ALERTA MAS LINDO ----*/
+.alerta-ocultoXXX {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+
+#continuar {
+  background-color: #4caf50; /* Color de fondo */
+  color: white; /* Color de texto */
+  padding: 12px 24px; /* Espaciado alrededor del texto */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano al pasar el mouse */
+  transition: all 0.3s; /* Transición suave para los cambios */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+  margin-top: 20px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* --------------- GRAFICOS RESUMEN -------------------*/
+
+.flex-graficos-resumen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* --------------- ICONOS AVANCE  RETROCESO ----------*/
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 10px; /* Espacio entre las imágenes */
+}
+
+.nav-icons img {
+  width: 40px; /* Ajusta el tamaño de las imágenes según necesites */
+  height: auto;
+}
+
+.nav-iconstxt a {
+  text-decoration: none;
+}
+
+/* --------------   PREGUNTAS EN TABLAS
+  /* Estilos para la tabla */
+table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+th {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  background-color: #f2f2f2;
+  /* font-family: "Abel", sans-serif; */
+  font-size: 15px;
+}
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  /* font-family: "Abel", sans-serif; */
+  font-size: 14px;
+}
+
+/* Eliminar el borde en el último elemento para evitar doble línea */
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Clases para controlar el ancho de las columnas */
+.pregunta-col {
+  /*width: 30%; /* Ancho inicial de la columna de preguntas */
+  max-width: 200px;
+  /* Ancho máximo de la columna de preguntas */
+}
+
+.pregunta-col-2 {
+  /*width: 30%; /* Ancho inicial de la columna de preguntas */
+  max-width: 150px;
+  /* Ancho máximo de la columna de preguntas */
+  margin-left: 50px;
+}
+
+.respuesta-col {
+  width: 15%;
+  /* Ancho inicial para las columnas de respuesta */
+  max-width: 45px;
+  /* Ancho máximo para las columnas de respuesta */
+  font-size: 13px;
+}
+
+.respuesta-financiera {
+  width: 12%;
+  /* Ancho inicial para las columnas de respuesta */
+  max-width: 30px;
+  /* Ancho máximo para las columnas de respuesta */
+  font-size: 13px;
+}
+/* Estilos para contenedores de radios */
+.radio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos para etiquetas debajo de los radios */
+.radio-label {
+  margin-top: 4px;
+}
+
+
+/* -----------BOTON ENVIAR ------------------------*/
+
+#boton-enviar {
+  background-color: #4caf50; /* Color de fondo */
+  color: white; /* Color de texto */
+  padding: 12px 24px; /* Espaciado alrededor del texto */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano al pasar el mouse */
+  transition: all 0.3s; /* Transición suave para los cambios */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+}
+
+#boton-enviar:hover {
+  background-color: #45a049; /* Color de fondo al pasar el mouse */
+}
+
+#boton-enviar:focus {
+  outline: none; /* Elimina el contorno al enfocar */
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.6); /* Sombra de foco */
+}
+
+/* -----------BOTON BORRAR ------------------------*/
+
+#boton-borrar {
+  background-color: #fe0314; /* Color de fondo */
+  color: white; /* Color de texto */
+  padding: 12px 24px; /* Espaciado alrededor del texto */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano al pasar el mouse */
+  transition: all 0.3s; /* Transición suave para los cambios */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+}
+
+#boton-borrar:hover {
+  background-color: #b6041c; /* Color de fondo al pasar el mouse */
+}
+
+#boton-borrar:focus {
+  outline: none; /* Elimina el contorno al enfocar */
+  box-shadow: 0 0 8px rgba(247, 6, 14, 0.6); /* Sombra de foco */
+}
+
+
+
+
+.confirm-modal {
+  /* #ventanaSalida { */
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.confirm-box button {
+  margin: 5px;
+}
+
+/* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+.tituloSeccion {
+  display: inline-block;
+  padding: 10px 50px 10px 50px; /* Espacio interior del rectángulo */
+  border: 2px solid rgba(0, 0, 0, 0.5); /* Borde del rectángulo */
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo transparente */
+  color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
+  border-radius: 5px; /* Bordes redondeados, opcional */
+  text-align: center;
+}
+
+.tituloSeccion a {
+  text-decoration: none; /* Quitar el subrayado del enlace */
+  color: inherit; /* Mantener el color del enlace como el color del texto del h1 */
+}
+
+/* ------------------  LISTAS  --------------------------*/
+
+
+.font-style-conclu {
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+  font-family: "Abel", sans-serif; /* Define el tipo de la fuente */
+  font-weight:400; /* Define el grosor de la fuente (opcional) */
+}
+.survey-container-conclusiones {
+  max-width: 700px;
+  margin: 45px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+
+/* Asegúrate de que la tabla ocupe todo el espacio disponible */
+#tabla-financiera {
+  width: 85%;
+  border-collapse: collapse;
+  margin-left: 60px;
+}
+
+/* Ajusta el ancho de las celdas de preguntas y respuestas */
+#tabla-financiera th.pregunta-financiera,
+#tabla-financiera td.pregunta-financiera,
+#tabla-financiera th.respuesta-financiera,
+#tabla-financiera td.respuesta-financiera {
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+
+#tabla-financiera th, #tabla-financiera td {
+  padding: 10px; /* Espaciado dentro de las celdas */
+  border: 1px solid #ddd; /* Borde de las celdas */
+}
+
+/* Asegúrate de que las celdas de la tabla tengan suficiente ancho */
+#tabla-financiera td.respuesta-financiera,
+#tabla-financiera th.respuesta-financiera {
+  width: 100px; /* Ajusta el ancho según sea necesario */
+}
+
+#tabla-financiera td.pregunta-financiera {
+  width: 150px; /* Ajusta el ancho según sea necesario */
+  white-space: normal; /* Permite que el texto se ajuste en varias líneas */
+  overflow: visible; /* Asegúrate de que el contenido no se corte */
+  font-size: 15px;
+}
+/* Asegura que el campo de número se ajuste al ancho de la celda */
+#tabla-financiera input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 5px; /* Ajusta este valor para el espaciado interno */
+  font-size: 15px; /* Asegúrate de que el tamaño de la fuente sea consistente */
+}
+
+#tabla-financiera td {
+  font-size: 15px; /* Asegúrate de que el tamaño de la fuente sea consistente */
+}

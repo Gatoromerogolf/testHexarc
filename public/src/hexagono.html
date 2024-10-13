@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexágono Dinámico con Bordes y Áreas</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="hexagonoCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const variables = [60, 80, 40, 90, 100, 70]; // Porcentajes de cada área (0 a 100)
+
+        function dibujarHexagono(variables) {
+            const canvas = document.getElementById('hexagonoCanvas');
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radioMax = 150; // Radio máximo (el tamaño máximo del hexágono)
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
+
+            // Dibuja el borde exterior del hexágono
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radioMax * Math.cos(angulo);
+                const y = centerY + radioMax * Math.sin(angulo);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                    ctx.lineTo(x, y); // Dibuja los bordes del hexágono
+                }
+            }
+            ctx.closePath();
+            ctx.strokeStyle = 'black';
+            ctx.stroke(); // Dibuja el borde exterior del hexágono
+
+            // Dibuja las líneas desde el centro hacia los vértices
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const x = centerX + radioMax * Math.cos(angulo);
+                const y = centerY + radioMax * Math.sin(angulo);
+
+                ctx.moveTo(centerX, centerY); // Empieza desde el centro
+                ctx.lineTo(x, y); // Línea desde el centro hasta el borde
+            }
+            ctx.strokeStyle = 'gray';
+            ctx.stroke(); // Dibuja las líneas radiales
+
+            // Dibuja el área basada en las variables (llenado parcial)
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
+                const radio = radioMax * porcentaje; // Ajusta el radio según el porcentaje
+                const x = centerX + radio * Math.cos(angulo);
+                const y = centerY + radio * Math.sin(angulo);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y); // Mueve al primer punto
+                } else {
+                    ctx.lineTo(x, y); // Dibuja las líneas para el área rellena
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(0, 150, 255, 0.5)'; // Color de relleno con transparencia
+            ctx.fill(); // Rellena el área del hexágono dinámico
+            ctx.strokeStyle = 'blue';
+            ctx.stroke(); // Dibuja el borde de la forma rellena
+        }
+
+        // Dibuja el hexágono con las variables dadas
+        dibujarHexagono(variables);
+
+    </script>
+</body>
+</html>
+mu 
