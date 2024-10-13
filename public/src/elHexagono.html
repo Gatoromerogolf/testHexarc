@@ -285,7 +285,7 @@
               ctx.stroke(); // Dibuja el borde de la forma rellena
 
               // Agregar el valor de cada variable dentro de su triángulo
-              ctx.font = '15px Abel strong';
+              ctx.font = '15px "Abel", strong';
               ctx.fillStyle = 'black';
               for (let i = 0; i < 6; i++) {
                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
@@ -337,10 +337,10 @@
 
                 if (i === 3) {
                   ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5); // Primera palabra
-                  ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 15); // Segunda palabra
+                  ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14); // Segunda palabra
                 } else {
-                  ctx.fillText(palabras[0], xRotulo - 20, yRotulo - 5); // Primera palabra
-                  ctx.fillText(palabras[1], xRotulo - 20, yRotulo + 15); // Segunda palabra
+                  ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5); // Primera palabra
+                  ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14); // Segunda palabra
                 }
 
               }
