@@ -16,6 +16,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+  
 
   <style>
     .loading {
@@ -53,7 +57,7 @@
           <div id="nombreEmpresa" class="company-name"></div>
           <div id="nombreUsuario" class="user-name"></div>
         </div>
-        <img src="../img/espana.png" alt="Logo Derecha" class="logo right">
+        <!-- <img src="../img/espana.png" alt="Logo Derecha" class="logo right"> -->
       </div>
 
       <!-- <h1>Bienvenido, <span id="username"></span>!</h1> -->
@@ -67,22 +71,40 @@
 
         <table id="tablaIndiceCapitulos" style="display: none">
           <tr>
-            <th>#</th>
+            <th>#</a></th>
             <th style="width: 350px;">Factor</th>
             <th style="width: 65px;">Máx</th>
             <th style="width: 65px;">Calif</th>
             <th style="width: 40px;">%</th>
             <th style="width: 40px;">PDF</th>
-            <th style="width: 40px;">xls</th>
+            <!-- <th style="width: 40px;">xls</a></th> -->
           </tr>
           <tr id="lineaMenu"></tr>
         </table>
       </div>
+        <div class="centrado-flex">
+          <button type="button" onclick="generaInfoFinal()" id="boton-enviar" style="display: none">Informe Final</button>
+        </div>
+      </div>
     </form>
   </div>
 
+
+
   <script>
-    localStorage.setItem('idioma', '1');
+  // Guardar 'idioma' en localStorage como un valor de cadena
+  localStorage.setItem('idioma', '1');
+
+  function generaInfoFinal(event) {
+    // No necesitas JSON.parse() para un valor simple como '1'
+    console.log ('entro en la funcion del boton')
+    const idioma = localStorage.getItem("idioma");
+    
+    // Comparar directamente el valor con '1'
+    window.location.href = idioma === '1' 
+      ? "elHexagono.html" 
+      : "elHexagono-en.html";
+  }
   </script>
 
 <!-- <script>

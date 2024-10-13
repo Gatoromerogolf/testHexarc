@@ -2,36 +2,39 @@ let tablaMenuA = [];
 let tablaMenuEs = [];
 let primeraVez = 0;
 let pagina = "";
-const CUIT =  localStorage.getItem('CUIT');
+
 const apellidouser = localStorage.getItem("apellido");
 const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
 const empresa = localStorage.getItem("empresa");
-
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-const capitulo = "A";
-respuestas = [];
-listaPrecios = [];
+const idioma = localStorage.getItem("idioma");
+const CUIT =  localStorage.getItem('CUIT');
+
+let listaPrecios = [];
+let capitulos = [];
+let totalCapitulos = [];
+let respuestas = [];
 let direct3o4 = 0;
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-async function inicializarAplicacion() {
+(async function () {
   try {
     listaPrecios = await leerListaPrecios();
-    if (listaPrecios === null) {
-      console.error(
-        "No se pudo leer la lista de precios. Abortando inicialización."
-      );
-      return;
-    }
+    capitulos = await leeCapitulos();
+    totalCapitulos = await obtenerTotalCapitulos(CUIT);
+
+    completarHtml(); // Llama a completarHtml después de procesar todos los capítulos
+
+    document.getElementById('tablaIndiceCapitulos').style.display = 'table';
+    document.getElementById('loading').style.display = 'none';
+
   } catch (error) {
     console.error("Error durante la inicialización de la aplicación:", error);
   }
-}
-inicializarAplicacion();
+})();
 
 async function leerListaPrecios() {
   try {
@@ -40,18 +43,18 @@ async function leerListaPrecios() {
       const result = await response.json();
       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
     } else {
-      console.error("Error al obtener las preguntas:", response.statusText);
+      console.error("Error al obtener la lista de precios", response.statusText);
       return [];
     }
   } catch (error) {
     console.error("Error al realizar la solicitud:", error);
     return [];
   }
+  return false; 
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-procesarCapitulos();
+// procesarCapitulos();
 
 // Función principal que controla la secuencia
 async function procesarCapitulos() {
@@ -64,48 +67,25 @@ async function procesarCapitulos() {
 }
 
 // ::::::::::::::::::::::------------------------------------------
-async function leeCapitulos(indice) {
+async function leeCapitulos() {
   try {
-    const respuesta = await fetch(`/capitulos?indice=${indice}`);
-    if (!respuesta.ok) {
-      console.log(`Error en lectura de capitulos`);
-      return;
-    }
-    const capitulos = await respuesta.json();
-    if (capitulos.length > 0) {
-      const capLeido = capitulos[0];
-      const capitulo = capLeido.letra;
-      const nombre = capLeido.nombre;
-      pagina = capLeido.paginaCap;
-      try {
-        const data = await obtenerTotalCapitulos(CUIT, capitulo);
-        if (data && data.length > 0) {
-          const { CUIT, capitulo, maximo, score, porcentaje } = data[0]; // Desestructura los valores
-          const elemento = [capitulo, "##", nombre, maximo, score, porcentaje];
-          tablaMenuEs.push(elemento);
-        } else {
-          // Si no hay totales, maneja el caso especial
-          const elemento = [capitulo, "##", nombre, null, null, null];
-          if (primeraVez == 0) {
-            elemento[1] = pagina;
-            primeraVez = 1;
-          }
-          tablaMenuEs.push(elemento);
-        }
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
-      }
+    const respuesta = await fetch(`/capitulos?idioma=${idioma}`);
+    if (respuesta.ok) {
+      const capitulos = await respuesta.json();
+      return capitulos;
+    } else {
+      console.error("Error al obtener los datos");
     }
   } catch (error) {
-    console.error("Error en la solicitud:", error);
+    console.error("Error al realizar la solicitud:", error);
   }
+  return false;  
 }
 
 // ::::::::::::::::::::::------------------------------------------
-async function obtenerTotalCapitulos(CUIT, capitulo) {
+async function obtenerTotalCapitulos(CUIT) {
   try {
-    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}&capitulo=${capitulo}`);
-
+    const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
     if (response.ok) {
       const data = await response.json();
       return data; // Devuelve los datos obtenidos si la respuesta es exitosa
@@ -129,145 +109,146 @@ function completarHtml() {
   let totcalif = 0;
   let totporcien = 0;
   let numeroConPunto = 0;
+  let valoresCapitulo = undefined;
 
   //  Agrega a la tabla un ultimo registro de Resumen General
-  const elemento = [null, null, "Resumen General:", null, null, null, null];
-  tablaMenuEs.push(elemento);
+  let textoFinal;
+  if (idioma == 1) {
+    textoFinal = 'Calificación General';
+  }
+    else {
+    textoFinal = 'Total Score';
+    }
 
+  const elemento = [null, null, textoFinal, null, null, null, null];
+  tablaMenuEs.push(elemento);
   tablaMenuA = tablaMenuEs;
 
   let tablaIndice = document.getElementById("tablaIndiceCapitulos");
-  for (i = 0; i < tablaMenuA.length; i++) {
-    //lineaDatosFd = tablaIndice.insertRow();
+  capitulos.forEach((capitulo, indice, array) => {
     let lineaDatosFd = tablaIndice.insertRow();
 
     let celdaNombre = lineaDatosFd.insertCell(-1);
-    celdaNombre.textContent = tablaMenuA[i][0];
-
-    // Crear la segunda celda (columna) como un enlace:
-    // un elemento <a> con el valor de tablaMenuA[i][1]
-    // como su atributo href, y luego lo agregamos como hijo de la celda de enlace (celdaEnlace).
+    celdaNombre.textContent = capitulo.letra;
 
     const celdaEnlace = lineaDatosFd.insertCell(-1);
     const enlace = document.createElement("a"); // Crear un elemento <a>
-    enlace.href = tablaMenuA[i][1]; // Establecer el atributo href con el valor correspondiente
-    enlace.textContent = tablaMenuA[i][2]; // Establecer el texto del enlace con el tercer elemento de la tabla
+    enlace.href = capitulo.paginaCap; // Establecer el atributo href con el valor correspondiente
+    enlace.textContent = capitulo.nombre; // Establecer el texto del enlace con el tercer elemento de la tabla
     enlace.style.textDecoration = "none";
     enlace.style.color = "blue";
-
-    if (tablaMenuA[i][1] == "##") {
-      enlace.style.color = "gray";
-    }
-
-    // Agregar el enlace como hijo de la celda
-    if (i == tablaMenuA.length - 1) {
-      enlace.style.fontSize = "18px"; // Cambiar el tamaño de la fuente
-      enlace.style.fontWeight = "bold"; // Hacer el texto en negrita
-      enlace.style.color = "black";
-
-      celdaEnlace.style.textAlign = "center"; // Centrar el contenido horizontalmente
-      celdaEnlace.style.display = "flex";
-      celdaEnlace.style.justifyContent = "center";
-      celdaEnlace.style.alignItems = "center";
-    }
     celdaEnlace.appendChild(enlace);
 
-    celdaMaximo = lineaDatosFd.insertCell(-1);
-    if (tablaMenuA[i][3] === 0) {
-      tablaMenuA[i][3] = "";
+  // si hay al menos un total de capitulos:
+    if (totalCapitulos) {
+        valoresCapitulo = totalCapitulos.find(totales => 
+            totales.CUIT === CUIT &&
+            totales.capitulo === capitulo.letra
+       )}
+
+    if (valoresCapitulo) { 
+        let celdaMaximo = lineaDatosFd.insertCell(-1);
+        // valoresCapitulo.maximo = valoresCapitulo.maximo.toFixed(2);
+        numeroFormateadoMx = formatearNumero(valoresCapitulo.maximo);
+        celdaMaximo.textContent = numeroFormateadoMx;
+        celdaMaximo.classList.add("ajustado-derecha");
+        totmaximo += valoresCapitulo.maximo;
+
+        let celdaPuntos = lineaDatosFd.insertCell(-1);
+        celdaPuntos.textContent = valoresCapitulo.score;
+        celdaPuntos.classList.add("ajustado-derecha");
+        totcalif += Number(valoresCapitulo.score);
+
+        let celdaPorciento = lineaDatosFd.insertCell(-1);
+        celdaPorciento.textContent = valoresCapitulo.porcentaje;
+        celdaPorciento.classList.add("ajustado-derecha");
+
+        let celdaPDF = lineaDatosFd.insertCell(-1);
+      // celdaExl = lineaDatosFd.insertCell(-1);
+        const boton = document.getElementById("boton-enviar");
+        const enlace = document.createElement("a");
+        switch (indice) {
+          case 0:
+            enlace.href = idioma == 1 ? "MA-conclusiones.html" : "MA-conclusiones-en.html";
+            break;
+          case 1:
+            enlace.href = idioma == 1 ? "MB-conclusiones.html" : "MB-conclusiones-en.html";
+            break;
+          case 2:
+            enlace.href = "MC-conclusiones.html";
+            break;
+          case 3:
+            enlace.href = "MD-conclusiones.html";
+            break;
+          case 4:
+            enlace.href = "ME-conclusiones.html";
+            break;
+          case 5:
+            enlace.href = "MF-conclusiones.html";
+            boton.style.display = "block"; // O "flex" si quieres mantener la alineación fle
+            break;
+          default:
+            // Opcional: valor predeterminado si ninguna de las condiciones se cumpla
+            break;
+        }
+        enlace.style.display = "block"; 
+        const imgPdf = document.createElement("img"); // Crear el elemento <img>
+        imgPdf.src = "../img/pdf (1).png";
+        imgPdf.width = 20;
+        imgPdf.style.display = "block";
+        imgPdf.style.margin = "0 auto";
+
+        enlace.appendChild(imgPdf); // Agregar la imagen al enlace
+        celdaPDF.appendChild(enlace); // Agregar el enlace a la celda
     }
-    if (tablaMenuA[i][3] > 0) {
-      numeroConPunto = formatearNumero(tablaMenuA[i][3]);
-    } else {
-      numeroConPunto = "";
+    else {
+      celdaMaximo = lineaDatosFd.insertCell(-1);
+      celdaMaximo.textContent = '';
+
+      celdaPuntos = lineaDatosFd.insertCell(-1);
+      celdaPuntos.textContent = '';
+
+      celdaPorciento = lineaDatosFd.insertCell(-1);
+      celdaPorciento.textContent = '';
+
+      celdaPDF = lineaDatosFd.insertCell(-1);
+      celdaPDF.textContent = '';
     }
-    celdaMaximo.textContent = numeroConPunto;
-    celdaMaximo.classList.add("ajustado-derecha");
-    totmaximo += tablaMenuA[i][3];
+  })
 
-    celdaPuntos = lineaDatosFd.insertCell(-1);
-    if (tablaMenuA[i][4] === 0) {
-      tablaMenuA[i][4] = "";
-    }
-    if (tablaMenuA[i][4] > 0) {
-      numeroConPunto = formatearNumero(tablaMenuA[i][4]);
-    } else {
-      numeroConPunto = "";
-    }
-    celdaPuntos.textContent = numeroConPunto;
-    celdaPuntos.classList.add("ajustado-derecha");
-    totcalif += Number(tablaMenuA[i][4]);
+  let lineaDatosFd = tablaIndice.insertRow();
 
-    celdaPorciento = lineaDatosFd.insertCell(-1);
-    if (tablaMenuA[i][5] === 0) {
-      tablaMenuA[i][5] = "";
-    }
-    celdaPorciento.textContent = tablaMenuA[i][5];
-    celdaPorciento.classList.add("ajustado-derecha");
+  let celdaNombre = lineaDatosFd.insertCell(-1);
+  celdaNombre.textContent = '';
 
-    celdaPDF = lineaDatosFd.insertCell(-1);
-    celdaExl = lineaDatosFd.insertCell(-1);
-
-    if (tablaMenuA[i][5] > 0) {
-      // Crear el elemento <img>
-      const imgPdf = document.createElement("img");
-
-      // Establecer los atributos de la imagen
-      imgPdf.src = "../img/pdf (1).png";
-      imgPdf.width = 20;
-      imgPdf.style.display = "block";
-      imgPdf.style.margin = "0 auto";
-
-      celdaPDF.appendChild(imgPdf); // Agregar la imagen a la celda
-      imgPdf.addEventListener("click", function () {
-        // Agregar el event listener para el clic
-        generarPDF();
-      });
-
-    // celdaExl = lineaDatosFd.insertCell(-1);
-      // Crear el elemento <img>
-      const imgExl = document.createElement("img");
-
-      // Establecer los atributos de la imagen
-      imgExl.src = "../img/excel.png";
-      imgExl.width = 20;
-      imgExl.style.display = "block";
-      imgExl.style.margin = "0 auto";
-
-      celdaExl.appendChild(imgExl); // Agregar la imagen a la celda
-      imgExl.addEventListener("click", function () {
-        // Agregar el event listener para el clic
-        generarExcel().catch(console.error);
-      });
-
-    } else {
-      celdaPDF.textContent = "";
-      celdaExl.textContent = "";
-    }
-
-    if (i == tablaMenuA.length - 1) {
-      const numeroFormateadoMx = formatearNumero(totmaximo);
-      celdaMaximo.textContent = numeroFormateadoMx;
-
-      totcalif = totcalif.toFixed(2);
-
-      const numeroFormateado = formatearNumero(totcalif);
-      celdaPuntos.textContent = numeroFormateado;
-
-      celdaPorciento.style.fontWeight = "bold"; // Hacer el texto en negrita
-      if (totmaximo > 0) {
-        celdaPorciento.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
-      } else {
-        celdaPorciento.textContent = "";
-      }
-
-      if (!totcalif > 0) {
-        celdaMaximo.textContent = "";
-        celdaPuntos.textContent = "";
-        celdaPorciento.textContent = "";
-      }
-    }
+  let celdaFactor = lineaDatosFd.insertCell(-1);
+  if (idioma == 1) {
+    celdaFactor.textContent = 'Calificación General';
   }
+    else {
+      celdaFactor.textContent = 'Total Score';
+  }
+  celdaFactor.style.fontWeight = "bold"; 
+  celdaFactor.style.fontSize = "17px";     // Aumentar tamaño de fuente
+  celdaFactor.style.textAlign = "center";  // Centrar texto horizontalmente
+
+  let celdaMaximoFin = lineaDatosFd.insertCell(-1);
+  numeroFormateadoMx = formatearNumero(totmaximo);
+  celdaMaximoFin.textContent = numeroFormateadoMx;
+  celdaMaximoFin.classList.add("ajustado-derecha", "fuente-negrita");
+  celdaMaximoFin.style.fontWeight = "bold"; 
+
+  totcalif = totcalif.toFixed(2);
+  let celdaMaximoCalFin = lineaDatosFd.insertCell(-1);
+  numeroFormateadoMx2 = formatearNumero(totcalif);
+  celdaMaximoCalFin.textContent = numeroFormateadoMx2;
+  celdaMaximoCalFin.classList.add("ajustado-derecha");
+  celdaMaximoCalFin.style.fontWeight = "bold"; 
+
+  let celdaPorCientoFin = lineaDatosFd.insertCell(-1);
+  celdaPorCientoFin.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
+  celdaPorCientoFin.style.fontWeight = "bold"; 
+
 }
 
 // ::::::::::::::::::::::------------------------------------------
@@ -277,13 +258,17 @@ function formatearNumero(numero) {
   return partes.join(",");
 }
 
-recuperarRespuestas(CUIT, capitulo);
+// recuperarRespuestas(CUIT, capitulo);
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-async function recuperarPreguntas() {
+async function recuperarPreguntas(capitulo = null) {
   try {
-    const response = await fetch("/preguntas");
+    let url = "/preguntas";
+    if (capitulo !== null) {
+      url += `?capitulo=${encodeURIComponent(capitulo)}`;
+    }
+    
+    const response = await fetch(url);
     if (response.ok) {
       const result = await response.json();
       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
@@ -298,20 +283,19 @@ async function recuperarPreguntas() {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-async function obtenerDatos() {
+async function obtenerDatos(capitulo = null) {
   try {
-    const response = await fetch("/preguntas");
+    let url = "/preguntas";
+    if (capitulo !== null) {
+      url += `?capitulo=${encodeURIComponent(capitulo)}`;
+    }
+    
+    const response = await fetch(url);
     if (response.ok) {
       const result = await response.json();
-      // Devolver directamente los datos recibidos
-      return result;
+      return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
     } else {
-      console.error(
-        "Error al obtener los datos:",
-        response.status,
-        response.statusText
-      );
+      console.error("Error al obtener las preguntas:", response.statusText);
       return [];
     }
   } catch (error) {
@@ -321,7 +305,6 @@ async function obtenerDatos() {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function recuperarRespuestas(CUIT, capitulo) {
   respuestas = await obtenerRespuestas(CUIT, capitulo);
   const primerRespuesta = respuestas[0];
@@ -329,7 +312,6 @@ async function recuperarRespuestas(CUIT, capitulo) {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function obtenerRespuestas(CUIT, capitulo) {
   // leo las respuestas del CUIT para el capítulo
   try {
@@ -347,7 +329,6 @@ async function obtenerRespuestas(CUIT, capitulo) {
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function cambiarDatos(lineToPrint) {
   if (!Array.isArray(lineToPrint)) {
     console.error("lineToPrint no es un array:", lineToPrint);
@@ -398,6 +379,7 @@ async function cambiarDatos(lineToPrint) {
         return;
       }
 
+    // si es 41 recupera el substring que está en la posición 
       if (fila.tipo === 42 || fila.tipo === 43) {
         indicesCheck = arrayRespuesta;
       } else {
@@ -419,7 +401,7 @@ async function cambiarDatos(lineToPrint) {
       fila.respta = textoConcatenado;
 
       let restar = 0;
-      if ((fila.tipo = 41)) {
+      if ((fila.tipo == 41)) {
         restar = 1;
       }
 
@@ -534,7 +516,6 @@ async function leerTextoCheck() {
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 async function generarPDF() {
   const lineToPrint = await recuperarPreguntas();
   if (Array.isArray(lineToPrint)) {
@@ -579,7 +560,8 @@ async function generarPDF() {
       break;
   }
 
-  const tituloPdf = (`Informe para ${localStorage.getItem('empresa')}, CUIT: ${CUIT}                                      usuario:${localStorage.getItem('nombre')} ${localStorage.getItem('apellido')}` )
+  const tituloPdf = (`Informe para ${localStorage.getItem('empresa')}, CUIT: ${CUIT}   
+     usuario:${localStorage.getItem('nombre')} ${localStorage.getItem('apellido')}` )
     doc.text(tituloPdf, 10, 10)
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
@@ -715,4 +697,3 @@ async function generarExcel() {
     console.log('Usuario canceló.');
   }
 }
-

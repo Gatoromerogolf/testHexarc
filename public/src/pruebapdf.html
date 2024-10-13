@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h1>Test PDF Generation</h1>
+        <p>This is a test paragraph.</p>
+    </div>
+    <button onclick="generatePDF()">Generate PDF</button>
+
+    <script>
+    function generatePDF() {
+        var element = document.getElementById('content');
+        if (!element) {
+            console.error("No se encontró el elemento #content");
+            return;
+        }
+        html2pdf()
+          .from(element)
+          .save('test.pdf')
+          .then(() => {
+            console.log("PDF generado exitosamente");
+          })
+          .catch((error) => {
+            console.error("Error durante la generación del PDF:", error);
+          });
+    }
+    </script>
+</body>
+</html>

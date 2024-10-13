@@ -1,7 +1,7 @@
-// listaPrecios.js
-const fetch = require('node-fetch'); // Asegúrate de instalar node-fetch si aún no lo has hecho
+// listaPreciosB.js
+// const fetch = require('node-fetch'); // Asegúrate de instalar node-fetch si aún no lo has hecho
 
-async function leerListaPrecios() {
+export async function obtenerListaPreciosB() {
   try {
     const response = await fetch('/leeListaPrecios'); // Usa la URL correcta para tu API
     if (response.ok) {
@@ -17,6 +17,3 @@ async function leerListaPrecios() {
   }
 }
 
-module.exports = {
-  leerListaPrecios
-};

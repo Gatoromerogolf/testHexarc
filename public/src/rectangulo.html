@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra Horizontal Coloreada</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="barraCanvas" width="400" height="100"></canvas>
+
+    <script>
+        const valor = 100; // Cambia este valor para probar diferentes porcentajes
+
+        function dibujarBarraConColores(valor) {
+            const canvas = document.getElementById('barraCanvas');
+            const ctx = canvas.getContext('2d');
+            const ancho = canvas.width;
+            const alto = canvas.height;
+
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, ancho, alto);
+
+            // Definir los rangos de colores y sus límites
+            const rangos = [
+                { limite: 40, color: 'red' },
+                { limite: 70, color: 'yellow' },
+                { limite: 90, color: 'green' },
+                { limite: 100, color: 'blue' }
+            ];
+
+            let inicioX = 0; // Donde empieza cada sección de color
+
+            // Dibujar cada rango de color
+            for (let i = 0; i < rangos.length; i++) {
+                const rango = rangos[i];
+                const limiteX = (rango.limite / 100) * ancho; // Límite de la sección en píxeles
+
+                let anchoAColorear = limiteX - inicioX; // Ancho a colorear
+
+                if (valor <= rango.limite) {
+                    // Si el valor es menor que el límite actual, ajustar el ancho a colorear
+                    anchoAColorear = (valor / 100) * ancho - inicioX;
+                }
+
+                // Asegurarse de que no se supere el límite de la sección
+                if (anchoAColorear < 0) anchoAColorear = 0;
+
+                // Dibujar el área en la barra
+                ctx.fillStyle = rango.color;
+                ctx.fillRect(inicioX, 0, anchoAColorear, alto);
+
+                // Actualizar el inicio de la siguiente sección
+                inicioX += anchoAColorear;
+
+                // Si el valor es menor que el límite actual, salir del bucle
+                if (valor <= rango.limite) {
+                    break;
+                }
+            }
+
+            // Dibujar el contorno de la barra
+            ctx.strokeStyle = 'black';
+            ctx.strokeRect(0, 0, ancho, alto);
+        }
+
+        // Dibuja la barra con el valor dado
+        dibujarBarraConColores(valor);
+    </script>
+</body>
+</html>

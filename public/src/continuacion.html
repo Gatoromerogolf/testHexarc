@@ -11,79 +11,138 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+  rel="stylesheet">
 
 <body class="financiero">
 
   <div class="survey-container-presentacion" style="max-width: 600px;">
 
     <div class="header-titulo">
-      <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
+      <a href="../index.html">
+        <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left">
+      </a>
       <div class="header-center">
         <div id="nombreEmpresa" class="company-name"></div>
         <div id="nombreUsuario" class="user-name"></div>
       </div>
-      <img src="../img/espana.png" alt="Logo Derecha" class="logo right">
+      <div>
+        <img src="../img/usa.png" alt="Logo Derecha" class="logo right" id="usaIcon">
+        <img src="../img/espana.png" alt="Logo Derecha" class="logo right" id="spainIcon">
+      </div>
     </div>
 
+    <div id="content" class="fade-in">
 
-      <h2>Bienvenido</h2>
+    <h2>Bienvenido</h2>
 
-      <p>Ud. podrá continuar con el proceso de autoevaluación.</p>
-      <p>La aplicación le habilitará el ingreso de información a partir del último capitulo y sección que haya completado.</p>
+    <p>Ud. podrá continuar con el proceso de autoevaluación.</p>
+    <p>La aplicación le habilitará el ingreso de información a partir del último capitulo y sección que haya completado.
+    </p>
 
-      <p>Le recordamos que al finalizar todos los capítulos, se presentará un resumen general con el puntaje obtenido, proporcionando una
-        visión integral de la posición de la empresa frente al desafío de la gestión de riesgos.</p>
+    <p>Le recordamos que al finalizar todos los capítulos, se presentará un resumen general con el puntaje obtenido,
+      proporcionando una
+      visión integral de la posición de la empresa frente al desafío de la gestión de riesgos.</p>
 
 
-      <div class="centrado-flex">
-        <button class="botonSiguiente" id="boton-enviar" type="button">CONTINUAR</button>
-      </div>
+    <div class="centrado-flex">
+      <button class="botonSiguiente" id="boton-enviar" type="button">CONTINUAR</button>
+    </div>
+
+  </div>
     </form>
   </div>
 </body>
 
 <script>
   document.getElementById("boton-enviar").addEventListener('click', () => {
-    const idioma = JSON.parse(localStorage.getItem('idioma'));
-    if (idioma == 2) {
-      window.location.href = "Menu-General-en.html";
-    } else {
+    localStorage.setItem('idioma', '1');
+    const idioma = Number(localStorage.getItem('idioma')); // idioma tendrá el valor numérico 2
+    actualizarUserIdioma(username, CUIT, idioma);
       window.location.href = "Menu-General.html";
-    }
   });
 </script>
 
-<script>
-      localStorage.setItem('idioma', '1');
-</script>
+<!-- <script>
+  localStorage.setItem('idioma', '1');
+</script> -->
 
 <script>
   const apellidouser = localStorage.getItem("apellido");
   const nombreUser = localStorage.getItem("nombre");
   const apenom = nombreUser + ' ' + apellidouser;
   const empresa = localStorage.getItem("empresa");
+  const username = localStorage.getItem("username")
+  const CUIT = localStorage.getItem("CUIT")
 
   document.getElementById("nombreEmpresa").textContent = empresa;
   document.getElementById("nombreUsuario").textContent = apenom;
 
 </script>
-<!-- <script>
+<script>
   // Agrega un evento de clic al ícono de España
   document.getElementById('spainIcon').addEventListener('click', function () {
-    // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de España
-    localStorage.setItem('idioma', '1');
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
+    window.location.href = "continuacion.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
   });
-</script> -->
 
-<!-- <script>
   // Agrega un evento de clic al ícono de USA
   document.getElementById('usaIcon').addEventListener('click', function () {
-    // Setea una variable en el localStorage con valor 1 cuando se hace clic en el ícono de USA
-    localStorage.setItem('idioma', '2');
+    const content = document.getElementById('content');
+      // Apply the fade-out effect
+    content.classList.add('fade-out');
+  // Wait for the fade-out to complete, then change the page
+  setTimeout(function () {
+    window.location.href = "continuacion-en.html";
+  }, 1000);  // Set the timeout to match the CSS transition duration (1s)
   });
+</script>
+
+<script>
+  function actualizarUserIdioma( username, CUIT, idioma ) {
+    fetch('/api/updateIdioma', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username , CUIT, idioma })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Campo idioma actualizado correctamente') {
+            console.log('Campo idioma actualizado correctamente');
+        } else {
+            console.error('Error al actualizar el campo idioma');
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud de actualización:', error);
+    });
+  }
+  </script>
+
+<!-- <script>
+    container.classList.add('fade-out');
+
+    setTimeout(() => {
+    if (idioma === 1) {
+      textElement.textContent = "Este es el texto en español.";
+    } else {
+      textElement.textContent = "This is the English text.";
+    }
+    
+    // Start fading in the new text
+    container.classList.remove('fade-out');
+  }, 1000);  // Match this duration to the CSS transition time
 </script> -->
 
-<!-- <script src="../../js/menu-General.js"></script> -->
+
+
 
 </html>

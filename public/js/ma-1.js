@@ -382,7 +382,7 @@ function continuar() {
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);
-      alert("Hubo un error al grabar los resultados: " + error.message);
+      console.log("Hubo un error al grabar los resultados: " + error.message);
     });
 }
 
@@ -423,7 +423,7 @@ async function grabarResultados2(respuestas) {
     }
   } catch (error) {
     console.log("Error:", error);
-    alert("estamos en el error (ins 2): " + error.message);
+    console.log("estamos en el error (ins 2): " + error.message);
     throw error; // Rechaza la promesa en caso de error
   }
 }

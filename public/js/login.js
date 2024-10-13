@@ -22,14 +22,18 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             localStorage.setItem('apellido', data.user.lastName);
             localStorage.setItem('CUIT', data.user.CUIT);
             localStorage.setItem('empresa', data.user.empresa);
+            localStorage.setItem('idioma', data.user.idioma);
 
-            if (data.user.ingresado == 1) {
-                window.location.href = '../src/continuacion.html';
-               } else {
+            if (data.user.ingresado == 0) {
                 window.location.href = '../src/Presentacion.html';
+               } else {
+                if (data.user.idioma == 1){
+                window.location.href = '../src/continuacion.html'}
+                else{
+                    window.location.href = '../src/continuacion-en.html'}
+                }             
             }
-        } else {
-            // Mostrar mensaje de error si las credenciales son inválidas
+        else {
             console.error('Credenciales inválidas');
         }
     })

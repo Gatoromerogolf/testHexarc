@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riesgos de Gobierno Corporativo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
+  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    .centered {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body id="conclusiones">
+  <div class="survey-container-conclusiones">
+    <section class="main">
+      <section class="gobCorpo">
+        <div class="header-container">
+          <div>
+            <div id="nombreEmpresa" class="company-name"></div>
+            <div id="nombreUsuario" class="user-name"></div>
+          </div>
+            <h4> A - Manejo de los Riesgos de Mercado</h4>
+            <h5> Autoevaluación</h5>
+        </div>
+        <hr>
+
+        <!-- <form id="formulario"> -->
+          <div class="contenedorTitulo">
+            <div class="logo-container">
+              <a href="Menu-General.html">
+                <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
+                        height: auto">;
+              </a>
+            </div>
+            <div class="center-container-titulo">
+              <h4 class="tituloSeccionContainer"><a href="Menu-A.html">Resumen</a></h4>
+            </div>
+          </div>
+
+  <table class="table-conclusiones">
+    <p class="pconclusiones">Los riesgos del Mercado (o del entorno o contexto) se refieren a las amenazas o peligros debido a factores externos y que pueden tener un impacto negativo en los objetivos y resultados deseados.  Son parte del sistema estratégico/táctico de la compañía y, conjuntamente con los riesgos de los procesos y el apetito de riesgo constituyen los riesgos que tiene que manejar el Sistema de Gobierno Corporativo.</p>
+
+    <table style="width: 300px">
+      <tr>
+        <th class="pregunta-col">Puntaje general</th>
+      </tr>
+    </table>
+
+    <p class="pconclusiones">La autoevaluación asigna un valor numérico a cada uno de los aspectos evaluados, mostrando su impacto en el riesgo de Mercado de la organización. Cada aspecto tiene un valor máximo que simboliza el nivel óptimo o esperado. En esta evaluación, el puntaje más alto obtenido es:</p>
+    
+    <div class="container-resultados">
+            Máximo del factor:
+      <p id="puntajeTotal" style="display: inline; font-weight: bold; margin: 0;"></p>
+      <span>puntos |</span>
+      <span>Puntaje obtenido: <span id="puntajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span></span>
+      <span>| Porcentaje: <span id="porcentajeObtenido"
+          style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+    </div>
+
+
+    <p class="pconclusiones">Este porcentaje ofrece una visión consolidada de los distintos aspectos evaluados, que permiten estimar el nivel de optimización del manejo de la gestión del riego distribuidos en los cuatro grupos que se detallan a continuación.
+  </table>
+
+        <br>
+
+  <h1>Situaciones NO EFECTIVAS</h1>
+  <p class="pconclusiones">Los elementos que se encuentran en esta categoría han sido evaluados como de nula aplicación dentro de la organización y clasificados como "NO EFECTIVO".  En una escala de puntuación reciben una calificación que no supera el 50% de la puntuación ideal.</p>
+          <!-- <p>La respuestas muestran una tendencia a evitar riesgos y a optar por estrategias conservadoras. Es probable que prefiera mantener la estabilidad y minimizar la incertidumbre, tomando decisiones más cautelosas y evitando cambios que puedan generar situaciones impredecibles. Es fundamental identificar las causas de esta baja performance y desarrollar planes de
+          mejora específicos.</p> -->
+
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 0 - 50%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+      <tbody id="questionsTableBody" style="font-size: 12px; font-family: Abel">
+      </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones POCO EFECTIVAS</h1>
+  <p class="pconclusiones">Este grupo incluye aquellas situaciones que se consideran de débil aplicación dentro de la organización y en la escala de puntuación, reciben una calificación entre el 50% y el 70% de la calificación ideal.</p>
+          <!-- <p>puede definirse como un apetito de riesgo moderado. Manifiesta asumir riesgos de manera selectiva y en áreas bien definidas, siempre que se perciban como gestionables y controladas.  Los riesgos asumidos son generalmente medidos y calculados en función de los posibles beneficios.</p> -->
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 50.01 - 70%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions5170">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones EFECTIVAS</h1>
+  <p class="pconclusiones">Los elementos clasificados como efectivos reflejan aquellas situaciones propuestas que si bien se aplican en la organización, no lo son en coincidencia o certeza total.  Reciben una puntuación entre el 70% y el 90% de la calificación ideal</p>
+    <!-- <p>Demuestran una disposición clara para asumir riesgos, incluso en áreas más inciertas. Está dispuesto a explorar nuevas oportunidades con mayor audacia, confiando en su capacidad para gestionar los desafíos. Aunque sigue aplicando ciertos controles, su enfoque es menos conservador y está más orientado a la innovación y al crecimiento.</p> -->
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 70.01 - 90%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions7190">
+    </tbody>
+  </table>
+  <br>
+
+  <h1>Situaciones MUY EFECTIVAS</h1>
+  <p class="pconclusiones">Este grupo reúne las situaciones que se consideran plenamente aplicables y efectivas dentro de la organización, mostrando una coincidencia completa con los criterios establecidos. Estas situaciones reciben una calificación que supera el 90% del puntaje ideal, lo que indica un alto grado de conformidad con los estándares definidos..</p>
+  <!-- <p>, lo que sugiere la aceptación de un apetito de riesgo muy alto.  Demuestran una marcada inclinación hacia la toma de riesgos, aceptando altos niveles de incertidumbre en busca de grandes rendimientos. Perciben el riesgo como una parte esencial del éxito, con una menor aversión a las posibles consecuencias negativas. Este enfoque es particularmente audaz y enfocado en maximizar oportunidades sin restringir el crecimiento.</p> -->
+
+  <table class="table-cuadro-conclusiones">
+    <thead>
+      <tr>
+        <th id="namePlayer" rowspan="2" style="position:sticky; left:0;">Sección</th>
+        <th colspan="4">Calificación: 90.01 - 100%</th>
+      </tr>
+      <tr>
+        <th>Ideal</th>
+        <th>Obtenida</th>
+        <th>%</th>
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody id="questions90100">
+    </tbody>
+  </table>
+  <br>
+  <br>
+
+  <!-- <table style="width: 300px">
+    <tr>
+      <th class="pregunta-col">CONCLUSION GENERAL</th>
+    </tr>
+  </table>
+
+  <p class="pconclusiones">En conclusión, el manejo de los riesgos de mercado en la organización muestra áreas significativas de mejora. Si bien todas las situaciones evaluadas han sido calificadas, la obtención de un 60% del puntaje ideal refleja que existen brechas importantes en la implementación y efectividad de las estrategias de gestión de riesgos. Este resultado sugiere que, aunque algunas medidas están en marcha, se requieren esfuerzos adicionales para alcanzar los estándares óptimos y garantizar una respuesta más sólida ante las fluctuaciones del mercado. Es fundamental reforzar los controles y mecanismos existentes para mitigar adecuadamente estos riesgos y mejorar la alineación con las mejores prácticas del sector.</p>
+  <p> una apreciación cuantitativa de la posición de la organización en el manejo del apetito de riesgo: cantidad y tipo de riesgo que esta dispuesta a asumir para lograr sus objeivos estratégicos y operativos.  En conjunto, los resultados proporcionan una hoja de ruta clara para fortalecer las prácticas de gobierno y consolidar una gestión basada en principios sólidos y valores transparentes.</P> -->
+
+  <br>
+
+  <div class="centrado-flex">
+    <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
+  </div>
+
+        </form>
+  </div>
+
+    </section>
+  </section>
+
+  <div id="modalGeneral" class="dialog-overlay" style="display:none;">
+    <div class="dialog-container">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <span class="dialog-title">Matriz de Datos  |</span>
+        <button id="closeDialog" class="dialog-close">&times;</button>
+      </div>
+      <div style="text-align: center;">
+        Sección:
+        <p id="nombreSeccion" style="display: inline; font-weight: bold; margin: 0;"></p>
+        <span> |</span>
+        <span>Puntaje obtenido: <span id="nombrePuntaje"
+            style="display: inline; font-weight: bold; margin: 0;"></span></span>
+        <span>| Porcentaje: <span id="nombrePorciento"
+            style="display: inline; font-weight: bold; margin: 0;"></span>%</span>
+      </div>
+      <div class="dialog-content">
+        <p id="tituloModalGeneral"></p>
+        <!-- <table id="tablaModalGeneral"> -->
+          <table id="dataTable" class="data-table">
+            <thead>
+              <tr>
+                <th>Sec</th>
+                <th>Nro</th>
+                <th>Consigna</th>
+                <th>Respuesta</th>
+                <th>Obs.</th>
+              </tr>
+            </thead>
+            <tbody id="lineaModalGeneral">
+              <!-- Las filas dinámicas se insertarán aquí -->
+            </tbody>
+          </table>
+      </div>
+    <!-- </div> -->
+    <div class="dialog-footer">
+        <button onclick="cerrarModal('modalGeneral')" class="dialog-button">Cerrar</button>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <script>
+    function printPage() {
+      window.print();
+    }
+  </script>
+
+<script>
+document.getElementById("closeDialog").addEventListener("click", function() {
+  document.getElementById("modalGeneral").style.display = "none";
+});
+</script>
+
+</body>
+
+<script src="../../js/mc-conclusiones.js"></script>
+
+</html>
