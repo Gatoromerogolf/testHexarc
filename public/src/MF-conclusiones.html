@@ -7,6 +7,9 @@
   <title>Riesgos de Gobierno Corporativo</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
   <link href="../estilos/estiloConclusionesFinanciero.css" rel="stylesheet">
@@ -47,6 +50,7 @@
 
 <body id="conclusiones">
   <div class="survey-container-conclusiones">
+    <div id="contenido">
     <section class="main">
       <section class="gobCorpo">
         <div class="header-container">
@@ -140,26 +144,49 @@
         </table>
 
         <br>
+      </div>
 
         <div class="centrado-flex">
           <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
         </div>
 
-        <!-- <div class="centrado-flex">
-          <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
-        </div> -->
+        <div class="centrado-flex">
+          <button onclick="generarPDF()" id="boton-enviar">Generar PDF</button>
+        </div>
 
         </form>
       </section>
     </section>
-
+    <!-- </div> -->
+  </div>
 </body>
 
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+<script>
   function printPage() {
     window.print();
   }
+
+  function generarPDF() {
+            const { jsPDF } = window.jspdf;
+
+            // Capturar el contenido del div con html2canvas
+            html2canvas(document.getElementById("contenido")).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const doc = new jsPDF();
+
+                // Agregar la imagen al PDF
+                doc.addImage(imgData, 'PNG', 10, 10, 180, 160);
+
+                // Descargar el PDF
+                doc.save("documento_con_imagen.pdf");
+            });
+        }
+
+
+
 
   const apellidouser = localStorage.getItem("apellido");
   const nombreUser = localStorage.getItem("nombre");
@@ -378,22 +405,22 @@
 
   }
 
-  function resumenGeneral() {
-    console.log('entro por aca')
+  // function resumenGeneral() {
+  //   console.log('entro por aca')
 
-    porcientoFormateado = ((totalScore / maximo) * 100).toFixed(2);
-    mostrarMiAlerta(maximo, totalScore, porcientoFormateado);
-  }
+  //   porcientoFormateado = ((totalScore / maximo) * 100).toFixed(2);
+  //   mostrarMiAlerta(maximo, totalScore, porcientoFormateado);
+  // }
 
-  function continuar() {
-    document.getElementById("miAlerta").style.display = "none";
-    actualizaCapitulos(capitulo, maximo, totalScore, porcientoFormateado);
-    localStorage.setItem("porciento-F", porcientoFormateado);
-    window.location.href =
-      JSON.parse(localStorage.getItem("idioma")) == 1
-        ? "resumenGeneral3.html"
-        : "resumenGeneral3-en.html";
-  }
+  // function continuar() {
+  //   document.getElementById("miAlerta").style.display = "none";
+  //   actualizaCapitulos(capitulo, maximo, totalScore, porcientoFormateado);
+  //   localStorage.setItem("porciento-F", porcientoFormateado);
+  //   window.location.href =
+  //     JSON.parse(localStorage.getItem("idioma")) == 1
+  //       ? "resumenGeneral3.html"
+  //       : "resumenGeneral3-en.html";
+  // }
 
 
 
