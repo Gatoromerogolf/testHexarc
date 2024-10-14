@@ -38,6 +38,10 @@
       /* Altura del contenedor (ajusta según necesites) */
     }
 
+    p { 
+      margin: 15px;
+    }
+
   </style>
 </head>
 
@@ -64,15 +68,28 @@
             </a>
           </div>
           <div class="center-container-titulo">
-            <h4 class="tituloSeccionContainer"><a href="Menu-General.html">Tu hexágono !!!!!</a></h4>
+            <h4 class="tituloSeccionContainer"><a href="Menu-General.html">Conclusiones</a></h4>
           </div>
         </div>
-        <br><br>
-
+        <br>
+        <div id="comentarios-finales">
+          <p>Algún texto habrá que agregar para darle un cierre más estructurado y que no aparezca solamente el hexagono de libre interpretación.</p>
+          <p>Empresas competitivas<br> 
+            Tienen un nivel superior de gestión de (MAR A o B); (MRM A o B); (MRP A o B); (MRG A o B); y nivel consistentemente superior en el (GR) y (SF)</p>
+            <p>Empresas fuertes<br>
+            Tienen un nivel de gestión superior en (MRG A o B)  y alto en (MAR A o B); (MRM A o B); (MRP A o B) (GR A o B) y (SF A o B)</p>
+            <p>Empresas inestables<br>
+            Tienen un nivel alto de gestión de (MRP A o B) y (MRG A o B ) pero bajo en (MAR B) y (MRM B ). Es bajo o inferior en (SF) y (GR). 
+            <p>Empresas débiles<br>
+            Tienen un nivel de gestión bajo A o B en todos los factores
+            <p>Empresas Críticas<br>
+            Tienen un nivel de gestión bajo B o inferior en (MRM); (MRP); (MAR) y (MRG). Inferior en (SF) y (GR). 
+            </p>
+        </div>
         <div class="canvas-container">
           <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
         </div>
-
+          <p>Por cada tipo de compañía tipificada se construye una estrategia de mejora adaptada a sus características, de forma que, mediante un proceso de mejora en el manejo de los riesgos se la prepare para alcanzar, idealmente, el “Hexágono Perfecto”.</p>
         <script>
 
           const apellidouser = localStorage.getItem("apellido");
@@ -193,7 +210,8 @@
               ctx.strokeStyle = 'black';
               ctx.stroke(); // Dibuja el borde exterior del hexágono
 
-              // Dibuja el hexágono amarillo (90% del hexágono externo)
+
+              // Dibuja el hexágono verde (90% del hexágono externo)
               ctx.beginPath();
               for (let i = 0; i < 6; i++) {
                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
@@ -203,16 +221,17 @@
                 if (i === 0) {
                   ctx.moveTo(x, y); // Mueve al primer punto
                 } else {
-                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono amarillo
+                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono verde
                 }
               }
               ctx.closePath();
-              ctx.fillStyle = 'rgba(0, 255, 0, 0.7)'; // Color de relleno amarillo con transparencia
-              ctx.fill(); // Rellena el área del hexágono amarillo
+              ctx.fillStyle = 'rgba(0, 255, 0, 0.7)'; // Color de relleno verde con transparencia
+              ctx.fill(); // Rellena el área del hexágono verde
               ctx.strokeStyle = 'green';
-              ctx.stroke(); // Dibuja el borde del hexágono amarillo
+              // ctx.stroke(); // Dibuja el borde del hexágono verde
 
-              // Dibuja el hexágono verde (70% del hexágono externo)
+
+              // Dibuja el hexágono amarillo (70% del hexágono externo)
               ctx.beginPath();
               for (let i = 0; i < 6; i++) {
                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
@@ -222,14 +241,15 @@
                 if (i === 0) {
                   ctx.moveTo(x, y); // Mueve al primer punto
                 } else {
-                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono verde
+                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono amarillo
                 }
               }
               ctx.closePath();
               ctx.fillStyle = 'rgba(255, 255, 0, 0.7)'; // Color de relleno verde con transparencia
               ctx.fill(); // Rellena el área del hexágono verde
               ctx.strokeStyle = 'yellow';
-              ctx.stroke(); // Dibuja el borde del hexágono verde
+              // ctx.stroke(); // Dibuja el borde del hexágono amarillo
+
 
               // Dibuja el hexágono rojo (50% del hexágono externo)
               ctx.beginPath();
@@ -249,6 +269,7 @@
               ctx.fill(); // Rellena el área del hexágono rojo
               ctx.strokeStyle = 'red';
               ctx.stroke(); // Dibuja el borde del hexágono rojo
+
 
               // Dibuja las líneas desde el centro hacia los vértices
               ctx.beginPath();
@@ -342,15 +363,12 @@
                   ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5); // Primera palabra
                   ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14); // Segunda palabra
                 }
-
               }
-
-
             }
-
             dibujarHexagono(variables, rotulos);
           }
-        </script>
+
+    </script>
   </div>
   </form>
   </div>
