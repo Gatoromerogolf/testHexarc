@@ -34,11 +34,13 @@
       /* Centra horizontalmente */
       align-items: center;
       /* Centra verticalmente */
-      height: 100vh;
+      height: auto;
       /* Altura del contenedor (ajusta según necesites) */
+      margin-bottom: 0; /* Asegúrate de que no haya margen inferior */
     }
 
     p { 
+      margin-top: 10px; /* Ajusta el margen superior del párrafo para acercarlo */
       margin: 15px;
     }
 
@@ -90,6 +92,10 @@
           <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
         </div>
           <p>Por cada tipo de compañía tipificada se construye una estrategia de mejora adaptada a sus características, de forma que, mediante un proceso de mejora en el manejo de los riesgos se la prepare para alcanzar, idealmente, el “Hexágono Perfecto”.</p>
+        <br>
+          <div class="centrado-flex">
+            <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
+          </div>
         <script>
 
           const apellidouser = localStorage.getItem("apellido");
