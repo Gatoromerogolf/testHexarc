@@ -6,3 +6,6 @@
 
 # ignorar node_modules
 node_modules/
+
+.bfg-replace.txt
+REPLACEMENT_STRING
