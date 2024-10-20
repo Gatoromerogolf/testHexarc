@@ -11,6 +11,58 @@ const MySQLStore = require ('express-mysql-session')(session);
 const ExcelJS = require('exceljs')
 const cron = require('node-cron');
 
+require('dotenv').config();  // 
+
+const nodemailer = require('nodemailer');
+const { google } = require("googleapis");
+
+// Configura los detalles de OAuth2 usando variables de entorno
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
+
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+async function sendMail(to, subject, text) {
+  try {
+      const accessToken = await oAuth2Client.getAccessToken();
+
+      // Configurar el transporte con OAuth2
+      const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            type: 'OAuth2',
+            user: "dev.bdt.reg@gmail.com",
+            clientId: CLIENT_ID,
+            clientSecret: CLIENT_SECRET,
+            refreshToken: REFRESH_TOKEN,
+            accessToken: accessToken.token,
+          },
+      });
+
+      // Configurar el correo
+      const mailOptions = {
+          from: "dev.bdt.reg@gmail.com",
+          to: "ruben.e.garcia@gmail.com",              // Destinatario
+          subject: "Envio de mensaje desde app.js",    // Asunto del correo
+          text: "Cuerpo del mensaje que se envia desde app.js",          // Cuerpo del mensaje
+      };
+
+      // Enviar el correo
+      const result = await transporter.sendMail(mailOptions);
+      console.log('Correo enviado:', result);
+  } catch (error) {
+      console.error('Error al enviar el correo:', error);
+  }
+}
+
+// Ejemplo de envío
+// Llama a esta función donde necesites en tu aplicación
+sendMail('ruben.e.garcia@gmail.com', 'Asunto de prueba', 'Mensaje de prueba.');
+
+
 const app = express();
 
 // Middleware para parsear el cuerpo de las solicitudes::::::::::::::::::::
@@ -35,6 +87,21 @@ const options = {
 };
 
 const sessionStore = new MySQLStore(options);
+
+
+app.post('/enviar-correo', (req, res) => {
+  const { email, subject, message } = req.body;
+
+  // Llamada a la función para enviar el correo
+  sendMail(email, subject, message)
+      .then(() => {
+          res.send('Correo enviado correctamente');
+      })
+      .catch((error) => {
+          res.status(500).send('Error al enviar el correo');
+      });
+});
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET, // Cambia esto por un secreto más seguro en producción
@@ -88,7 +155,7 @@ app.post('/api/login', (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
-cron.schedule('0 */2 * * *', () => { // cada treinta minutos
+cron.schedule('0 15 * * *', () => { // cada treinta minutos
   // console.log('Ejecutando tarea programada: registrando en la base de datos');
 
   const query = 'INSERT INTO tablalogs (logs) VALUES (NOW())';
@@ -100,6 +167,10 @@ cron.schedule('0 */2 * * *', () => { // cada treinta minutos
     }
     console.log('Registro insertado correctamente:', results);
   });
+
+    // Ejemplo de envío
+  // Llama a esta función donde necesites en tu aplicación
+  sendMail('ruben.e.garcia@gmail.com', 'Mail por cron', 'Mensaje de prueba.');
 });
 
 
