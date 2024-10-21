@@ -52,7 +52,8 @@ async function sendMail(to, subject, text) {
 
       // Enviar el correo
       const result = await transporter.sendMail(mailOptions);
-      console.log('Correo enviado:', result);
+      // console.log('Correo enviado:', result);
+      console.log('Correo enviado:');
   } catch (error) {
       console.error('Error al enviar el correo:', error);
   }
