@@ -75,6 +75,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../public'), { index: 'index.html' }));
 
+// Motor de plantillas
+app.set('view engine', 'ejs')
+
+// invoca bcryptjs
+const bcryptjs = require('bcryptjs')
+
 
 // Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
@@ -86,8 +92,6 @@ const options = {
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DB
 };
-
-const sessionStore = new MySQLStore(options);
 
 
 app.post('/enviar-correo', (req, res) => {
@@ -103,6 +107,7 @@ app.post('/enviar-correo', (req, res) => {
       });
 });
 
+const sessionStore = new MySQLStore(options);
 
 app.use(session({
     secret: process.env.SESSION_SECRET, // Cambia esto por un secreto más seguro en producción
