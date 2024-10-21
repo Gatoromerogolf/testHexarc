@@ -61,7 +61,8 @@ async function sendMail(to, subject, text) {
 
 // Ejemplo de envío
 // Llama a esta función donde necesites en tu aplicación
-sendMail('ruben.e.garcia@gmail.com', 'Asunto de prueba', 'Mensaje de prueba.');
+
+// sendMail('ruben.e.garcia@gmail.com', 'Asunto de prueba', 'Mensaje de prueba.');
 
 
 const app = express();
@@ -76,7 +77,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public'), { index: 'index.html' }));
 
 // Motor de plantillas
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
+
+
+// ejemplo para que levant4 algo con plantilla
+
+app.get('/ejs', (req, res) => {
+  res.render ('indexejs', {msg: 'Nombre del usuario'});
+})
 
 // invoca bcryptjs
 const bcryptjs = require('bcryptjs')
@@ -117,20 +125,6 @@ app.use(session({
     cookie: { secure: false } // Cambia esto a true si usas HTTPS
 }));
 
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: true,
-//   // Desactiva el almacenamiento en caché de sesión temporalmente
-//   cookie: { maxAge: 60000 }
-// }));
-
-
-// Ruta para servir index.html
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../public', 'index.html'));
-// });
-
 
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
@@ -170,7 +164,7 @@ app.post('/api/login', (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
-cron.schedule('0 15 * * *', () => { // cada treinta minutos
+cron.schedule('0 15 * * *', () => { // a las 15 hs
   // console.log('Ejecutando tarea programada: registrando en la base de datos');
 
   const query = 'INSERT INTO tablalogs (logs) VALUES (NOW())';
@@ -255,7 +249,6 @@ app.post('/updateDatosUsuario', (req, res) => {
   //     res.json({ success: true });
   // });
 });
-
 
 
 // Ruta protegida que requiere autenticación :::::::::::::::::::::::::::::::::::::::::.
@@ -449,7 +442,6 @@ app.get('/seccionesTodas', (req, res) => {
   });
 
 
-
 // Ruta para saber si existe respuesta para la seccion ::::::::::::::::::::
 app.get('/busca-respuesta', (req, res) => {
   const { CUIT, capitulo, seccion } = req.query;
@@ -570,7 +562,6 @@ app.delete('/eliminarRepuesta', (req, res) => {
 });
 
 
-
 // Ruta para obtener todos las respuestas de la tabla textorespuestas::::::::::::::::::::
 app.get('/textorespuestas', (req, res) => {
   const query = 'SELECT * FROM textorespuestas';
@@ -598,18 +589,6 @@ app.get('/textocheck', (req, res) => {
   });
 });
 
-// // Ruta para obtener todos las preguntas de la tabla ::::::::::::::::::::
-// app.get('/preguntas', (req, res) => {
-//   const query = 'SELECT * FROM preguntas ORDER BY Capitulo, Seccion, Numero';
-
-//   pool.query(query, (error, results, fields) => {
-//     if (error) {
-//       res.status(500).json({ error: 'Error al obtener los registros' });
-//       return;
-//     }
-//     res.json(results);
-//   });
-// });
 
 // Ruta para obtener preguntas, con un filtro opcional por capitulo
 app.get('/preguntas', (req, res) => {
@@ -647,7 +626,6 @@ app.get('/preguntas', (req, res) => {
     res.json(results);
   });
 });
-
 
 
 // Ruta para obtener todos las respuestas de la tabla ::::::::::::::::::::
@@ -823,9 +801,6 @@ app.post('/insertarExperiencia', (req, res) => {
 });
 
 
-
-
-
   // Ruta para obtener los registros de DATOS NETOS ::::::::::::::::::::
   app.get('/leerDatosNetos', (req, res) => {
     const query = 'SELECT * FROM netos';
@@ -846,7 +821,6 @@ app.post('/insertarExperiencia', (req, res) => {
     });
 
 
-
 // Ruta para obtener los registros de la tabla FECHAS::::::::::::::::::::
 app.get('/leerDatosFechas', (req, res) => {
   const query = 'SELECT * FROM fechas';
@@ -865,8 +839,6 @@ app.get('/leerDatosFechas', (req, res) => {
       }
     });
   });
-
-
 
 
 // Captura todas las otras rutas para mostrar un 404 :::::::::::::::::::::::::::::::::
