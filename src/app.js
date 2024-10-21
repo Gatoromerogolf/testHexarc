@@ -103,21 +103,21 @@ app.post('/enviar-correo', (req, res) => {
 });
 
 
-// app.use(session({
-//     secret: process.env.SESSION_SECRET, // Cambia esto por un secreto más seguro en producción
-//     store: sessionStore,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { secure: false } // Cambia esto a true si usas HTTPS
-// }));
-
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  // Desactiva el almacenamiento en caché de sesión temporalmente
-  cookie: { maxAge: 60000 }
+    secret: process.env.SESSION_SECRET, // Cambia esto por un secreto más seguro en producción
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Cambia esto a true si usas HTTPS
 }));
+
+// app.use(session({
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   // Desactiva el almacenamiento en caché de sesión temporalmente
+//   cookie: { maxAge: 60000 }
+// }));
 
 
 // Ruta para servir index.html
