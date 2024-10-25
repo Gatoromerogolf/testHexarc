@@ -46,8 +46,8 @@ async function sendMail(to, subject, text) {
       const mailOptions = {
           from: "dev.bdt.reg@gmail.com",
           to: "ruben.e.garcia@gmail.com",              // Destinatario
-          subject: "Envio de mensaje desde app.js",    // Asunto del correo
-          text: "Cuerpo del mensaje que se envia desde app.js",          // Cuerpo del mensaje
+          subject: subject,    // Asunto del correo
+          text: text,          // Cuerpo del mensaje
       };
 
       // Enviar el correo
@@ -154,6 +154,8 @@ app.post('/api/login', (req, res) => {
               idioma: user.idioma,
             }
           }); 
+            // Llama a esta función donde necesites en tu aplicación
+          sendMail('ruben.e.garcia@gmail.com', 'Ingreso de usuario', `Ha ingresado ${username}`);
           updateLoginTimestamp(user.id);
       } else {
           res.status(401).send('Credenciales inválidas');
