@@ -9,3 +9,5 @@ node_modules/
 
 .bfg-replace.txt
 REPLACEMENT_STRING
+
+account_transport.json
