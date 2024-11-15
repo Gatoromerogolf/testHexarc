@@ -175,7 +175,7 @@ app.post('/api/login', (req, res) => {
           }); 
             // Llama a esta función donde necesites en tu aplicación
           console.log ('llama a sendmail')  
-          sendMail('ruben.e.garcia@gmail.com', 'Ingreso de usuario', `Ha ingresado ${username}`);
+          sendMail('ruben.e.garcia@gmail.com', 'Ingreso de usuario', `Ha ingresado recien ${username}`);
           updateLoginTimestamp(user.id);
       } else {
           res.status(401).send('Credenciales inválidas');
