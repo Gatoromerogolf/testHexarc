@@ -18,7 +18,7 @@ const { google } = require("googleapis");
 
 const OAuth2 = google.auth.OAuth2;
 
-const accountTransport = require("../account_transport.json");
+// const accountTransport = require("../account_transport.json");
 
 // Configura los detalles de OAuth2 usando variables de entorno
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -26,10 +26,16 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
+// const oAuth2Client = new google.auth.OAuth2(
+//   process.env.CLIENT_ID,
+//   process.env.CLIENT_SECRET,
+//   process.env.REDIRECT_URI
+// );
+
 const oAuth2Client = new google.auth.OAuth2(
-  process.env.CLIENT_ID,
-  process.env.CLIENT_SECRET,
-  process.env.REDIRECT_URI
+  CLIENT_ID,       // Usa la constante
+  CLIENT_SECRET,   // Usa la constante
+  REDIRECT_URI     // Usa la constante
 );
 
 // Configuración del token de actualización
