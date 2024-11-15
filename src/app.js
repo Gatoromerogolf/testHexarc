@@ -16,14 +16,27 @@ require('dotenv').config();  //
 const nodemailer = require('nodemailer');
 const { google } = require("googleapis");
 
+const OAuth2 = google.auth.OAuth2;
+
+const accountTransport = require("../account_transport.json");
+
 // Configura los detalles de OAuth2 usando variables de entorno
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
+);
+
+// Configuración del token de actualización
+oAuth2Client.setCredentials({
+  refresh_token: process.env.REFRESH_TOKEN,
+});
+
 
 async function sendMail(to, subject, text) {
   try {
@@ -155,6 +168,7 @@ app.post('/api/login', (req, res) => {
             }
           }); 
             // Llama a esta función donde necesites en tu aplicación
+          console.log ('llama a sendmail')  
           sendMail('ruben.e.garcia@gmail.com', 'Ingreso de usuario', `Ha ingresado ${username}`);
           updateLoginTimestamp(user.id);
       } else {
