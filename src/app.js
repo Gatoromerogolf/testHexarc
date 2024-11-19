@@ -12,7 +12,7 @@ const ExcelJS = require('exceljs')
 const cron = require('node-cron');
 
 require('dotenv').config();  // 
-console.log('Variables de entorno cargadas:', process.env);
+// console.log('Variables de entorno cargadas:', process.env);
 
 const nodemailer = require('nodemailer');
 const { google } = require("googleapis");
