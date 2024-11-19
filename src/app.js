@@ -12,6 +12,7 @@ const ExcelJS = require('exceljs')
 const cron = require('node-cron');
 
 require('dotenv').config();  // 
+console.log('Variables de entorno cargadas:', process.env);
 
 const nodemailer = require('nodemailer');
 const { google } = require("googleapis");
@@ -19,6 +20,12 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 
 // const accountTransport = require("../account_transport.json");
+
+console.log('CLIENT_ID:', process.env.CLIENT_ID);
+console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
+console.log('REFRESH_TOKEN:', process.env.REFRESH_TOKEN);
+console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
+
 
 // Configura los detalles de OAuth2 usando variables de entorno
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -45,6 +52,10 @@ oAuth2Client.setCredentials({
 
 
 async function sendMail(to, subject, text) {
+  console.log('Configuración del correo:');
+  console.log('CLIENT_ID:', process.env.CLIENT_ID);
+  console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
+  console.log('REFRESH_TOKEN:', process.env.REFRESH_TOKEN);
   try {
       const accessToken = await oAuth2Client.getAccessToken();
 
