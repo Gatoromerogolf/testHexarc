@@ -52,7 +52,7 @@ oAuth2Client.setCredentials({
 
 
 async function sendMail(to, subject, text) {
-  console.log('Configuración del correo:');
+  console.log('Configuración del correo agregado:');
   console.log('CLIENT_ID:', process.env.CLIENT_ID);
   console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
   console.log('REFRESH_TOKEN:', process.env.REFRESH_TOKEN);
