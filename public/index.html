@@ -1,103 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a HexaRci</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a HexaRci</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link
+  <link
     href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
     rel="stylesheet">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            /* font-family: Arial, sans-serif; */
-            background-color: #f4f4f4;
-            background: url('estilos/background financiero.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family:'Abel', sans-serif;
-        }
-        .welcome-button {
-            font-size: 22px;
-            padding: 15px 50px;
-            background-color: #4CAF50;
-            background-color: #50c878;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: default;
-            font-family:'Abel', sans-serif;
-        }
-        .welcome-button-big {
-            font-size: 36px;
-            padding: 30px 90px;
-            background-color: #416942;
-            background-color: #FFD700;
-            background-color: #BCC6CC;
-            background-color: #696969;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: default;
-            font-family:'Abel', sans-serif;
-        }
-        .ingreso-button {
-            font-size: 18px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            background-color: #FFFFF0;
-            background-color: #2F4F4F;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .ingreso-button:hover {
-            background-color: #45a049;
-        }
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      /* font-family: Arial, sans-serif; */
+      background-color: #f4f4f4;
+      background: url('estilos/background financiero.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Abel', sans-serif;
+    }
 
-        .registro-button {
-            font-size: 18px;
-            padding: 10px 20px;
-            background-color: #5956ad;
-            background-color: #A9A9A9;
-            background-color: #696969;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .registro-button:hover {
-            background-color: #64607b;
-        }
-    </style>
+    .welcome-button {
+      font-size: 22px;
+      padding: 15px 50px;
+      background-color: #4CAF50;
+      background-color: #50c878;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: default;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .welcome-button-big {
+      font-size: 36px;
+      padding: 30px 90px;
+      background-color: #416942;
+      background-color: #FFD700;
+      background-color: #BCC6CC;
+      background-color: #696969;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: default;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .ingreso-button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      background-color: #FFFFF0;
+      background-color: #2F4F4F;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .ingreso-button:hover {
+      background-color: #45a049;
+    }
+
+    .registro-button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #5956ad;
+      background-color: #A9A9A9;
+      background-color: #696969;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .registro-button:hover {
+      background-color: #64607b;
+    }
+  </style>
 </head>
+
 <body>
 
-<button class="welcome-button-big">
+  <button class="welcome-button-big">
     HexaRCi
-</button>
-<br>
-<button class="welcome-button">Bienvenido  |  Welcome </button>
-<br>
-<a href="/login.html" class="ingreso-button">Ingreso | Login</a>
-<br>
-<br>
-<a href="/registro.html" class="registro-button">Registro | Sign Up</a>
+  </button>
+  <br>
+  <button class="welcome-button">Bienvenido | Welcome </button>
+  <br>
+  <a href="/login.html" class="ingreso-button">Ingreso | Login</a>
+  <br>
+  <br>
+  <!-- <a href="/registro.html" class="registro-button">Registro | Sign Up</a> -->
 
 
 </body>
+
 </html>

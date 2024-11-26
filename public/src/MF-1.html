@@ -86,63 +86,70 @@
             <th class="pregunta-financiera">Indicador</th>
             <th class="respuesta-financiera">Resultado</th>
             <th class="respuesta-financiera">Score</th>
-            <th class="respuesta-financiera">Calificación</th>
+            <!-- <th class="respuesta-financiera">Calificación</th> -->
           </tr>
 
           <tr>
             <td class="pregunta-financiera">1. Evolución de los ingresos</td>
               <td class="respuesta-financiera" id="evolIngresos" style="text-align: right"></td>
               <td class="respuesta-col" id="evolIngresos-Sco" style="text-align: center"></td>
-              <td class="respuesta-col" id="evolIngresos-Cal" style="text-align: center"></td>
+              <!-- <td class="respuesta-col" id="evolIngresos-Cal" style="text-align: center"></td> -->
             </tr>
 
           <tr>
             <td class="pregunta-financiera">2. Margen Bruto</td>
             <td class="respuesta-financiera" id="margenBruto" style="text-align: right"></td>
             <td class="respuesta-col" id="margenBruto-Sco" style="text-align: center"></td>
-            <td class="respuesta-col" id="margenBruto-Cal" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="margenBruto-Cal" style="text-align: center"></td> -->
           </tr>
 
           <tr>
             <td class="pregunta-financiera">3. Margen Neto</td>
             <td class="respuesta-financiera" id="margenNeto" style="text-align: right"></td>
             <td class="respuesta-col" id="margenNeto-Sco" style="text-align: center"></td>
-            <td class="respuesta-col" id="margenNeto-Cal" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="margenNeto-Cal" style="text-align: center"></td> -->
           </tr>
           
           <tr>
             <td class="pregunta-financiera">4. Utilidad antes de intereses, impuestos, depreciación y amortización (EBITDA)</td>
             <td class="respuesta-financiera" id="utilidadAntes" style="text-align: right"></td>
             <td class="respuesta-col" id="utilidadAntes-Sco" style="text-align: center"></td>
-            <td class="respuesta-col" id="utilidadAntes-Cal" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="utilidadAntes-Cal" style="text-align: center"></td> -->
           </tr>
 
           <tr>
             <td class="pregunta-financiera">5. Rendimiento sobre el Capital (ROE)</td>
             <td class="respuesta-financiera" id="rendiCapital" style="text-align: right"></td>
             <td class="respuesta-col" id="rendiCapital-Sco" style="text-align: center"></td>
-            <td class="respuesta-col" id="rendiCapital-Cal" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="rendiCapital-Cal" style="text-align: center"></td> -->
           </tr>
 
           <tr>
             <td class="pregunta-financiera">6. Rendimiento sobre los Activos (ROA)</td>
             <td class="respuesta-financiera" id="rendiActivos" style="text-align: right"></td>
             <td class="respuesta-col" id="rendiActivos-Sco" style="text-align: center"></td>
-            <td class="respuesta-col" id="rendiActivos-Cal" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="rendiActivos-Cal" style="text-align: center"></td> -->
           </tr>
 
           <tr>
-            <td class="pregunta-financiera">7. Resultados extraordinarios</td>
+            <td class="pregunta-financiera">7. Rendimiento sobre las Ventas (ROS)</td>
+            <td class="respuesta-financiera" id="rendiVentas" style="text-align: right"></td>
+            <td class="respuesta-col" id="rendiVentas-Sco" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="rendiActivos-Cal" style="text-align: center"></td> -->
+          </tr>
+
+          <tr>
+            <td class="pregunta-financiera">8. Resultados extraordinarios</td>
             <td class="respuesta-financiera" id="resulExtra" style="text-align: right"></td>
             <td class="respuesta-col" id="resulExtra-Sco" style="text-align: center"></td>
-            <td class="respuesta-col" id="resulExtra-Cal" style="text-align: center"></td>
+            <!-- <td class="respuesta-col" id="resulExtra-Cal" style="text-align: center"></td> -->
           </tr>
 
           <tr>
             <td class="pregunta-financiera" style="text-align: right; font-weight: bold">Resultado Final</td>
             <td></td>
             <td class="respuesta-financiera" id="resultado" style="text-align: center; font-weight: bold"></td></td>
-            <td class="respuesta-col" id="resultado-Cal" style="text-align: center; ; font-weight: bold"></td>
+            <!-- <td class="respuesta-col" id="resultado-Cal" style="text-align: center; ; font-weight: bold"></td> -->
           </tr>
         </table>
 
@@ -292,7 +299,7 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("evolIngresos-Sco").textContent = puntos;
-  document.getElementById("evolIngresos-Cal").textContent = texto;
+  // document.getElementById("evolIngresos-Cal").textContent = texto;
 
   primero = ((datoParaMirarF.respuesta[2] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("margenBruto").textContent = primero;
@@ -311,7 +318,7 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("margenBruto-Sco").textContent = puntos;
-  document.getElementById("margenBruto-Cal").textContent = texto;
+  // document.getElementById("margenBruto-Cal").textContent = texto;
 
   primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("margenNeto").textContent = primero;
@@ -330,7 +337,7 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("margenNeto-Sco").textContent = puntos;
-  document.getElementById("margenNeto-Cal").textContent = texto;
+  // document.getElementById("margenNeto-Cal").textContent = texto;
 
   primero = ((datoParaMirar.respuesta[14] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("utilidadAntes").textContent = primero;
@@ -349,7 +356,7 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("utilidadAntes-Sco").textContent = puntos;
-  document.getElementById("utilidadAntes-Cal").textContent = texto;
+  // document.getElementById("utilidadAntes-Cal").textContent = texto;
 
   primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[13])*100).toFixed(2);
   document.getElementById("rendiCapital").textContent = primero;
@@ -368,7 +375,8 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("rendiCapital-Sco").textContent = puntos;
-  document.getElementById("rendiCapital-Cal").textContent = texto;
+  // document.getElementById("rendiCapital-Cal").textContent = texto;
+
 
   primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[0])*100).toFixed(2);
   document.getElementById("rendiActivos").textContent = primero;
@@ -387,7 +395,30 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("rendiActivos-Sco").textContent = puntos;  
-  document.getElementById("rendiActivos-Cal").textContent = texto;
+  // document.getElementById("rendiActivos-Cal").textContent = texto;
+
+
+
+  primero = ((datoParaMirarF.respuesta[3] / datoParaMirarF.respuesta[0]*100).toFixed(2));
+  document.getElementById("rendiVentas").textContent = primero;
+  if (primero > 40) {
+      texto = "Alto";
+      puntos = 20;
+  } else if (primero >0 && primero <= 40) {
+      texto = "Medio Alto";
+      puntos = 15;
+  } else if (primero == 0) {
+      texto = "Medio Bajo";
+      puntos = 10;
+  } else {
+      texto = "Bajo";
+      puntos = 5;
+  }
+  totalScore += puntos; 
+  document.getElementById("rendiVentas-Sco").textContent = puntos;  
+  // document.getElementById("rendiActivos-Cal").textContent = texto;
+
+
 
   primero = ((datoParaMirarF.respuesta[4] / datoParaMirar.respuesta[8])*100).toFixed(2);
   document.getElementById("resulExtra").textContent = primero;
@@ -406,25 +437,26 @@ function realizaCalculos(datoParaMirar, datoParaMirarF) {
   }
   totalScore += puntos; 
   document.getElementById("resulExtra-Sco").textContent = puntos;
-  document.getElementById("resulExtra-Cal").textContent = texto;
+  // document.getElementById("resulExtra-Cal").textContent = texto;
+
 
   console.log (totalScore);
 
   document.getElementById("resultado").textContent = totalScore;
-  if (totalScore == 200) {
-        texto = "Alto";
-        document.getElementById("resultado-Cal").className = "texto-azul"; 
-    } else if (totalScore >= 150 && totalScore < 200) {
-        texto = "Medio Alto";
-        document.getElementById("resultado-Cal").className = "texto-verde"; 
-    } else if (totalScore >= 100 && totalScore < 150) {
-        texto = "Medio Bajo";
-        document.getElementById("resultado-Cal").className = "texto-amarillo"; 
-    } else {
-        texto = "Bajo";
-        document.getElementById("resultado-Cal").className = "texto-rojo"; 
-    }
-    document.getElementById("resultado-Cal").textContent = texto;
+  // if (totalScore == 200) {
+  //       texto = "Alto";
+  //       document.getElementById("resultado-Cal").className = "texto-azul"; 
+  //   } else if (totalScore >= 150 && totalScore < 200) {
+  //       texto = "Medio Alto";
+  //       document.getElementById("resultado-Cal").className = "texto-verde"; 
+  //   } else if (totalScore >= 100 && totalScore < 150) {
+  //       texto = "Medio Bajo";
+  //       document.getElementById("resultado-Cal").className = "texto-amarillo"; 
+  //   } else {
+  //       texto = "Bajo";
+  //       document.getElementById("resultado-Cal").className = "texto-rojo"; 
+  //   }
+    // document.getElementById("resultado-Cal").textContent = texto;
 
     let puntaje = (totalScore / 200 * 100).toFixed(2);
     localStorage.setItem('porciento-F', puntaje);

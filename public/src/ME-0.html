@@ -250,7 +250,7 @@ document.getElementById('boton-enviar').addEventListener('click', function(event
     const formateadoElement = document.getElementById(formateadoId);
 
     // Validamos que el campo no esté vacío y sea mayor que 0
-    if (isNaN(value) || value <= 0) {
+    if (isNaN(value)) {
         faltantes.push({ index: index +1, input: input }); // Guardamos el índice y la referencia del campo faltante
         input.classList.add('error'); // Agregamos una clase para resaltar el campo en error
         // formateadoElement.textContent = ''; // Limpiar el campo formateado si hay error

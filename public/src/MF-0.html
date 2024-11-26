@@ -162,7 +162,7 @@ function buildForm(questions) {
     numberInput.name = `question_${question.id}`;
     numberInput.classList.add('number-input');
     numberInput.id = `q${question.id}_input`;
-    numberInput.min = 1;  // Mínimo valor permitido, ajusta según sea necesario
+    numberInput.min = -1000000000;  // Mínimo valor permitido, ajusta según sea necesario
     numberInput.max = 1000000000;  // Máximo valor permitido, ajusta según sea necesario
     numberInput.style.width = '150px';  // Ajusta el ancho según lo que necesites
     numberInput.style.textAlign = 'right';
@@ -248,7 +248,7 @@ document.getElementById('boton-enviar').addEventListener('click', function(event
     const formateadoElement = document.getElementById(formateadoId);
 
     // Validamos que el campo no esté vacío y sea mayor que 0
-    if (isNaN(value) || value <= 0) {
+    if (isNaN(value)) {
         faltantes.push({ index: index +1, input: input }); // Guardamos el índice y la referencia del campo faltante
         input.classList.add('error'); // Agregamos una clase para resaltar el campo en error
         // formateadoElement.textContent = ''; // Limpiar el campo formateado si hay error
