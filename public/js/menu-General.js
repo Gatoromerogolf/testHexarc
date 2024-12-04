@@ -175,16 +175,16 @@ function completarHtml() {
             enlace.href = idioma == 1 ? "MB-conclusiones.html" : "MB-conclusiones-en.html";
             break;
           case 2:
-            enlace.href = "MC-conclusiones.html";
+            enlace.href = idioma == 1 ? "MC-conclusiones.html" : "MC-conclusiones-en.html";
             break;
           case 3:
-            enlace.href = "MD-conclusiones.html";
+            enlace.href = idioma == 1 ? "MD-conclusiones.html" : "MD-conclusiones-en.html";
             break;
           case 4:
-            enlace.href = "ME-conclusiones.html";
+            enlace.href = idioma == 1 ? "ME-conclusiones.html" : "ME-conclusiones-en.html";
             break;
           case 5:
-            enlace.href = "MF-conclusiones.html";
+            enlace.href = idioma == 1 ? "MF-conclusiones.html" : "MF-conclusiones-en.html";
             boton.style.display = "block"; // O "flex" si quieres mantener la alineación fle
             break;
           default:

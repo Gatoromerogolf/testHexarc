@@ -20,7 +20,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
   
-
   <style>
     .loading {
         display: none;
@@ -43,13 +42,11 @@
         100% { transform: rotate(360deg); }
     }
 </style>
-
 </head>
 
 <body>
   <div class="survey-container">
     <form id="survey-form">
-
       <div class="header-titulo">
         <a href="../../index.html">
         <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo left"></a>
@@ -63,7 +60,6 @@
       <!-- <h1>Bienvenido, <span id="username"></span>!</h1> -->
       <h3>Autoevaluación de la calidad del manejo de la empresa</h3>
       <div class="contenedorTabla">
-
         <div id="loading" class="loading" style="display: block">
           <div class="spinner"></div>
           Cargando...
@@ -71,7 +67,7 @@
 
         <table id="tablaIndiceCapitulos" style="display: none">
           <tr>
-            <th>#</a></th>
+            <th>#</th>
             <th style="width: 350px;">Factor</th>
             <th style="width: 65px;">Máx</th>
             <th style="width: 65px;">Calif</th>
@@ -82,9 +78,8 @@
           <tr id="lineaMenu"></tr>
         </table>
       </div>
-        <div class="centrado-flex">
-          <button type="button" onclick="generaInfoFinal()" id="boton-enviar" style="display: none">Informe Final</button>
-        </div>
+      <div class="centrado-flex">
+        <button type="button" onclick="generaInfoFinal()" id="boton-enviar" style="display: none">Informe Final</button>
       </div>
     </form>
   </div>
