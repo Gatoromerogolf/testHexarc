@@ -103,7 +103,8 @@ async function obtenerTotalCapitulos(CUIT) {
   }
 }
 
-// ::::::::::::::::::::::------------------------------------------
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 function completarHtml() {
   let totmaximo = 0;
   let totcalif = 0;
@@ -480,6 +481,8 @@ async function cambiarDatos(lineToPrint) {
   });
 }
 
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 async function leerTextoRespuestas() {
   try {
     const response = await fetch(`/textorespuestas`); //('lectura tabla texto respuestas:)
@@ -499,6 +502,8 @@ async function leerTextoRespuestas() {
   }
   return [];
 }
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 async function leerTextoCheck() {
   try {
@@ -651,6 +656,8 @@ async function generarPDF() {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 // Función para escribir los detalles de movimientos en la tabla MySQL
 async function grabarParciales(datos) {
   const body = {
@@ -684,6 +691,8 @@ async function grabarParciales(datos) {
     throw error; // Rechaza la promesa en caso de error
   }
 }
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 async function generarExcel() {
   if (confirm()) {

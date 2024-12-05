@@ -4,11 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evaluación de riesgos</title>
+  <title>Risk Management</title>
   <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
   <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
   <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body class="financiero">
@@ -39,7 +42,7 @@
           </div>
 
           <div class="salida">
-            <p style="font-size:12px">Select the option that corresponds to your organization.</p>
+            <!-- <p>Select the option that corresponds to your organization.</p> -->
             <button type="button" id="boton-salir">Exit</button>
           </div>
 
@@ -47,10 +50,8 @@
             <div id="ventanaSalida">
               <!-- <div class="confirm-modal" id="confirm-modal">-->
               <div class="confirm-box">
-                <p>The information recorded so far will be saved. <br> If you exit the application, you can complete the
-                  missing items later.
-                  <br>
-                </p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
+                <p>The information recorded so far will be saved. </p> If you exit the application, you can complete the missing items later.
+                <p>Please confirm if you want to 'Exit' the application or 'Continue' with data entry.</p>
                 <button id="confirm-yes">Exit</button>
                 <button id="confirm-no">Continue</button><br>
               </div>
@@ -70,14 +71,16 @@
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-1" value="1">
+                <div class="radio-container"><input type="radio" name="A-8-1" value="1"></div>
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-1" value="2">
+                <div class="radio-container"><input type="radio" name="A-8-1" value="2"></div>
               </td>
             </tr>
-
+          </table>
+          <p>Select the option that best reflects the degree of compliance with the described situation within your organization, where 'Highly effective' indicates full alignment or certainty, and 'Ineffective' reflects a lack of implementation.</p>
+          <table>
             <tr>
               <th class="pregunta-col">Situation</th>
               <th class="respuesta-col">Ineffective</th>
@@ -90,19 +93,19 @@
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-2" value="1">
+                <div class="radio-container"><input type="radio" name="A-8-2" value="1"></div>
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-2" value="2">
+                <div class="radio-container"><input type="radio" name="A-8-2" value="2"></div>
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-2" value="3">
+                <div class="radio-container"><input type="radio" name="A-8-2" value="3"></div>
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-2" value="4">
+                <div class="radio-container"><input type="radio" name="A-8-2" value="4"></div>
               </td>
             </tr>
 
@@ -111,11 +114,11 @@
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-3" value="1">
+                <div class="radio-container"><input type="radio" name="A-8-3" value="1"></div>
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-3" value="2">
+                <div class="radio-container"><input type="radio" name="A-8-3" value="2"></div>
               </td>
 
               <td class="respuesta-col">
@@ -123,7 +126,7 @@
               </td>
 
               <td class="respuesta-col">
-                <div class="radio-container"><input type="radio" name="A-8-3" value="4">
+                <div class="radio-container"><input type="radio" name="A-8-3" value="4"></div>
               </td>
             </tr>
 
