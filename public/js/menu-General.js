@@ -247,7 +247,10 @@ function completarHtml() {
   celdaMaximoCalFin.style.fontWeight = "bold"; 
 
   let celdaPorCientoFin = lineaDatosFd.insertCell(-1);
-  celdaPorCientoFin.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
+  let porcentaje = (totcalif / totmaximo) * 100;
+  // Validar si el resultado es NaN
+  celdaPorCientoFin.textContent = isNaN(porcentaje) ? "" : porcentaje.toFixed(2);
+  // celdaPorCientoFin.textContent = ((totcalif / totmaximo) * 100).toFixed(2);
   celdaPorCientoFin.style.fontWeight = "bold"; 
 
 }
