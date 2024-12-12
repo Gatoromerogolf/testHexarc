@@ -191,30 +191,30 @@ function ejecutarGrafico(datos) {
         labels: {
           generateLabels: function (chart) {
             return [
-              {
-                text: "Inefectivo",
-                fillStyle: "rgba(255, 87, 51, 0.5)",
-                strokeStyle: "rgba(255, 87, 51)",
-                lineWidth: 1,
-              },
-              {
-                text: "Poco efectivo",
-                fillStyle: "rgba(255, 197, 51, 0.5)",
-                strokeStyle: "rgba(255, 197, 51, 0.5)",
-                lineWidth: 1,
-              },
-              {
-                text: "Efectivo",
-                fillStyle: "rgba(62, 229, 47, 0.5)",
-                strokeStyle: "rgba(62, 229, 47, 0.5)",
-                lineWidth: 1,
-              },
-              {
-                text: "Muy efectivo",
-                fillStyle: "rgba(47, 135, 229, 0.5)",
-                strokeStyle: "rgba(47, 135, 229, 0.5)",
-                lineWidth: 1,
-              },
+              // {
+              //   text: "Inefectivo",
+              //   fillStyle: "rgba(255, 87, 51, 0.5)",
+              //   strokeStyle: "rgba(255, 87, 51)",
+              //   lineWidth: 1,
+              // },
+              // {
+              //   text: "Poco efectivo",
+              //   fillStyle: "rgba(255, 197, 51, 0.5)",
+              //   strokeStyle: "rgba(255, 197, 51, 0.5)",
+              //   lineWidth: 1,
+              // },
+              // {
+              //   text: "Efectivo",
+              //   fillStyle: "rgba(62, 229, 47, 0.5)",
+              //   strokeStyle: "rgba(62, 229, 47, 0.5)",
+              //   lineWidth: 1,
+              // },
+              // {
+              //   text: "Muy efectivo",
+              //   fillStyle: "rgba(47, 135, 229, 0.5)",
+              //   strokeStyle: "rgba(47, 135, 229, 0.5)",
+              //   lineWidth: 1,
+              // },
             ];
           },
         },

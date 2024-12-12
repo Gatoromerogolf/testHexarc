@@ -253,6 +253,9 @@ tr:first-of-type + tr {
   
   .dos-columnas-presentacion {
     column-count: 2;
+    list-style-type: upper-alpha;
+    list-style-position: inside;
+    padding-left: 0; /* Evita espacio innecesario a la izquierda */
 }
 
   
