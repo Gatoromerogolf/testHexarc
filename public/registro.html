@@ -82,7 +82,75 @@
             <option value=""></option>
             <option value=3>3</option>
             <option value=4>4 o más</option>
-        </select>               
+        </select>
+
+        <label for="organization">Actividad de la empresa:</label>
+        <input type="text" id="actividad" name="actividad" required>
+
+        <label for="ria">La cantidad de directores se ha mantenido en los últimos tres años?</label>
+
+        <select id="ctdddirec" name="ria" required>
+            <option value=""></option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+        </select>     
+
+        <label for="organization">Quienes son los directores y miembros del Advisory Board de existir (incluir direcciones de Linkedin</label>
+        <input type="text" id="actividad" name="actividad" required>
+
+        <label for="organization">Si existe un Advisory Board tiene éste una antigüedad menor a dos años</label>
+        <input type="text" id="advboard" name="actividad" required>
+
+        <label for="organization">La situación financiera durante los últimos tres años ha mejorado o empeorado?</label>
+        <input type="text" id="situfinan" name="actividad" required>
+
+        <label for="organization">Los resultados durante los últimos tres años han mejorado o empeorado:</label>
+        <input type="text" id="resultados" name="actividad" required>
+
+        <label for="organization">Tiene subsidiarias en el exterior:</label>
+        <input type="text" id="subsidia" name="actividad" required>
+
+        <label for="organization">La estructura gerencial se ha mantenido estable durante los tres últimos años:</label>
+        <input type="text" id="estgeren" name="actividad" required>
+
+        <label for="organization">La forma de trabajo durante los dos últimos años es predominantemente remota</label>
+        <input type="text" id="formtraba" name="actividad" required>
+
+        <label for="organization">Los procesos han mostrado cambios significativos en su diseño en los dos últimos años</label>
+        <input type="text" id="cambioprocesos" name="actividad" required>
+
+        <label for="organization">Ha habido tercerizaciones significativas de procesos en los dos últimos años<input type="text" id="tercerizproc" name="actividad" required>
+
+            <p>Determinación del riesgo inherente</p>
+
+            <label for="deterria">La empresa es:</label>
+
+            <select id="deterria" name="ria" required>
+                <option value=""></option>
+                <option value="Si">Financiera no regulada</option>
+                <option value="No">Medios y Contenido</option>
+                <option value="Si">Biotecnología y Farmaceutica</option>
+                <option value="No">Petróleo y Gas</option>
+                <option value="No">Start-ups de Tecnologías Innovadoras</option>
+                <option value="Si">Entretenimiento y Producción de películas</option>
+                <option value="No">Comercio minorista</option>
+            </select>
+
+            
+            <label for="encuentra">La empresa se encuentra:</label>
+
+            <select id="encuentra" name="ria" required>
+                <option value=""></option>
+                <option value="Si">Instalando procesos de transformación digital a través de inteligaencia artificial en procesos "core" o de soporte significativos</option>
+                <option value="No">Llevando a cabo reestructuraciones corporativas</option>
+                <option value="Si">Llevando a cabo cambios significativos en la dirección ejecutiva</option>
+                <option value="No">En proceso de fusiones y adquisiciones</option>
+                <option value="No">Llevando a cabo cambios signficativos en la estrategia de negocios</option>
+                <option value="Si">Llevando a cabo adaptaciones significativas a nuevas regulaciones</option>
+                <option value="No">En proceso de resolución de crisis</option>
+                <option value="No">En proceso de intervención o supervisión por alguna autoridad regulatoria o judicial</option>
+            </select>
+
 
         <label for="newPassword">Ingrese su nueva clave:</label>
         <input type="password" id="newPassword" name="newPassword" required>
