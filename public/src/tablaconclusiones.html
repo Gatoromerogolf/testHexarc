@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Elegante</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: "Abel", sans-serif;
+        }
+        th, td {
+            border:2px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #d7e8ec;
+            font-weight: bold;
+        }
+        .factor {
+            background-color: #e8f8f5;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .seccion th {
+        background-color: #e8f8f5;
+        padding-left: 15px; /* Indent for Sección */
+         }
+
+        .situacion th, .situacion td {
+        padding-left: 30px; /* Additional indent for Situación*/
+        background-color: #e8f8f5; 
+    }
+
+    .situacion2 th, .situacion2 td {
+        padding-left: 30px; /* Additional indent for Situación*/
+    }
+        .respuesta {
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr class="factor">
+                <th colspan="2">Factor: Manejo de Riesgos Corporativos</th>
+            </tr>
+            <tr class="seccion">
+                <th>Sección: Información para el Directorio</th>
+                <th class="respuesta">12,50 %</th>
+            </tr>
+            <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="situacion2">
+                <td>El Directorio recibe KPI‹s suficientes y sólidos desde la Gerencia</td>
+                <td class="respuesta">No efectivo</td>
+            </tr>
+            <tr class="situacion2">
+                <td>El Directorio ejerce consistentemente un desafio creible a la informacion gerencial</td>
+                <td class="respuesta">Poco efectivo</td>
+            </tr>
+            <tr class="situacion2">
+                <td>El Directorio aprueba los contratos significativos celebrados por la Gerencia</td>
+                <td class="respuesta">No</td>
+            </tr>
+        </tbody>
+    </table>
+
+            <tr class="factor">
+                <th colspan="4">FACTOR 2</th>
+            </tr>
+            <tr class="seccion">
+                <th colspan="2">SECCIÓN 2</th>
+                <th class="respuesta">Porcentaje</th>
+            </tr>
+            <tr class="situacion">
+                <th>Situación</th>
+                <th>Descripción</th>
+                <th>Respuesta</th>
+            </tr>
+            <tr>
+                <td class="situacion">Situación C</td>
+                <td>Descripción C</td>
+                <td class="respuesta">80%</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

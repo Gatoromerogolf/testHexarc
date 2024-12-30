@@ -45,6 +45,60 @@
       /* Ajusta el margen superior del párrafo para acercarlo */
       margin: 15px;
     }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      font-family: "Abel", sans-serif !important;
+    }
+
+    th,
+    td {
+      border: 2px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #d7e8ec;
+      font-weight: bold;
+    }
+
+    .factor {
+      background-color: #e8f8f5;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .seccion th {
+      background-color: #e8f8f5;
+      padding-left: 15px;
+      /* Indent for Sección */
+    }
+
+    .situacion th,
+    .situacion td {
+      padding-left: 30px;
+      /* Additional indent for Situación*/
+      background-color: #e8f8f5;
+    }
+
+    .situacion2 th,
+    .situacion2 td {
+      padding-left: 30px;
+      /* Additional indent for Situación*/
+    }
+
+    .respuesta {
+      width: 75px;
+      /* Ajusta el valor según lo necesario */
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -58,7 +112,7 @@
             <div id="nombreUsuario" class="user-name"></div>
           </div>
           <h4> Autoevaluación de la calidad del manejo de la empresa</h4>
-          <h5> Autoevaluación</h5>
+          <h5> </h5>
         </div>
         <hr>
 
@@ -76,14 +130,17 @@
         </div>
         <br>
         <div id="comentarios-finales">
-          <!-- <p>Algún texto habrá que agregar para darle un cierre más estructurado y que no aparezca solamente el hexagono de libre interpretación.</p> -->
-          <p>Informe relativo a la autoevaluación de <STRONG>BDT ADVISORY</STRONG> de acuerdo con el Sistema HexaRCi</p>
-          <p>De acuerdo con la información cargada por <STRONG>BDT ADVISORY</STRONG> y a los parámetros del Sistema <STRONG>BDT ADVISORY</STRONG> es una compañia de tipo:</p>
+
+          <p>Informe relativo a la autoevaluación de <STRONG>BDT ADVISORY</STRONG> de acuerdo con el Modelo HexaRCi.</p>
+          <p>De acuerdo con la información cargada por <STRONG>BDT ADVISORY</STRONG> y a los parámetros del Sistema,
+            <STRONG>BDT ADVISORY</STRONG> es una compañia calificada preliminarmente como tipo:
+          </p>
           <CENTER><STRONG>"TIPIFICACION"</STRONG></CENTER>
 
-
-          <p style="color: red">(El tipo surgirá de la combinación de los valores de cada factor.  Se agrega el texto correspondiente a la tipificación resultante. Si es valor fuese
-            Resiliente, se mostraria:)</p>
+          <!-- 
+          <p style="color: red">(El tipo surgirá de la combinación de los valores de cada factor. Se agrega el texto
+            correspondiente a la tipificación resultante. Si es valor fuese
+            Resiliente, se mostraria:)</p> -->
 
           <p>Resiliente.</p>
           <p>Empresas que, aunque pueden no ser las líderes absolutas, tienen una capacidad destacada para
@@ -95,6 +152,132 @@
 
           <p>Los aspectos a mejorar más significativos en cada factor de riesgo MRM, MRP, MRG y MAR se detallan
             en el siguiente punto</p>
+
+          <table>
+            <thead>
+              <tr class="factor">
+                <th colspan="2">Factor: Manejo de Riesgos de Gobierno Corporativo</th>
+              </tr>
+              <tr class="seccion">
+                <th>Sección: Información para el Directorio</th>
+                <th class="respuesta">12,50 %</th>
+              </tr>
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="situacion2">
+                <td>El Directorio recibe KPI‹s suficientes y sólidos desde la Gerencia</td>
+                <td class="respuesta">No efectivo</td>
+              </tr>
+              <tr class="situacion2">
+                <td>El Directorio ejerce consistentemente un desafio creible a la informacion gerencial</td>
+                <td class="respuesta">Poco efectivo</td>
+              </tr>
+              <tr class="situacion2">
+                <td>El Directorio aprueba los contratos significativos celebrados por la Gerencia</td>
+                <td class="respuesta">No</td>
+              </tr>
+
+              <tr class="seccion">
+                <th>Sección: Estructura organizacional</th>
+                <th class="respuesta">25,0 %</th>
+              </tr>
+
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+
+              <tr class="situacion2">
+                <td>El Directorio ha conformado una estructura donde existen los siguientes roles efectivos:</td>
+                <td class="respuesta">CEO, Gte Adm y Finanzas, Gte Riesgos, Gte Legales</td>
+              </tr>
+
+
+              <tr class="seccion">
+                <th>Sección: El Directorio y su articulación con las Gerencias</th>
+                <th class="respuesta">32,26 %</th>
+              </tr>
+
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Los miembros del Directorio ( y en su caso el Advisory Board) tienen acceso a y participan con
+                  cierta frecuencia en reuniones con:</td>
+                <td class="respuesta">Gte Adm y Finanzas, Gte Riesgos, Secr Directorio</td>
+              </tr>
+
+
+              <tr class="seccion">
+                <th>Sección: Comité de Auditoría</th>
+                <th class="respuesta">52,50 %</th>
+              </tr>
+
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Su Presidente es un director independiente</td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Asegura la subsanacion de las debilidades de control interno detectadas por la Auditoria Interna
+                </td>
+                <td class="respuesta">Poco efectivo</td>
+              </tr>
+
+
+              <tr class="seccion">
+                <th>Sección: Comités del Directorio</th>
+                <th class="respuesta">54,84 %</th>
+              </tr>
+
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Existe un Comité de Nominaciones y Sucesiones</td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Existe un Comité de Compensaciones
+                </td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              
+              <tr class="situacion2">
+                <td>Existe un Comité de Riesgos</td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>La estructura de Comités del Directorio está documentada
+                </td>
+                <td class="respuesta">No efectivo</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Cada Comité envía informes al Directorio
+                </td>
+                <td class="respuesta">Efectivo</td>
+              </tr>
+            </tbody>
+          </table>
+
 
           <p>Manejo de los Riesgos de Gobierno Corporativo</p>
           <ul>
@@ -113,7 +296,7 @@
             <li>Sucesiones.</li>
           </ul>
 
-          <p>Manejo de los Riesgos de Gobierno Corporativo</p>
+          <p>Manejo del Apetito de Riesgo</p>
           <center>*** No hay elementos en esta categoría ***</center>
 
           <p>Manejo de los Riesgos de Mercado</p>
@@ -146,19 +329,18 @@
           </ul>
 
 
+          <p>La representación gráfica del Hexágono que conforma los seis factores se expone a continuación. El grado de
+            cumplimiento de cada factor conforma el porcentaje posible respecto de cada eje.</p>
 
-
-          <p>El grado de cumplimiento de cada factor conforma el porcentaje posible respecto de cada eje. Si cada factor
-            alcanzare el 100% se conformaría un ‘Hexágono perfecto’.</p>
-
-          <p>La representación gráfica del Hexágono que conforma los seis factores se expone a continuación</p>
+          <p>Si cada factor alcanzare el 100% se conformaría un ‘Hexágono perfecto’ y de esa manera <strong>BDTA
+              ADVISORY</strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi</p>
         </div>
         <div class="canvas-container">
           <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
         </div>
-        <p>Por cada tipo de compañía tipificada se debe construir una estrategia de mejora adaptada a sus
-          características, de forma que, mediante un proceso de mejora en el manejo de los riesgos se la prepare para
-          alcanzar, idealmente, el “Hexágono Perfecto”.</p>
+        <p>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades
+          de <strong>BDTA ADVISORY</strong>, de forma que mediante un proceso de mejora continua en el manejo de los
+          riesgos se la prepare para ir alzanzando el “Hexágono Perfecto”.</p>
 
         <br>
         <!-- <div class="centrado-flex">
@@ -174,7 +356,6 @@
 
           document.getElementById("nombreEmpresa").textContent = empresa;
           document.getElementById("nombreUsuario").textContent = apenom;
-
 
           let var1 = 3;
           let var2 = 3;
