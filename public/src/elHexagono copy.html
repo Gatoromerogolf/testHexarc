@@ -46,80 +46,58 @@
       margin: 15px;
     }
 
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
     table,
     th,
     td {
       font-family: "Abel", sans-serif !important;
     }
 
-    #tablaHexagono {
-      width: 100%;
-      table-layout: fixed;
-      border-collapse: collapse;
-      border: 2px solid #ddd;
+    th,
+    td {
+      border: 2px solid #ccc;
+      padding: 8px;
+      text-align: left;
     }
 
-    /* #tablaHexagono th,
-#tablaHexagono td {
-  border: 2px solid #ddd;
-  padding: 5px;
-} */
     th {
-      border: 2px solid #ddd;
-      padding: 5px;
-      text-align: left;
       background-color: #d7e8ec;
       font-weight: bold;
     }
 
-    .factor{
-      background-color: #97d0f2;
-    }
-
-    /* Estilo para la primera fila (Nombre del factor) */
-    .fila-factor {
+    .factor {
       background-color: #e8f8f5;
-      border: 2px solid #0a0a0a;
-      background-color: #01a2ff;
-    }
-
-    .fila-factor tr {
-      /* text-align: center; */
-      padding: 5px;
-      /* border: 5px solid #ddd; */
-      /* border: 5px solid #a20101; */
-    }
-
-
-    .seccion th,
-    .seccion tr {
-      width: 100% max-content;
-      background-color: #01a2ff;
-      background-color: #e8f8f5;
-      padding-left: 10px;
+      font-size: 1.2em;
       font-weight: bold;
     }
 
-    .situacion th {
-      padding-left: 10px;
+    .seccion th {
+      background-color: #e8f8f5;
+      padding-left: 15px;
+      /* Indent for Sección */
+    }
+
+    .situacion th,
+    .situacion td {
+      padding-left: 30px;
+      /* Additional indent for Situación*/
       background-color: #e8f8f5;
     }
 
-    .situacion2 th {
-      padding-left: 10px;
-      background-color: #fafcfc;
-      font-weight: normal;
+    .situacion2 th,
+    .situacion2 td {
+      padding-left: 30px;
+      /* Additional indent for Situación*/
     }
 
-    /* .respuesta {
+    .respuesta {
       width: 75px;
+      /* Ajusta el valor según lo necesario */
       text-align: center;
-    } */
-
-    #tablaSeccion,
-    #tablaFactor {
-      font-weight: bold;
-      width: 100%;
     }
   </style>
 </head>
@@ -153,12 +131,9 @@
         <br>
         <div id="comentarios-finales">
 
-          <p>Informe relativo a la autoevaluación de <STRONG><span class="company-name"
-                style="font-size: 16px"></span></STRONG> de acuerdo con el Modelo HexaRCi.</p>
-          <p>De acuerdo con la información cargada por <STRONG><span class="company-name"
-                style="font-size: 16px"></span></STRONG> y a los parámetros del Sistema,
-            <STRONG><span class="company-name" style="font-size: 16px"></span></STRONG> es una compañia calificada
-            preliminarmente como tipo:
+          <p>Informe relativo a la autoevaluación de <STRONG>BDT ADVISORY</STRONG> de acuerdo con el Modelo HexaRCi.</p>
+          <p>De acuerdo con la información cargada por <STRONG>BDT ADVISORY</STRONG> y a los parámetros del Sistema,
+            <STRONG>BDT ADVISORY</STRONG> es una compañia calificada preliminarmente como tipo:
           </p>
           <CENTER><STRONG>"TIPIFICACION"</STRONG></CENTER>
 
@@ -178,7 +153,7 @@
           <p>Los aspectos a mejorar más significativos en cada factor de riesgo MRM, MRP, MRG y MAR se detallan
             en el siguiente punto</p>
 
-          <!-- <table>
+          <table>
             <thead>
               <tr class="factor">
                 <th colspan="2">Factor: Manejo de Riesgos de Gobierno Corporativo</th>
@@ -222,39 +197,166 @@
                 <td class="respuesta">CEO, Gte Adm y Finanzas, Gte Riesgos, Gte Legales</td>
               </tr>
 
-            </tbody>
-          </table> -->
 
-          <br><br>
-
-          <table id="tablaHexagono">
-            <thead>
-              <tr class="fila-factor">
-                <th id="factor" class="factor"></th>
+              <tr class="seccion">
+                <th>Sección: El Directorio y su articulación con las Gerencias</th>
+                <th class="respuesta">32,26 %</th>
               </tr>
-            </thead>
-            <tbody>
 
-              <!-- <tr class="seccion">
-                <th id="tablaSeccion"></th>
-              </tr> -->
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
 
-              <!-- <tr class="fila-seccion">
-                <th id="nombreSeccion" colspan="2">
-                </th>
-                <th id="porcentaje" colspan="2">
-                </th>
-              </tr> -->
-
-            <tbody>
               <tr class="situacion2">
-                <th id="lineaModalGeneral" class="respuesta"></th>
+                <td>Los miembros del Directorio ( y en su caso el Advisory Board) tienen acceso a y participan con
+                  cierta frecuencia en reuniones con:</td>
+                <td class="respuesta">Gte Adm y Finanzas, Gte Riesgos, Secr Directorio</td>
+              </tr>
+
+
+              <tr class="seccion">
+                <th>Sección: Comité de Auditoría</th>
+                <th class="respuesta">52,50 %</th>
+              </tr>
+
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Su Presidente es un director independiente</td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Asegura la subsanacion de las debilidades de control interno detectadas por la Auditoria Interna
+                </td>
+                <td class="respuesta">Poco efectivo</td>
+              </tr>
+
+
+              <tr class="seccion">
+                <th>Sección: Comités del Directorio</th>
+                <th class="respuesta">54,84 %</th>
+              </tr>
+
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Existe un Comité de Nominaciones y Sucesiones</td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Existe un Comité de Compensaciones
+                </td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              
+              <tr class="situacion2">
+                <td>Existe un Comité de Riesgos</td>
+                <td class="respuesta">NO</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>La estructura de Comités del Directorio está documentada
+                </td>
+                <td class="respuesta">No efectivo</td>
+              </tr>
+
+              <tr class="situacion2">
+                <td>Cada Comité envía informes al Directorio
+                </td>
+                <td class="respuesta">Efectivo</td>
               </tr>
             </tbody>
           </table>
 
 
+          <table>
+            <thead>
+              <tr class="factor">
+                <th colspan="2">Factor: Manejo de Riesgos de Gobierno Corporativo</th>
+              </tr>
+              <tr class="seccion">
+                <th>Sección: Información para el Directorio</th>
+                <th class="respuesta">12,50 %</th>
+              </tr>
+              <tr class="situacion">
+                <th>Situación</th>
+                <th>Informado</th>
+              </tr>
+            </thead>
 
+            <tbody>
+              <tr class="situacion2">
+                <td>El Directorio recibe KPI‹s suficientes y sólidos desde la Gerencia</td>
+                <td class="respuesta">No efectivo</td>
+              </tr>
+              <tr class="situacion2">
+                <td>El Directorio ejerce consistentemente un desafio creible a la informacion gerencial</td>
+                <td class="respuesta">Poco efectivo</td>
+              </tr>
+              <tr class="situacion2">
+                <td>El Directorio aprueba los contratos significativos celebrados por la Gerencia</td>
+                <td class="respuesta">No</td>
+              </tr>
+
+
+          <p>Manejo de los Riesgos de Gobierno Corporativo</p>
+          <ul>
+            <li>Información para el Directorio.</li>
+            <li>Estructura organizacional.</li>
+            <li>El Directorio y su articulación con las Gerencias.</li>
+            <li>Comité de Auditoría.</li>
+            <li>Comités del Directorio.</li>
+            <li>Gestión de Riesgos.</li>
+            <li>Funcionamiento del Directorio.</li>
+            <li>El Directorio y las Gerencias.</li>
+            <li>Presidente del Directorio.</li>
+            <li>La composición y responsabilidad del Directorio.</li>
+            <li>Estrategia.</li>
+            <li>Cumplimiento y control.</li>
+            <li>Sucesiones.</li>
+          </ul>
+
+          <p>Manejo del Apetito de Riesgo</p>
+          <center>*** No hay elementos en esta categoría ***</center>
+
+          <p>Manejo de los Riesgos de Mercado</p>
+          <ul>
+            <li>Valores y Comportamientos.</li>
+          </ul>
+
+          <p>Manejo de los Riesgos de Procesos</p>
+          <ul>
+            <li>Gestión Financiera.</li>
+            <li>Ventas.</li>
+            <li>Contabilidad e impuestos.</li>
+            <li>Sistema de control.</li>
+            <li>Marketing.</li>
+            <li>Legales y cumplimiento.</li>
+            <li>Gestión de riesgos.</li>
+            <li>Transformación digital.</li>
+            <li>Sistemas de Información de Gestión (MIS).</li>
+            <li>Personas y Cultura.</li>
+            <li>Ciberseguridad y resuperación de desastres.</li>
+            <li>Cumplimiento ambiental.</li>
+            <li>Selección de cartera de productos.</li>
+            <li>Auditoría interna.</li>
+            <li>Consultoría externa o customización.</li>
+            <li>Innovación.</li>
+            <li>Planificación.</li>
+            <li>Atención y satisfacción del cliente.</li>
+            <li>Gestión y generación de los productos(manufacturas).</li>
+            <li>Tecnología de la información.</li>
+          </ul>
 
 
           <p>La representación gráfica del Hexágono que conforma los seis factores se expone a continuación. El grado de
@@ -267,9 +369,8 @@
           <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
         </div>
         <p>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades
-          de <STRONG><span class="company-name" style="font-size: 16px"></span></STRONG>, de forma que mediante un
-          proceso de mejora continua en el manejo de los riesgos se la prepare para ir alcanzando el “Hexágono
-          Perfecto”.</p>
+          de <strong>BDTA ADVISORY</strong>, de forma que mediante un proceso de mejora continua en el manejo de los
+          riesgos se la prepare para ir alzanzando el “Hexágono Perfecto”.</p>
 
         <br>
         <!-- <div class="centrado-flex">
@@ -301,7 +402,7 @@
 
               // Ejecuta el código que depende de `totalCapitulos` aquí, ya que ahora tienes los datos
               if (totalCapitulos && totalCapitulos.exists) {
-                // console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
+                console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
                 // Aquí puedes colocar más lógica que depende de los datos de `totalCapitulos`
                 ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
               } else {
@@ -317,7 +418,7 @@
               const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
               if (response.ok) {
                 totalCapitulos = await response.json(); //registro seccion recibido en formato JSON
-                // console.table(totalCapitulos);
+                console.table(totalCapitulos);
                 return { exists: true, records: totalCapitulos };
               } else {
                 console.error("Error al obtener los datos");
@@ -358,7 +459,7 @@
             }
 
             // Mostrar las variables después de asignarles valores
-            // console.log({ var1, var2, var3, var4, var5, var6 });
+            console.log({ var1, var2, var3, var4, var5, var6 });
 
             const variables = [var1, var2, var3, var4, var5, var6]; // Porcentajes de cada área (0 a 100)
             const rotulos = ['Gobierno Corporativo', 'Apetito Riesgo', 'Riesgos Mercado', 'Riesgos Procesos', 'Situación Financiera', 'Generación Resultados']; // Rótulos para cada eje
@@ -553,8 +654,6 @@
           }
 
         </script>
-
-        <script src="../../js/armaTablaHexagono.js"></script>
   </div>
   </form>
   </div>

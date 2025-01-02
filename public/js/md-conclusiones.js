@@ -16,11 +16,12 @@ let respuestas = [];
 let textoCheck = [];
 let textoRespuestas = [];
 
-
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-
+/* -----------------------------------------
+ejecutarProceso         
+------------------------------------------> */
 // Llamas a la función `ejecutarProceso` para iniciar el flujo
 ejecutarProceso();
 
@@ -32,6 +33,9 @@ async function ejecutarProceso() {
   console.log(`leyo textoRespuestas ${textoRespuestas[0].textos}`)
 }
 
+/* -----------------------------------------
+recuperarPreguntas          
+------------------------------------------> */
 async function recuperarPreguntas(capitulo = 'D') {
   try {
     let url = "/preguntas";
@@ -53,41 +57,9 @@ async function recuperarPreguntas(capitulo = 'D') {
   }
 }
 
-
-async function leeTextoCheck() {
-  try {
-    const response = await fetch("/textocheck");
-    if (response.ok) {
-      const result = await response.json();
-      return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
-    } else {
-      console.error("Error al obtener las preguntas:", response.statusText);
-      return [];
-    }
-  } catch (error) {
-    console.error("Error al realizar la solicitud:", error);
-    return [];
-  }
-}
-
-async function leeTextoRespuestas() {
-  try {
-    const response = await fetch("/textorespuestas");
-    if (response.ok) {
-      const result = await response.json();
-      console.log("Datos recibidos de /textorespuestas:", result); // Verifica la estructura aquí
-      return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
-    } else {
-      console.error("Error al obtener las preguntas:", response.statusText);
-      return [];
-    }
-  } catch (error) {
-    console.error("Error al realizar la solicitud:", error);
-    return [];
-  }
-}
-
-
+/* -----------------------------------------
+buscaPrintResultados      
+------------------------------------------> */
 async function buscaPrintResultados (CUIT, capitulo) {
   try {
     const { exists, respuestas } = await buscaRespuesta(CUIT, capitulo);   // Espera a que la promesa de buscaRespuesta se resuelva
@@ -101,6 +73,9 @@ async function buscaPrintResultados (CUIT, capitulo) {
   }   
 }
 
+/* -----------------------------------------
+buscaRespuesta    
+------------------------------------------> */
 async function buscaRespuesta(CUIT, capitulo) {
   try {
     const response = await fetch(
@@ -119,6 +94,10 @@ async function buscaRespuesta(CUIT, capitulo) {
   }
 }
 
+
+/* -----------------------------------------
+actualizarHTML  
+------------------------------------------> */
 // Función para actualizar el HTML con los datos de la tabla
 async function actualizarHTML(respuestas) {
   console.log("Actualizando HTML..."); // Debugging
@@ -128,6 +107,10 @@ async function actualizarHTML(respuestas) {
     );
 
     let lineaDatosFd = document.getElementById(elementoID);
+    if (!lineaDatosFd) {
+      console.error("El elemento con ID 'elementoID' no existe en el DOM");
+      return;
+    }
 
     if (tablaMenuA.length > 0) {
       await llenaUnaParte(tablaMenuA, lineaDatosFd);
@@ -175,11 +158,54 @@ async function actualizarHTML(respuestas) {
   });
 }  
 
+
+/* -----------------------------------------
+leeTextoCheck          
+------------------------------------------> */
+async function leeTextoCheck() {
+  try {
+    const response = await fetch("/textocheck");
+    if (response.ok) {
+      const result = await response.json();
+      return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+    } else {
+      console.error("Error al obtener las preguntas:", response.statusText);
+      return [];
+    }
+  } catch (error) {
+    console.error("Error al realizar la solicitud:", error);
+    return [];
+  }
+}
+
+/* -----------------------------------------
+leeTextoRespuestas         
+------------------------------------------> */
+async function leeTextoRespuestas() {
+  try {
+    const response = await fetch("/textorespuestas");
+    if (response.ok) {
+      const result = await response.json();
+      console.log("Datos recibidos de /textorespuestas:", result); // Verifica la estructura aquí
+      return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+    } else {
+      console.error("Error al obtener las preguntas:", response.statusText);
+      return [];
+    }
+  } catch (error) {
+    console.error("Error al realizar la solicitud:", error);
+    return [];
+  }
+}
+
+
 // function mostrarModalOculto(modal){
 //   modal.style.display = "block";
 // }
 
-
+/* -----------------------------------------
+armarDetalleGeneral
+------------------------------------------> */
 function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas, textoCheck, textoRespuestas) {
   let lineaModalGeneral = document.getElementById("lineaModalGeneral");
   eliminarFilas();
@@ -336,6 +362,9 @@ function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas
   document.getElementById("modalGeneral").style.display = "flex";
 }
 
+/* -----------------------------------------
+eliminarFilas
+------------------------------------------> */
 function eliminarFilas() {
   const filasEliminar = dataTable.getElementsByTagName("tr");
   for (let i = filasEliminar.length - 1; i > 0; i--) {
@@ -343,6 +372,9 @@ function eliminarFilas() {
   }
 }
 
+/* -----------------------------------------
+cerrarModal
+------------------------------------------> */
 function cerrarModal(idModal) {
   const modal = document.getElementById(idModal);
   if (modal) {
@@ -351,6 +383,9 @@ function cerrarModal(idModal) {
   }
 }
 
+/* -----------------------------------------
+llenaUnaParte
+------------------------------------------> */
   async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
       for (const respuesta of tablaMenuA) {
       let fila = document.createElement('tr');
@@ -405,6 +440,9 @@ function cerrarModal(idModal) {
   }
 }
 
+/* -----------------------------------------
+obtenerNombreSeccion
+------------------------------------------> */
 async function obtenerNombreSeccion(indice, idioma, capitulo) {
   try {
     const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
@@ -419,6 +457,7 @@ async function obtenerNombreSeccion(indice, idioma, capitulo) {
       return 'Descripción no disponible';
     }
   } catch (error) {
+    console.log(`indice ${indice}, idioma ${idioma}, capitulo ${capitulo}`)
     console.error('Error al obtener la descripción:', error);
     return 'Descripción no disponible';
   }

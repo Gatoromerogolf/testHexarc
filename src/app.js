@@ -604,7 +604,7 @@ app.get('/textorespuestas', (req, res) => {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
     }
-    // console.log ('lectura tabla texto:' , results )
+    console.log('Resultados de textorespuestas:', results);
     res.json(results);
   });
 });
