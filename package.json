@@ -29,6 +29,7 @@
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.14",
+    "openai": "^4.80.1",
     "redis": "^4.7.0"
   },
   "devDependencies": {

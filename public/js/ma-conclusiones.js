@@ -229,7 +229,16 @@ function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas
       }
     };
     
-    if (pregunta.tipo > 50) {
+    if (pregunta.tipo == 3) {
+      celdaRpta.textContent = valorRespuesta;
+    }
+
+    if (pregunta.tipo == 51) {
+      const registroTextoRespuestas = textoRespuestas.find(item => item.pregunta == pregunta.tipo);
+      celdaRpta.textContent = registroTextoRespuestas.textos[valorRespuesta - 1]
+    }
+
+    if (pregunta.tipo > 51) {
       const registroTextoRespuestas = textoRespuestas.find(item => item.pregunta == pregunta.tipo);
       valorRespuesta = arrayRespuestas[(pregunta.Numero)-1];// resta 1 por la posición 0
       const texto = registroTextoRespuestas.textos[valorRespuesta-1];
@@ -281,53 +290,53 @@ function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas
       celdaRpta.textContent = conjunto;
     }      
 
-    const celdaComenta = fila.insertCell(-1);
+    // const celdaComenta = fila.insertCell(-1);
     // Crear el elemento de imagen
-    const imagen = document.createElement('img');
+    // const imagen = document.createElement('img');
     // Asignar la fuente de la imagen (ruta a la imagen)
 
     // Opcional: puedes ajustar el tamaño de la imagen
-    imagen.style.width = '15px';
-    imagen.style.height = '15px';
-    imagen.style.border = 'none';
-    imagen.style.margin = '0';
-    imagen.style.padding = '0';
-    imagen.style.verticalAlign = 'middle';
-    imagen.style.marginTop = '5px';  // Ajusta esta cantidad según lo necesites
+    // imagen.style.width = '15px';
+    // imagen.style.height = '15px';
+    // imagen.style.border = 'none';
+    // imagen.style.margin = '0';
+    // imagen.style.padding = '0';
+    // imagen.style.verticalAlign = 'middle';
+    // imagen.style.marginTop = '5px';  // Ajusta esta cantidad según lo necesites
     
-    celdaComenta.style.display = 'flex';
-    celdaComenta.style.justifyContent = 'center'; // Centrar horizontalmente
-    celdaComenta.style.alignItems = 'center';     // Centrar verticalmente
-    celdaComenta.style.height = '100%';           // Ocupa toda la altura de la fila
-    celdaComenta.style.padding = '0';             // Evitar padding que pueda desalinear la imagen
-    celdaComenta.style.boxSizing = 'border-box';  // Incluir bordes y padding en el tamaño total
-    celdaComenta.style.border = 'none';
+    // celdaComenta.style.display = 'flex';
+    // celdaComenta.style.justifyContent = 'center'; // Centrar horizontalmente
+    // celdaComenta.style.alignItems = 'center';     // Centrar verticalmente
+    // celdaComenta.style.height = '100%';           // Ocupa toda la altura de la fila
+    // celdaComenta.style.padding = '0';             // Evitar padding que pueda desalinear la imagen
+    // celdaComenta.style.boxSizing = 'border-box';  // Incluir bordes y padding en el tamaño total
+    // celdaComenta.style.border = 'none';
     
     // celdaComenta.style.border = 'none';
 
     // Agregar la imagen a la celda
-    imagen.src = '../img/blanco.png';  // Reemplaza con la ruta de tu imagen
-    celdaComenta.appendChild(imagen);
+    // imagen.src = '../img/blanco.png';
+    // celdaComenta.appendChild(imagen);
 
-    if (celdaRpta.textContent == "NO") {
-      imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-       celdaComenta.appendChild(imagen);
-    }
+    // if (celdaRpta.textContent == "NO") {
+    //   imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
+    //    celdaComenta.appendChild(imagen);
+    // }
 
-    if (celdaRpta.textContent == "No efectivo") {
-       imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-        celdaComenta.appendChild(imagen);
-    }
+    // if (celdaRpta.textContent == "No efectivo") {
+    //    imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
+    //     celdaComenta.appendChild(imagen);
+    // }
 
-    if(celdaRpta.textContent == "Poco efectivo") {
-              imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
-              celdaComenta.appendChild(imagen);
-    }
+    // if(celdaRpta.textContent == "Poco efectivo") {
+    //           imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
+    //           celdaComenta.appendChild(imagen);
+    // }
 
-    if(celdaRpta.textContent == "Efectivo") {
-            imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
-            celdaComenta.appendChild(imagen);
-    }
+    // if(celdaRpta.textContent == "Efectivo") {
+    //         imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
+    //         celdaComenta.appendChild(imagen);
+    // }
       // else { 
       //   celdaComenta.textContent = ' ';
       // }  

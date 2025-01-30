@@ -1,5 +1,4 @@
 
-
 let tablaMenuEs = [];
 let tablaMenuA = [];
 let primeraVez = 0;
@@ -8,6 +7,9 @@ let primeraVez = 0;
 // const apenom = nombreUser + ' ' + apellidouser;
 // const empresa = localStorage.getItem("empresa");
 // const CUIT = localStorage.getItem("CUIT");
+
+const ria = localStorage.getItem("ria");
+const servicio = localStorage.getItem("servicio");
 const capitulo = "A";
 const idioma = Number(localStorage.getItem('idioma'))
 let totalMax = 0;
@@ -34,27 +36,662 @@ ejecutarProceso();
 
 async function ejecutarProceso() {
     capitulos = await leeCapitulos();
-    matrizPreguntas = await recuperarPreguntas();
-    // buscaPrintResultados(CUIT, capitulo);
+    totalCapitulos = await leeTotalCapitulos(CUIT);
+    matrizPreguntas = await recuperarPreguntas(capitulo);
     textoCheck = await leeTextoCheck();
     textoRespuestas = await leeTextoRespuestas();
+    valorCategorias = await leeListaPrecios ();
 
-    if (textoRespuestas.length > 0 && Array.isArray(textoRespuestas[0].textos) && textoRespuestas[0].textos.length > 0) {
-        console.log(`Primer texto del primer registro: ${textoRespuestas[0].textos[0]}`);
-    } else {
-        console.error("No hay datos válidos en textoRespuestas o en textos del primer registro.");
-    }
+    const { tipificacion, textoTipificacion } = await obtieneTipificacion();
 
+    document.getElementById("tipificacion").textContent = tipificacion;
+    document.getElementById("causaTipificacion").textContent = textoTipificacion;  
 
     buscaPrintResultados(CUIT, capitulo);
 
-    // console.log(`leyo textoRespuestas ${textoRespuestas[0].textos}`)
 }
 
 /* -----------------------------------------
+obtieneTipificacion          
+------------------------------------------> */
+async function obtieneTipificacion() {
+    // console.table (totalCapitulos);
+
+    // Gobierno Corporativo
+    const capituloA = totalCapitulos.find(item => item.capitulo === "A");
+    const capituloB = totalCapitulos.find(item => item.capitulo === "B");
+    const capituloC = totalCapitulos.find(item => item.capitulo === "C");
+    const capituloD = totalCapitulos.find(item => item.capitulo === "D");
+    const capituloE = totalCapitulos.find(item => item.capitulo === "E");
+    const capituloF = totalCapitulos.find(item => item.capitulo === "F");
+
+    // console.log(`capitulo A ${capituloA.porcentaje}`)
+
+    //  MRG SUPERIOR
+    if (Number(capituloA.porcentaje)> 90.0) {
+        if (Number(capituloB.porcentaje) > 90.0 &&
+            Number(capituloC.porcentaje) > 90.0 &&
+            Number(capituloD.porcentaje) > 90.0 &&
+            Number(capituloE.porcentaje) > 90.0 &&
+            Number(capituloF.porcentaje) > 90.0)
+            {
+                tipificacion = "COMPETITIVA";
+                textoTipificacion = "muestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+                return tipificacion, textoTipificacion;
+            }
+        if (Number(capituloB.porcentaje) > 70.0 &&
+            Number(capituloC.porcentaje) > 70.0 &&
+            Number(capituloD.porcentaje) > 70.0 &&
+            Number(capituloE.porcentaje) > 70.0 &&
+            Number(capituloF.porcentaje) > 70.0)
+            {
+                tipificacion = "RESILIENTE";
+                textoTipificacion = " bla bla resiliente bla blamuestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+                return { tipificacion, textoTipificacion };
+            }
+        if (Number(capituloE.porcentaje) > 50.0)
+            {
+                tipificacion = "INESTABLE";
+                textoTipificacion = " texto para inestable bla resiliente bla blamuestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+                return { tipificacion, textoTipificacion };
+            }
+        tipificacion = "VULNERABLE"
+        textoTipificacion = " texto para VULNERABLES  nestable bla resiliente bla blamuestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+        return { tipificacion, textoTipificacion };
+        }
+
+    //  MRG ALTO
+    if (Number(capituloA.porcentaje) > 70.0) {
+        if (Number(capituloD.porcentaje) > 70.0 )
+            {
+                tipificación = "SOLIDA";
+                textoTipificacion = " texto para SOLIDA SOLIDA SOLIDA inestable bla resiliente bla blamuestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+                return { tipificacion, textoTipificacion };
+            }    
+        tipificacion = "INESTABLE";
+        textoTipificacion = " texto para INES TA  BLE  inestable bla resiliente bla blamuestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+        return { tipificacion, textoTipificacion };
+    }
+        
+    //  MRG BAJO
+    if (Number(capituloA.porcentaje) > 50.0) {
+        // console.log ("entro en bajo");
+        if (Number(capituloE.porcentaje) > 70.0 )
+            {
+                tipificacion = "VULNERABLE";
+                textoTipificacion = " muestra un manejo del Gobierno Corporativo que requiere mejoras significativas y atención en el flujo de su Situación Financiera.  texto para INES TA  BLE  inestable bla resiliente bla blamuestra un posicionamiento relevante en su industria, con ventajas sostenibles derivadas de un manejo superior en el Gobierno Corporativo, en el Apetito de Riesgo, en los Riesgos de Mercado y en sus Procesos.  Su Situación Financiera es consistentemente sólida. La Generación de Resultados es consistentemente saludable"
+                return { tipificacion, textoTipificacion };
+            }    
+
+        if (Number(capituloE.porcentaje) > 50.0 )
+            {
+                tipificacion = "INESTABLE";
+                textoTipificacion = " tedxto para Inestable muestra un manejo del Gobierno Corporativo que requiere mejoras significativas y atención en el flujo de su Situación Financiera."
+                return { tipificacion, textoTipificacion };
+            }   
+        tipificacion = "DEBIL"
+        textoTipificacion = " texto para DEBIK  del Gobierno Corporativo que requiere mejoras significativas y atención en el flujo de su Situación Financiera."
+        return { tipificacion, textoTipificacion };}
+        
+    //  MRG INFERIOR
+
+    if (Number(capituloE.porcentaje) > 70.0 )
+        {
+            tipificacion = "DEBIL";
+            textoTipificacion = " otro texto para DEBIL  muestra un manejo del Gobierno Corporativo que requiere mejoras significativas y atención en el flujo de su Situación Financiera."
+            return { tipificacion, textoTipificacion };
+        }    
+
+    tipificacion = "CRITICA";
+    textoTipificacion = " texto parA CRITICA CA C AC muestra un manejo del Gobierno Corporativo que requiere mejoras significativas y atención en el flujo de su Situación Financiera."
+    return { tipificacion, textoTipificacion };   
+}
+
+/* -----------------------------------------
+buscaPrintResultados      
+------------------------------------------> */
+async function buscaPrintResultados(CUIT, capitulo) {
+    try {
+        const { exists, respuestas } = await buscaRespuesta(CUIT, capitulo);   // Espera a que la promesa de buscaRespuesta se resuelva
+        if (exists && respuestas.length > 0) {
+            actualizarHTML(respuestas); // Imprime el resultado de los registros obtenidos
+        } else {
+            console.log('No se encontraron registros.');
+        }
+    } catch (error) {
+        console.error('Error al ejecutar la búsqueda:', error);
+    }
+}
+
+/* -----------------------------------------
+buscaRespuesta    
+------------------------------------------> */
+async function buscaRespuesta(CUIT, capitulo) {
+    try {
+        const response = await fetch(
+            `/busca-respuesta-capitulo-ordenado?CUIT=${CUIT}&capitulo=${capitulo}`
+        );
+        if (!response.ok) {
+            throw new Error('Respuesta no OK de buscaRespuesta');
+        }
+
+        const resultado = await response.json();
+        return { exists: resultado.exists, respuestas: resultado.records || [] };
+
+    } catch (error) {
+        console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+        return { exists: false, respuestas: [] };
+    }
+}
+
+/* -----------------------------------------
+actualizarHTML  
+------------------------------------------> */
+async function actualizarHTML(respuestas) {
+
+    let lineaDatosFd = document.getElementById("factor");
+
+    // Crear fila con la clase 'factor'
+    let filaFactor = document.createElement('tr');
+    filaFactor.classList.add('factor');
+
+    let celdaFactor = document.createElement('th');
+    celdaFactor.colSpan = 4; // Para que ocupe cuatro columnas 
+    celdaFactor.style.fontSize = "20px"; // Ajusta el tamaño según necesites
+
+    switch (capitulo) {
+        case "A":
+            celdaFactor.textContent = "Factor: Manejo de los Riesgos de Gobierno Corporativo"; break;
+        case "B":
+            celdaFactor.textContent = "Factor: Manejo del Apetito de Riesgo"; break;
+        case "C":
+            celdaFactor.textContent = "Factor: Manejo de los Riesgos de Mercado"; break;
+        case "D":
+            celdaFactor.textContent = "Factor: Manejo de los Riesgos de Procesos"; break;
+        default:
+            celdaFactor.textContent = "error en el Factor";
+    }
+
+    filaFactor.appendChild(celdaFactor);
+    lineaDatosFd.appendChild(filaFactor);
+    
+    const max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
+
+    console.log (`valor de maximo ${max}`)
+
+    await procesarCategoria({ min: 0, max: max }, "tablaSeccion");
+
+    async function procesarCategoria(rango, elementoID) {
+        let tablaMenuA = respuestas.filter(respuesta =>
+            respuesta.porcentaje > rango.min && respuesta.porcentaje <= rango.max
+        );
+
+        if (tablaMenuA.length > 0) {
+            await llenaUnaParte(tablaMenuA, lineaDatosFd);
+        } else {
+            let fila = document.createElement('tr');
+            let celdaNombre = document.createElement('td');
+            celdaNombre.style.width = '500px';
+            celdaNombre.textContent = '*** No hay elementos en esta categoría ***';
+            celdaNombre.style.textAlign = 'center';
+            fila.appendChild(celdaNombre);
+            lineaDatosFd.appendChild(fila);
+        }
+    }
+
+}
+
+/* -----------------------------------------
+llenaUnaParte
+------------------------------------------> */
+async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
+
+    console.table (matrizPreguntas)
+
+    for (const respuesta of tablaMenuA) {
+
+        // hay que ver de cada seccion que tipo de pregunta tiene
+        // solo tienen que considerarse si contienen preguntas tipo 1 o 52
+        // si tienen 1 solo van las que tienen como respuesta un 2 (NO)
+        // si tienen 52 solo van las que tienen como respuesta NO (un 2) o (1 o 2) enlas 
+        // que van de 1 a 4 (No efectivo, Poco efectivo)
+
+        // tablaMenuaA tiene todas las respuestas que hayan tenido como porcentaje de 
+        // sección un valor menor al maximo (70 o75%)
+        //  tiene capitulo, seccion y el string de respuestas de todas las preguntas
+
+        // habria que buscar por cada elemento de tablaMenuA, donde indica la seccion, 
+        // recorrer las preguntas de esa seccion para ver si tiene tipo 1 o 52
+        // si no tiene ninguna, eliminar la fila de tablaMenuaA
+    
+        // if (!existeTipo) continue;
+    
+        // console.log(`✅ Se encontró tipo 1 o 52 para capitulo=${respuesta.capitulo}, seccion=${respuesta.seccion}`);
+
+        const existeTipo = matrizPreguntas.some(p => 
+            p.Capitulo == respuesta.capitulo &&
+            p.Seccion == respuesta.seccion &&
+            (p.tipo == 1 || p.tipo == 52)
+        );
+
+        if (!existeTipo) {
+            console.log(`No hay 1 o 52 en matrizPreguntas para seccion ${respuesta.seccion}.`);
+            continue;  // Salta a la siguiente iteración del bucle
+        }
+
+        // Ahora tengo que ver que la respuesta tenga al menos un valor 2 si es tipo 1 (es el NO como respuesta) o un valor 1 o 2 si es tipo  52 (No efectivo o Poco efectivo)
+        // si no lo tienen, hay que ignorar la seccion.
+
+        // con cada respuesta leida de tablaMenuA
+
+
+        //  con la respuesta.seccion recorrer toda la matrizPreguntas con matrizPreguntas.Seccion = respuesta.seccion
+            // selecciono la que tenga tipo 1 o 52.
+            // Si es tipo 1
+            //       si respuesta.respuesta[matrizPreguntas.Numero - 1] == 2 hay que seguir imprimiendo
+            // Si es tipo 52
+            //       si respuesta.respuesta[matrizPreguntas.Numero - 1] < 3 hay que seguir imprimiendo
+
+            // puedo definir sigoProceso = false
+            // lo pongo en true si hay que seguir imprimiendo
+            // despues pregunto   if (!sigoProceso) continue;
+
+        console.log(`Procesando respuesta: seccion=${respuesta.seccion}`);
+
+        // Filtrar las preguntas que cumplen con capitulo y seccion
+        const preguntasFiltradas = matrizPreguntas.filter(p => 
+            p.Capitulo === respuesta.capitulo && 
+            p.Seccion === respuesta.seccion && 
+            (p.tipo === 1 || p.tipo === 52)
+        );
+
+        console.log(`Preguntas filtradas:`, preguntasFiltradas);
+
+        let sigoProceso = false;
+
+    // Recorrer las preguntas filtradas
+        for (const pregunta of preguntasFiltradas) {
+            const indice = pregunta.Numero - 1;  // Calcular la posición
+            const valorLeido = respuesta.respuesta[indice]; // Obtener respuesta
+
+            console.log(`🔍 Evalua pregunta ${pregunta.Numero}: tipo=${pregunta.tipo}, valorLeido=${valorLeido}`);
+
+            //     console.log(`⛔ Condición no cumplida, 
+            if (
+                (pregunta.tipo === 1 && valorLeido == 2 ||
+                pregunta.tipo === 52 && valorLeido < 3)
+            ) {
+                sigoProceso = true;
+            }
+        }
+
+        if (!sigoProceso) {
+            console.log(`⛔ No cumplida, salta sgte seccion : ${respuesta.seccion}`)
+            continue;  
+        }
+
+        let filaSeccion = document.createElement('tr');
+        filaSeccion.classList.add('seccion');
+
+        let celdaNombre = document.createElement('th');
+        celdaNombre.setAttribute('colspan', '4'); // Combina 4 columnas
+        // const capitulo = "A";
+        const indice = respuesta.seccion;
+        const descripcion = await obtenerNombreSeccion(indice, idioma, capitulo);
+        celdaNombre.textContent = "[ " + respuesta.porcentaje + " % ]   -   Seccion: " + respuesta.seccion + '. ' + descripcion;
+        // celdaNombre.style.width = '550px';
+        celdaNombre.style.fontSize = "17px";
+        filaSeccion.appendChild(celdaNombre);
+
+        lineaDatosFd.appendChild(filaSeccion);
+
+        let filaSituacion = document.createElement('tr'); //fila adicional "Situación"
+        filaSituacion.classList.add('seccion');
+
+        let celdaSituacionNum = document.createElement('th');
+        celdaSituacionNum.textContent = " # "; // Texto de la situación
+        celdaSituacionNum.style.width = '10px';
+        filaSituacion.appendChild(celdaSituacionNum);
+
+        let celdaSituacion = document.createElement('th');
+        celdaSituacion.textContent = "Situación"; // Texto de la situación
+        celdaSituacion.style.width = '590px';
+        filaSituacion.appendChild(celdaSituacion);
+
+        let celdaInformado = document.createElement('th');
+        celdaInformado.textContent = "Informado"; // Texto de 'Informado'
+        celdaInformado.style.width = '50px';
+        filaSituacion.appendChild(celdaInformado);
+
+        // let celdaFlag = document.createElement('th');
+        // celdaFlag.textContent = "Obs"; // Texto de 'banderida'
+        // celdaFlag.style.width = '10px';
+        // filaSituacion.appendChild(celdaFlag);
+
+        lineaDatosFd.appendChild(filaSituacion);
+
+        let info = respuesta.seccion;
+        let preguntasSeccion = matrizPreguntas.filter(pregunta =>
+            pregunta.Seccion == info
+        );
+
+        for (const pregunta of preguntasSeccion) {
+
+            let filaSeccion = document.createElement('tr');
+            filaSeccion.classList.add('situacion2');
+
+            let celdaNumero = document.createElement('th');
+            celdaNumero.style.width = "5px"; // Define el ancho en píxeles
+            celdaNumero.textContent = pregunta.Numero;
+            filaSeccion.appendChild(celdaNumero);
+
+            let consigna = document.createElement('th');
+            consigna.style.width = "300px"; // Define el ancho en píxeles
+            consigna.textContent = pregunta.Descrip;
+            filaSeccion.appendChild(consigna);
+
+            let respondido = document.createElement('th');
+            respondido.style.width = "20px"; // Define el ancho en píxeles
+            poneRespuesta(respuesta, pregunta).then((texto) => {
+                respondido.textContent = texto;
+                filaSeccion.appendChild(respondido);
+
+                if (pregunta.tipo == "52") {
+                    if (texto == "No efectivo" || texto == "Poco efectivo" ) {
+                    // if (texto == "No efectivo") {
+                    lineaDatosFd.appendChild(filaSeccion)}};
+
+                if (pregunta.tipo == "1") {
+                    if (texto == "NO") {
+                    // if (texto == "No efectivo") {
+                    lineaDatosFd.appendChild(filaSeccion)}};
+            })
+
+            // const imagen = document.createElement('img');
+                // if (texto == "NO") {
+                // imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
+                // celdaRpta.textContent = imagen;
+                // celdaRpta.appendChild(imagen);
+                // }
+                // if (texto == "No efectivo") {
+                // imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
+                //     celdaRpta.appendChild(imagen);
+                // }
+
+                // if(texto == "Poco efectivo") {
+                //         imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
+                //         celdaRpta.appendChild(imagen);
+                // }
+
+                // if(texto == "Efectivo") {
+                //         imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
+                //         celdaRpta.appendChild(imagen);
+                // }
+                //     else { 
+                //     celdaRpta.textContent = ' ';
+                //     }    
+
+            // celdaRpta.textContent = pregunta.tipo;
+            // celdaRpta.style.width = "20px"; // Define el ancho en píxeles
+            // filaSeccion.appendChild(celdaRpta);
+            }
+        }
+
+        // lineaDatosFd.appendChild(filaSeccion);
+    
+    }
+
+/* -----------------------------------------
+armarDetalleGeneral
+------------------------------------------> */
+// function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas, textoCheck, textoRespuestas) {
+//     let lineaModalGeneral = document.getElementById("lineaModalGeneral");
+//     // eliminarFilas();
+//     let preguntasSeccion = matrizPreguntas.filter(pregunta =>
+//         pregunta.Seccion == info
+//     );
+
+//     // console.table(preguntasSeccion);
+
+//     for (const pregunta of preguntasSeccion) {
+
+//         let filaSeccion = document.createElement('tr');
+//         // const fila = lineaModalGeneral.insertRow();     // Crear una nueva fila en la tabla
+
+//         let celdaNumero = document.createElement('th');
+//         celdaNumero.textContent = pregunta.Numero;
+//         filaSeccion.appendChild(celdaNumero);
+
+//         let consigna = document.createElement('th');
+//         consigna.textContent = pregunta.Descrip;
+//         filaSeccion.appendChild(consigna);
+
+//         // busca el registro de respuesta de la seccion que está trabajando
+//         let celdaRpta = document.createElement('th');
+//         celdaRpta.textContent = pregunta.tipo;
+//     }
+// }
+
+/* -----------------------------------------
+poneRespuesta
+------------------------------------------> */
+async function poneRespuesta(respuesta, pregunta) {
+
+    // recupera la respuesta segun el numero de pregunta....;
+    const registroRespuestasSeccion = respuesta; //es el arreglo de respuestas para todas las preguntas de la seccion)
+    let arrayRespuestas = registroRespuestasSeccion.respuesta;
+
+    valorRespuesta = arrayRespuestas[pregunta.Numero - 1];// resta 1 por la posición 0
+
+    // segun el tipo de respuesta (en pregunta.tipo) se convierte para mostrar
+    // tipo 1:  1: si,  2: no
+    if (pregunta.tipo == 1) {
+        if (valorRespuesta == 1) {
+            return "SI"
+        } else {
+            return "NO"
+        }
+    };
+
+    if (pregunta.tipo == 3) {
+        return valorRespuesta
+    }
+
+    if (pregunta.tipo == 51) {
+        const registroTextoRespuestas = textoRespuestas.find(item => item.pregunta == pregunta.tipo);
+        return registroTextoRespuestas.textos[valorRespuesta - 1]
+    }
+
+    if (pregunta.tipo > 50) {
+        try {
+            const registroTextoRespuestas = textoRespuestas.find(registro => registro.pregunta === pregunta.tipo);
+            if (!registroTextoRespuestas) {
+                console.error(`No se encontró un registro con pregunta igual a ${pregunta.tipo}`);
+            }
+            valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
+            if (valorRespuesta == "9") {
+                return "No aplica"
+            }
+            else {
+                const texto = registroTextoRespuestas.textos[valorRespuesta - 1];
+                return texto;
+            }
+        } catch (error) {
+            console.error("Error procesando bloque para pregunta.tipo > 50:", error);
+        }
+    };
+
+    if (pregunta.tipo > 40 && pregunta.tipo < 50) {
+        console.log(`\n Pregunta a procesar ${pregunta.Numero} y tipo ${pregunta.tipo} \n`)
+        let indicesCheck = 0;
+        const registroTextoCheck = textoCheck.find(item => item.pregunta == pregunta.tipo);
+        if (!registroTextoCheck) {
+            console.log("No se encontró ninguna fila con la pregunta:", pregunta.tipo);
+            return;
+        }
+        valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
+        const valoresTextoCheck = registroTextoCheck.textos;
+        // console.log(`registro Respuestas seccion  ${registroRespuestasSeccion.respuesta}`);
+        if (pregunta.tipo == 42 || pregunta.tipo == 43) {
+            arrayRespuestas = registroRespuestasSeccion.respuesta;
+        } else {
+            arrayRespuestas = registroRespuestasSeccion.respuesta[6]
+        };
+        // console.log(`array rsepuestas  ${arrayRespuestas}`)
+        let conjunto = '';
+        arrayRespuestas.forEach((indice, i) => {
+            const texto = valoresTextoCheck[indice - 1]; // Obtener el texto correspondiente al índice
+            if (i > 0) {
+                conjunto += ", "; // Agregar una coma y un espacio antes de cada texto (excepto el primero)
+            }
+            conjunto += texto;
+        });
+        return conjunto;
+    }
+}
+
+/* -----------------------------------------
+poneBandera
+------------------------------------------> */
+async function poneBandera(respuesta, pregunta) {
+
+    return new Promise((resolve) => {
+        let img = document.createElement('img');
+        const registroRespuestasSeccion = respuesta;
+        let arrayRespuestas = registroRespuestasSeccion.respuesta
+        valorRespuesta = arrayRespuestas[pregunta.Numero - 1];// resta 1 por la posición 0
+        // tipo 1:  1: si,  2: no
+        img.style.width = "20px"; // Opcional: ajusta el tamaño de la imagen
+        img.style.height = "20px";
+        if (pregunta.tipo == 1) {
+            if (valorRespuesta == 1) {
+                img.src = '../img/marca-de-verificacion.png';
+                img.alt = 'Correcto';
+            } else {
+                img.src = '../img/incorrecto.png';
+                img.alt = 'Incorrecto';
+            }
+            resolve(img); // Devuelve el elemento img
+        };
+        if (pregunta.tipo == 3) {
+            img.src = '../img/pregunta.png';
+            resolve(img); // Devuelve el elemento img
+        }
+        if (pregunta.tipo == 41 || pregunta.tipo == 42 || pregunta.tipo == 43) {
+            img.src = '../img/pregunta-1.png';
+            resolve(img); // Devuelve el elemento img
+        }
+        if (pregunta.tipo == 51) {
+            img.src = '../img/pregunta-1.png';
+            resolve(img); // Devuelve el elemento img
+        }
+        if (pregunta.tipo > 50) {
+            const registroTextoRespuestas = textoRespuestas.find(registro => registro.pregunta === pregunta.tipo);
+            valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
+            if (valorRespuesta == "9") {
+                img.src = '../img/blanco.png';  // Reemplaza con la ruta de tu imagen
+                resolve(img);
+            } else {
+                const texto = registroTextoRespuestas.textos[valorRespuesta - 1];
+                if (texto == "No efectivo") {
+                    img.src = '../img/peligro.png';
+                } else if (texto == "Poco efectivo") {
+                    img.src = '../img/advertencia-rojo.png';
+                } else if (texto == "Efectivo") {
+                    img.src = '../img/advertencia.png';
+                } else if (texto == "Muy efectivo") {
+                    img.src = '../img/comprobar.png';
+
+                } else if (texto == "No hay") {
+                    img.src = '../img/peligro.png';
+                } else if (texto == "Mensual") {
+                    img.src = '../img/comprobar.png';
+                } else if (texto == "Ad hoc") {
+                    img.src = '../img/comprobado.png';
+
+                } else if (texto == "Anual") {
+                    img.src = '../img/comprobar.png';
+                } else if (texto == "Mensual" && pregunta.tipo == 55) {
+                    img.src = '../img/advertencia.png';
+                }
+                resolve(img);
+            } 
+        }
+})
+}
+
+/* -----------------------------------------
+cerrarModal
+------------------------------------------> */
+function cerrarModal(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        console.log("Cerrando modal"); // Debugging: Confirmar que el modal se cierra
+        modal.style.display = "none";
+    }
+}
+
+/* -----------------------------------------
+obtenerNombreSeccion
+------------------------------------------> */
+async function obtenerNombreSeccion(indice, idioma, capitulo) {
+    try {
+        const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        if (data.length > 0) {
+            return data[0].descripcion;
+        } else {
+            return 'Descripción no disponible';
+        }
+    } catch (error) {
+        console.error('Error al obtener la descripción:', error);
+        return 'Descripción no disponible';
+    }
+}
+
+/* -----------------------------------------
+lee Capitulos
+------------------------------------------> */
+async function leeCapitulos() {
+    try {
+        const respuesta = await fetch(`/capitulos?idioma=${idioma}`);
+        if (respuesta.ok) {
+            const capitulos = await respuesta.json();
+            return capitulos;
+        } else {
+            console.error("Error al obtener los datos");
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+    }
+    return false;
+};
+
+/* -----------------------------------------
+lee totalCapitulos
+------------------------------------------> */
+async function leeTotalCapitulos(CUIT) {
+    try {
+        const respuesta = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
+        if (respuesta.ok) {
+            const totalCapitulos = await respuesta.json();
+            return totalCapitulos;
+        } else {
+            console.error("Error al obtener los datos");
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+    }
+    return false;
+};
+/* -----------------------------------------
 recuperarPreguntas          
 ------------------------------------------> */
-async function recuperarPreguntas(capitulo = 'A') {
+async function recuperarPreguntas(capitulo) {
     try {
         let url = "/preguntas";
         if (capitulo !== null) {
@@ -116,583 +753,21 @@ async function leeTextoRespuestas() {
 }
 
 /* -----------------------------------------
-buscaPrintResultados      
+leeListaPrecios         
 ------------------------------------------> */
-async function buscaPrintResultados(CUIT, capitulo) {
+async function leeListaPrecios() {
     try {
-        const { exists, respuestas } = await buscaRespuesta(CUIT, capitulo);   // Espera a que la promesa de buscaRespuesta se resuelva
-        if (exists && respuestas.length > 0) {
-            actualizarHTML(respuestas); // Imprime el resultado de los registros obtenidos
+        const response = await fetch("/leeListaPrecios");
+        if (response.ok) {
+            const result = await response.json();
+            const precioZ = Array.isArray(result) ? result.filter(item => item.capitulo === "Z") : [];
+            return precioZ;
         } else {
-            console.log('No se encontraron registros.');
-        }
-    } catch (error) {
-        console.error('Error al ejecutar la búsqueda:', error);
-    }
-}
-
-/* -----------------------------------------
-buscaRespuesta    
-------------------------------------------> */
-async function buscaRespuesta(CUIT, capitulo) {
-    try {
-        const response = await fetch(
-            `/busca-respuesta-capitulo-ordenado?CUIT=${CUIT}&capitulo=${capitulo}`
-        );
-        if (!response.ok) {
-            throw new Error('Respuesta no OK de buscaRespuesta');
-        }
-
-        const resultado = await response.json();
-        return { exists: resultado.exists, respuestas: resultado.records || [] };
-
-    } catch (error) {
-        console.error("Error al realizar la solicitud en buscaRespuesta:", error);
-        return { exists: false, respuestas: [] };
-    }
-}
-
-
-/* -----------------------------------------
-actualizarHTML  
-------------------------------------------> */
-// Función para actualizar el HTML con los datos de la tabla
-async function actualizarHTML(respuestas) {
-
-    let lineaDatosFd = document.getElementById("factor");
-
-    // if (capitulo === "D") {
-    // Crear fila con la clase 'factor'
-    let filaFactor = document.createElement('tr');
-    filaFactor.classList.add('factor');
-
-    let celdaFactor = document.createElement('th');
-    celdaFactor.colSpan = 4; // Para que ocupe cuatro columnas 
-
-    switch (capitulo) {
-        case "A":
-            celdaFactor.textContent = "Factor: Manejo de los Riesgos de Gobierno Corporativo"; break;
-        case "B":
-            celdaFactor.textContent = "Factor: Manejo del Apetito de Riesgo";
-            break;
-        case "C":
-            celdaFactor.textContent = "Factor: Manejo de los Riesgos de Mercado";
-            break;
-        case "D":
-            celdaFactor.textContent = "Factor: Manejo de los Riesgos de Procesos";
-            break;
-        default:
-            celdaFactor.textContent = "error en el Factor";
-    }
-    filaFactor.appendChild(celdaFactor);
-    lineaDatosFd.appendChild(filaFactor);
-    // }
-
-    async function procesarCategoria(rango, elementoID) {
-        let tablaMenuA = respuestas.filter(respuesta =>
-            respuesta.porcentaje > rango.min && respuesta.porcentaje <= rango.max
-        );
-
-        if (tablaMenuA.length > 0) {
-            await llenaUnaParte(tablaMenuA, lineaDatosFd);
-        } else {
-            let fila = document.createElement('tr');
-            let celdaNombre = document.createElement('td');
-            celdaNombre.style.width = '500px';
-            celdaNombre.textContent = '*** No hay elementos en esta categoría ***';
-            celdaNombre.style.textAlign = 'center';
-            fila.appendChild(celdaNombre);
-            lineaDatosFd.appendChild(fila);
-        }
-    }
-
-    await procesarCategoria({ min: 0, max: 90 }, "tablaSeccion");
-
-}
-
-/* -----------------------------------------
-llenaUnaParte
-------------------------------------------> */
-async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
-    for (const respuesta of tablaMenuA) {
-
-        let filaSeccion = document.createElement('tr');
-        filaSeccion.classList.add('seccion');
-
-        let celdaNombre = document.createElement('th');
-        celdaNombre.setAttribute('colspan', '4'); // Combina 4 columnas
-        const capitulo = "A";
-        const indice = respuesta.seccion;
-        const descripcion = await obtenerNombreSeccion(indice, idioma, capitulo);
-        celdaNombre.textContent = "[ " + respuesta.porcentaje + " % ]   -   Seccion: " + respuesta.seccion + '. ' + descripcion;
-        // celdaNombre.style.width = '550px';
-        filaSeccion.appendChild(celdaNombre);
-
-        lineaDatosFd.appendChild(filaSeccion);
-
-
-        let filaSituacion = document.createElement('tr'); //fila adicional "Situación"
-        filaSituacion.classList.add('seccion');
-
-        let celdaSituacionNum = document.createElement('th');
-        celdaSituacionNum.textContent = " # "; // Texto de la situación
-        celdaSituacionNum.style.width = '10px';
-        filaSituacion.appendChild(celdaSituacionNum);
-
-        let celdaSituacion = document.createElement('th');
-        celdaSituacion.textContent = "Situación"; // Texto de la situación
-        celdaSituacion.style.width = '450px';
-        filaSituacion.appendChild(celdaSituacion);
-
-        let celdaInformado = document.createElement('th');
-        celdaInformado.textContent = "Informado"; // Texto de 'Informado'
-        celdaInformado.style.width = '50px';
-        filaSituacion.appendChild(celdaInformado);
-
-        let celdaFlag = document.createElement('th');
-        celdaFlag.textContent = "Obs"; // Texto de 'banderida'
-        celdaFlag.style.width = '10px';
-        filaSituacion.appendChild(celdaFlag);
-
-        lineaDatosFd.appendChild(filaSituacion);
-
-
-        let info = respuesta.seccion;
-        let preguntasSeccion = matrizPreguntas.filter(pregunta =>
-            pregunta.Seccion == info
-        );
-
-        for (const pregunta of preguntasSeccion) {
-
-            let filaSeccion = document.createElement('tr');
-            filaSeccion.classList.add('situacion2');
-
-            let celdaNumero = document.createElement('th');
-            celdaNumero.style.width = "5px"; // Define el ancho en píxeles
-            celdaNumero.textContent = pregunta.Numero;
-            filaSeccion.appendChild(celdaNumero);
-
-            let consigna = document.createElement('th');
-            consigna.style.width = "300px"; // Define el ancho en píxeles
-            consigna.textContent = pregunta.Descrip;
-            filaSeccion.appendChild(consigna);
-
-            let respondido = document.createElement('th');
-            respondido.style.width = "20px"; // Define el ancho en píxeles
-
-            poneRespuesta(respuesta, pregunta).then((texto) => {
-                respondido.textContent = texto;
-            })
-            filaSeccion.appendChild(respondido);
-            lineaDatosFd.appendChild(filaSeccion);
-
-
-            let celdaRpta = document.createElement('th');
-            // celdaRpta.textContent = pregunta.tipo;
-            celdaRpta.style.width = "20px"; // Define el ancho en píxeles
-            poneBandera(respuesta, pregunta).then((imagen) => {
-                celdaRpta.appendChild(imagen);
-            })
-            filaSeccion.appendChild(celdaRpta);
-
-            lineaDatosFd.appendChild(filaSeccion);
-            const imagen = document.createElement('img');
-
-                // if (texto == "NO") {
-                // imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-                // celdaRpta.textContent = imagen;
-                // celdaRpta.appendChild(imagen);
-                // }
-                // if (texto == "No efectivo") {
-                // imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-                //     celdaRpta.appendChild(imagen);
-                // }
-
-                // if(texto == "Poco efectivo") {
-                //         imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
-                //         celdaRpta.appendChild(imagen);
-                // }
-
-                // if(texto == "Efectivo") {
-                //         imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
-                //         celdaRpta.appendChild(imagen);
-                // }
-                //     else { 
-                //     celdaRpta.textContent = ' ';
-                //     }    
-
-            // celdaRpta.textContent = pregunta.tipo;
-            // celdaRpta.style.width = "20px"; // Define el ancho en píxeles
-            // filaSeccion.appendChild(celdaRpta);
-            }
-        }
-
-        // lineaDatosFd.appendChild(filaSeccion);
-    
-    }
-
-
-
-
-
-/* -----------------------------------------
-armarDetalleGeneral
-------------------------------------------> */
-function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas, textoCheck, textoRespuestas) {
-    let lineaModalGeneral = document.getElementById("lineaModalGeneral");
-    // eliminarFilas();
-    let preguntasSeccion = matrizPreguntas.filter(pregunta =>
-        pregunta.Seccion == info
-    );
-
-    // console.table(preguntasSeccion);
-
-    for (const pregunta of preguntasSeccion) {
-
-        let filaSeccion = document.createElement('tr');
-        // const fila = lineaModalGeneral.insertRow();     // Crear una nueva fila en la tabla
-
-        let celdaNumero = document.createElement('th');
-        celdaNumero.textContent = pregunta.Numero;
-        filaSeccion.appendChild(celdaNumero);
-
-        let consigna = document.createElement('th');
-        consigna.textContent = pregunta.Descrip;
-        filaSeccion.appendChild(consigna);
-
-        // busca el registro de respuesta de la seccion que está trabajando
-        let celdaRpta = document.createElement('th');
-        celdaRpta.textContent = pregunta.tipo;
-    }
-}
-
-/* -----------------------------------------
-poneRespuesta
-------------------------------------------> */
-async function poneRespuesta(respuesta, pregunta) {
-
-    // const registroRespuestasSeccion = respuestas.find(item => item.seccion === pregunta.Seccion)
-    // // registroRespuestasSeccion: es el arreglo de respuestas para todas las preguntas de la seccion)
-    // // ahora recupera la respuesta segun el numero de pregunta....;
-    const registroRespuestasSeccion = respuesta;
-    // console.table(registroRespuestasSeccion)
-    let arrayRespuestas = registroRespuestasSeccion.respuesta;
-    // console.log(`respuesta encontrada ${arrayRespuestas}`)
-
-    valorRespuesta = arrayRespuestas[pregunta.Numero - 1];// resta 1 por la posición 0
-    // console.log("valor de respuesta: " + valorRespuesta);
-
-    // segun el tipo de respuesta (en pregunta.tipo) se convierte para mostrar
-    // tipo 1:  1: si,  2: no
-    if (pregunta.tipo == 1) {
-        if (valorRespuesta == 1) {
-            return "SI"
-        } else {
-            return "NO"
-        }
-    };
-
-    if (pregunta.tipo == 3) {
-        return valorRespuesta
-    }
-
-    if (pregunta.tipo == 51) {
-        const registroTextoRespuestas = textoRespuestas.find(item => item.pregunta == pregunta.tipo);
-        return registroTextoRespuestas.textos[valorRespuesta - 1]
-    }
-
-    if (pregunta.tipo > 50) {
-
-        try {
-
-            const registroTextoRespuestas = textoRespuestas.find(registro => registro.pregunta === pregunta.tipo);
-
-            if (!registroTextoRespuestas) {
-                console.error(`No se encontró un registro con pregunta igual a ${pregunta.tipo}`);
-            }
-
-            valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
-            if (valorRespuesta == "9") {
-                return "No aplica"
-            }
-            else {
-                const texto = registroTextoRespuestas.textos[valorRespuesta - 1];
-                return texto;
-            }
-        } catch (error) {
-            console.error("Error procesando bloque para pregunta.tipo > 50:", error);
-        }
-    };
-
-    if (pregunta.tipo > 40 && pregunta.tipo < 50) {
-        console.log(`\n Pregunta a procesar ${pregunta.Numero} y tipo ${pregunta.tipo} \n`)
-        let indicesCheck = 0;
-        const registroTextoCheck = textoCheck.find(item => item.pregunta == pregunta.tipo);
-        if (!registroTextoCheck) {
-            console.log("No se encontró ninguna fila con la pregunta:", pregunta.tipo);
-            return;
-        }
-
-        valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
-
-        const valoresTextoCheck = registroTextoCheck.textos;
-
-        console.log(`registro Respuestas seccion  ${registroRespuestasSeccion.respuesta}`);
-
-        if (pregunta.tipo == 42 || pregunta.tipo == 43) {
-            arrayRespuestas = registroRespuestasSeccion.respuesta;
-        } else {
-            arrayRespuestas = registroRespuestasSeccion.respuesta[6]
-        };
-
-        console.log(`array rsepuestas  ${arrayRespuestas}`)
-
-        let conjunto = '';
-
-        arrayRespuestas.forEach((indice, i) => {
-            const texto = valoresTextoCheck[indice - 1]; // Obtener el texto correspondiente al índice
-            if (i > 0) {
-                conjunto += ", "; // Agregar una coma y un espacio antes de cada texto (excepto el primero)
-            }
-            conjunto += texto;
-        });
-        return conjunto;
-    }
-}
-
-
-
-/* -----------------------------------------
-poneBandera
-------------------------------------------> */
-async function poneBandera(respuesta, pregunta) {
-
-    return new Promise((resolve) => {
-        let img = document.createElement('img');
-
-        const registroRespuestasSeccion = respuesta;
-        let arrayRespuestas = registroRespuestasSeccion.respuesta
-
-        valorRespuesta = arrayRespuestas[pregunta.Numero - 1];// resta 1 por la posición 0
-
-        // tipo 1:  1: si,  2: no
-        img.style.width = "20px"; // Opcional: ajusta el tamaño de la imagen
-        img.style.height = "20px";
-
-        if (pregunta.tipo == 1) {
-            if (valorRespuesta == 1) {
-                img.src = '../img/marca-de-verificacion.png';
-                img.alt = 'Correcto';
-            } else {
-                img.src = '../img/incorrecto.png';
-                img.alt = 'Incorrecto';
-            }
-            resolve(img); // Devuelve el elemento img
-        };
-
-        if (pregunta.tipo == 3) {
-            img.src = '../img/pregunta.png';
-            resolve(img); // Devuelve el elemento img
-        }
-
-        if (pregunta.tipo == 41 || pregunta.tipo == 42 || pregunta.tipo == 43) {
-            img.src = '../img/pregunta-1.png';
-            resolve(img); // Devuelve el elemento img
-        }
-
-        if (pregunta.tipo == 51) {
-            img.src = '../img/pregunta-1.png';
-            resolve(img); // Devuelve el elemento img
-        }
-
-        if (pregunta.tipo > 50) {
-            const registroTextoRespuestas = textoRespuestas.find(registro => registro.pregunta === pregunta.tipo);
-
-            valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
-            if (valorRespuesta == "9") {
-                img.src = '../img/blanco.png';  // Reemplaza con la ruta de tu imagen
-                resolve(img);
-            } else {
-                const texto = registroTextoRespuestas.textos[valorRespuesta - 1];
-                if (texto == "No efectivo") {
-                    img.src = '../img/peligro.png';
-                } else if (texto == "Poco efectivo") {
-                    img.src = '../img/advertencia-rojo.png';
-                } else if (texto == "Efectivo") {
-                    img.src = '../img/advertencia.png';
-                } else if (texto == "Muy efectivo") {
-                    img.src = '../img/comprobar.png';
-
-                } else if (texto == "No hay") {
-                    img.src = '../img/peligro.png';
-                } else if (texto == "Mensual") {
-                    img.src = '../img/comprobar.png';
-                } else if (texto == "Ad hoc") {
-                    img.src = '../img/comprobado.png';
-
-                } else if (texto == "Anual") {
-                    img.src = '../img/comprobar.png';
-                } else if (texto == "Mensual" && pregunta.tipo == 55) {
-                    img.src = '../img/advertencia.png';
-                }
-                resolve(img);
-            } 
-        }
-})
-}
-
-//     if (pregunta.tipo > 40 && pregunta.tipo < 50) {
-//         let indicesCheck = 0;
-//         const registroTextoCheck = textoCheck.find(item => item.pregunta == pregunta.tipo);
-
-//         valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
-
-//         const valoresTextoCheck = registroTextoCheck.textos;
-
-//         if (pregunta.tipo == 42 || pregunta.tipo == 43) {
-//             arrayRespuestas = registroRespuestasSeccion.respuesta;
-//         } else {
-//             arrayRespuestas = registroRespuestasSeccion.respuesta[6]
-//         };
-
-//         let conjunto = '';
-
-//         arrayRespuestas.forEach((indice, i) => {
-//             const texto = valoresTextoCheck[indice - 1]; // Obtener el texto correspondiente al índice
-//             if (i > 0) {
-//                 conjunto += ", "; // Agregar una coma y un espacio antes de cada texto (excepto el primero)
-//             }
-//             conjunto += texto;
-//         });
-//         return conjunto;
-//     }
-// }
-
-
-
-
-// let conjunto = "cualquiera"
-
-//   filaSeccion.appendChild(celdaRpta);
-
-//   lineaModalGeneral.appendChild(filaSeccion);
-// }
-
-// const celdaComenta = fila.insertCell(-1);
-// // Crear el elemento de imagen
-// const imagen = document.createElement('img');
-// Asignar la fuente de la imagen (ruta a la imagen)
-
-// Opcional: puedes ajustar el tamaño de la imagen
-// imagen.style.width = '15px';
-// imagen.style.height = '15px';
-// imagen.style.border = 'none';
-// imagen.style.margin = '0';
-// imagen.style.padding = '0';
-// imagen.style.verticalAlign = 'middle';
-// imagen.style.marginTop = '5px';  // Ajusta esta cantidad según lo necesites
-
-// celdaComenta.style.display = 'flex';
-// celdaComenta.style.justifyContent = 'center'; // Centrar horizontalmente
-// celdaComenta.style.alignItems = 'center';     // Centrar verticalmente
-// celdaComenta.style.height = '100%';           // Ocupa toda la altura de la fila
-// celdaComenta.style.padding = '0';             // Evitar padding que pueda desalinear la imagen
-// celdaComenta.style.boxSizing = 'border-box';  // Incluir bordes y padding en el tamaño total
-// celdaComenta.style.border = 'none';
-
-// celdaComenta.style.border = 'none';
-
-// Agregar la imagen a la celda
-// imagen.src = '../img/blanco.png';  // Reemplaza con la ruta de tu imagen
-// celdaComenta.appendChild(imagen);
-
-// if (celdaRpta.textContent == "NO") {
-//   imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-//    celdaComenta.appendChild(imagen);
-// }
-
-// if (celdaRpta.textContent == "No efectivo") {
-//    imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-//     celdaComenta.appendChild(imagen);
-// }
-
-// if(celdaRpta.textContent == "Poco efectivo") {
-//           imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
-//           celdaComenta.appendChild(imagen);
-// }
-
-// if(celdaRpta.textContent == "Efectivo") {
-//         imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
-//         celdaComenta.appendChild(imagen);
-//   }
-//     // else { 
-//     //   celdaComenta.textContent = ' ';
-//     // }  
-// }
-
-//   document.getElementById("modalGeneral").style.display = "flex";
-// }
-// }
-
-/* -----------------------------------------
-eliminarFilas
-------------------------------------------> */
-// function eliminarFilas() {
-//   const filasEliminar = dataTable.getElementsByTagName("tr");
-//   for (let i = filasEliminar.length - 1; i > 0; i--) {
-//     dataTable.deleteRow(i);
-//   }
-// }
-
-/* -----------------------------------------
-cerrarModal
-------------------------------------------> */
-function cerrarModal(idModal) {
-    const modal = document.getElementById(idModal);
-    if (modal) {
-        console.log("Cerrando modal"); // Debugging: Confirmar que el modal se cierra
-        modal.style.display = "none";
-    }
-}
-
-
-/* -----------------------------------------
-obtenerNombreSeccion
-------------------------------------------> */
-async function obtenerNombreSeccion(indice, idioma, capitulo) {
-    try {
-        const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
-        if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (data.length > 0) {
-            return data[0].descripcion;
-        } else {
-            return 'Descripción no disponible';
-        }
-    } catch (error) {
-        console.error('Error al obtener la descripción:', error);
-        return 'Descripción no disponible';
-    }
-}
-
-
-/* -----------------------------------------
-lee Capitulos
-------------------------------------------> */
-async function leeCapitulos() {
-    try {
-        const respuesta = await fetch(`/capitulos?idioma=${idioma}`);
-        if (respuesta.ok) {
-            const capitulos = await respuesta.json();
-            return capitulos;
-        } else {
-            console.error("Error al obtener los datos");
+            console.error("Error al obtener las preguntas:", response.statusText);
+            return [];
         }
     } catch (error) {
         console.error("Error al realizar la solicitud:", error);
+        return [];
     }
-    return false;
-};
+}

@@ -23,6 +23,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             localStorage.setItem('CUIT', data.user.CUIT);
             localStorage.setItem('empresa', data.user.empresa);
             localStorage.setItem('idioma', data.user.idioma);
+            localStorage.setItem('ria', data.user.ria);
+            localStorage.setItem('servicio', data.user.servicio);
 
             if (data.user.ingresado == 0) {
                 window.location.href = '../src/Presentacion.html';

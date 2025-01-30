@@ -170,7 +170,9 @@ app.post('/api/login', (req, res) => {
             lastName: user.Apellido,
             empresa: user.Empresa,
             CUIT: user.CUIT, // Guarda el usuario como un objeto en la sesión
-            idioma: user.idioma};
+            idioma: user.idioma,
+            ria: user.ria,
+            servicio: user.servicio};
           res.status(200).json({ 
             message: 'Login exitoso',
             user: {
@@ -182,6 +184,8 @@ app.post('/api/login', (req, res) => {
               CUIT: user.CUIT,
               ingresado: user.ingresado,
               idioma: user.idioma,
+              ria: user.ria,
+              servicio: user.servicio
             }
           }); 
             // Llama a esta función donde necesites en tu aplicación
@@ -604,7 +608,7 @@ app.get('/textorespuestas', (req, res) => {
       res.status(500).json({ error: 'Error al obtener los registros' });
       return;
     }
-    console.log('Resultados de textorespuestas:', results);
+    // console.log('Resultados de textorespuestas:', results);
     res.json(results);
   });
 });
