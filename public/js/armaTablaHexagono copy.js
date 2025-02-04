@@ -2,7 +2,6 @@
 let tablaMenuEs = [];
 let tablaMenuA = [];
 let primeraVez = 0;
-let max = 0;
 // let apellidouser = localStorage.getItem("apellido");
 // const nombreUser = localStorage.getItem("nombre");
 // const apenom = nombreUser + ' ' + apellidouser;
@@ -10,11 +9,8 @@ let max = 0;
 // const CUIT = localStorage.getItem("CUIT");
 
 const ria = localStorage.getItem("ria");
-// const max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
-// console.log (`valor de maximo ${max}`)
-
 const servicio = localStorage.getItem("servicio");
-// let capitulo = "A";
+let capitulo = "A";
 const idioma = Number(localStorage.getItem('idioma'))
 let totalMax = 0;
 let totalCal = 0;
@@ -36,222 +32,74 @@ elementos.forEach(elemento => {
 ejecutarProceso         
 ------------------------------------------> */
 // Llamas a la función `ejecutarProceso` para iniciar el flujo
-// ejecutarProceso();
+ejecutarProceso();
 
 async function ejecutarProceso() {
     capitulos = await leeCapitulos();
     totalCapitulos = await leeTotalCapitulos(CUIT);
-    // matrizPreguntas = await recuperarPreguntas(capitulo);
+    matrizPreguntas = await recuperarPreguntas(capitulo);
     textoCheck = await leeTextoCheck();
     textoRespuestas = await leeTextoRespuestas();
     valorCategorias = await leeListaPrecios ();
-    max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
-    // console.log (`valor de maximo ${max}`)
 
     const { tipificacion, textoTipificacion } = await obtieneTipificacion();
 
     document.getElementById("tipificacion").textContent = tipificacion;
     document.getElementById("causaTipificacion").textContent = textoTipificacion;  
 
-    // await buscaPrintResultados(CUIT, capitulo);
-    // capitulo = "B"
-    // matrizPreguntas = await recuperarPreguntas(capitulo);
+    buscaPrintResultados(CUIT, capitulo);
+    capitulo = "B"
+    matrizPreguntas = await recuperarPreguntas(capitulo);
+    buscaPrintResultados(CUIT, capitulo);
 
 }
 
 
 //  ver si no va esto....
-document.addEventListener("DOMContentLoaded", async function() {
-    await ejecutarProceso(); // Ejecuta todo cuando el DOM está listo
 
-    console.table (capitulos);
-    // matrizPreguntas = await recuperarPreguntas(capitulo);
+document.addEventListener("DOMContentLoaded", function() {
+    let capitulos = ["A", "B", "C", "D"]; // Lista de capítulos
     let contenedor = document.getElementById("contenedorTablas"); // Contenedor donde agregaremos todo
 
-    for (const capitulo of capitulos) {
-        console.log(`procesando capitulo ${capitulo.letra}`)
-        if (capitulo.letra == "E" || capitulo.letra == "F") {
-            continue
-        }
-
-        matrizPreguntas = await recuperarPreguntas(capitulo.letra);
-
-        // Crear el título del capítulo ::::::::::::::::::::::::::.
+    capitulos.forEach(capitulo => {
+        // Crear el título del capítulo
         let titulo = document.createElement("h3");
-        titulo.textContent = `Factor: ${capitulo.nombre}`;
+        titulo.textContent = `Capítulo ${capitulo}`;
         contenedor.appendChild(titulo);
 
-
-        // Crear la tabla :::::::::::::::::::::::::::::::::::::::::
+        // Crear la tabla
         let tabla = document.createElement("table");
         tabla.classList.add("tablaHexagono");
 
+        // Crear el encabezado
+        let thead = document.createElement("thead");
+        let filaEncabezado = document.createElement("tr");
+        filaEncabezado.classList.add("fila-factor");
 
-        // Busca las respuestas de ese capítulo
-        console.log(`busca respuesta de CUIT ${CUIT} y capitulo ${capitulo.letra}`)
-        const data = await buscaRespuesta(CUIT, capitulo.letra);
-        const respuestas = data.respuestas || []; // Si no hay respuestas, asigna un array vacío
-        console.table(respuestas);
+        let thFactor = document.createElement("th");
+        thFactor.textContent = `Factor ${capitulo}`;
+        thFactor.classList.add("factor");
+        filaEncabezado.appendChild(thFactor);
+        thead.appendChild(filaEncabezado);
+        tabla.appendChild(thead);
 
-        // Crear el encabezado (seccion):::::::::::::::::::::::::::
+        // Crear el cuerpo de la tabla
+        let tbody = document.createElement("tbody");
+        let filaRespuesta = document.createElement("tr");
+        filaRespuesta.classList.add("situacion2");
 
-        // Solo se incluyen las secciones con preguntas tipo 1 o 52.
-        // hay que ver dentro de las preguntas de esa seccion hay alguna con tipo 1 o 52
-        // si no hay ninguna, no se incluye.
+        let tdRespuesta = document.createElement("td");
+        tdRespuesta.textContent = `Respuesta para ${capitulo}`;
+        tdRespuesta.classList.add("respuesta");
+        filaRespuesta.appendChild(tdRespuesta);
+        tbody.appendChild(filaRespuesta);
+        tabla.appendChild(tbody);
 
-        // tiene que leer todos los registros de respuestas (uno por seccion)
-        // o sea, que tiene que leer todas las secciones del capitulo
-        // si la sección tiene % menor al minimo segun ria tiene que incluirla.
-        //    lista precio segunda posición de capitulo Z pregunta 1: no ria,  pregunta 2: ria 
-
-        for (const respuesta of respuestas) {
-            if (respuesta.porcentaje > max){
-                console.log (`descarto capitulo ${capitulo.nombre}, seccion ${respuesta.seccion} con % ${respuesta.porcentaje}`)
-                console.log ("**********************");
-                continue
-            }
-
-            console.log(`encontro para incluir capitulo ${capitulo.nombre}, seccion ${respuesta.seccion} con % ${respuesta.porcentaje}`);
-
-            const existeTipo = matrizPreguntas.some(p => 
-                p.Capitulo == respuesta.capitulo &&
-                p.Seccion == respuesta.seccion &&
-                (p.tipo == 1 || p.tipo == 52)
-            );
-
-            if (!existeTipo) {
-                console.log(`No hay 1 o 52 en matrizPreguntas para seccion ${respuesta.seccion}.`);
-                continue;  // Salta a la siguiente iteración del bucle
-            }
-    
-            let thead = document.createElement("thead");
-            let filaEncabezado = document.createElement("tr");
-            filaEncabezado.classList.add("fila-factor");
-
-            let thFactor = document.createElement("th");
-            const indice = respuesta.seccion;
-            const descripcion = await obtenerNombreSeccion(indice, idioma, capitulo.letra);
-            thFactor.textContent = "[ " + respuesta.porcentaje + " % ]   -   Seccion: " + respuesta.seccion + '. ' + descripcion;
-            thFactor.style.fontSize = "17px";
-            thFactor.classList.add("factor");
-            thFactor.setAttribute('colspan', '4');
-            filaEncabezado.appendChild(thFactor);
-            thead.appendChild(filaEncabezado);
-            tabla.appendChild(thead);
-
-            //  crea subtitulo de la sección
-            let thead2 = document.createElement("tbody");
-            let filaEncabezado2 = document.createElement("tr");
-            filaEncabezado2.classList.add("fila-factor");
-
-            // let thFactor2 = document.createElement("th");
-            // const indice2 = respuesta.seccion;
-            // const descripcion2 = await obtenerNombreSeccion(indice, idioma, capitulo.letra);
-            // thFactor2.textContent = "[ " + respuesta.porcentaje + " % ]   -   Seccion: " + respuesta.seccion + '. ' + descripcion;
-            // thFactor2.style.fontSize = "17px";
-            // thFactor2.classList.add("factor");
-            // thFactor2.setAttribute('colspan', '4');
-            // filaEncabezado.appendChild(thFactor2);
-            // thead.appendChild(filaEncabezado2);
-            // tabla.appendChild(thead2);
-
-
-            // Crear el cuerpo de la tabla::::::::::::::::::::::::::::::
-
-            //  Filtra las preguntas para la seccion seleccionada
-            let info = respuesta.seccion;
-            let preguntasSeccion = matrizPreguntas.filter(pregunta =>
-                pregunta.Seccion == info
-            );
-
-            // itera por todas las preguntas filtradas
-
-            for (const pregunta of preguntasSeccion) {
-
-                let filaSeccion = document.createElement('tr');
-                filaSeccion.classList.add('situacion2');
-    
-                // let celdaNumero = document.createElement('th');
-                // celdaNumero.style.width = "5px"; // Define el ancho en píxeles
-                // celdaNumero.textContent = pregunta.Numero;
-                // filaSeccion.appendChild(celdaNumero);
-    
-                // let consigna = document.createElement('th');
-                // consigna.style.width = "300px"; // Define el ancho en píxeles
-                // consigna.textContent = pregunta.Descrip;
-                // filaSeccion.appendChild(consigna);
-    
-                // let respondido = document.createElement('th');
-                // respondido.style.width = "20px"; // Define el ancho en píxeles
-                // poneRespuesta(respuesta, pregunta).then((texto) => {
-                //     respondido.textContent = texto;
-                //     filaSeccion.appendChild(respondido);
-    
-                //     if (pregunta.tipo == "52") {
-                //         if (texto == "No efectivo" || texto == "Poco efectivo" ) {
-                //         // if (texto == "No efectivo") {
-                //         lineaDatosFd.appendChild(filaSeccion)}
-                //     };
-    
-                //     if (pregunta.tipo == "1") {
-                //         if (texto == "NO") {
-                //         // if (texto == "No efectivo") {
-                //         lineaDatosFd.appendChild(filaSeccion)}
-                //     };
-                // })
-
-
-
-                let tbody = document.createElement("tbody");
-                let filaRespuesta = document.createElement("tr");
-                filaRespuesta.classList.add("situacion2");
-
-                // let tdRespuesta = document.createElement("td");
-                // tdRespuesta.textContent = `Respuesta para ${capitulo}`;
-                // tdRespuesta.classList.add("respuesta");
-                // filaRespuesta.appendChild(tdRespuesta);
-
-                let celdaNumero = document.createElement('td');
-                celdaNumero.style.width = "5px"; // Define el ancho en píxeles
-                celdaNumero.textContent = pregunta.Numero;
-                filaRespuesta.appendChild(celdaNumero);
-
-                let consigna = document.createElement('td');
-                consigna.style.width = "300px"; // Define el ancho en píxeles
-                consigna.textContent = pregunta.Descrip;
-                filaRespuesta.appendChild(consigna);
-
-                tbody.appendChild(filaRespuesta);
-
-                let respondido = document.createElement('td');
-                respondido.style.width = "20px"; // Define el ancho en píxeles
-                poneRespuesta(respuesta, pregunta).then((texto) => {
-                    respondido.textContent = texto;
-                    filaRespuesta.appendChild(respondido);
-    
-                    if (pregunta.tipo == "52") {
-                        if (texto == "No efectivo" || texto == "Poco efectivo" ) {
-                        // if (texto == "No efectivo") {
-                        filaRespuesta.appendChild(filaSeccion)}
-                    };
-    
-                    if (pregunta.tipo == "1") {
-                        if (texto == "NO") {
-                        // if (texto == "No efectivo") {
-                        filaRespuesta.appendChild(filaSeccion)}
-                    };
-                })
-
-
-
-                tabla.appendChild(tbody);
-
-                // Agregar la tabla al contenedor
-                contenedor.appendChild(tabla);
-            }
-        }
-    };
+        // Agregar la tabla al contenedor
+        contenedor.appendChild(tabla);
+    });
 });
+
 
 
 
@@ -419,9 +267,9 @@ async function actualizarHTML(respuestas) {
     filaFactor.appendChild(celdaFactor);
     lineaDatosFd.appendChild(filaFactor);
     
-    // const max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
+    const max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
 
-    // console.log (`valor de maximo ${max}`)
+    console.log (`valor de maximo ${max}`)
 
     await procesarCategoria({ min: 0, max: max }, "tablaSeccion");
 
@@ -479,7 +327,7 @@ async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
         );
 
         if (!existeTipo) {
-            console.log(`No hay 1 o 52 en matrizPreguntas para capitulo ${respuesta.capitulo} y seccion ${respuesta.seccion}.`);
+            console.log(`No hay 1 o 52 en matrizPreguntas para seccion ${respuesta.seccion}.`);
             continue;  // Salta a la siguiente iteración del bucle
         }
 
@@ -518,7 +366,7 @@ async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
             const indice = pregunta.Numero - 1;  // Calcular la posición
             const valorLeido = respuesta.respuesta[indice]; // Obtener respuesta
 
-            // console.log(`🔍 Evalua pregunta ${pregunta.Numero}: tipo=${pregunta.tipo}, valorLeido=${valorLeido}`);
+            console.log(`🔍 Evalua pregunta ${pregunta.Numero}: tipo=${pregunta.tipo}, valorLeido=${valorLeido}`);
 
             //     console.log(`⛔ Condición no cumplida, 
             if (
