@@ -153,16 +153,21 @@ document.addEventListener("DOMContentLoaded", async function() {
             let celdaSituacionNum = document.createElement('td');
             celdaSituacionNum.textContent = " # "; // Texto de la situación
             celdaSituacionNum.style.width = '10px';
+            celdaSituacionNum.style.fontWeight = "600";
             filaSituacion.appendChild(celdaSituacionNum);
 
             let celdaSituacion = document.createElement('td');
             celdaSituacion.textContent = "Situación"; // Texto de la situación
             celdaSituacion.style.width = '550px';
+            celdaSituacion.style.fontWeight = "600";
+            celdaSituacion.style.fontSize = "16px";
             filaSituacion.appendChild(celdaSituacion);
 
             let celdaInformado = document.createElement('td');
             celdaInformado.textContent = "Informado"; // Texto de 'Informado'
             celdaInformado.style.width = '70px';
+            celdaInformado.style.fontWeight = "600";
+            celdaInformado.style.fontSize = "16px";
             filaSituacion.appendChild(celdaInformado);
 
             tbody.appendChild(filaSituacion);
@@ -229,44 +234,40 @@ document.addEventListener("DOMContentLoaded", async function() {
                 let filaRespuesta = document.createElement("tr");
                 filaRespuesta.classList.add("situacion2");
 
-                // let tdRespuesta = document.createElement("td");
-                // tdRespuesta.textContent = `Respuesta para ${capitulo}`;
-                // tdRespuesta.classList.add("respuesta");
-                // filaRespuesta.appendChild(tdRespuesta);
-
                 let celdaNumero = document.createElement('td');
                 celdaNumero.style.width = "5px"; // Define el ancho en píxeles
                 celdaNumero.textContent = pregunta.Numero;
                 filaRespuesta.appendChild(celdaNumero);
 
                 let consigna = document.createElement('td');
-                consigna.style.width = "500px"; // Define el ancho en píxeles
+                consigna.style.width = "350px"; // Define el ancho en píxeles
                 consigna.textContent = pregunta.Descrip;
                 consigna.style.fontSize = "16px";
                 filaRespuesta.appendChild(consigna);
 
-                tbody.appendChild(filaRespuesta);
+                // tbody.appendChild(filaRespuesta);
 
                 let respondido = document.createElement('td');
-                respondido.style.width = "20px"; // Define el ancho en píxeles
+                respondido.style.width = "90px"; // Define el ancho en píxeles
                 poneRespuesta(respuesta, pregunta).then((texto) => {
                     respondido.textContent = texto;
+                    respondido.style.fontSize = "16px";
                     filaRespuesta.appendChild(respondido);
     
                     if (pregunta.tipo == "52") {
                         if (texto == "No efectivo" || texto == "Poco efectivo" ) {
                         // if (texto == "No efectivo") {
-                        filaRespuesta.appendChild(filaSeccion)}
+                        filaRespuesta.appendChild(filaSeccion)
+                        tbody.appendChild(filaRespuesta);}
                     };
     
                     if (pregunta.tipo == "1") {
                         if (texto == "NO") {
                         // if (texto == "No efectivo") {
-                        filaRespuesta.appendChild(filaSeccion)}
+                        filaRespuesta.appendChild(filaSeccion)
+                        tbody.appendChild(filaRespuesta);}
                     };
                 })
-
-
 
                 tabla.appendChild(tbody);
 
