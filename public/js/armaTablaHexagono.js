@@ -590,8 +590,9 @@ async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
             filaSeccion.appendChild(celdaNumero);
 
             let consigna = document.createElement('th');
-            consigna.style.width = "300px"; // Define el ancho en píxeles
+            consigna.style.width = "400px"; // Define el ancho en píxeles
             consigna.textContent = pregunta.Descrip;
+            consigna.style.fontSize = "14px";
             filaSeccion.appendChild(consigna);
 
             let respondido = document.createElement('th');
