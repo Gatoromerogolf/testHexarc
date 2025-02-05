@@ -566,13 +566,13 @@ async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
         celdaInformado.textContent = "Informado"; // Texto de 'Informado'
         celdaInformado.style.width = '50px';
         filaSituacion.appendChild(celdaInformado);
+        
+        lineaDatosFd.appendChild(filaSituacion);
 
         // let celdaFlag = document.createElement('th');
         // celdaFlag.textContent = "Obs"; // Texto de 'banderida'
         // celdaFlag.style.width = '10px';
         // filaSituacion.appendChild(celdaFlag);
-
-        lineaDatosFd.appendChild(filaSituacion);
 
         let info = respuesta.seccion;
         let preguntasSeccion = matrizPreguntas.filter(pregunta =>
