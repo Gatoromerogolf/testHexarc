@@ -77,6 +77,10 @@ document.addEventListener("DOMContentLoaded", async function() {
         matrizPreguntas = await recuperarPreguntas(capitulo.letra);
 
         // Crear el título del capítulo ::::::::::::::::::::::::::.
+        let espacios = document.createElement("h3");
+        espacios.textContent = "";
+        contenedor.appendChild(espacios);// inserta linea en blanco
+
         let titulo = document.createElement("h3");
         titulo.textContent = `Factor: ${capitulo.nombre}`;
         contenedor.appendChild(titulo);
@@ -140,9 +144,28 @@ document.addEventListener("DOMContentLoaded", async function() {
             tabla.appendChild(thead);
 
             //  crea subtitulo de la sección
-            let thead2 = document.createElement("tbody");
-            let filaEncabezado2 = document.createElement("tr");
-            filaEncabezado2.classList.add("fila-factor");
+            let tbody = document.createElement("tbody");
+
+            let filaSituacion = document.createElement('tr'); //fila adicional "Situación"
+            filaSituacion.classList.add('seccion');
+            filaSituacion.style.borderBottom = "1px solid black"; // Línea divisoria
+
+            let celdaSituacionNum = document.createElement('td');
+            celdaSituacionNum.textContent = " # "; // Texto de la situación
+            celdaSituacionNum.style.width = '10px';
+            filaSituacion.appendChild(celdaSituacionNum);
+
+            let celdaSituacion = document.createElement('td');
+            celdaSituacion.textContent = "Situación"; // Texto de la situación
+            celdaSituacion.style.width = '550px';
+            filaSituacion.appendChild(celdaSituacion);
+
+            let celdaInformado = document.createElement('td');
+            celdaInformado.textContent = "Informado"; // Texto de 'Informado'
+            celdaInformado.style.width = '70px';
+            filaSituacion.appendChild(celdaInformado);
+
+            tbody.appendChild(filaSituacion);
 
             // let thFactor2 = document.createElement("th");
             // const indice2 = respuesta.seccion;
@@ -202,7 +225,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 
-                let tbody = document.createElement("tbody");
+                // let tbody = document.createElement("tbody");
                 let filaRespuesta = document.createElement("tr");
                 filaRespuesta.classList.add("situacion2");
 
@@ -217,8 +240,9 @@ document.addEventListener("DOMContentLoaded", async function() {
                 filaRespuesta.appendChild(celdaNumero);
 
                 let consigna = document.createElement('td');
-                consigna.style.width = "300px"; // Define el ancho en píxeles
+                consigna.style.width = "500px"; // Define el ancho en píxeles
                 consigna.textContent = pregunta.Descrip;
+                consigna.style.fontSize = "16px";
                 filaRespuesta.appendChild(consigna);
 
                 tbody.appendChild(filaRespuesta);
@@ -566,7 +590,7 @@ async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
         celdaInformado.textContent = "Informado"; // Texto de 'Informado'
         celdaInformado.style.width = '50px';
         filaSituacion.appendChild(celdaInformado);
-        
+
         lineaDatosFd.appendChild(filaSituacion);
 
         // let celdaFlag = document.createElement('th');
