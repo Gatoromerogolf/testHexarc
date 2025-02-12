@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="../estilos/login.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+    
+</head>
+<style>
+  *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Abel', sans-serif;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /*background-color:#528FD5;*/
+  background: url('estilos/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+h3 {
+  font-size: 12px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  /* background:#e6e6e6; */
+  background-color: #0b5e92;
+  background-color: rgba(11, 94, 146, 0.7); /* 0.8 es el nivel de opacidad */
+  text-align: center;
+  padding: 60px 90px;
+  border-radius: 15px;
+}
+
+form .title{
+  font-size: 40px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: white;
+}
+
+form .subtitle{
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: white;
+}
+form label{
+  margin-bottom: 30px;
+  line-height: 30px; /* Ajusta este valor según sea necesario */
+}
+
+form label .fa-solid{
+  font-size: 20px;
+  color: black;
+  margin-right: 5px;
+  line-height: 10px;
+}
+
+form label input{
+  outline: none;
+  border: none;
+  color:black;
+  border-bottom: solid 1px rgb(109, 105, 106);
+  padding:10px 10px;
+  font-size: 25px;
+}
+
+form label input::placeholder{
+  color: black;
+}
+/* form .link{
+  color: rgb(14, 8, 0);
+  margin-bottom: 20px;
+  text-decoration: none;
+} */
+
+form button{
+  color: rgb(18, 17, 17);
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 50%; /* Ajusta este valor según el ancho deseado */
+  align-self: center; /* Centra el botón dentro del formulario */
+  border-radius: 10px;
+}
+
+</style>
+
+<body class="financiero">
+  <form id="loginForm">
+    <h1 class="title">- HexaRCi -</h1>
+    <h3 class="subtitle">Registro de nuevo usuario</h3>
+    <br>
+    <label for="username">
+      <i class="fa-solid fa-envelope"></i>
+      <input placeholder="usuario" type="text" id="username" name="username" required>
+    </label>
+    <label for="password">
+      <i class="fa-solid fa-lock"></i>
+      <input placeholder="clave" type="password" id="password" name="password" required>
+    </label>  
+    <!-- <a href="#" class="link">Olvidó su clave?</a> -->
+    <button id="login" type="submit">Ingresar</button>
+  </form>
+    <div id="message"></div>
+    
+  <script src="../../js/loginreg.js"></script>
+
+</body>
+
+</html>

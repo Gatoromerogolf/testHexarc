@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación de riesgos</title>
+  <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+  rel="stylesheet">
+
+<body class="financiero">
+
+  <div class="survey-container-presentacion" style="max-width: 800px;">
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #9b59b6;
+	font-family: 'Open Sans', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+select, option {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+/* formulario fondo blanco */
+.container {
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	width: 850px;
+	max-width: 100%;
+}
+
+/*  titulo debajo de Crear cuenta */
+.header {
+	border-bottom: 10px solid #f0f0f0;
+	background-color: #f7f7f7;
+	padding: 20px 40px;
+}
+
+.header h2 {
+	margin: 0;
+}
+
+.form {
+	padding: 30px 40px;	/* hacia arrriba y a los costados */
+}
+
+.form-group {
+    display: flex;
+    gap: 20px; /* Espacio entre los campos */
+}
+
+.form-control {
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	position: relative;
+
+    flex: 1; /* Que cada campo ocupe el mismo espacio */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form-control label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+/* campos del formulario */
+.form-control input {
+	border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 10px;
+	width: 100%;
+}
+
+.form-control input:focus {
+	outline: 0;
+	border-color: #777;
+}
+
+.form-control.success input {
+	border-color: #2ecc71;
+}
+
+.form-control.error input {
+	border-color: #e74c3c;
+}
+
+.form-control i {
+	visibility: hidden;
+	position: absolute;
+	top: 40px;
+	right: 10px;
+}
+
+.form-control.success i.fa-check-circle {
+	color: #2ecc71;
+	visibility: visible;
+}
+
+.form-control.error i.fa-exclamation-circle {
+	color: #e74c3c;
+	visibility: visible;
+}
+
+.form-control small {
+	color: #e74c3c;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	visibility: hidden;
+}
+
+.form-control.error small {
+	visibility: visible;
+}
+
+.form button {
+	background-color: #8e44ad;
+	border: 2px solid #8e44ad;
+	border-radius: 4px;
+	color: #fff;
+	display: block;
+	font-family: inherit;
+	font-size: 16px;
+	padding: 10px;
+	margin-top: 20px;
+	width: 100%;
+}
+
+.check {
+  margin-left: 8px; /* Ajusta el espacio según necesites */
+}
+
+input[type="checkbox"] {
+  margin-left: -20px; /* Ajusta según necesites */
+}
+
+</style>
+
+<div class="container">
+    <div class="header">
+        <h2>Crear cuenta</h2>
+    </div>
+    <form id="form" class="form">
+        <fieldset>
+            <legend style="font-size: 20px; font-weight: 650">Datos del usuario.</legend>
+            <div class="form-group">
+                <div class="form-control">
+                    <label for="nombreEmpresa">Nombre</label>
+                    <input type="text"  id="nombreUsuario"/>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="apellidoUsuario">Apellido</label>
+                    <input type="text" placeholder="Apellido" id="apellidoUsuario">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+            </div>
+            <div class="form-control">
+                <label for="email">Correo electrónico</label>
+                <input type="email" placeholder="direccion de mail" id="email">
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-group">
+                <div class="form-control">
+                    <label for="password">Definir nueva clave</label>
+                    <input type="password" placeholder="Password" id="password"/>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password2">Repetir nueva clave</label>
+                    <input type="password" placeholder="Password dos" id="password2"/>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend style="font-size: 20px; font-weight: 650">Datos de la Empresa.</legend>
+            <div class="form-control">
+                <label for="nombreEmpresa">Nombre</label>
+                <input type="text" placeholder="Nombre" id="nombreEmpresa"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="actividad">Actividad</label>
+                <textarea rows ="4" placeholder="Descripción general de la actividad" id="actividad"></textarea>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+
+            <div class="form-control">
+                <legend>Seleccionar tipo principal de actividad</legend>
+                <!-- <label for="lang">Se utiliza - select - </label> -->
+                  <select name="rubroAct" id="rubroAct">
+                    <option value="1">Financiera no regulada</option>
+                    <option value="2">Medios y Contenido</option>
+                    <option value="3">Biotecnología y farmacéutica</option>
+                    <option value="4">Petróleo y gas</option>
+                    <option value="5">Start-Ups de tecnologías innovadoras</option>
+                    <option value="6">Entretenimiento y producción de películas</option>
+                    <option value="7">Comercio minorista On-Line</option>
+                    <option value="8">Otras</option>
+                  </select>
+            </div>
+
+            <div class="form-control">
+                <div class="form-group">
+                <label for="actividad">Sector o industria:</label>
+                <!-- <div class="form-group"> -->
+
+                <td class="respuesta-col">
+                    <div class="radio-container"><input type="radio" name="A-4-1" value="1"
+                        onclick="manejarVisibilidadFila2()">Manufactura</div>
+                  </td>
+    
+                  <td class="respuesta-col">
+                    <div class="radio-container"><input type="radio" name="A-4-1" value="2"
+                        onclick="manejarVisibilidadFila2()">Servicios</div>
+                  </td>
+                <!-- <textarea rows ="4" placeholder="Descripción de la actividad" id="actividad"></textarea> -->
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+                </div>
+            </div>
+
+            <!-- <ul class="listas" style="list-style: none"> -->
+            <div>
+                La empresa se encuentra: <span style="font-size: 14px;">(marcar todo lo que corresponda)</span>
+                <ul style="list-style: none;">
+                  <li><input id="uno" type="checkbox" value="1"><label class="check" for="uno">Instalando procesos de transformación digital a través de inteligencia artificial en procesos “core” o de soporte significativos</label></li>
+                  <li><input id="uno2" type="checkbox" value="2"><label class="check" for="uno">Llevando a cabo reestructuraciones corporativas</label></li>
+                  <li><input id="uno3" type="checkbox" value="3"><label class="check" for="uno">Llevando a cabo cambios significativos en la dirección ejecutiva</label></li>
+                  <li><input id="uno4" type="checkbox" value="4"><label class="check" for="uno">En proceso de fusiones y adquisiciones</label></li>
+                  <li><input id="uno5" type="checkbox" value="5"><label class="check" for="uno">Llevando a cabo cambios significativos en la estrategia de negocios</label></li>
+                  <li><input id="uno6" type="checkbox" value="6"><label class="check" for="uno">Llevando a cabo adaptaciones significativas a nuevas regulaciones</label></li>
+                  <li><input id="uno7" type="checkbox" value="7"><label class="check" for="uno">En proceso de resolución de crisis</label></li>
+                  <li><input id="uno8" type="checkbox" value="8"><label class="check" for="uno">En proceso de intervención o supervisión por alguna autoridad regulatoria o judicial</label></li>
+                </ul>
+            </div>
+        </fieldset>
+
+        <br>
+        <fieldset>
+            <legend style="font-size: 20px; font-weight: 650">Sobre el Directorio.</legend>
+            <div class="form-control">
+                <label for="calidadDirectores">¿La calidad de los Directores ha mejorado en los últimos tres años y por qué?</label>
+                <textarea rows ="2" id="calidadDirectores"></textarea>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="calidadDirectorio">¿La calidad del Directorio ha mejorado en los últimos tres años y por qué?</label>
+                <textarea rows ="2" id="acalidadDirectorio"></textarea>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+                <legend style="font-size: 20px; font-weight: 650">Advisory Board.</legend>
+                <div class="form-group">
+                <div class="form-control">
+                    <label for="advisory">Si existe, ¿hace cuanto tiempo funciona?</label>
+                    <textarea rows ="1" id="advisory"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="advisoryAntiguedad">¿Tiene una antigüedad menor a dos años?</label>
+                    <textarea rows ="1" id="advisoryAntiguedad"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+            </div>
+        </fieldset>
+
+        <br>
+        <fieldset>
+            <legend style="font-size: 20px; font-weight: 650">Situación Financiera y Resultados.</legend>
+            <!-- <div class="form-group"> -->
+                <div class="form-control">
+                    <label for="sitFinanEmpeorado">¿La situación financiera ha empeorado durante los últimos 3 años?</label>
+                    <textarea rows ="1" id="sitFinanEmpeorado"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="sitFinanTasas">¿Se ha tenido que recurrir a financiamiento no bancario a tasas elevadas en los últimos tres años?</label>
+                    <textarea rows ="1" id="sitFinanTasas"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="sitFinanPercep">¿Se percibe que la situación descripta respecto del financiamiento se mantendrá en el siguiente año?</label>
+                    <textarea rows ="1" id="sitFinanPercep"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+            <!-- </div> -->
+            <div class="form-control">
+                <label for="sitResultados">¿Los resultados durante los últimos tres años han mejorado o empeorado?</label>
+                <textarea rows ="1" id="sitResultados"></textarea>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+
+            <div class="form-control">
+                <label for="sitResultadosExtra">¿Los resultados durante alguno de los últimos tres años han sido beneficiados por alguna circunstancia extraordinaria?</label>
+                <textarea rows ="1" id="sitResultadosExtra"></textarea>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+        </fieldset>
+
+        <br>
+        <fieldset>
+            <legend style="font-size: 20px; font-weight: 650">Estructura y procesos.</legend>
+            <!-- <div class="form-group"> -->
+                <div class="form-control">
+                    <label for="subsidiarias">¿Tiene subsidiarias en el exterior y dónde?</label>
+                    <textarea rows ="1" id="subsidiarias"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="estrGerencial">¿La estructura gerencial se ha mantenido estable durante los tres últimos años?</label>
+                    <textarea rows ="1" id="estrGerencial"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+
+                <div class="form-control">
+                    <label for="formaRemota">¿La forma de trabajo durante los dos últimos años es predominantemente remota?</label>
+                    <textarea rows ="1" id="formaRemota"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+
+                <div class="form-control">
+                    <label for="cambioProcesos">¿Los procesos han mostrado cambios significativos en su diseño en los dos últimos años?</label>
+                    <textarea rows ="1" id="cambioProcesos"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+
+                <div class="form-control">
+                    <label for="tercerizaciones">¿Ha habido tercerizaciones significativas de procesos en los dos últimmos años?</label>
+                    <textarea rows ="1" id="tercerizaciones"></textarea>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+        </fieldset>
+
+        <button>Enviar</button>
+    </form>
+</div>
+
+<script>
+const form = document.getElementById('form');
+const usuario = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const password2 = document.getElementById('password2');
+
+form.addEventListener('submit', e => {
+	e.preventDefault();
+	
+	checkInputs();
+});
+
+function checkInputs() {
+	// trim to remove the whitespaces
+	const usuarioValue = usuario.value.trim();
+	const emailValue = email.value.trim();
+	const passwordValue = password.value.trim();
+	const password2Value = password2.value.trim();
+	
+	if(usuarioValue === '') {
+		setErrorFor(usuario, 'No puede dejar el usuario en blanco');
+	} else {
+		setSuccessFor(usuario);
+	}
+	
+	if(emailValue === '') {
+		setErrorFor(email, 'No puede dejar el email en blanco');
+	} else if (!isEmail(emailValue)) {
+		setErrorFor(email, 'No ingreso un email válido');
+	} else {
+		setSuccessFor(email);
+	}
+	
+	if(passwordValue === '') {
+		setErrorFor(password, 'Password no debe ingresar en blanco.');
+	} else {
+		setSuccessFor(password);
+	}
+	
+	if(password2Value === '') {
+		setErrorFor(password2, 'Password2 no debe ngresar en blanco');
+	} else if(passwordValue !== password2Value) {
+		setErrorFor(password2, 'Passwords no coinciden');
+	} else{
+		setSuccessFor(password2);
+	}
+}
+
+function setErrorFor(input, message) {
+	const formControl = input.parentElement;
+	const small = formControl.querySelector('small');
+	formControl.className = 'form-control error';
+	small.innerText = message;
+}
+
+function setSuccessFor(input) {
+	const formControl = input.parentElement;
+	formControl.className = 'form-control success';
+}
+
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+</script>
