@@ -17,13 +17,18 @@ A continuación los aspectos identificados para su evaluación:
    ```markdown
    | Ahora dice   |   Ahora dice | Debería decir|
    |--------------|--------------|--------------|
-   | El Directorio recibe KPI´s suficientes y solidos desde la Gerencia | No efectivo | KPI´s enviados por la Gerencia al Directorio |
+   | El Directorio recibe KPI´s suficientes y solidos desde la Gerencia | No efectivo | KPI´s de la Gerencia hacie el Directorio |
 
-   | El Directorio ejerce consistentemente un desafío creíble a la información gerencia | Poco efectivo | Control sobre la información gerencial |
+   | El Directorio ejerce consistentemente un desafío creíble a la información gerencia | Poco efectivo | Control de la información gerencial |
    
    | El Directorio aprueba los contratos significativos celebrados por la Gerencia | NO  | Control de los contratos celebrados por la Gerencia |
    ```
 
+Ahora estamos describiendo la situación actual con su resultado, según lo indicado por el mismo usuario.  O sea, es la pregunta y la respuesta.
+
+La propuesta es describir el título dando a entender que ese título requiere atención y es una posibilidad de mejora.
+Es presentarle al usuario un nivel "superior" que requiere un paso de profundización en el proceso de mejora.  
+Si el usuario pregunta "por qué es mejorable", el consultor en base a la respuesta de la autoevaluación (ej: poco efectivo), hace su recomendación justificando las ventajas de la misma.
 
 
 # codigos generales

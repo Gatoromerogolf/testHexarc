@@ -371,7 +371,7 @@ function cerrarModal(idModal) {
       celdaNombre.textContent = descripcion; // Ajusta según tu estructura de datos
       celdaNombre.textContent = respuesta.seccion + '. ' + descripcion;
       const nombreSeccion = respuesta.seccion + ' ' + descripcion;
-      celdaNombre.style.width = '300px';
+      celdaNombre.style.width = '450px';
       celdaNombre.classList.add('font-style-conclu');
       fila.appendChild(celdaNombre);
     
