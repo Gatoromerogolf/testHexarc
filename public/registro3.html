@@ -288,7 +288,7 @@
                     <legend style="font-size: 20px; font-weight: 650">Datos de la Empresa.</legend>
                     <div class="form-control">
                         <label for="nombreEmpresa">Nombre</label>
-                        <input type="text" value="Nombre ya conocido de la empresa, asignado internamente" id="nombreEmpresa" disabled />
+                        <input type="text" id="nombreEmpresa" disabled style="font-size: 20px; font-weight: 650"/>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
@@ -365,17 +365,17 @@
                 <fieldset>
                     <legend style="font-size: 20px; font-weight: 650">Sobre el Directorio.</legend>
                     <div class="form-control">
-                        <label for="calidadDirectores">¿La calidad de los Directores ha mejorado en los últimos tres
+                        <label for="caliDirector">¿La calidad de los Directores ha mejorado en los últimos tres
                             años y por qué?</label>
-                        <textarea rows="2" id="calidadDirectores"></textarea>
+                        <textarea rows="2" id="calDirector"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
                     <div class="form-control">
-                        <label for="calidadDirectorio">¿La calidad del Directorio ha mejorado en los últimos tres años y
+                        <label for="calDirectorio">¿La calidad del Directorio ha mejorado en los últimos tres años y
                             por qué?</label>
-                        <textarea rows="2" id="acalidadDirectorio"></textarea>
+                        <textarea rows="2" id="calDirectorio"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
@@ -393,55 +393,54 @@
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error message</small>
                         </div>
-                        <div class="form-control">
+                        <!-- <div class="form-control">
                             <label for="advisoryAntiguedad">¿Tiene una antigüedad menor a dos años?</label>
                             <textarea rows="1" id="advisoryAntiguedad"></textarea>
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error message</small>
-                        </div>
+                        </div> -->
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <legend style="font-size: 20px; font-weight: 650">Situación Financiera y Resultados.</legend>
                     <div class="form-control">
-                        <label for="sitFinanEmpeorado">¿La situación financiera ha empeorado durante los últimos 3
+                        <label for="finanEmpeorado">¿La situación financiera ha empeorado durante los últimos 3
                             años?</label>
-                        <textarea rows="1" id="sitFinanEmpeorado"></textarea>
+                        <textarea rows="1" id="finanEmpeorado"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
                     <div class="form-control">
-                        <label for="sitFinanTasas">¿Se ha tenido que recurrir a financiamiento no bancario a tasas
+                        <label for="finanTasas">¿Se ha tenido que recurrir a financiamiento no bancario a tasas
                             elevadas en los últimos tres años?</label>
-                        <textarea rows="1" id="sitFinanTasas"></textarea>
+                        <textarea rows="1" id="finanTasas"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
                     <div class="form-control">
-                        <label for="sitFinanPercep">¿Se percibe que la situación descripta respecto del financiamiento
+                        <label for="finanPercep">¿Se percibe que la situación descripta respecto del financiamiento
                             se mantendrá en el siguiente año?</label>
-                        <textarea rows="1" id="sitFinanPercep"></textarea>
+                        <textarea rows="1" id="finanPercep"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
                     <div class="form-control">
-                        <label for="sitResultados">¿Los resultados durante los últimos tres años han mejorado o
-                            empeorado?</label>
-                        <textarea rows="1" id="sitResultados"></textarea>
+                        <label for="resultados">¿Los resultados durante los últimos tres años han mejorado o empeorado?</label>
+                        <textarea rows="1" id="resultados"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
                     </div>
 
                     <div class="form-control">
-                        <label for="sitResultadosExtra">¿Los resultados durante alguno de los últimos tres años han sido
+                        <label for="resultadosExtra">¿Los resultados durante alguno de los últimos tres años han sido
                             beneficiados por alguna circunstancia extraordinaria?</label>
-                        <textarea rows="1" id="sitResultadosExtra"></textarea>
+                        <textarea rows="1" id="resultadosExtra"></textarea>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
@@ -500,6 +499,10 @@
         </div>
 
         <script>
+            const empresa = localStorage.getItem("empresa");
+            alert (`nombre empresa  ${empresa}`)
+            document.getElementById("nombreEmpresa").value = empresa;
+
             let huboerror = false;
             const form = document.getElementById('form');
             const usuario = document.getElementById('nombreUsuario');
@@ -507,6 +510,20 @@
             const email = document.getElementById('email');
             const password = document.getElementById('password');
             const password2 = document.getElementById('password2');
+            const actividad = document.getElementById('actividad');
+            const calDirector = document.getElementById('calDirector');
+            const calDirectorio = document.getElementById('calDirectorio');
+            const advisory = document.getElementById('advisory'); 
+            const finanEmpeorado = document.getElementById('finanEmpeorado');  
+            const finanTasas = document.getElementById('finanTasas');   
+            const finanPercep = document.getElementById('finanPercep');
+            const resultados = document.getElementById('resultados');                            
+            const resultadosExtra = document.getElementById('resultadosExtra'); 
+            const subsidiarias = document.getElementById('subsidiarias'); 
+            const estrGerencial = document.getElementById('estrGerencial'); 
+            const formaRemota = document.getElementById('formaRemota'); 
+            const cambioProcesos = document.getElementById('cambioProcesos');
+            const tercerizaciones = document.getElementById('tercerizaciones');  
 
             form.addEventListener('submit', e => {
                 e.preventDefault();
@@ -521,6 +538,20 @@
                 const emailValue = email.value.trim();
                 const passwordValue = password.value.trim();
                 const password2Value = password2.value.trim();
+                const actividadValue = actividad.value.trim();
+                const calDirectorValue = calDirector.value.trim();
+                const calDirectorioValue = calDirectorio.value.trim();
+                const advisoryValue = advisory.value.trim(); 
+                const finanEmpeoradoValue = finanEmpeorado.value.trim();  
+                const finanTasasValue = finanTasas.value.trim();   
+                const finanPercepValue = finanPercep.value.trim();
+                const resultadosValue = resultados.value.trim();                            
+                const resultadosExtraValue = resultadosExtra.value.trim(); 
+                const subsidiariasValue = subsidiarias.value.trim(); 
+                const estrGerencialValue = estrGerencial.value.trim(); 
+                const formaRemotaValue = formaRemota.value.trim(); 
+                const cambioProcesosValue = cambioProcesos.value.trim();
+                const tercerizacionesValue = tercerizaciones.value.trim(); 
 
                 if (usuarioValue === '') {
                     setErrorFor(usuario, 'No puede dejar el nombre en blanco');
@@ -556,9 +587,125 @@
                     setSuccessFor(password2);
                 }
 
+                if (actividadValue === '') {
+                    setErrorFor(actividad, 'No puede dejar la actividad en blanco');
+                } else {
+                    setSuccessFor(actividad);
+                }
+
+                if (calDirectorValue === '') {
+                    setErrorFor(calDirector, 'No puede quedar en blanco.');
+                } else {
+                    setSuccessFor(calDirector);
+                }
+
+                if (calDirectorioValue === '') {
+                    setErrorFor(calDirectorio, 'No puede quedar en blanco.');
+                } else {
+                    setSuccessFor(calDirectorio);
+                }
+
+                // if (advisoryValue === '') {
+                //     setErrorFor(advisory, 'No puede quedar en blanco.');
+                // } else {
+                //     setSuccessFor(advisory);
+                // }
+
+
+                
+                if (finanEmpeoradoValue === '') {
+                    setErrorFor(finanEmpeorado, 'No puede quedar en blanco.');
+                } else {
+                    setSuccessFor(finanEmpeorado);
+                }
+
+                if (finanTasasValue === '') {
+                    setErrorFor(finanTasas, 'No puede quedar en blanco.');
+                } else {
+                    setSuccessFor(finanTasas);
+                }
+
+                if (finanPercepValue === '') {
+                    setErrorFor(finanPercep, 'No puede quedar en blanco..');
+                } else {
+                    setSuccessFor(finanPercep);
+                }
+
+                if (resultadosValue === '') {
+                    setErrorFor(resultados, 'No puede quedar en blanco..');
+                } else {
+                    setSuccessFor(resultados);
+                }
+
+                if (resultadosExtraValue === '') {
+                    setErrorFor(resultadosExtra, 'No puede quedar en blanco.');
+                } else {
+                    setSuccessFor(resultadosExtra);
+                }
+
+                if (subsidiariasValue === '') {
+                    setErrorFor(subsidiarias, 'No puede quedar en blanco..');
+                } else {
+                    setSuccessFor(subsidiarias);
+                }
+
+                if (estrGerencialValue === '') {
+                    setErrorFor(estrGerencial, 'No puede quedar en blanco..');
+                } else {
+                    setSuccessFor(estrGerencial);
+                }
+
+                if (formaRemotaValue === '') {
+                    setErrorFor(formaRemota, 'No puede quedar en blanco.');
+                } else {
+                    setSuccessFor(formaRemota);
+                }
+
+                if (cambioProcesosValue === '') {
+                    setErrorFor(cambioProcesos, 'No puede quedar en blanco..');
+                } else {
+                    setSuccessFor(cambioProcesos);
+                }
+
+                if (tercerizacionesValue === '') {
+                    setErrorFor(tercerizaciones, 'No puede quedar en blanco..');
+                } else {
+                    setSuccessFor(tercerizaciones);
+                }
+
                 if (huboerror) {
                     alert('Debe corregir las observaciones...');
                     window.scrollTo(0, 0); // Mueve la página al inicio
+                } else {
+                    alert ("esta para grabar el formulario")
+
+                    actualizarUser();
+                    actualizarEmpresa();
+
+                    alert ("proceso terminado")
+                    // actualiza datos de user
+                    //   Nombre
+                    //   Apellido
+                    //   borra password con la definida
+                    //   email
+
+                    // graba registro de empresa
+                    //   mismo numero de cuit que el usuario
+                    //   descripcion
+                    //   Directores
+                    //   Directorio
+                    //   Advisory
+                    //   situacionFinan
+                    //   finanNoBancario
+                    //   finanMantenido
+                    //   resultados
+                    //   resultadosExtra
+                    //   subsidiarias
+                    //   gerencial
+                    //   remota
+                    //   procesos
+                    //   tercerizaciones
+
                 }
 
             }

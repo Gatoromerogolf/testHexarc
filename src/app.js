@@ -288,6 +288,19 @@ app.post('/updateDatosUsuario', (req, res) => {
 });
 
 
+app.post('/updateDatosInvitado', (req, res) => {
+  const { cuit, nombre, apellido, password, email } = req.body;
+
+  const query = 'UPDATE users SET nombre = ?, apellido = ?, cuit = ?, email = ?, ria = ?, password = ?, username = ? WHERE userId = ?';
+  const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+  // pool.query(query, [fullName, organization, cuit, email, ria, hashedPassword, username, userId], (err, result) => {
+  //     if (err) throw err;
+
+  //     res.json({ success: true });
+  // });
+});
+
 // Ruta protegida que requiere autenticación :::::::::::::::::::::::::::::::::::::::::.
 app.get('/protected', (req, res) => {
   if (req.session.user) {

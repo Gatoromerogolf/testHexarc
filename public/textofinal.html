@@ -421,14 +421,14 @@ function obtieneTipificacion(ria, GC, AR, RM, RP, SF, GR) {
 
         if (Number(capituloD) > valor2 && Number(capituloE) > valor2)
             {
-            tipificación = "SOLIDA";
+            tipificacion = "SOLIDA";
             textoTipificacion = "Una empresa es Sólida cuando tiene la capacidad de manejar el quehacer diario sin contratiempos significativos. Son empresas estables y financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado.<br><br>En el contexto del Sistema HexaRCi una empresa es tipificada como Sólida cuando muestra un manejo relevante de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Asimismo su situación financiera es sólida."
             return { tipificacion, textoTipificacion };
             } 
 
         if (Number(capituloE) > valor3)
             {
-            tipificación = "INESTABLE";
+            tipificacion = "INESTABLE";
             textoTipificacion = "Una empresa es Inestable cuando se enfrenta con problemas de significación, como pérdidas recurrentes, modelos de negocio obsoletos o mala gestión. Su viabilidad está en riesgo si no implementan cambios significativos.<br><br>En el contexto del Sistema HexaRCi una empresa será tipificada como Inestable cuando muestra una Situación Financiera endeble con un manejo de los Riesgos de Gobierno Corporativo que requiere mejoras.  La necesidad de mejoras en el manejo de los riesgos del Gobierno Corporativo es relevante porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos.<br><br>El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos. Ello sumado a la endeblez de la situación financiera puede llevar a la empresa a una debilidad considerable."
             return { tipificacion, textoTipificacion };
             } 
