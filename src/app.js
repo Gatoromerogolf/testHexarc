@@ -289,16 +289,26 @@ app.post('/updateDatosUsuario', (req, res) => {
 
 
 app.post('/updateDatosInvitado', (req, res) => {
-  const { cuit, nombre, apellido, password, email } = req.body;
+  const { CUIT, Nombre, Apellido, password, email } = req.body;
 
-  const query = 'UPDATE users SET nombre = ?, apellido = ?, cuit = ?, email = ?, ria = ?, password = ?, username = ? WHERE userId = ?';
-  const hashedPassword = bcrypt.hashSync(newPassword, 10);
+  if (!CUIT || !Nombre || !Apellido || !password || !email) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
 
-  // pool.query(query, [fullName, organization, cuit, email, ria, hashedPassword, username, userId], (err, result) => {
-  //     if (err) throw err;
+  const query = 'UPDATE users SET Nombre = ?, Apellido = ?, password = ?, email = ? WHERE CUIT = ?';
 
-  //     res.json({ success: true });
-  // });
+  pool.query(query, [Nombre, Apellido, password, email, CUIT], (err, result) => {
+      if (err) {
+        console.error('Error al actualizar el usuario:', err);
+        return res.status(500).json({ error: 'Error en el servidor' });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: 'No se encontró el usuario con ese CUIT' });
+      }
+
+      res.json({ message: 'Campos actualizados correctamente' });
+  });
 });
 
 // Ruta protegida que requiere autenticación :::::::::::::::::::::::::::::::::::::::::.
