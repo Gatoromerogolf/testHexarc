@@ -306,7 +306,7 @@ async function obtieneTipificacion() {
             {
             tipificacion = "COMPETITIVA";
             textoTipificacion = "Una empresa es competitiva cuando es capaz de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permiten atraer y retener clientes y generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo.<br>En el contexto del Sistema HexaRCi una empresa es tipificada como Competitiva cuando muestra un manejo destacado en la totalidad de los riesgos: de Gobierno Corporativo; del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos. Asimismo, su Situación Financiera es consistentemente sólida y la Generación de Resultados es consistentemente saludable."
-            return tipificacion, textoTipificacion;
+            return { tipificacion, textoTipificacion };
             }
         if (Number(capituloB.porcentaje) > 70.0 &&
             Number(capituloC.porcentaje) > 70.0 &&

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de riesgos</title>
+    <!-- <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+    rel="stylesheet">
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* body {
+        font-family: 'Open Sans', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+    } */
+
+    /* body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+        background-repeat: no-repeat;
+        height: 100%;
+    } */
+
+    body.financiero {
+        background: url('/estilos/background%20financiero.jpg') no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        background-repeat: no-repeat;
+        height: 100%;
+    }
+
+    select,
+    option {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+    }
+
+    .survey-container-presentacion {
+        max-width: 900px;
+        margin: 80px auto;
+        padding: 40px;
+        background-color: rgba(255, 255, 255, 0.95);
+        /* Fondo blanco con opacidad */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+
+        font-family: 'Abel', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 0x;
+    }
+
+    /* formulario fondo blanco */
+    .container {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        width: 900px;
+        max-width: 100%;
+    }
+
+    /*  titulo debajo de Crear cuenta */
+    .header {
+        border-bottom: 10px solid #f0f0f0;
+        background-color: #f7f7f7;
+        padding: 20px 40px;
+    }
+
+    .header h2 {
+        margin: 0;
+    }
+
+    .form {
+        padding: 30px 40px;
+        /* hacia arrriba y a los costados */
+    }
+
+    .form-group {
+        display: flex;
+        gap: 20px;
+        /* Espacio entre los campos */
+    }
+
+    .form-control {
+        margin-bottom: 10px;
+        padding-bottom: 20px;
+        position: relative;
+
+        flex: 1;
+        /* Que cada campo ocupe el mismo espacio */
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .form-control label {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    /* campos del formulario */
+    .form-control input {
+        border: 2px solid #f0f0f0;
+        border-radius: 4px;
+        display: block;
+        font-family: inherit;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .form-control input:focus {
+        outline: 0;
+        border-color: #777;
+    }
+
+    .form-control.success input {
+        border-color: #2ecc71;
+    }
+
+    .form-control.error input {
+        border-color: #e74c3c;
+    }
+
+    .form-control i {
+        visibility: hidden;
+        position: absolute;
+        top: 40px;
+        right: 10px;
+    }
+
+    .form-control.success i.fa-check-circle {
+        color: #2ecc71;
+        visibility: visible;
+    }
+
+    .form-control.error i.fa-exclamation-circle {
+        color: #e74c3c;
+        visibility: visible;
+    }
+
+    .form-control small {
+        color: #e74c3c;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        visibility: hidden;
+    }
+
+    .form-control.error small {
+        visibility: visible;
+    }
+
+    .form button {
+        background-color: #8e44ad;
+        border: 2px solid #8e44ad;
+        border-radius: 4px;
+        color: #fff;
+        display: block;
+        font-family: inherit;
+        font-size: 16px;
+        padding: 10px;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .check {
+        margin-left: 8px;
+        /* Ajusta el espacio según necesites */
+    }
+
+    input[type="checkbox"] {
+        margin-left: -20px;
+        /* Ajusta según necesites */
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-align: center;
+        color: #333333;
+    }
+
+    input:-webkit-autofill {
+        background-color: white !important;
+        box-shadow: 0 0 0px 1000px white inset !important;
+    }
+
+    fieldset {
+        border: 3px solid #4CAF50;
+        /* Borde más grueso */
+        border-radius: 8px;
+        /* Bordes redondeados */
+        padding: 10px;
+        /* Espaciado interno */
+        margin-bottom: 20px;
+        /* Espacio entre fieldsets */
+    }
+
+    textarea {
+        border: 1px solid #dad9d9;
+        /* Borde más grueso */
+        border-radius: 6px;
+        /* Bordes redondeados */
+        padding: 10px;
+        /* Espaciado interno */
+        margin-bottom: 20px;
+        /* Espacio entre fieldsets */
+    }
+
+    /* Ocultar las flechas de los inputs type=number */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+        /* Para Firefox */
+        width: 40px;
+        /* Reducir tamaño */
+        text-align: center;
+        /* Centrar el texto */
+    }
+</style>
+
+<body class="financiero">
+    <div class="survey-container-presentacion" style="max-width: 900px;">
+        <div class="container">
+            <div class="header">
+                <h2>Informe final</h2>
+            </div>
+            <form id="form" class="form">
+
+
+                <fieldset>
+                    <legend style="font-size: 20px; font-weight: 650">Ingresar valores.</legend>
+                    <table>
+                        <tr>
+                            <th class="pregunta-col">RIA</th>
+                            <th class="respuesta-col">GC</th>
+                            <th class="respuesta-col">AR</th>
+                            <th class="respuesta-col">RM</th>
+                            <th class="respuesta-col">RP</th>
+                            <th class="respuesta-col">SF</th>
+                            <th class="respuesta-col">GR</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="number" id="RIA" min="1" max="1" />
+                            </td>
+
+                            <td class="respuesta-col">
+                                <input type="number" id="GC" min="0" max="100" />
+                            </td>
+
+                            <td class="respuesta-col">
+                                <input type="number" id="AR" min="0" max="100" />
+                            </td>
+
+                            <td class="respuesta-col">
+                                <input type="number" id="RM" min="0" max="100" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="RP" min="0" max="100" />
+                            </td>
+
+
+                            <td class="respuesta-col">
+                                <input type="number" id="SF" min="0" max="100" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="GR" min="0" max="100" />
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+
+                <button type="submit">Calcular</button>
+
+            </form>
+        </div>
+
+
+        <div id="comentarios-finales">
+            <!-- <p>Informe relativo a la autoevaluación de <strong><span class="company-name"
+                        style="font-size: 16px"></span></strong> de acuerdo con el Modelo HexaRCi.</p> -->
+            <p style="text-align: justify">De acuerdo con la información registrada por <strong><span
+                        class="company-name" style="font-size: 16px"></span></strong> en los distintos factores de esta
+                autoealuación y a los parámetros del Modelo HexaRCi,
+                <strong><span class="company-name" style="font-size: 16px"></span></strong> es una compañia calificada
+                preliminarmente como tipo:
+            </p>
+
+            <div id="tipificacion" style="font-weight: 700; font-size: 20px; text-align: center;"></div>
+
+            <p id="causaTipificacion"></p>
+
+            <p style="text-align: justify">El análisis realizado a través del Modelo HEXARCi de la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.</p>
+            <p style="text-align: justify">Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.</p>
+            <p style="text-align: justify">A continuación los aspectos identificados para su evalución.</p>
+        </div>
+
+<script>
+    let tipificacion = "";
+    let causaTipificacion = "";
+
+    document
+        .getElementById("form")
+        .addEventListener("submit", function (event) {
+            valores = 0;
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            const ria = document.getElementById('RIA').value;
+            const GC = document.getElementById('GC').value;
+            console.log (`valor GC = ${GC}`)
+            const AR = document.getElementById('AR').value;
+            const RM = document.getElementById('RM').value;
+            const RP = document.getElementById('RP').value;
+            const SF = document.getElementById('SF').value;
+            const GR = document.getElementById('GR').value;
+
+            console.log(`RIA =${ria}, GC= ${GC},  AR=${AR}, RM= ${RM}, RP=${RP}, SF= ${SF}, GR=${GR}`);
+
+            const { tipificacion, textoTipificacion } = obtieneTipificacion(GC, AR, RM, RP, SF, GR);
+
+            document.getElementById("tipificacion").textContent = tipificacion;
+            document.getElementById("causaTipificacion").innerHTML = textoTipificacion;  
+        });
+
+                
+/* -----------------------------------------
+obtieneTipificacion          
+// ------------------------------------------ */
+function obtieneTipificacion(GC, AR, RM, RP, SF, GR) {
+    // console.table (totalCapitulos);
+
+    // Gobierno Corporativo
+    // const capituloA = totalCapitulos.find(item => item.capitulo === "A");
+    // const capituloB = totalCapitulos.find(item => item.capitulo === "B");
+    // const capituloC = totalCapitulos.find(item => item.capitulo === "C");
+    // const capituloD = totalCapitulos.find(item => item.capitulo === "D");
+    // const capituloE = totalCapitulos.find(item => item.capitulo === "E");
+    // const capituloF = totalCapitulos.find(item => item.capitulo === "F");
+
+    capituloA = GC;
+    console.log (`adentro de funcion capituloA ${capituloA}`)
+    capituloB = AR;
+    capituloC = RM;
+    capituloD = RP;
+    capituloE = SF;
+    capituloF = GR;
+
+    // console.log(`capitulo A ${capituloA}`)
+
+    console.log (`${capituloA}, ${capituloB}, ${capituloC}, ${capituloD}, ${capituloE}, ${capituloF}`)
+
+    //  MRG SUPERIOR
+    if (Number(capituloA)> 90.0) {
+        if (Number(capituloB) > 90.0 &&
+            Number(capituloC) > 90.0 &&
+            Number(capituloD) > 90.0 &&
+            Number(capituloE) > 90.0 &&
+            Number(capituloF) > 90.0)
+            {
+            tipificacion = "COMPETITIVA";
+            textoTipificacion = "Una empresa es competitiva cuando es capaz de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permiten atraer y retener clientes y generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo.<br>En el contexto del Sistema HexaRCi una empresa es tipificada como Competitiva cuando muestra un manejo destacado en la totalidad de los riesgos: de Gobierno Corporativo; del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos. Asimismo, su Situación Financiera es consistentemente sólida y la Generación de Resultados es consistentemente saludable."
+            return { tipificacion, textoTipificacion };
+            }
+        if (Number(capituloB) > 70.0 &&
+            Number(capituloC) > 70.0 &&
+            Number(capituloD) > 70.0 &&
+            Number(capituloE) > 70.0 &&
+            Number(capituloF) > 70.0)
+            {
+            tipificacion = "RESILIENTE";
+            textoTipificacion = "Una empresa es resiliente cuando tiene la capacidad de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo.  En el contexto del Sistema HexaRCi una empresa es tipificada como Resiliente cuando muestra un manejo destacado en los Riesgos de Gobierno Corporativo y un nivel relevante en el manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Asimismo, su Situación Financiera es sólida y la Generación de Resultados es saludable."
+            return { tipificacion, textoTipificacion };
+            }
+        if (Number(capituloE) > 50.0)
+            {
+            tipificacion = "VULNERABLE";
+            textoTipificacion = "En el sistema HexaRCi, una empresa se clasifica como Vulnerable cuando, a pesar de contar con una situación financiera sólida, presenta deficiencias significativas en la gestión de los riesgos de Gobierno Corporativo.<br><br> Esta clasificación no implica un problema inmediato en su estabilidad financiera, pero sí una exposición considerable a riesgos que podrían comprometer su sostenibilidad a largo plazo.<br>El Gobierno Corporativo es un pilar fundamental en la estructura de cualquier organización, ya que define el conjunto de procesos, principios y valores que regulan su dirección, administración, control y transparencia. Un sistema de gobierno corporativo eficiente no solo fortalece la confianza de los inversionistas y otras partes interesadas, sino que también permite una gestión más eficaz de los riesgos y oportunidades estratégicas.<br><br>Cuando el Gobierno Corporativo presenta fallas, la organización puede enfrentar disfuncionalidades en sus procesos internos, afectando su capacidad para responder a los desafíos del entorno. Estas debilidades impactan directamente en el Apetito de Riesgo, es decir, en la cantidad y el tipo de riesgo que la empresa está dispuesta a asumir para alcanzar sus objetivos estratégicos.<br><br>Como consecuencia, una gestión inadecuada de los riesgos de mercado y operacionales puede deteriorar progresivamente su situación financiera, poniendo en riesgo su estabilidad y competitividad en el futuro.  Por ello, la mejora en el manejo de los riesgos de Gobierno Corporativo es un aspecto crítico para garantizar la resiliencia y sostenibilidad de la empresa, incluso cuando su situación financiera actual sea favorable."
+            return { tipificacion, textoTipificacion };
+            }
+        tipificacion = "INESTABLE"
+            textoTipificacion = "Una empresa es Inestable cuando se enfrenta con problemas de significación, como pérdidas recurrentes, modelos de negocio obsoletos o mala gestión. Su viabilidad está en riesgo si no implementan cambios significativos.<br>En el contexto del Sistema HexaRCi una empresa será tipificada como Inestable cuando muestra una Situación Financiera endeble con un manejo de los Riesgos de Gobierno Corporativo que requiere mejoras.<br>La necesidad de mejoras en el manejo de los riesgos del Gobierno Corporativo es relevante porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos. Ello sumado a la endeblez de la situación financiera puede llevar a la empresa a una debilidad considerable."
+        return { tipificacion, textoTipificacion };
+    }
+
+    return {
+        tipificacion: "VEREMOS",
+        textoTipificacion: "Una empresa es Inestable cuando..."
+    }};
+
+    </script>
+    </div>
+</body>
+
+</html>
