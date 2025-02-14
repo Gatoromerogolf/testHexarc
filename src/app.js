@@ -288,7 +288,7 @@ app.post('/updateDatosUsuario', (req, res) => {
 });
 
 
-app.post('/updateDatosInvitado', (req, res) => {
+app.post('/api/updateDatosInvitado', (req, res) => {
   const { CUIT, Nombre, Apellido, password, email } = req.body;
 
   if (!CUIT || !Nombre || !Apellido || !password || !email) {
@@ -310,6 +310,40 @@ app.post('/updateDatosInvitado', (req, res) => {
       res.json({ message: 'Campos actualizados correctamente' });
   });
 });
+
+
+
+// Creacion de Empresa  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+app.post('/api/creaEmpresa', (req, res) => {
+  if (!req.session.user) {
+      return res.status(401).json({ error: 'No estás autenticado' });
+  }
+
+  const { CUIT, actividad, calDirector, calDirectorio, advisory, finanEmpeorado, finanTasas, finanPercep, resultados, resultadosExtra, subsidiarias, estrGerencial, formaRemota, cambioProcesos, tercerizaciones } = req.body;
+
+  // Verificar que no haya valores faltantes
+  if (!CUIT || !actividad || !calDirector || !calDirectorio || !advisory || !finanEmpeorado || !finanTasas || !finanPercep || !resultados || !resultadosExtra || !subsidiarias || !estrGerencial || !formaRemota || !cambioProcesos || !tercerizaciones) {
+      return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
+
+  const query = `
+      INSERT INTO empresas (CUIT, actividad, calDirector, calDirectorio, advisory, finanEmpeorado, finanTasas, finanPercep, resultados, resultadosExtra, subsidiarias, estrGerencial, formaRemota, cambioProcesos, tercerizaciones)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [CUIT, actividad, calDirector, calDirectorio, advisory, finanEmpeorado, finanTasas, finanPercep, resultados, resultadosExtra, subsidiarias, estrGerencial, formaRemota, cambioProcesos, tercerizaciones];
+
+  pool.query(query, values, (err, result) => {
+      if (err) {
+          console.error('Error al insertar en la base de datos:', err);
+          return res.status(500).json({ error: 'Error en el servidor' });
+      }
+
+      res.json({ message: 'Empresa creada correctamente', id: result.insertId });
+  });
+});
+
+
 
 // Ruta protegida que requiere autenticación :::::::::::::::::::::::::::::::::::::::::.
 app.get('/protected', (req, res) => {
