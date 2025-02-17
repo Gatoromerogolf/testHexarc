@@ -17,36 +17,10 @@ require('dotenv').config();  //
 const nodemailer = require('nodemailer');
 const { google } = require("googleapis");
 
-const OAuth2 = google.auth.OAuth2;
-
-// const accountTransport = require("../account_transport.json");
-
-console.log('CLIENT_ID:', process.env.CLIENT_ID);
-console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
-console.log('REFRESH_TOKEN:', process.env.REFRESH_TOKEN);
-console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
-
-
-// Configura los detalles de OAuth2 usando variables de entorno
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
-const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
-
-// const oAuth2Client = new google.auth.OAuth2(
-//   process.env.CLIENT_ID,
-//   process.env.CLIENT_SECRET,
-//   process.env.REDIRECT_URI
-// );
-
-// envio de gmail con oauth
-//  https://www.youtube.com/watch?v=W3jGtgva46w
-//
-
 const oAuth2Client = new google.auth.OAuth2(
-  CLIENT_ID,       // Usa la constante
-  CLIENT_SECRET,   // Usa la constante
-  REDIRECT_URI     // Usa la constante
+  process.env.CLIENT_ID,       // Usar directamente process.env
+  process.env.CLIENT_SECRET,   // Usar directamente process.env
+  process.env.REDIRECT_URI     // Usar directamente process.env
 );
 
 // Configuración del token de actualización
@@ -78,7 +52,7 @@ async function sendMail(to, subject, text) {
 
       // Configurar el correo
       const mailOptions = {
-          from: "hexarci.dev@gmail.com",
+          from: process.env.GMAIL_USER,
           to: "ruben.e.garcia@gmail.com",              // Destinatario
           subject: subject,    // Asunto del correo
           text: text,          // Cuerpo del mensaje
