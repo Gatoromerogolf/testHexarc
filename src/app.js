@@ -37,18 +37,19 @@ async function sendMail(to, subject, text) {
   try {
       const accessToken = await oAuth2Client.getAccessToken();
 
-      // Configurar el transporte con OAuth2
+      console.log('Access Token:', accessToken.token);
+
       const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
+        service: 'gmail',
+        auth: {
             type: 'OAuth2',
             user: "hexarci.dev@gmail.com",
-            clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET,
-            refreshToken: REFRESH_TOKEN,
+            clientId: process.env.CLIENT_ID,        // Accede a CLIENT_ID desde las variables de entorno
+            clientSecret: process.env.CLIENT_SECRET, // Accede a CLIENT_SECRET desde las variables de entorno
+            refreshToken: process.env.REFRESH_TOKEN, // Accede a REFRESH_TOKEN desde las variables de entorno
             accessToken: accessToken.token,
-          },
-      });
+        },
+    });
 
       // Configurar el correo
       const mailOptions = {
