@@ -39,6 +39,10 @@ const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 //   process.env.REDIRECT_URI
 // );
 
+// envio de gmail con oauth
+//  https://www.youtube.com/watch?v=W3jGtgva46w
+//
+
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,       // Usa la constante
   CLIENT_SECRET,   // Usa la constante
@@ -64,7 +68,7 @@ async function sendMail(to, subject, text) {
           service: 'gmail',
           auth: {
             type: 'OAuth2',
-            user: "dev.bdt.reg@gmail.com",
+            user: "hexarci.dev@gmail.com",
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             refreshToken: REFRESH_TOKEN,
@@ -74,7 +78,7 @@ async function sendMail(to, subject, text) {
 
       // Configurar el correo
       const mailOptions = {
-          from: "dev.bdt.reg@gmail.com",
+          from: "hexarci.dev@gmail.com",
           to: "ruben.e.garcia@gmail.com",              // Destinatario
           subject: subject,    // Asunto del correo
           text: text,          // Cuerpo del mensaje
