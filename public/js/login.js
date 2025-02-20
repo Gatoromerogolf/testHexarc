@@ -3,6 +3,15 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    let messageDiv = document.getElementById("message");
+    messageDiv.textContent = ""
+
+    if (username == "invitado"){
+        const messageDiv = document.getElementById("message");
+        messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i>Debe registrarse previamente`;
+        console.error('Error en la solicitud:');
+
+    }
 
     // Realiza la solicitud al servidor para validar las credenciales
     fetch('/api/login', {
@@ -40,7 +49,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         }
     })
     .catch(error => {
-        alert("usuario o clave invalidos");
+        const messageDiv = document.getElementById("message");
+        messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Usuario o clave inválidos`;
         console.error('Error en la solicitud:', error);
     });
 });

@@ -7,6 +7,8 @@
     <title>Evaluación de riesgos</title>
     <!-- <link href="../estilos/estiloMenuGeneral.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -175,6 +177,38 @@
         /* Ajusta el espacio según necesites */
     }
 
+    .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .password-container input {
+        width: 100%;
+        padding-right: 40px;
+        /* Espacio para el icono */
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .toggle-password:hover {
+        color: #333;
+    }
+
+    .password-container .toggle-password {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #666;
+    }
+
     input[type="checkbox"] {
         margin-left: -20px;
         /* Ajusta según necesites */
@@ -220,7 +254,13 @@
     <div class="survey-container-presentacion" style="max-width: 900px;">
         <div class="container">
             <div class="header">
-                <h2>Crear cuenta</h2>
+                <!-- <div class="header-center">
+                    <div id="nombreEmpresa" class="company-name"></div>
+                    <div id="nombreUsuario" class="user-name"></div>
+                </div> -->
+                <p style="text-align: center;">Bienvenido <strong><span class="nombreEmpresa"
+                            style="font-size: 22px"></span></strong></p>
+                <h3>Crear cuenta</h3>
             </div>
             <form id="form" class="form">
                 <fieldset>
@@ -251,7 +291,7 @@
                     <div class="form-group">
                         <div class="form-control">
                             <label for="password">Definir nueva clave</label>
-                            <input type="password" id="password" autocomplete="new-password" />
+                            <input type="password" id="password" autocomplete="new-password" minlength="4" required/>
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error message</small>
@@ -270,7 +310,7 @@
                     <legend style="font-size: 20px; font-weight: 650">Datos de la Empresa.</legend>
                     <div class="form-control">
                         <label for="nombreEmpresa">Nombre</label>
-                        <input type="text" id="nombreEmpresa" disabled style="font-size: 20px; font-weight: 650" />
+                        <span class="nombreEmpresa" style="font-size: 20px; font-weight: 650"></span>
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
                         <small>Error message</small>
@@ -289,7 +329,7 @@
                 <fieldset>
                     <legend style="font-size: 20px; font-weight: 650">Sobre el Directorio.</legend>
                     <div class="form-control">
-                        <label for="caliDirector">¿La calidad de los Directores ha mejorado en los últimos tres
+                        <label for="calDirector">¿La calidad de los Directores ha mejorado en los últimos tres
                             años y por qué?</label>
                         <textarea rows="2" id="calDirector"></textarea>
                         <i class="fas fa-check-circle"></i>
@@ -417,12 +457,17 @@
         </div>
 
         <script>
+
+            let huboError = false;
+
             const empresa = localStorage.getItem("empresa");
             const CUIT = localStorage.getItem("CUIT");
-            alert(`nombre empresa  ${empresa}, CUIT ${CUIT}`)
-            document.getElementById("nombreEmpresa").value = empresa;
+            const elementos = document.querySelectorAll(".nombreEmpresa");
 
-            let huboerror = false;
+            elementos.forEach(elemento => {
+                elemento.textContent = empresa;
+            });
+
             const form = document.getElementById('form');
             const usuario = document.getElementById('nombreUsuario');
             const apellido = document.getElementById('apellidoUsuario');
@@ -450,7 +495,7 @@
                 checkInputs();
             });
 
-            function checkInputs() {
+            async function checkInputs() {
                 // trim to remove the whitespaces
                 const usuarioValue = usuario.value.trim();
                 const apellidoValue = apellido.value.trim();
@@ -584,52 +629,72 @@
                     setSuccessFor(tercerizaciones);
                 }
 
-                if (huboerror) {
+                await verificarEmail(emailValue);
+
+                if (huboError) {
                     alert('Debe corregir las observaciones...');
+                    huboError = false;
                     window.scrollTo(0, 0); // Mueve la página al inicio
                 } else {
-                    alert("esta para grabar el formulario")
-                    
                     actualizarInvitado(CUIT, usuarioValue, apellidoValue, passwordValue, emailValue);
-
                     const datosEmpresa = {
-                    CUIT,
-                    actividad: actividadValue,
-                    calDirector: calDirectorValue,
-                    calDirectorio: calDirectorioValue,
-                    advisory: advisoryValue,
-                    finanEmpeorado: finanEmpeoradoValue,
-                    finanTasas: finanTasasValue,
-                    finanPercep: finanPercepValue,
-                    resultados: resultadosValue,
-                    resultadosExtra: resultadosExtraValue,
-                    subsidiarias: subsidiariasValue,
-                    estrGerencial: estrGerencialValue,
-                    formaRemota: formaRemotaValue,
-                    cambioProcesos: cambioProcesosValue,
-                    tercerizaciones: tercerizacionesValue
-                };
-
-
-
-
-
-
-
-
+                        CUIT,
+                        actividad: actividadValue,
+                        calDirector: calDirectorValue,
+                        calDirectorio: calDirectorioValue,
+                        advisory: advisoryValue,
+                        finanEmpeorado: finanEmpeoradoValue,
+                        finanTasas: finanTasasValue,
+                        finanPercep: finanPercepValue,
+                        resultados: resultadosValue,
+                        resultadosExtra: resultadosExtraValue,
+                        subsidiarias: subsidiariasValue,
+                        estrGerencial: estrGerencialValue,
+                        formaRemota: formaRemotaValue,
+                        cambioProcesos: cambioProcesosValue,
+                        tercerizaciones: tercerizacionesValue
+                    };
                     crearEmpresa(datosEmpresa)
-
-
-                    alert("proceso terminado")
+                    window.location.href = '../registrado.html'
                 }
             }
+
+            async function verificarEmail(emailValue) {
+                const resultado = await preguntaMail(emailValue);
+                if (resultado.exists) {
+                    console.log("✅ El email está registrado.");
+                    setErrorFor(email, 'Este email ya se encuentra registrado ❌');
+                } else {
+                    console.log("❌ El email NO está registrado.");
+                    setSuccessFor(email);
+                }
+            }
+
+            async function preguntaMail(emailValue) {
+                try {
+                    const response = await fetch(`/buscaMail?email=${emailValue}`);
+
+                    if (response.ok) {
+                        const mailUser = await response.json(); //registro seccion recibido en formato JSON
+                        return { exists: mailUser.exists, records: mailUser.records };
+                    } else {
+                        console.error("Error al obtener los datos");
+                        return { exists: false, records: [] };
+                    }
+
+                } catch (error) {
+                    console.error("Error al realizar la solicitud:", error);
+                    return { exists: false, records: [] };
+                }
+            }
+
 
             function setErrorFor(input, message) {
                 const formControl = input.parentElement;
                 const small = formControl.querySelector('small');
                 formControl.className = 'form-control error';
                 small.innerText = message;
-                huboerror = true;
+                huboError = true;
             }
 
             function setSuccessFor(input) {
@@ -652,7 +717,7 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.message === 'Campos actualizados correctamente') {
-                            console.log('Campos actualizados correctamente');
+                            console.log('Invitado actualizado correctamente');
                         } else {
                             console.error('Error al actualizar el invitado');
                         }
@@ -662,26 +727,7 @@
                     });
             }
 
-
-            function crearEmpresa(datosEmpresa)
-                {
-                // const datosEmpresa = {
-                // CUIT,
-                // actividadValue,
-                // calDirectorValue,
-                // calDirectorioValue,
-                // advisoryValue,
-                // finanEmpeoradoValue,
-                // finanTasasValue,
-                // finanPercepValue,
-                // resultadosValue,
-                // resultadosExtraValue,
-                // subsidiariasValue,
-                // estrGerencialValue,
-                // formaRemotaValue,
-                // cambioProcesosValue,
-                // tercerizacionesValue
-                // };            
+            function crearEmpresa(datosEmpresa) {
                 fetch('/api/creaEmpresa', {
                     method: 'POST',
                     headers: {
@@ -689,16 +735,35 @@
                     },
                     body: JSON.stringify(datosEmpresa)
                 })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Respuesta del servidor:', data);
-                })
-                .catch(error => {
-                    console.error('Error en la solicitud:', error);
-                });
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Respuesta del servidor:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error en la solicitud:', error);
+                    });
             }
         </script>
     </div>
 </body>
 
 </html>
+
+
+<!-- // const datosEmpresa = {
+    // CUIT,
+    // actividadValue,
+    // calDirectorValue,
+    // calDirectorioValue,
+    // advisoryValue,
+    // finanEmpeoradoValue,
+    // finanTasasValue,
+    // finanPercepValue,
+    // resultadosValue,
+    // resultadosExtraValue,
+    // subsidiariasValue,
+    // estrGerencialValue,
+    // formaRemotaValue,
+    // cambioProcesosValue,
+    // tercerizacionesValue
+    // };   -->

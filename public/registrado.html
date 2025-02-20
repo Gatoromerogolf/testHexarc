@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        /*background-color:#528FD5;*/
+        background: url('../estilos/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    h3 {
+        font-size: 12px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        /* Asegura que los elementos estén en columna */
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        /* background: rgba(255, 255, 255, 0.2); */
+        /* Opcional: para destacar el formulario */
+        padding: 40px;
+        border-radius: 20px;
+    }
+
+    .ingreso-button {
+        display: inline-block;
+        max-width: 150px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        /* Elimina el subrayado */
+        border-radius: 5px;
+        text-align: center;
+
+    }
+
+    p {
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .ingreso-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<body class="financiero">
+
+    <form id="loginForm">
+        <h1 class="title">Registración</h1>
+        <h3 class="subtitle">Ha finalizado el proceso de registración</h3>
+
+        <p>Recuerde utilizar la dirección de correo electrónico y <br> la clave recientemente declarados.</p>
+
+        <a href="/login.html" class="ingreso-button">Continuar</a>
+
+    </form>
+
+    <!-- <script src="../../js/registro.js"></script> -->
+</body>
+
+</html>

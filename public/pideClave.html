@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../estilos/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body class="financiero">
+
+    <form id="loginForm">
+        <h1 class="title">HexaRCi</h1>
+        <h3 class="subtitle">Ingrese su dirección de correo electrónico:</h3>
+        <label for="username">
+            <i class="fa-solid fa-envelope"></i>
+            <input placeholder="email" type="text" id="username" name="username" required>
+        </label>
+
+        <p style="font-size: 18px; color:white">Si la dirección es válida,<br> recibirá allí un mensaje con la
+            información solicitada</p>
+        <br>
+        <button id="login" type="submit">Enviar</button>
+
+        <div>
+            <div>
+                <div id="message">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+
+            const email = document.getElementById('username').value;
+            await verificarEmail(email);
+            window.location.href = '../login.html'
+        });
+
+        async function verificarEmail(email) {
+
+            console.log("📧 Email recibido en frontend:", email); // Verifica si email tiene un valor
+
+            if (!email) {
+                console.error("⚠️ El email está vacío o indefinido.");
+                return;
+            }
+
+            const resultado = await preguntaMail(email);
+            if (resultado.exists) {
+                console.log("✅ El email está registrado.");
+
+                const password = resultado.records.length > 0 ? resultado.records[0].password : undefined;
+                console.log(`🔑 El pass es: ${password}`);
+
+                if (!password) {
+                    console.error("⚠️ No se pudo recuperar el password.");
+                    return;
+                }
+
+                // Llamar al backend para enviar el mail
+                await fetch('/enviar-correo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        to: email.trim(),
+                        subject: "Información solicitada",
+                        text: `Tu contraseña es ${password}`,
+                    })
+                });
+            } else {
+                console.log("❌ El email NO está registrado.");
+            }
+        }
+
+        async function preguntaMail(emailValue) {
+            try {
+                const response = await fetch(`/buscaMail?email=${emailValue}`);
+
+                if (response.ok) {
+                    const mailUser = await response.json();
+                    return { exists: mailUser.exists, records: mailUser.records };
+                } else {
+                    console.error("Error al obtener los datos");
+                    return { exists: false, records: [] };
+                }
+
+            } catch (error) {
+                console.error("Error al realizar la solicitud:", error);
+                return { exists: false, records: [] };
+            }
+        }
+    </script>
+
+</body>
+
+</html>
