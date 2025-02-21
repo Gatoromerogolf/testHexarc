@@ -294,12 +294,13 @@
         <div id="comentarios-finales">
             <!-- <p>Informe relativo a la autoevaluación de <strong><span class="company-name"
                         style="font-size: 16px"></span></strong> de acuerdo con el Modelo HexaRCi.</p> -->
-            <p style="text-align: justify">De acuerdo con la información cargada por <strong>Nombre Empresa</strong> y a los parámetros del Modelo HexaRCi, la Compañía <strong>Nombre Empresa</strong> es una compañía calificada preliminarmente como tipo:
+            <p style="text-align: justify">De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para <strong>Nombre Empresa</strong> del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma.</p>
+            <p>De acuerdo con la información cargada por <strong>Nombre Empresa</strong> y a los parámetros del Modelo HexaRCi, la Compañía <strong>Nombre Empresa</strong> es una compañía calificada preliminarmente como tipo:
             </p>
 
             <div id="tipificacion" style="font-weight: 700; font-size: 20px; text-align: center;">.....</div>
 
-            <p>La tipificación preliminar se sustenta en que <strong><span class="company-name" style="font-size: 16px"></span></strong>:</p>
+            <p>La calificacion adquiere la condición de Preliminar debido al hecho de que una tipificación Definitiva corresponderá al resultado de la aplicación de un Modelo de mayor profundidad, como ser el del Modelo HexaRC de BDT Advisory LCC.</p>
 
             <p id="causaTipificacion"></p>
 
@@ -364,7 +365,8 @@ function obtieneTipificacion(ria, GC, AR, RM, RP, SF, GR) {
             Number(capituloF) > valor1)
             {
             tipificacion = "COMPETITIVA";
-            textoTipificacion = "Una empresa es competitiva cuando es capaz de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permiten atraer y retener clientes y generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo.<br><br>En el contexto del Sistema HexaRCi una empresa es tipificada como Competitiva cuando muestra un manejo destacado en la totalidad de los riesgos: de Gobierno Corporativo; del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos. Asimismo, su Situación Financiera es consistentemente sólida y la Generación de Resultados es consistentemente saludable."
+            // textoTipificacion = "Una empresa es competitiva cuando es capaz de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permiten atraer y retener clientes y generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo.<br><br>En el contexto del Sistema HexaRCi una empresa es tipificada como Competitiva cuando muestra un manejo destacado en la totalidad de los riesgos: de Gobierno Corporativo; del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos. Asimismo, su Situación Financiera es consistentemente sólida y la Generación de Resultados es consistentemente saludable.";
+            textoTipificacion = "<strong>Nombre Empresa</strong> se tipifica preliminarmente como Competitiva porque en el marco del Sistema HexaRCi una empresa es tipificada como Competitiva cuando detenta un desempeño destacado en su manejo de la totalidad de los riesgos: de Gobierno Corporativo, del Apetito de Riesgo, de Mercado y de los Procesos. Su situación financiera así como la generación de resultados son consistentemente saludables.<br><br>En general las empresas competitivas son capaces de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permite atraer y retener clientes. También generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo."
             return { tipificacion, textoTipificacion };
             }
 
@@ -375,7 +377,7 @@ function obtieneTipificacion(ria, GC, AR, RM, RP, SF, GR) {
             Number(capituloF) > valor2)
             {
             tipificacion = "RESILIENTE";
-            textoTipificacion = "Una empresa es resiliente cuando tiene la capacidad de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo.<br><br>En el contexto del Sistema HexaRCi una empresa es tipificada como Resiliente cuando muestra un manejo destacado en los Riesgos de Gobierno Corporativo y un nivel relevante en el manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Asimismo, su Situación Financiera es sólida y la Generación de Resultados es saludable."
+            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Resiliente porque en el marco del Sistema HexaRCi una empresa es tipificada como Resiliente cuando detenta un desempeño destacado en su manejo de los Riesgos de Gobierno Corporativo y un desempeño relevante en su manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Su situación financiera así como la generación de resultados son saludables.<br><br>En general las empresas resilientes son capaces de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo."
             return { tipificacion, textoTipificacion };
             }
 
