@@ -39,6 +39,7 @@
     </form>
 
     <script>
+
         document.getElementById('loginForm').addEventListener('submit', async function (event) {
             event.preventDefault(); // Evita el envío del formulario por defecto
 
@@ -68,6 +69,21 @@
                     return;
                 }
 
+                let htmlContent = `
+                <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
+                    <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+                        <h2 style="color: #333;">Recuperación de Información</h2>
+                        <p>Has solicitado información de aplicación en HexaRCi.</p>
+                            <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                                ${password}
+                            </div>
+                        <p style="margin-top: 20px;">Si no solicitaste esta información, puedes ignorar este mensaje.</p>
+                        <hr style="border: none; height: 1px; background: #ddd;">
+                        <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
+                    </div>
+                </div>
+                `;
+
                 // Llamar al backend para enviar el mail
                 await fetch('/enviar-correo', {
                     method: 'POST',
@@ -76,6 +92,7 @@
                         to: email.trim(),
                         subject: "Información solicitada",
                         text: `Tu contraseña es ${password}`,
+                        html: htmlContent,
                     })
                 });
             } else {
@@ -100,6 +117,7 @@
                 return { exists: false, records: [] };
             }
         }
+
     </script>
 
 </body>

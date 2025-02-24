@@ -28,15 +28,13 @@ oAuth2Client.setCredentials({
   refresh_token: process.env.REFRESH_TOKEN,
 });
 
-async function sendMail(to, subject, text) {
-  // console.log('Configuración del correo agregado:');
-  // console.log('CLIENT_ID:', process.env.CLIENT_ID);
-  // console.log('CLIENT_SECRET:', process.env.CLIENT_SECRET);
-  // console.log('REFRESH_TOKEN:', process.env.REFRESH_TOKEN);
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// ::::    sendmail
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+async function sendMail(to, subject, text, html) {
   try {
     const accessToken = await oAuth2Client.getAccessToken();
-
-    // console.log('Access Token:', accessToken.token);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -56,14 +54,15 @@ async function sendMail(to, subject, text) {
       to: to, // Destinatario
       subject: subject, // Asunto del correo
       text: text, // Cuerpo del mensaje
+      html: html, // cuerpo en formato html
     };
 
     // Enviar el correo
     const result = await transporter.sendMail(mailOptions);
     // console.log('Correo enviado:', result);
-    console.log("Correo enviado en este momento:");
+    console.log(" ✅ Correo enviado en este momento:");
   } catch (error) {
-    console.error("Error al enviar el correo:", error);
+    console.error(" ❌ Error al enviar el correo:", error);
   }
 }
 
@@ -111,16 +110,6 @@ async function sendMail(to, subject, text) {
 // });
 
 
-
-
-
-
-
-
-
-
-
-
 const app = express();
 
 // Middleware para parsear el cuerpo de las solicitudes::::::::::::::::::::
@@ -157,8 +146,11 @@ const options = {
   database: process.env.MYSQL_DB,
 };
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//                       enviar correo
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post("/enviar-correo", async (req, res) => {
-  const { to, subject, text } = req.body;
+  const { to, subject, text, html } = req.body;
 
   console.log("📥 Datos recibidos en backend:", req.body); // Debugging
 
@@ -167,7 +159,7 @@ app.post("/enviar-correo", async (req, res) => {
 }
 
   // Llamada a la función para enviar el correo
-  sendMail(to, subject, text)
+  sendMail(to, subject, text, html)
     .then(() => {
       res.send("Correo enviado correctamente");
     })
@@ -175,6 +167,10 @@ app.post("/enviar-correo", async (req, res) => {
       res.status(500).send("Error al enviar el correo");
     });
 });
+
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 const sessionStore = new MySQLStore(options);
 
@@ -188,6 +184,9 @@ app.use(
   })
 );
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//               api login
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
   pool.query(
