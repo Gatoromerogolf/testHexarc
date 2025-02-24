@@ -56,7 +56,6 @@ async function ejecutarProceso() {
     // await buscaPrintResultados(CUIT, capitulo);
     // capitulo = "B"
     // matrizPreguntas = await recuperarPreguntas(capitulo);
-
 }
 
 
@@ -163,12 +162,12 @@ document.addEventListener("DOMContentLoaded", async function() {
             celdaSituacion.style.fontSize = "16px";
             filaSituacion.appendChild(celdaSituacion);
 
-            let celdaInformado = document.createElement('td');
-            celdaInformado.textContent = "Informado"; // Texto de 'Informado'
-            celdaInformado.style.width = '70px';
-            celdaInformado.style.fontWeight = "600";
-            celdaInformado.style.fontSize = "16px";
-            filaSituacion.appendChild(celdaInformado);
+            // let celdaInformado = document.createElement('td');
+            // celdaInformado.textContent = "Informado"; // Texto de 'Informado'
+            // celdaInformado.style.width = '70px';
+            // celdaInformado.style.fontWeight = "600";
+            // celdaInformado.style.fontSize = "16px";
+            // filaSituacion.appendChild(celdaInformado);
 
             tbody.appendChild(filaSituacion);
 
@@ -247,27 +246,29 @@ document.addEventListener("DOMContentLoaded", async function() {
 
                 // tbody.appendChild(filaRespuesta);
 
-                let respondido = document.createElement('td');
-                respondido.style.width = "90px"; // Define el ancho en píxeles
-                poneRespuesta(respuesta, pregunta).then((texto) => {
-                    respondido.textContent = texto;
-                    respondido.style.fontSize = "16px";
-                    filaRespuesta.appendChild(respondido);
+                tbody.appendChild(filaRespuesta);
+
+                // let respondido = document.createElement('td');
+                // respondido.style.width = "90px"; // Define el ancho en píxeles
+                // poneRespuesta(respuesta, pregunta).then((texto) => {
+                //     respondido.textContent = texto;
+                //     respondido.style.fontSize = "16px";
+                //     filaRespuesta.appendChild(respondido);
     
-                    if (pregunta.tipo == "52") {
-                        if (texto == "No efectivo" || texto == "Poco efectivo" ) {
-                        // if (texto == "No efectivo") {
-                        filaRespuesta.appendChild(filaSeccion)
-                        tbody.appendChild(filaRespuesta);}
-                    };
+                //     if (pregunta.tipo == "52") {
+                //         if (texto == "No efectivo" || texto == "Poco efectivo" ) {
+                //         // if (texto == "No efectivo") {
+                //         filaRespuesta.appendChild(filaSeccion)
+                //         tbody.appendChild(filaRespuesta);}
+                //     };
     
-                    if (pregunta.tipo == "1") {
-                        if (texto == "NO") {
-                        // if (texto == "No efectivo") {
-                        filaRespuesta.appendChild(filaSeccion)
-                        tbody.appendChild(filaRespuesta);}
-                    };
-                })
+                //     if (pregunta.tipo == "1") {
+                //         if (texto == "NO") {
+                //         // if (texto == "No efectivo") {
+                //         filaRespuesta.appendChild(filaSeccion)
+                //         tbody.appendChild(filaRespuesta);}
+                //     };
+                // })
 
                 tabla.appendChild(tbody);
 
@@ -279,12 +280,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 
-
 /* -----------------------------------------
 obtieneTipificacion          
 ------------------------------------------> */
 async function obtieneTipificacion() {
-    // console.table (totalCapitulos);
 
     // Gobierno Corporativo
     const capituloA = totalCapitulos.find(item => item.capitulo === "A");
@@ -294,34 +293,45 @@ async function obtieneTipificacion() {
     const capituloE = totalCapitulos.find(item => item.capitulo === "E");
     const capituloF = totalCapitulos.find(item => item.capitulo === "F");
 
+
+    if (ria == 1){
+        valor1 = 95;
+        valor2 = 75;
+        valor3 = 55
+    } else {
+        valor1 = 90;
+        valor2 = 70;
+        valor3 = 50
+    }
+
     // console.log(`capitulo A ${capituloA.porcentaje}`)
 
     //  MRG SUPERIOR
-    if (Number(capituloA.porcentaje)> 90.0) {
-        if (Number(capituloB.porcentaje) > 90.0 &&
-            Number(capituloC.porcentaje) > 90.0 &&
-            Number(capituloD.porcentaje) > 90.0 &&
-            Number(capituloE.porcentaje) > 90.0 &&
-            Number(capituloF.porcentaje) > 90.0)
+    if (Number(capituloA.porcentaje)> valor1) {
+        if (Number(capituloB.porcentaje) > valor1 &&
+            Number(capituloC.porcentaje) > valor1 &&
+            Number(capituloD.porcentaje) > valor1 &&
+            Number(capituloE.porcentaje) > valor1 &&
+            Number(capituloF.porcentaje) > valor1)
             {
             tipificacion = "COMPETITIVA";
-            textoTipificacion = "Una empresa es competitiva cuando es capaz de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permiten atraer y retener clientes y generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo.<br>En el contexto del Sistema HexaRCi una empresa es tipificada como Competitiva cuando muestra un manejo destacado en la totalidad de los riesgos: de Gobierno Corporativo; del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos. Asimismo, su Situación Financiera es consistentemente sólida y la Generación de Resultados es consistentemente saludable."
+            textoTipificacion = "<strong>Nombre Empresa</strong> se tipifica preliminarmente como Competitiva porque en el marco del Sistema HexaRCi una empresa es tipificada como Competitiva cuando detenta un desempeño destacado en su manejo de la totalidad de los riesgos: de Gobierno Corporativo, del Apetito de Riesgo, de Mercado y de los Procesos. Su situación financiera así como la generación de resultados son consistentemente saludables.<br><br>En general las empresas competitivas son capaces de superar y mantenerse por delante de sus competidores, ofreciendo productos o servicios de valor que le permite atraer y retener clientes. También generar una situación financiera satisfactoria para sus propietarios y con ello efectuar las inversiones necesarias para mantener su liderazgo."
             return { tipificacion, textoTipificacion };
             }
-        if (Number(capituloB.porcentaje) > 70.0 &&
-            Number(capituloC.porcentaje) > 70.0 &&
-            Number(capituloD.porcentaje) > 70.0 &&
-            Number(capituloE.porcentaje) > 70.0 &&
-            Number(capituloF.porcentaje) > 70.0)
+        if (Number(capituloB.porcentaje) > valor2 &&
+            Number(capituloC.porcentaje) > valor2 &&
+            Number(capituloD.porcentaje) > valor2 &&
+            Number(capituloE.porcentaje) > valor2 &&
+            Number(capituloF.porcentaje) > valor2)
             {
             tipificacion = "RESILIENTE";
-            textoTipificacion = "Una empresa es resiliente cuando tiene la capacidad de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo.  En el contexto del Sistema HexaRCi una empresa es tipificada como Resiliente cuando muestra un manejo destacado en los Riesgos de Gobierno Corporativo y un nivel relevante en el manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Asimismo, su Situación Financiera es sólida y la Generación de Resultados es saludable."
+            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Resiliente porque en el marco del Sistema HexaRCi una empresa es tipificada como Resiliente cuando detenta un desempeño destacado en su manejo de los Riesgos de Gobierno Corporativo y un desempeño relevante en su manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Su situación financiera así como la generación de resultados son saludables.<br><br>En general las empresas resilientes son capaces de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo."
             return { tipificacion, textoTipificacion };
             }
-        if (Number(capituloE.porcentaje) > 50.0)
+        if (Number(capituloE.porcentaje) > valor3)
             {
             tipificacion = "VULNERABLE";
-            textoTipificacion = "En el sistema HexaRCi, una empresa se clasifica como Vulnerable cuando, a pesar de contar con una situación financiera sólida, presenta deficiencias significativas en la gestión de los riesgos de Gobierno Corporativo.<br><br> Esta clasificación no implica un problema inmediato en su estabilidad financiera, pero sí una exposición considerable a riesgos que podrían comprometer su sostenibilidad a largo plazo.<br>El Gobierno Corporativo es un pilar fundamental en la estructura de cualquier organización, ya que define el conjunto de procesos, principios y valores que regulan su dirección, administración, control y transparencia. Un sistema de gobierno corporativo eficiente no solo fortalece la confianza de los inversionistas y otras partes interesadas, sino que también permite una gestión más eficaz de los riesgos y oportunidades estratégicas.<br><br>Cuando el Gobierno Corporativo presenta fallas, la organización puede enfrentar disfuncionalidades en sus procesos internos, afectando su capacidad para responder a los desafíos del entorno. Estas debilidades impactan directamente en el Apetito de Riesgo, es decir, en la cantidad y el tipo de riesgo que la empresa está dispuesta a asumir para alcanzar sus objetivos estratégicos.<br><br>Como consecuencia, una gestión inadecuada de los riesgos de mercado y operacionales puede deteriorar progresivamente su situación financiera, poniendo en riesgo su estabilidad y competitividad en el futuro.  Por ello, la mejora en el manejo de los riesgos de Gobierno Corporativo es un aspecto crítico para garantizar la resiliencia y sostenibilidad de la empresa, incluso cuando su situación financiera actual sea favorable."
+            textoTipificacion = "Una empresa es vulnerable cuando enfrenta desafíos significativos, tales como competencia creciente, presión en los márgenes o falta de diferenciación en el mercado. Aunque todavía opera con normalidad, su posición no es segura a mediano o largo plazo.<br><br>En el contexto del Sistema HexaRCi una empresa es tipificada como Vulnerable cuando frente una Situación Financiera endeble muestra un manejo destacado en el manejo los riesgos de Gobierno Corporativo, al ser ésta la fortaleza que permitirá su recuperación.<br><br>La necesidad de mejoras significativas en el manejo de los riesgos del Gobierno Corporativo es relevante porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada.  Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos; y como consecuencia a un deterioro de la situación financiera futura."
             return { tipificacion, textoTipificacion };
             }
         tipificacion = "INESTABLE"
@@ -330,25 +340,25 @@ async function obtieneTipificacion() {
         }
 
     //  MRG ALTO
-    if (Number(capituloA.porcentaje) > 70.0) {
-        if (Number(capituloD.porcentaje) > 70.0 && Number(capituloE.porcentaje) > 90)
+    if (Number(capituloA.porcentaje) > valor2) {
+        if (Number(capituloD.porcentaje) > valor2 && Number(capituloE.porcentaje) > valor1)
             {
-            tipificación = "SOLIDA";
+            tipificacion = "SOLIDA";
             textoTipificacion = "Una empresa es Sólida cuando tiene la capacidad de manejar el quehacer diario sin contratiempos significativos. Son empresas estables y financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado.<br>En el contexto del Sistema HexaRCi una empresa es tipificada como Sólida cuando muestra un manejo relevante de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Asimismo y su Situación Financiera es sólida."
             return { tipificacion, textoTipificacion };
             }    
-        if (Number(capituloD.porcentaje) > 70.0 && Number(capituloE.porcentaje) > 70)
+        if (Number(capituloD.porcentaje) > valor2 && Number(capituloE.porcentaje) > valor2)
             {
-            tipificación = "SOLIDA";
+            tipificacion = "SOLIDA";
             textoTipificacion = "Una empresa es Sólida cuando tiene la capacidad de manejar el quehacer diario sin contratiempos significativos. Son empresas estables y financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado.<br>En el contexto del Sistema HexaRCi una empresa es tipificada como Sólida cuando muestra un manejo relevante de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Asimismo y su Situación Financiera es sólida."
             return { tipificacion, textoTipificacion };
             } 
 
-        if (Number(capituloE.porcentaje) > 50.0)
+        if (Number(capituloE.porcentaje) > valor3)
             {
-            tipificación = "INESTABLE";
-            textoTipificacion = "Una empresa es Inestable cuando se enfrenta con problemas de significación, como pérdidas recurrentes, modelos de negocio obsoletos o mala gestión. Su viabilidad está en riesgo si no implementan cambios significativos.<br>En el contexto del Sistema HexaRCi una empresa será tipificada como Inestable cuando muestra una Situación Financiera endeble con un manejo de los Riesgos de Gobierno Corporativo que requiere mejoras.  La necesidad de mejoras en el manejo de los riesgos del Gobierno Corporativo es relevante porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos. Ello sumado a la endeblez de la situación financiera puede llevar a la empresa a una debilidad considerable."
-                return { tipificacion, textoTipificacion };
+            tipificacion = "INESTABLE";
+            textoTipificacion = "Una empresa es Inestable cuando se enfrenta con problemas de significación, como pérdidas recurrentes, modelos de negocio obsoletos o mala gestión. Su viabilidad está en riesgo si no implementan cambios significativos.<br><br>En el contexto del Sistema HexaRCi una empresa será tipificada como Inestable cuando muestra una Situación Financiera endeble con un manejo de los Riesgos de Gobierno Corporativo que requiere mejoras.  La necesidad de mejoras en el manejo de los riesgos del Gobierno Corporativo es relevante porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos. Ello sumado a la endeblez de la situación financiera puede llevar a la empresa a una debilidad considerable."
+            return { tipificacion, textoTipificacion };
             } 
 
 
@@ -358,23 +368,23 @@ async function obtieneTipificacion() {
     }
         
     //  MRG BAJO
-    if (Number(capituloA.porcentaje) > 50.0) {
+    if (Number(capituloA.porcentaje) > valor3) {
         // console.log ("entro en bajo");
-        if (Number(capituloE.porcentaje) > 90.0 )
+        if (Number(capituloE.porcentaje) > valor1 )
             {
             tipificacion = "VULNERABLE";
             textoTipificacion = "En el sistema HexaRCi, una empresa se clasifica como Vulnerable cuando, a pesar de contar con una situación financiera sólida, presenta deficiencias significativas en la gestión de los riesgos de Gobierno Corporativo.<br><br> Esta clasificación no implica un problema inmediato en su estabilidad financiera, pero sí una exposición considerable a riesgos que podrían comprometer su sostenibilidad a largo plazo.<br>El Gobierno Corporativo es un pilar fundamental en la estructura de cualquier organización, ya que define el conjunto de procesos, principios y valores que regulan su dirección, administración, control y transparencia. Un sistema de gobierno corporativo eficiente no solo fortalece la confianza de los inversionistas y otras partes interesadas, sino que también permite una gestión más eficaz de los riesgos y oportunidades estratégicas.<br><br>Cuando el Gobierno Corporativo presenta fallas, la organización puede enfrentar disfuncionalidades en sus procesos internos, afectando su capacidad para responder a los desafíos del entorno. Estas debilidades impactan directamente en el Apetito de Riesgo, es decir, en la cantidad y el tipo de riesgo que la empresa está dispuesta a asumir para alcanzar sus objetivos estratégicos.<br><br>Como consecuencia, una gestión inadecuada de los riesgos de mercado y operacionales puede deteriorar progresivamente su situación financiera, poniendo en riesgo su estabilidad y competitividad en el futuro.  Por ello, la mejora en el manejo de los riesgos de Gobierno Corporativo es un aspecto crítico para garantizar la resiliencia y sostenibilidad de la empresa, incluso cuando su situación financiera actual sea favorable."
             return { tipificacion, textoTipificacion };
             }    
 
-        if (Number(capituloE.porcentaje) > 70.0 )
+        if (Number(capituloE.porcentaje) > valor2 )
             {
             tipificacion = "VULNERABLE";
             textoTipificacion = "Una empresa es vulnerable cuando enfrenta desafíos significativos, tales como competencia creciente, presión en los márgenes o falta de diferenciación en el mercado. Aunque todavía opera con normalidad, su posición no es segura a mediano o largo plazo.<br><br>En el contexto del Sistema HexaRCi una empresa es tipificada como Vulnerable cuando muestra una Situación Financiera sólida necesitando mejoras significativas en su manejo de los Riesgos de Gobierno Corporativo.<br><br>La necesidad de mejoras significativas en el manejo de los riesgos del Gobierno Corporativo es relevante porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada.  Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos; y como consecuencia a un deterioro de la situación financiera futura."
             return { tipificacion, textoTipificacion };
             }   
 
-            if (Number(capituloE.porcentaje) > 50.0 )
+            if (Number(capituloE.porcentaje) > valor3 )
                 {
                 tipificacion = "INESTABLE";
                 textoTipificacion = "En el sistema HexaRCi, una empresa se clasifica como Vulnerable cuando, a pesar de contar con una situación financiera sólida, presenta deficiencias significativas en la gestión de los riesgos de Gobierno Corporativo.<br><br> Esta clasificación no implica un problema inmediato en su estabilidad financiera, pero sí una exposición considerable a riesgos que podrían comprometer su sostenibilidad a largo plazo.<br>El Gobierno Corporativo es un pilar fundamental en la estructura de cualquier organización, ya que define el conjunto de procesos, principios y valores que regulan su dirección, administración, control y transparencia. Un sistema de gobierno corporativo eficiente no solo fortalece la confianza de los inversionistas y otras partes interesadas, sino que también permite una gestión más eficaz de los riesgos y oportunidades estratégicas.<br><br>Cuando el Gobierno Corporativo presenta fallas, la organización puede enfrentar disfuncionalidades en sus procesos internos, afectando su capacidad para responder a los desafíos del entorno. Estas debilidades impactan directamente en el Apetito de Riesgo, es decir, en la cantidad y el tipo de riesgo que la empresa está dispuesta a asumir para alcanzar sus objetivos estratégicos.<br><br>Como consecuencia, una gestión inadecuada de los riesgos de mercado y operacionales puede deteriorar progresivamente su situación financiera, poniendo en riesgo su estabilidad y competitividad en el futuro.  Por ello, la mejora en el manejo de los riesgos de Gobierno Corporativo es un aspecto crítico para garantizar la resiliencia y sostenibilidad de la empresa, incluso cuando su situación financiera actual sea favorable.."
@@ -387,7 +397,7 @@ async function obtieneTipificacion() {
         
     //  MRG INFERIOR
 
-    if (Number(capituloE.porcentaje) > 90.0 )
+    if (Number(capituloE.porcentaje) > valor1 )
         {
             tipificacion = "DEBIL";
             textoTipificacion = "Empresas con riesgo serio de colapso, tales como problemas financieros graves, pérdida de confianza de clientes, proveedores y empleados y con poca capacidad para operar eficientemente.<br>En el contexto del Sistema HexaRCi una empresa es tipificada como Débil cuando muestra un manejo con deficiencias serias en el manejo de los Riesgos de Gobierno Corporativo.  El presentar deficiencias serias en el manejo de los riesgos del Gobierno Corporativo es crítica porque éste representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas serias en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos y con ello un deterioro generalizado que pone en riesgo la sostenibilidad de la empresa."
