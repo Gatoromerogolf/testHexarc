@@ -162,7 +162,7 @@
           <tr>
             <td class="pregunta-financiera" style="text-align: right; font-weight: bold">Resultado Final</td>
             <td></td>
-            <td class="respuesta-financiera" id="resultado" style="text-align: center; font-weight: bold"></td></td>
+            <td class="respuesta-financiera" id="resultado" style="text-align: center; font-weight: bold"></td>
             <!-- <td class="respuesta-col" id="resultado-Cal" style="text-align: center; ; font-weight: bold"></td> -->
           </tr>
         </table>
@@ -308,7 +308,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("capitalTrabajo-Sco").textContent = puntos;
-  document.getElementById("capitalTrabajo-Cal").textContent = texto;
+  // document.getElementById("capitalTrabajo-Cal").textContent = texto;
 
   primero = datoParaMirar.respuesta[2];
   document.getElementById("flujoFondos").textContent = primero;
@@ -331,7 +331,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("flujoFondos-Sco").textContent = puntos;
-  document.getElementById("flujoFondos-Cal").textContent = texto;
+  // document.getElementById("flujoFondos-Cal").textContent = texto;
 
   primero = (datoParaMirar.respuesta[3] / datoParaMirar.respuesta[4]).toFixed(2);
   document.getElementById("indCobInt").textContent = primero;
@@ -350,7 +350,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("indCobInt-Sco").textContent = puntos;
-  document.getElementById("indCobInt-Cal").textContent = texto;
+  // document.getElementById("indCobInt-Cal").textContent = texto;
 
 
   primero = datoParaMirar.respuesta[5] + datoParaMirar.respuesta[6];
@@ -370,7 +370,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("cicloConvCaja-Sco").textContent = puntos;
-  document.getElementById("cicloConvCaja-Cal").textContent = texto;
+  // document.getElementById("cicloConvCaja-Cal").textContent = texto;
 
   primero = ((datoParaMirar.respuesta[7] / datoParaMirar.respuesta[8])*360).toFixed(2);
   document.getElementById("diasVentaCalle").textContent = primero;
@@ -389,7 +389,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("diasVentaCalle-Sco").textContent = puntos;
-  document.getElementById("diasVentaCalle-Cal").textContent = texto;
+  // document.getElementById("diasVentaCalle-Cal").textContent = texto;
 
   primero = ((datoParaMirar.respuesta[9] / datoParaMirar.respuesta[10])*360).toFixed(2);
   document.getElementById("diasDeudaCalle").textContent = primero;
@@ -408,7 +408,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("diasDeudaCalle-Sco").textContent = puntos;
-  document.getElementById("diasDeudaCalle-Cal").textContent = texto;
+  // document.getElementById("diasDeudaCalle-Cal").textContent = texto;
 
   primero = ((datoParaMirar.respuesta[11] / datoParaMirar.respuesta[12])*360).toFixed(2);
   document.getElementById("rotacion").textContent = primero;
@@ -427,7 +427,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("rotacion-Sco").textContent = puntos;  
-  document.getElementById("rotacion-Cal").textContent = texto;
+  // document.getElementById("rotacion-Cal").textContent = texto;
 
   primero = ((datoParaMirar.respuesta[1] / datoParaMirar.respuesta[13])*100).toFixed(2);
   document.getElementById("indiceDeuda").textContent = primero;
@@ -446,7 +446,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("indiceDeuda-Sco").textContent = puntos;
-  document.getElementById("indiceDeuda-Cal").textContent = texto;
+  // document.getElementById("indiceDeuda-Cal").textContent = texto;
 
   primero = ((datoParaMirar.respuesta[0] / datoParaMirar.respuesta[1])*100).toFixed(2);
   document.getElementById("liquidez").textContent = primero;
@@ -465,7 +465,7 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("liquidez-Sco").textContent = puntos;
-  document.getElementById("liquidez-Cal").textContent = texto;
+  // document.getElementById("liquidez-Cal").textContent = texto;
 
   primero = (((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[11]) / datoParaMirar.respuesta[1])*100).toFixed(2);
   document.getElementById("liquidezSeca").textContent = primero;
@@ -484,25 +484,25 @@ function realizaCalculos() {
   }
   totalScore += puntos; 
   document.getElementById("liquidezSeca-Sco").textContent = puntos;
-  document.getElementById("liquidezSeca-Cal").textContent = texto;
+  // document.getElementById("liquidezSeca-Cal").textContent = texto;
 
   console.log (totalScore);
 
   document.getElementById("resultado").textContent = totalScore;
-  if (totalScore == 200) {
-        texto = "Muy bueno";
-        document.getElementById("resultado-Cal").className = "texto-azul"; 
-    } else if (totalScore >= 150 && totalScore < 200) {
-        texto = "Bueno";
-        document.getElementById("resultado-Cal").className = "texto-verde"; 
-    } else if (totalScore >= 100 && totalScore < 150) {
-        texto = "Malo";
-        document.getElementById("resultado-Cal").className = "texto-amarillo"; 
-    } else {
-        texto = "Muy malo";
-        document.getElementById("resultado-Cal").className = "texto-rojo"; 
-    }
-    document.getElementById("resultado-Cal").textContent = texto;
+  // if (totalScore == 200) {
+  //       texto = "Muy bueno";
+  //       document.getElementById("resultado-Cal").className = "texto-azul"; 
+  //   } else if (totalScore >= 150 && totalScore < 200) {
+  //       texto = "Bueno";
+  //       document.getElementById("resultado-Cal").className = "texto-verde"; 
+  //   } else if (totalScore >= 100 && totalScore < 150) {
+  //       texto = "Malo";
+  //       document.getElementById("resultado-Cal").className = "texto-amarillo"; 
+  //   } else {
+  //       texto = "Muy malo";
+  //       document.getElementById("resultado-Cal").className = "texto-rojo"; 
+  //   }
+  //   document.getElementById("resultado-Cal").textContent = texto;
 
     puntaje = (totalScore / 200 * 100).toFixed(2);
     localStorage.setItem('porciento-E', puntaje);

@@ -455,7 +455,7 @@ tr:last-child td {
 }
 
 #tabla-financiera td.pregunta-financiera {
-  width: 150px; /* Ajusta el ancho según sea necesario */
+  width: 200px; /* Ajusta el ancho según sea necesario */
   white-space: normal; /* Permite que el texto se ajuste en varias líneas */
   overflow: visible; /* Asegúrate de que el contenido no se corte */
   font-size: 15px;

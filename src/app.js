@@ -228,7 +228,7 @@ app.post("/api/login", (req, res) => {
         sendMail(
           "ruben.e.garcia@gmail.com",
           "Ingreso de usuario",
-          `Ha ingresado recien ${username}`
+          `Ha ingresado recien ${user.Apellido}, de ${user.Empresa}, con ${user.username}`
         );
         updateLoginTimestamp(user.id);
       } else {
