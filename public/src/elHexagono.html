@@ -52,18 +52,25 @@
             font-family: "Abel", sans-serif !important;
         }
 
+
+        #contenedorTablas {
+            max-width: 600px;
+            margin: 20px auto;
+            /* Centra horizontalmente */
+            justify-content: center;
+            /* Centra la tabla dentro */
+            align-items: center;
+        }
+
         #tablaHexagono {
-            width: 90%;
-            table-layout: fixed;
+            width: 100%;
+            /* Ajusta al ancho del contenedor */
+            max-width: 600px;
+            /* Opcional, define un ancho máximo */
             border-collapse: collapse;
             border: 2px solid #ddd;
         }
 
-        /* #tablaHexagono th,
-#tablaHexagono td {
-  border: 2px solid #ddd;
-  padding: 5px;
-} */
         th {
             border: 2px solid #ddd;
             padding: 5px;
@@ -74,13 +81,15 @@
 
         .factor {
             background-color: #97d0f2;
+            border: 1px solid #0a0a0a;
         }
 
         /* Estilo para la primera fila (Nombre del factor) */
         .fila-factor {
             background-color: #e8f8f5;
             border: 2px solid #0a0a0a;
-            background-color: #01a2ff;
+            /* background-color: #01a2ff;
+            background-color: #f29797; */
         }
 
         .fila-factor tr {
@@ -90,38 +99,13 @@
             /* border: 5px solid #a20101; */
         }
 
-
-        .seccion th,
-        .seccion tr {
-            width: 100% max-content;
-            background-color: #01a2ff;
-            background-color: #e8f8f5;
-            padding-left: 10px;
-            font-weight: bold;
-        }
-
-        .situacion th {
-            padding-left: 10px;
-            background-color: #e8f8f5;
-        }
-
         .situacion2 th {
             padding-left: 10px;
             background-color: #fafcfc;
             font-weight: normal;
         }
-
-        /* .respuesta {
-      width: 75px;
-      text-align: center;
-    } */
-
-        #tablaSeccion,
-        #tablaFactor {
-            font-weight: bold;
-            width: 100%;
-        }
     </style>
+
 </head>
 
 <body id="conclusiones">
@@ -153,42 +137,47 @@
                 <br>
 
                 <div id="comentarios-finales">
-                    <!-- <p>Informe relativo a la autoevaluación de <strong><span class="company-name"
-                                style="font-size: 16px"></span></strong> de acuerdo con el Modelo HexaRCi.</p> -->
-                                
-                                <!-- //  mail del 28 de enero  // -->
-
-                    <p style="text-align: justify">De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para <strong><span class="company-name" style="font-size: 16px"></span></strong> del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma.</p>
-
-                    <p style="text-align: justify">De acuerdo con la información cargada por <strong><span class="company-name" style="font-size: 16px"></span></strong> y a los parámetros del Modelo HexaRCi, la Compañia <strong><span class="company-name" style="font-size: 16px"></span></strong> es una compañia calificada preliminarmente como tipo: 
+                    <p style="text-align: justify">De acuerdo con los términos de la Propuesta de servicios
+                        profesionales de BDT Advisory LLC para <strong><span class="company-name"
+                                style="font-size: 16px"></span></strong> del Sistema HexaRCi, el presente informe tiene
+                        el ámbito de uso reservado previsto en la misma.</p>
+                    <p style="text-align: justify">De acuerdo con la información cargada por <strong><span
+                                class="company-name" style="font-size: 16px"></span></strong> y a los parámetros del
+                        Modelo HexaRCi, la Compañia <strong><span class="company-name"
+                                style="font-size: 16px"></span></strong> es una compañia calificada preliminarmente como
+                        tipo:
                     </p>
-
                     <div id="tipificacion" style="font-weight: 700; font-size: 20px; text-align: center;"></div>
-
-                    <p>La calificacion adquiere la condición de Preliminar debido al hecho de que una tipificación Definitiva corresponderá al resultado de la aplicación de un Modelo de mayor profundidad, como ser el del Modelo HexaRC de BDT Advisory LCC.</p>
-
-                    <p id="causaTipificacion"></p>
+                    <p>La calificacion adquiere la condición de Preliminar debido al hecho de que una tipificación
+                        Definitiva corresponderá al resultado de la aplicación de un Modelo de mayor profundidad, como
+                        ser el del Modelo HexaRC de BDT Advisory LCC.</p>
+                    <p id="causaTipificacion" style="text-align: justify"></p>
 
                     <!-- <p style="text-align: justify">El análisis realizado a través del Modelo HEXARCi de la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.</p>
                     <p style="text-align: justify">Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.</p> -->
-                    <p style="text-align: justify">Los aspectos a mejorar más significativos en cada factor de riesgo: Manejo de los Riesgos de Gobierno Corporativo (MRG); Manejo de los Riesgos del Apetito de Riesgo (MAR); Manejo de los Riesgos de Mercado (MRM) y Manejo de los Riesgos de los Procesos se exponen a continuación:.</p>
+                    <p style="text-align: justify">Los aspectos a mejorar más significativos en cada factor de riesgo:
+                        Manejo de los Riesgos de Gobierno Corporativo (MRG); Manejo de los Riesgos del Apetito de Riesgo
+                        (MAR); Manejo de los Riesgos de Mercado (MRM) y Manejo de los Riesgos de los Procesos se exponen
+                        a continuación:.</p>
+                </div>
 
-                        <!-- Contenedor donde se generarán dinámicamente las tablas -->
-                    <div id="contenedorTablas"></div>
+                <!-- Contenedor donde se generarán dinámicamente las tablas -->
+                <div id="contenedorTablas"></div>
+                <table id="tablaHexagono">
+                    <thead>
+                        <tr class="fila-factor">
+                            <th id="factor" class="factor"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="situacion2">
+                            <th id="lineaModalGeneral" class="respuesta"></th>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <table id="tablaHexagono">
-                        <thead>
-                            <tr class="fila-factor">
-                                <th id="factor" class="factor"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="situacion2">
-                                <th id="lineaModalGeneral" class="respuesta"></th>
-                            </tr>
-                        </tbody>
-                    </table>
 
+                <div>
                     <p>La representación gráfica de la situación de <strong><span class="company-name"
                                 style="font-size: 16px"></span></strong> es la siguiente:</p>
                 </div>
@@ -196,6 +185,8 @@
                 <div class="canvas-container">
                     <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
                 </div>
+                <br>
+                <br>
 
                 <!-- <p style="text-align: justify">Si cada factor alcanzare el 100% se conformaría un ‘Hexágono perfecto’ y de esa manera <strong><span class="company-name" style="font-size: 16px"></span></strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi.
                 </p>
