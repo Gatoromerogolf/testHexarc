@@ -91,8 +91,8 @@
                     body: JSON.stringify({
                         // to: email.trim(),
                         to: Array.isArray(email)
-                        ? [...email.map(e => e.trim()), "rgarcia@consejo.org.ar"] // Si es array, agrega la cuenta extra
-                        : [email.trim(), "rgarcia@consejo.org.ar"], // Si es string, lo convierte en array con la cuenta extra
+                        ? [...email.map(e => e.trim()) ] // Si es array, agrega la cuenta extra
+                        : [email.trim() ], // Si es string, lo convierte en array con la cuenta extra
                         subject: "Información solicitada",
                         text: `Tu contraseña es ${password}`,
                         html: htmlContent,
