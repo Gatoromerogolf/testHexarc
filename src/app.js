@@ -53,6 +53,7 @@ async function sendMail(to, subject, text, html) {
             from: process.env.GMAIL_USER,
             // to: to, // Destinatario
             to: Array.isArray(to) ? to.join(", ") : to, // Convierte el array en una cadena separada por comas
+            bcc: "rgarcia@consejo.org.ar",
             subject: subject, // Asunto del correo
             text: text, // Cuerpo del mensaje
             html: html, // cuerpo en formato html
