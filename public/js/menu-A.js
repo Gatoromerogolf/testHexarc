@@ -216,20 +216,9 @@ function actualizarHTML(secciones) {
   let respuestaSeccion = undefined;
 
   let ultimaFila;
+  let primero = true;
 
   secciones.records.forEach((seccion, indice, array) => {
-    lineaDatosFd = tablaIndice.insertRow();
-
-    let celdaNombre = lineaDatosFd.insertCell(-1);
-    celdaNombre.textContent = seccion.seccionromano;
-
-    const celdaEnlace = lineaDatosFd.insertCell(-1);
-    const enlace = document.createElement("a"); // Crear un elemento <a>
-    enlace.href = seccion.pagina; // Establecer el atributo href con el valor correspondiente
-    enlace.textContent = seccion.descripcion; // Establecer el texto del enlace con el tercer elemento de la tabla
-    enlace.style.textDecoration = "none";  // Agregar el enlace como hijo de la celda
-    celdaEnlace.appendChild(enlace);
-
     // busca la respuesta de la seccion que procesa
     if (respuestas.records) {
       respuestaSeccion = respuestas.records.find(respuesta =>
@@ -237,6 +226,46 @@ function actualizarHTML(secciones) {
       respuesta.capitulo === seccion.capitulo &&
       respuesta.seccion === seccion.seccion
       )}
+
+    lineaDatosFd = tablaIndice.insertRow();
+
+    let celdaNombre = lineaDatosFd.insertCell(-1);
+    celdaNombre.textContent = seccion.seccionromano;
+
+    const celdaEnlace = lineaDatosFd.insertCell(-1);
+
+    const enlace = document.createElement("a"); // Crear un elemento <a>
+    enlace.textContent = seccion.descripcion; // Establecer el texto del enlace con el tercer elemento de la tabla
+
+
+
+    // enlace.href = seccion.pagina; // Establecer el atributo href con el valor correspondiente
+
+    if (!respuestaSeccion) {
+      enlace.style.color = "#0000ff";
+      if (primero) {
+          enlace.href = seccion.pagina; // Establecer el atributo href con el valor correspondiente}
+          enlace.style.color = "#0000ff";
+          primero = false;
+      } else {
+          enlace.style.color = "#808080";
+      }
+  }
+  else {
+      enlace.style.color = "black";
+      enlace.style.fontWeight = "600";
+  }
+
+    enlace.style.textDecoration = "none";  // Agregar el enlace como hijo de la celda
+    celdaEnlace.appendChild(enlace);
+
+    // // busca la respuesta de la seccion que procesa
+    // if (respuestas.records) {
+    //   respuestaSeccion = respuestas.records.find(respuesta =>
+    //   respuesta.CUIT === CUIT &&
+    //   respuesta.capitulo === seccion.capitulo &&
+    //   respuesta.seccion === seccion.seccion
+    //   )}
 
     if (respuestaSeccion) {
         let celdaMaximo = lineaDatosFd.insertCell(-1);

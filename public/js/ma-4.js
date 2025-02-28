@@ -237,7 +237,15 @@ function calculaResultados() {
 }
 
 // PROCESO PRINCIPAL ::::::::::::::::::::::::::::::::::::::::::
+document
+    .getElementById("formulario")
+    .addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+        event.preventDefault(); // Evita que se envíe el formulario
+        }
+     });   
 
+    // Captura del formulario :::::::::::::::::::::::::::::::::::::
 document
 // Captura del formulario :::::::::::::::::::::::::::::::::::::
   .getElementById("formulario")
