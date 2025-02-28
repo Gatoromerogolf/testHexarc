@@ -191,7 +191,8 @@ function continuar() {
         })
         .catch((error) => {
             console.error("Error en grabarResultados:", error);
-            alert("Hubo un error al grabar los resultados: " + error.message);
+            alert(error.message);
+            window.location.href = "Menu-A.html";
         });
 }
 
@@ -232,7 +233,7 @@ async function grabarResultados2(respuestas) {
         }
     } catch (error) {
         console.log("Error:", error);
-        alert("estamos en el error (ins 2): " + error.message);
+        alert(error.message);
         throw error; // Rechaza la promesa en caso de error
     }
 }

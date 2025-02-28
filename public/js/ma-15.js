@@ -279,6 +279,14 @@ function actualizaUserIngreso(username, CUIT) {
     });
 }
 
+// Bloquea el botón "Atrás" del navegador
+window.history.pushState(null, "", window.location.href);
+
+window.addEventListener("popstate", function (event) {
+    window.history.pushState(null, "", window.location.href);
+    alert("No puedes volver atrás en esta página.");
+});
+
 // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
 const opts = {
   angle: -0.3,

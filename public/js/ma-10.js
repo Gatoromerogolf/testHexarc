@@ -182,7 +182,8 @@ function continuar() {
     })
     .catch((error) => {
       console.error("Error en grabarResultados:", error);
-      alert("Hubo un error al grabar los resultados: " + error.message);
+      alert(error.message);
+      window.location.href = "Menu-A.html";
     });
 }
 
@@ -226,6 +227,14 @@ async function grabarResultados2(respuestas) {
     throw error; // Rechaza la promesa en caso de error
   }
 }
+
+// Bloquea el botón "Atrás" del navegador
+window.history.pushState(null, "", window.location.href);
+
+window.onpopstate = function () {
+    // Redirige de nuevo a MA-11 si intenta volver atrás
+    window.location.href = window.location.href;
+};
 
 
 
