@@ -221,10 +221,12 @@ async function grabarResultados2(respuestas) {
 }
 
 // Bloquea el botón "Atrás" del navegador
-window.history.pushState(null, "", window.location.href);
+alert ("URL actual " +  window.location.href);
+alert ("anterior " + document.referrer);
+window.history.replaceState(null, "", window.location.href);
 
 window.addEventListener("popstate", function (event) {
-    window.history.pushState(null, "", window.location.href);
+    history.pushState(null, "", window.location.href);
     alert("No puedes volver atrás en esta página.");
 });
 
