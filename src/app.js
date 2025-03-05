@@ -14,6 +14,56 @@ const cron = require("node-cron");
 require("dotenv").config(); //
 // console.log('Variables de entorno cargadas:', process.env);
 
+// const nodemailer = require("nodemailer");
+// const { google } = require("googleapis");
+
+// const oAuth2Client = new google.auth.OAuth2(
+//     process.env.CLIENT_ID, // Usar directamente process.env
+//     process.env.CLIENT_SECRET, // Usar directamente process.env
+//     process.env.REDIRECT_URI // Usar directamente process.env
+// );
+
+// // Configuración del token de actualización
+// oAuth2Client.setCredentials({
+//     refresh_token: process.env.REFRESH_TOKEN,
+// });
+
+const app = express();
+
+// Middleware para parsear el cuerpo de las solicitudes::::::::::::::::::::
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
+// app.use(express.static(path.join(__dirname, '../public')));
+
+app.use(
+    express.static(path.join(__dirname, "../public"), { index: "index.html" })
+);
+
+// Motor de plantillas
+app.set("view engine", "ejs");
+
+// ejemplo para que levant4 algo con plantilla
+
+app.get("/ejs", (req, res) => {
+    res.render("indexejs", { msg: "Nombre del usuario" });
+});
+
+// invoca bcryptjs
+const bcryptjs = require("bcryptjs");
+
+// Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
+app.use(cookieParser()); // Configura el middleware para leer cookies
+
+const options = {
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DB,
+};
+
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 
@@ -27,6 +77,36 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({
     refresh_token: process.env.REFRESH_TOKEN,
 });
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//                       enviar correo
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+app.post("/enviar-correo", async (req, res) => {
+    let { to, subject, text, html } = req.body;
+
+    console.log("📥 Datos recibidos en backend:", req.body); // Debugging
+
+    // Si `to` es un string, lo convierte en array para manejar múltiples destinatarios
+    if (typeof to === "string") {
+        to = [to.trim()];
+    } else if (Array.isArray(to)) {
+        to = to.map((email) => email.trim()); // Elimina espacios extra en cada dirección
+    } else {
+        return res
+            .status(400)
+            .json({ success: false, message: "Destinatario no válido" });
+    }
+
+    // Llamada a la función para enviar el correo
+    await sendMail(to, subject, text, html)
+        .then(() => {
+            res.send("Correo enviado correctamente");
+        })
+        .catch((error) => {
+            res.status(500).send("Error al enviar el correo");
+        });
+});
+
 
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::    sendmail
@@ -68,117 +148,8 @@ async function sendMail(to, subject, text, html) {
     }
 }
 
-// Ejemplo de envío
-// Llama a esta función donde necesites en tu aplicación
-
-// sendMail('ruben.e.garcia@gmail.com', 'Asunto de prueba', 'Mensaje de prueba.');
-
-// // Nueva ruta para enviar el correo
-// app.post('/sendMail', async (req, res) => {
-//     const { to, subject, text } = req.body;
-
-//     try {
-//         const accessToken = await oAuth2Client.getAccessToken();
-//         if (!accessToken.token) throw new Error("No se pudo obtener el Access Token");
-
-//         const transporter = nodemailer.createTransport({
-//             service: "gmail",
-//             auth: {
-//                 type: "OAuth2",
-//                 user: process.env.GMAIL_USER,
-//                 clientId: process.env.CLIENT_ID,
-//                 clientSecret: process.env.CLIENT_SECRET,
-//                 refreshToken: process.env.REFRESH_TOKEN,
-//                 accessToken: accessToken.token,
-//             },
-//         });
-
-//         const mailOptions = {
-//             from: process.env.GMAIL_USER,
-//             to,
-//             subject,
-//             text,
-//         };
-
-//         await transporter.sendMail(mailOptions);
-//         console.log(`✅ Correo enviado a: ${to}`);
-//         res.json({ success: true, message: "Correo enviado con éxito" });
-//     } catch (error) {
-//         console.error("❌ Error al enviar el correo:", error);
-//         res.status(500).json({ success: false, message: "Error al enviar el correo", error: error.message });
-//     }
-// });
-
-const app = express();
-
-// Middleware para parsear el cuerpo de las solicitudes::::::::::::::::::::
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Middleware para servir archivos estáticos::::::::::::::::::::::::::::::
-// app.use(express.static(path.join(__dirname, '../public')));
-
-app.use(
-    express.static(path.join(__dirname, "../public"), { index: "index.html" })
-);
-
-// Motor de plantillas
-app.set("view engine", "ejs");
-
-// ejemplo para que levant4 algo con plantilla
-
-app.get("/ejs", (req, res) => {
-    res.render("indexejs", { msg: "Nombre del usuario" });
-});
-
-// invoca bcryptjs
-const bcryptjs = require("bcryptjs");
-
-// Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
-app.use(cookieParser()); // Configura el middleware para leer cookies
-
-const options = {
-    host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_PORT,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DB,
-};
-
-// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-//                       enviar correo
-// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-app.post("/enviar-correo", async (req, res) => {
-    let { to, subject, text, html } = req.body;
-
-    console.log("📥 Datos recibidos en backend:", req.body); // Debugging
-
-    //   if (!to || typeof to !== "string" || to.trim() === "") {
-    //     return res.status(400).json({ success: false, message: "Destinatario no válido" });
-    // }
-
-    // Si `to` es un string, lo convierte en array para manejar múltiples destinatarios
-    if (typeof to === "string") {
-        to = [to.trim()];
-    } else if (Array.isArray(to)) {
-        to = to.map((email) => email.trim()); // Elimina espacios extra en cada dirección
-    } else {
-        return res
-            .status(400)
-            .json({ success: false, message: "Destinatario no válido" });
-    }
-
-    // Llamada a la función para enviar el correo
-    await sendMail(to, subject, text, html)
-        .then(() => {
-            res.send("Correo enviado correctamente");
-        })
-        .catch((error) => {
-            res.status(500).send("Error al enviar el correo");
-        });
-});
-
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 const sessionStore = new MySQLStore(options);
 
@@ -245,78 +216,7 @@ app.post("/api/login", (req, res) => {
         }
     );
 
-    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    //  recupera por mail
-    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-    //   app.get("/loginMail", (req, res) => {
-    //     const email = req.query.email; // Recupera el email desde la URL
-
-    //     if (!email) {
-    //       return res.status(400).json({ error: "Email requerido" });
-    //     }
-
-    //     console.log(`Solicitud recibida en /api/loginmail con email: ${email}`);
-
-    //     pool.query(
-    //       "SELECT id FROM users WHERE email = ?",
-    //       [email],
-    //       (err, results) => {
-    //         if (err) {
-    //           console.error("Error en la base de datos:", err);
-    //           return res.status(500).json({ error: "Error en la base de datos" });
-    //         }
-
-    //         if (results.length > 0) {
-    //           console.log(`El email ${email} existe en la base de datos.`);
-    //           return res.status(200).json({ exists: true });
-    //         } else {
-    //           console.log(`El email ${email} no está registrado.`);
-    //           return res.status(200).json({ exists: false });
-    //         }
-    //       }
-    //     );
-    //   });
-
-    // // Ruta para obtener todos los registros de la tabla secciones 2::::::::::::::::::::
-    // app.get("/secciones2", (req, res) => {
-    //     const capitulo = req.query.capitulo || "A";
-    //     const seccion = req.query.indice ? parseInt(req.query.indice) : null; // Null si no se pasa seccion
-    //     const idioma = parseInt(req.query.idioma) || 2;
-
-    //     let query;
-    //     let params;
-
-    //     //seleccion de tabla en base al idioma
-
-    //     if (idioma === 1) {
-    //       query = "SELECT * FROM secciones WHERE capitulo = ?";
-    //     } else {
-    //       query = "SELECT * FROM secciones_en WHERE capitulo = ?";
-    //     }
-
-    //     // Si se especifica la sección, añadimos el filtro a la consulta
-    //     if (seccion !== null) {
-    //       query += " AND seccion = ?";
-    //       params = [capitulo, seccion];
-    //     } else {
-    //       params = [capitulo]; // Sin filtro de sección
-    //     }
-
-    //     // Realización de la consulta
-    //     pool.query(query, params, (error, results, fields) => {
-    //       if (error) {
-    //         res.status(500).json({ error: "Error al obtener los registros" });
-    //         console.log("error servidor al obtener registros");
-    //         return;
-    //       }
-    //       if (results.length > 0) {
-    //         res.json(results);
-    //       } else {
-    //         res.status(404).json({ error: "No se encontraron registros" });
-    //       }
-    //     });
-    //   });
 
     //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // Definir la tarea cron

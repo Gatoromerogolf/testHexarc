@@ -62,7 +62,7 @@
                 console.log("✅ El email está registrado.");
 
                 const password = resultado.records.length > 0 ? resultado.records[0].password : undefined;
-                console.log(`🔑 El pass es: ${password}`);
+                // alert(`🔑 El pass es: ${password}`);
 
                 if (!password) {
                     console.error("⚠️ No se pudo recuperar el password.");
