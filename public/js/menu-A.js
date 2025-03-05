@@ -18,23 +18,6 @@ const capitulo = "A";
 const respuestaSeccion = undefined;
 
 
-// (async function () {
-//   try {
-//     for (let indice = 1; indice < 16; indice++) {
-//       const shouldTerminate = await obtenerSecciones(indice, idioma);
-//       if (shouldTerminate) break;
-//     }
-//     // Una vez que se han obtenido todos los datos, actualizar el HTML
-//     // elemento = [null, `##`, "Calificación general:", null, null];
-//     // tablaMenuEs.push(elemento);
-//     actualizarHTML(tablaMenuEs);
-//     document.getElementById('tablaIndice').style.display = 'table';
-//     document.getElementById('loading').style.display = 'none';
-    
-//   } catch (error) {
-//     console.error("Error en la función autoinvocada:", error);
-//   }
-// })();
 
 // Función autoinvocada - Ejecución inmediata  NUEVA !!!!!!!!!!!!!!1
 (async function () {
@@ -91,118 +74,6 @@ async function leerRespuestas(CUIT, capitulo) {
 
 
 
-
-
-
-
-// // Función para obtener los datos de la base de datos
-// async function obtenerSecciones(indice, idioma) {
-//   let linkPagina = "##";
-//   try {
-//     // Realizar la solicitud fetch
-//     const capitulo = "A";
-
-//     const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);
-
-//     if (response.ok) {indice=`${indice}`;
-//       // Obtener los datos en formato JSON
-//       const seccionRec = await response.json(); //registro seccion recibido
-//       if (seccionRec.length > 0) {
-//         const primerSeccion = seccionRec[0];
-//         // console.log (primerSeccion)
-//         // console.log (primerSeccion.max4)
-//         // leo la tabla de respuestas para saber si se completó
-//         const CUIT = localStorage.getItem("CUIT");
-//         const seccion = primerSeccion.seccion;
-
-//         const direct3o4 = "direct3o4";
-//         const direc34 = localStorage.getItem(direct3o4) || 2;
-
-//         const maximo =
-//           direc34 === "1" ? primerSeccion.max3 : primerSeccion.max4;
-
-//         const respuesta = await buscaRespuesta(CUIT, capitulo, seccion);
-//         if (respuesta.exists) {
-//           // si lo encuentra, llena la tabla sin pasar el link
-//           // console.log(`Encontro registro ${seccion} en obtenerSecciones`);
-//           const registro = respuesta.record;
-
-//           const elemento = [
-//             `${primerSeccion.seccionromano}`,
-//             `##`,
-//             `${primerSeccion.descripcion}`,
-//             registro.maximo,
-//             registro.score,
-//             // (respuesta.score / primerSeccion.max4 * 100).toFixed(2)
-//             registro.porcentaje,
-//           ];
-//           // console.log(elemento);
-//           tablaMenuEs.push(elemento);
-//         } else {
-//           // console.log (`no hay respuesta para seccion ${seccion}`);
-//           const elemento = [
-//             `${primerSeccion.seccionromano}`,
-//             "##",
-//             `${primerSeccion.descripcion}`,
-//             null,
-//             null,
-//           ];
-//           if (primeraVez == 0) {
-//             elemento[1] = `${primerSeccion.pagina}`;
-//             primeraVez = 1;
-//           }
-//           tablaMenuEs.push(elemento);
-//           // return true; // marca para terminar el ciclo
-//         }
-//       }
-//     } else {
-//       console.error("Error al obtener los datos");
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud:", error);
-//   }
-//   return false;
-// }
-
-// (async function () {
-//   try {
-//     for (let indice = 1; indice < 16; indice++) {
-//       const shouldTerminate = await obtenerSecciones(indice, idioma);
-//       if (shouldTerminate) break;
-//     }
-//     // Una vez que se han obtenido todos los datos, actualizar el HTML
-//     // elemento = [null, `##`, "Calificación general:", null, null];
-//     // tablaMenuEs.push(elemento);
-//     actualizarHTML(tablaMenuEs);
-//     document.getElementById('tablaIndice').style.display = 'table';
-//     document.getElementById('loading').style.display = 'none';
-    
-//   } catch (error) {
-//     console.error("Error en la función autoinvocada:", error);
-//   }
-// })();
-
-// async function buscaRespuesta(CUIT, capitulo, seccion) {
-//   // console.log (`los 3 valores ${CUIT}, ${capitulo}, ${seccion}`)
-//   try {
-//     const response = await fetch(
-//       `/busca-respuesta?CUIT=${CUIT}&capitulo=${capitulo}&seccion=${seccion}`
-//     );
-//     if (response.ok) {
-//       const result = await response.json();
-//       if (result.exists) {
-//         // return { exists: true, score: result.score };
-//         return { exists: true, record: result.record };
-//       }
-//     } else {
-//       console.error(`Sin respuesta para seccion ${seccion} en buscaRespuesta`);
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud en buscaRespuesta:", error);
-//   }
-//   return { exists: false };
-// }
-
 // Función para actualizar el HTML con los datos de la tabla
 function actualizarHTML(secciones) {
 
@@ -236,8 +107,6 @@ function actualizarHTML(secciones) {
 
     const enlace = document.createElement("a"); // Crear un elemento <a>
     enlace.textContent = seccion.descripcion; // Establecer el texto del enlace con el tercer elemento de la tabla
-
-
 
     // enlace.href = seccion.pagina; // Establecer el atributo href con el valor correspondiente
 

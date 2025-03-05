@@ -240,8 +240,7 @@ async function grabarResultados2(respuestas) {
   }
 }
 // Bloquea el botón "Atrás" del navegador
-alert ("URL actual " +  window.location.href);
-alert ("anterior " + document.referrer);
+
 window.history.replaceState(null, "", window.location.href);
 
 window.addEventListener("popstate", function (event) {

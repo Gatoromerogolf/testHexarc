@@ -19,7 +19,7 @@ const respuestaSeccion = undefined;
 (async function () {
     try {
         let seccionRec = await leerSecciones();
-        console.table(seccionRec.records);
+        console.table (seccionRec.records);
         if (!Array.isArray(seccionRec.records)) throw new Error("leerSecciones no devolvió un array");
 
         // si es de servicios (== 1) elimina manufactura (20)
@@ -95,45 +95,17 @@ function actualizarHTML(secciones) {
     let ultimaRespuestaSeccion = undefined; //guarda el valor de la ultima respuesta encontrada
     let respuestaSeccion = undefined;
 
-    let primero = true;
-
     // secciones.records.forEach((seccion, indice, array) => {
     secciones.forEach((seccion, indice, array) => {
-
-        if (respuestas.records) {
-            respuestaSeccion = respuestas.records.find(
-                (respuesta) =>
-                    respuesta.CUIT === CUIT &&
-                    respuesta.capitulo === seccion.capitulo &&
-                    respuesta.seccion === seccion.seccion
-            );
-        }
         lineaDatosFd = tablaIndice.insertRow();
 
         let celdaNombre = lineaDatosFd.insertCell(-1);
         celdaNombre.textContent = seccion.seccionromano;
 
         const celdaEnlace = lineaDatosFd.insertCell(-1);
-
         const enlace = document.createElement("a"); // Crear un elemento <a>
+        enlace.href = seccion.pagina; // Establecer el atributo href con el valor correspondiente
         enlace.textContent = seccion.descripcion; // Establecer el texto del enlace con el tercer elemento de la tabla
-
-
-        if (!respuestaSeccion) {
-            enlace.style.color = "#0000ff";
-            if (primero) {
-                enlace.href = seccion.pagina; // Establecer el atributo href con el valor correspondiente}
-                enlace.style.color = "#0000ff";
-                primero = false;
-            } else {
-                enlace.style.color = "#808080";
-            }
-        }
-        else {
-            enlace.style.color = "black";
-            enlace.style.fontWeight = "600";
-        }
-
         enlace.style.textDecoration = "none"; // Agregar el enlace como hijo de la celda
         celdaEnlace.appendChild(enlace);
 

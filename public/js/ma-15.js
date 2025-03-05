@@ -280,8 +280,7 @@ function actualizaUserIngreso(username, CUIT) {
 }
 
 // Bloquea el botón "Atrás" del navegador
-alert ("URL actual " +  window.location.href);
-alert ("anterior " + document.referrer);
+
 history.pushState(null, "", window.location.href);
 window.addEventListener("popstate", function (event) {
     history.pushState(null, "", window.location.href);
