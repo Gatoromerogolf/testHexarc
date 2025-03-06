@@ -51,7 +51,7 @@
                 <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
                   completar posteriormente los items faltantes.
                   <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
+                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
                 <button id="confirm-yes">Salir</button>
                 <button id="confirm-no">Continuar</button><br>
               </div>
@@ -72,16 +72,16 @@
             </td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-1" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-14-1" value="1"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-1" value="2"></label>
+              <div class="radio-container"><input type="radio" name="A-14-1" value="2"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-1" value="3"></label>
+              <div class="radio-container"><input type="radio" name="A-14-1" value="3"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-1" value="4"></label>
+              <div class="radio-container"><input type="radio" name="A-14-1" value="4"></div></td>
           </tr>
 
           <tr>
@@ -89,16 +89,16 @@
             </td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-2" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-14-2" value="1"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-2" value="2"></label>
+              <div class="radio-container"><input type="radio" name="A-14-2" value="2"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-2" value="3"></label>
+              <div class="radio-container"><input type="radio" name="A-14-2" value="3"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-2" value="4"></label>
+              <div class="radio-container"><input type="radio" name="A-14-2" value="4"></div></td>
           </tr>
 
           <tr>
@@ -106,16 +106,16 @@
             </td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-3" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-14-3" value="1"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-3" value="2"></label>
+              <div class="radio-container"><input type="radio" name="A-14-3" value="2"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-3" value="3"></label>
+              <div class="radio-container"><input type="radio" name="A-14-3" value="3"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-3" value="4"></label>
+              <div class="radio-container"><input type="radio" name="A-14-3" value="4"></div></td>
           </tr>
 
           <tr>
@@ -123,16 +123,16 @@
             </td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-4" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-14-4" value="1"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-4" value="2"></label>
+              <div class="radio-container"><input type="radio" name="A-14-4" value="2"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-4" value="3"></label>
+              <div class="radio-container"><input type="radio" name="A-14-4" value="3"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-4" value="4"></label>
+              <div class="radio-container"><input type="radio" name="A-14-4" value="4"></div></td>
           </tr>
 
           <tr>
@@ -140,16 +140,16 @@
             </td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-5" value="1"></label>
+              <div class="radio-container"><input type="radio" name="A-14-5" value="1"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-5" value="2"></label>
+              <div class="radio-container"><input type="radio" name="A-14-5" value="2"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-5" value="3"></label>
+              <div class="radio-container"><input type="radio" name="A-14-5" value="3"></div></td>
 
             <td class="respuesta-col">
-              <div class="radio-container"><input type="radio" name="A-14-5" value="4"></label>
+              <div class="radio-container"><input type="radio" name="A-14-5" value="4"></div></td>
           </tr>
         </table>
 
@@ -184,7 +184,7 @@
       </div>
     </div>
   </div>
-
+  </div>
 
 </body>
 
@@ -215,6 +215,22 @@
     isExiting = true;
     window.location.href = '../../index.html';
   });
+
+  window.addEventListener("load", function () {
+        // Insertamos dos estados en el historial para evitar que el usuario vuelva atrás
+        history.pushState(null, "", location.href);
+        history.pushState(null, "", location.href);
+
+        window.addEventListener("popstate", function () {
+            location.reload(); // Recarga la misma página en lugar de solo mostrar el mensaje
+            // history.pushState(null, "", location.href); // Restauramos el estado en el historial
+        });
+
+        // Opcional: Asegurar que el evento popstate se registre correctamente después de un tiempo
+        setTimeout(() => {
+            history.pushState(null, "", location.href);
+        }, 10);
+    });
 </script>
 
 <script src="../../js/ma-14.js"></script>

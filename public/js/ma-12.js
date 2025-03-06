@@ -15,6 +15,20 @@ const empresa = localStorage.getItem("empresa");
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
+// Agregar una entrada al historial al cargar la página
+// Evitar volver atrás
+// Agregar una entrada al historial al cargar la página
+// Agregar dos estados al historial para bloquear el botón de volver
+history.pushState(null, "", location.href);
+history.pushState(null, "", location.href);
+
+// Detectar cuando el usuario pulsa el botón de volver
+window.addEventListener("popstate", function (event) {
+  alert("No puedes volver atrás en esta página.");
+  history.pushState(null, "", location.href); // Volver a insertar estado
+});
+
+
 // OBTIENE LOS VALORES DE RADIO ::::::::::::::::::::::::::::::
 
 function obtenerValoresSeleccionados() {
@@ -234,19 +248,14 @@ async function grabarResultados2(respuestas) {
       throw new Error(result.error || "Error desconocido ins 2");
     }
   } catch (error) {
-    console.log("Error:", error);
-    alert("estamos en el error (ins 2): " + error.message);
-    throw error; // Rechaza la promesa en caso de error
+    // console.log("Error:", error);
+    // alert("estamos en el error (ins 2): " + error.message);
+    // throw error; // Rechaza la promesa en caso de error
   }
 }
 // Bloquea el botón "Atrás" del navegador
 
-window.history.replaceState(null, "", window.location.href);
 
-window.addEventListener("popstate", function (event) {
-    history.pushState(null, "", window.location.href);
-    alert("No puedes volver atrás en esta página.");
-});
 
 
 // Armar velocimetro ::::::::::::::::::::::::::::::::::::::

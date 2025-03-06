@@ -226,9 +226,9 @@ async function grabarResultados2(respuestas) {
       throw new Error(result.error || "Error desconocido ins 2");
     }
   } catch (error) {
-    console.log("Error:", error);
-    alert("El proceso requiere que registre nuevamente sus credenciales" + error.message);
-    throw error; // Rechaza la promesa en caso de error
+    // console.log("Error:", error);
+    // alert("El proceso requiere que registre nuevamente sus credenciales" + error.message);
+    // throw error; // Rechaza la promesa en caso de error
   }
 }
 
