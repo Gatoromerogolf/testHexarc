@@ -15,8 +15,9 @@ const empresa = localStorage.getItem("empresa");
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-// OBTIENE LOS VALORES DE RADIO ::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           obtenerValoresSeleccionados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function obtenerValoresSeleccionados() {
     respuestas = [];
     const grupos = ["A-9-1", "A-9-2", "A-9-3", "A-9-4"];
@@ -44,13 +45,10 @@ function obtenerValoresSeleccionados() {
     }
 }
 
-// CALCULA RESULTADOS ::::::::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           calculaResultados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function calculaResultados() {
-    // tabla = respuestas[0] == 1 ? tabla01 : tabla02;
-    // maximo = respuestas[0] == 1 ? tabla01[0][2] : tabla02[0][2];
-    // console.log(respuestas[0], maximo, tabla01[0][2], tabla02[0][2]);
-
     for (let i = 0; i < respuestas.length; i++) {
         if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
 
@@ -77,24 +75,24 @@ function calculaResultados() {
             }
         }
         console.log(`valor despues calculo: ${valores}`);
-
     }
     const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
     return porcientoFormateado;
 }
 
-// PROCESO PRINCIPAL ::::::::::::::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           PROCESO PRINCIPAL
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 document
     .getElementById("formulario")
     .addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
-        event.preventDefault(); // Evita que se envíe el formulario
+            event.preventDefault(); // Evita que se envíe el formulario
         }
-     });   
+    });
 
-    // Captura del formulario :::::::::::::::::::::::::::::::::::::
-document 
+// Captura del formulario :::::::::::::::::::::::::::::::::::::
+document
     .getElementById("formulario")
     .addEventListener("submit", function (event) {
         if (isExiting) {      // Verifica si está para salir y evita la validación en ese caso
@@ -112,55 +110,42 @@ document
         if (!(filasFaltantes.length > 0)) {
             porcientoFormateado = calculaResultados();
             porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
-            // alert(
-            //   `Calificación obtenida: \n
-            //         Puntaje máximo de la sección: ${maximo} \n
-            //         Calificación: ${valores} \n
-            //         Porcentual: ${porcientoFormateado}%`
-            // );
-            // console.log("Mostrando alerta personalizada...");
             mostrarMiAlerta(maximo, valores, porcientoFormateado);
             console.log(`Suma puntos ${valores},
                  valor máximo: ${maximo},
                  porcentaje ${porcientoFormateado}`);
             console.table(puntajesIndividuales);
 
-            // // Supongamos que calculas o recibes algún valor 'nuevoValor'
-            // let nuevoValor = porcientoFormateado; // Función hipotética que genera un valor
-
-            // Guardar el valor en LocalStorage
             localStorage.setItem("maximo-9", JSON.stringify(maximo));
             localStorage.setItem("valores-9", JSON.stringify(valores));
             localStorage.setItem("porciento-9", JSON.stringify(porcientoFormateado));
-
-            // window.location.href = "Menu-A.html";
         }
     });
 
-// ---------------------------
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           limpiarSelecciones
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function limpiarSelecciones() {
     // Obtener todos los inputs tipo radio y checkbox
     var radios = document.querySelectorAll('input[type="radio"]');
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    // Desmarcar todos los radios
+    // Desmarcar todo
     radios.forEach(function (radio) {
         radio.checked = false;
     });
-
-    // Desmarcar todos los checkboxes
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           mostrarMiAlerta
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
 
-    // Mostrar la alerta personalizada
     document.getElementById('miAlerta').style.display = 'block';
 
-    //  crea el gauge despues de mostrar la alerta
     const target = document.getElementById('gaugeChart'); // your canvas element
     const gauge = new Gauge(target).setOptions(opts); // create gauge!
     gauge.maxValue = 100; // set max gauge value
@@ -168,19 +153,16 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
     gauge.animationSpeed = 32; // set animation speed (32 is default value)
     gauge.set(porcientoFormateado); // set actual value
 
-    // Actualizar los contenidos
     document.getElementById('maximo').textContent = maximo;
     document.getElementById('calificacion').textContent = valores;
     document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
-
 }
 
-function cerrarAlerta() {
-    document.getElementById("miAlerta").style.display = "none";
-}
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           continuar
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function continuar() {
-    cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+    document.getElementById("miAlerta").style.display = "none";
 
     grabarResultados2(respuestas)
         .then(() => {
@@ -196,26 +178,37 @@ function continuar() {
         });
 }
 
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           grabarResultados2 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function grabarResultados2(respuestas) {
-
     const capitulo = "A";
     const seccion = 9;
-    const score = valores;
-    const respuesta = respuestas;
-    const porcentaje = porcientoFormateado;
-
-    const body = {
-        capitulo,
-        seccion,
-        maximo,
-        score,
-        porcentaje,
-        respuesta
-    };
-
 
     try {
+        // primero elimina la respuesta anterior (si existe)
+        const eliminacionExitosa = await eliminarRegistro(capitulo, seccion);
+
+        // Independientemente de si se eliminó o no un registro, debe continuar con la inserción
+        if (eliminacionExitosa) {
+            console.log("Continuando con la inserción...");
+        } else {
+            console.warn("No se eliminó ningún registro, pero se procederá con la inserción.");
+        }
+
+        const score = valores;
+        const respuesta = respuestas;
+        const porcentaje = porcientoFormateado;
+
+        const body = {
+            capitulo,
+            seccion,
+            maximo,
+            score,
+            porcentaje,
+            respuesta
+        };
+
         const response = await fetch("/insertar2", {
             method: "POST",
             headers: {
@@ -237,8 +230,6 @@ async function grabarResultados2(respuestas) {
         // throw error; // Rechaza la promesa en caso de error
     }
 }
-
-
 
 // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
 const opts = {

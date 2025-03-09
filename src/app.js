@@ -113,18 +113,19 @@ app.post("/enviar-correo", async (req, res) => {
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function sendMail(to, subject, text, html) {
     try {
-        const accessToken = await oAuth2Client.getAccessToken();
-        console.log("Access Token:", accessToken.token); // Esto te dará el token y te ayudará a depurar
+        const accessTokenObject = await oAuth2Client.getAccessToken()
+        const accessToken = accessTokenObject?.token;  // Asegura que extraes solo el token
+        console.log("Access Token:", accessToken || "No se pudo obtener el token");
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
                 type: "OAuth2",
-                user: "hexarci.dev@gmail.com",
+                user: process.env.GMAIL_USER,
                 clientId: process.env.CLIENT_ID, // Accede a CLIENT_ID desde las variables de entorno
                 clientSecret: process.env.CLIENT_SECRET, // Accede a CLIENT_SECRET desde las variables de entorno
                 refreshToken: process.env.REFRESH_TOKEN, // Accede a REFRESH_TOKEN desde las variables de entorno
-                accessToken: accessToken.token,
+                accessToken: accessToken,
             },
         });
 
@@ -144,8 +145,8 @@ async function sendMail(to, subject, text, html) {
         // console.log('Correo enviado:', result);
         console.log(" ✅ Correo enviado en este momento:");
     } catch (error) {
-        console.error(" ❌ Error al enviar el correo:", error);
-    }
+        console.error(" ❌ Error al enviar el correo:", error.response || error);
+    };
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -882,6 +883,37 @@ app.post("/insertar2", (req, res) => {
         }
     });
 });
+
+//  elimina un registro de la tabla de respuestas:::::::::::::::::::::::::::::::::::::::
+app.delete("/eliminar", (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ error: "No estás autenticado" });
+    }
+
+    const { capitulo, seccion } = req.body;
+    const CUIT = req.session.user.CUIT;
+
+    if (!CUIT || !capitulo || !seccion) {
+        return res.status(400).json({ error: "Faltan datos requeridos" });
+    }
+
+    const eliminarSQL = "DELETE FROM respuestas WHERE CUIT = ? AND capitulo = ? AND seccion = ?";
+    const datosAPasar = [CUIT, capitulo, seccion];
+
+    pool.query(eliminarSQL, datosAPasar, function (error, resultado) {
+        if (error) {
+            console.log("Error al eliminar:", error);
+            return res.status(500).json({ error: error.message });
+        }
+
+        if (resultado.affectedRows === 0) {
+            return res.status(200).json({ success: true, message: "No había registros para eliminar" });
+        }
+
+        res.status(200).json({ success: true, message: "Registro eliminado correctamente" });
+    });
+});
+
 
 // Grabacion de Parciales  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post("/grabaParciales", (req, res) => {

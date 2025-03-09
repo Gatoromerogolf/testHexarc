@@ -504,6 +504,32 @@ tr:last-child td {
   margin: 5px;
 }
 
+/* Estilos individuales para cada botón */
+#confirm-yes {
+  background-color: #d9534f;
+  padding: 10px;
+  border-radius: 10px; /* Bordes redondeados */
+  color: white;
+}
+
+#confirm-yes:hover {
+  background-color: #c9302c;
+  padding: 10px;
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+#confirm-no {
+  background-color: #5bc0de;
+  padding: 10px;
+  border-radius: 10px; /* Bordes redondeados */
+  color: white;
+}
+
+#confirm-no:hover {
+  background-color: #31b0d5;
+  padding: 10px;
+  border-radius: 10px; /* Bordes redondeados */
+}
 /* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 .tituloSeccion {

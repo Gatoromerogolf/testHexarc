@@ -32,6 +32,9 @@ async function ejecutarProceso() {
   console.log(`leyo textoRespuestas ${textoRespuestas[0].textos}`)
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             recuperarPreguntas
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function recuperarPreguntas(capitulo = 'A') {
   try {
     let url = "/preguntas";
@@ -53,6 +56,9 @@ async function recuperarPreguntas(capitulo = 'A') {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             leeTextoCheck
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 async function leeTextoCheck() {
   try {
@@ -70,6 +76,9 @@ async function leeTextoCheck() {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             leeTextoRespuestas
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function leeTextoRespuestas() {
   try {
     const response = await fetch("/textorespuestas");
@@ -87,7 +96,9 @@ async function leeTextoRespuestas() {
   }
 }
 
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             buscaPrintResultados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function buscaPrintResultados (CUIT, capitulo) {
   try {
     const { exists, respuestas } = await buscaRespuesta(CUIT, capitulo);   // Espera a que la promesa de buscaRespuesta se resuelva
@@ -101,6 +112,9 @@ async function buscaPrintResultados (CUIT, capitulo) {
   }   
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             buscaRespuesta
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function buscaRespuesta(CUIT, capitulo) {
   try {
     const response = await fetch(
@@ -119,6 +133,9 @@ async function buscaRespuesta(CUIT, capitulo) {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             actualizarHTML
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Función para actualizar el HTML con los datos de la tabla
 async function actualizarHTML(respuestas) {
   console.log("Actualizando HTML..."); // Debugging
@@ -179,6 +196,10 @@ async function actualizarHTML(respuestas) {
 //   modal.style.display = "block";
 // }
 
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             armarDetalleGeneral
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas, textoCheck, textoRespuestas) {
   let lineaModalGeneral = document.getElementById("lineaModalGeneral");
@@ -289,62 +310,15 @@ function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas
 
       celdaRpta.textContent = conjunto;
     }      
-
-    // const celdaComenta = fila.insertCell(-1);
-    // Crear el elemento de imagen
-    // const imagen = document.createElement('img');
-    // Asignar la fuente de la imagen (ruta a la imagen)
-
-    // Opcional: puedes ajustar el tamaño de la imagen
-    // imagen.style.width = '15px';
-    // imagen.style.height = '15px';
-    // imagen.style.border = 'none';
-    // imagen.style.margin = '0';
-    // imagen.style.padding = '0';
-    // imagen.style.verticalAlign = 'middle';
-    // imagen.style.marginTop = '5px';  // Ajusta esta cantidad según lo necesites
-    
-    // celdaComenta.style.display = 'flex';
-    // celdaComenta.style.justifyContent = 'center'; // Centrar horizontalmente
-    // celdaComenta.style.alignItems = 'center';     // Centrar verticalmente
-    // celdaComenta.style.height = '100%';           // Ocupa toda la altura de la fila
-    // celdaComenta.style.padding = '0';             // Evitar padding que pueda desalinear la imagen
-    // celdaComenta.style.boxSizing = 'border-box';  // Incluir bordes y padding en el tamaño total
-    // celdaComenta.style.border = 'none';
-    
-    // celdaComenta.style.border = 'none';
-
-    // Agregar la imagen a la celda
-    // imagen.src = '../img/blanco.png';
-    // celdaComenta.appendChild(imagen);
-
-    // if (celdaRpta.textContent == "NO") {
-    //   imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-    //    celdaComenta.appendChild(imagen);
-    // }
-
-    // if (celdaRpta.textContent == "No efectivo") {
-    //    imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-    //     celdaComenta.appendChild(imagen);
-    // }
-
-    // if(celdaRpta.textContent == "Poco efectivo") {
-    //           imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
-    //           celdaComenta.appendChild(imagen);
-    // }
-
-    // if(celdaRpta.textContent == "Efectivo") {
-    //         imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
-    //         celdaComenta.appendChild(imagen);
-    // }
-      // else { 
-      //   celdaComenta.textContent = ' ';
-      // }  
   }
   
   document.getElementById("modalGeneral").style.display = "flex";
 }
 
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             eliminarfilas
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function eliminarFilas() {
   const filasEliminar = dataTable.getElementsByTagName("tr");
   for (let i = filasEliminar.length - 1; i > 0; i--) {
@@ -352,6 +326,9 @@ function eliminarFilas() {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             cerrarModal
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function cerrarModal(idModal) {
   const modal = document.getElementById(idModal);
   if (modal) {
@@ -360,6 +337,9 @@ function cerrarModal(idModal) {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             llenaUnaParte
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
       for (const respuesta of tablaMenuA) {
       let fila = document.createElement('tr');
@@ -414,6 +394,9 @@ function cerrarModal(idModal) {
   }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             ObtenerNombreSeccion
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function obtenerNombreSeccion(indice, idioma, capitulo) {
   try {
     const response = await fetch(`/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`);

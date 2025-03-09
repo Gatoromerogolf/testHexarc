@@ -16,8 +16,10 @@ const empresa = localStorage.getItem("empresa");
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-// OBTIENE LOS VALORES DE RADIO ::::::::::::::::::::::::::::::
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           obtenerValoresSeleccionados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function obtenerValoresSeleccionados() {
     respuestas = [];
     const grupos = ["A-15-1", "A-15-2"];
@@ -45,19 +47,13 @@ function obtenerValoresSeleccionados() {
     }
 }
 
-// CALCULA RESULTADOS ::::::::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           calculaResultados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function calculaResultados() {
-    // tabla = respuestas[0] == 1 ? tabla01 : tabla02;
-    // maximo = respuestas[0] == 1 ? tabla01[0][2] : tabla02[0][2];
-    // console.log(respuestas[0], maximo, tabla01[0][2], tabla02[0][2]);
 
     for (let i = 0; i < respuestas.length; i++) {
         if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
-
-        // console.log(`i= ${i} ,
-        //      valores ${valores} ,
-        //      respuestas: ${respuestas[i]}`);
 
         switch (respuestas[0]) {
             case "1":
@@ -88,7 +84,9 @@ function calculaResultados() {
     }
 }
 
-// PROCESO PRINCIPAL ::::::::::::::::::::::::::::::::::::::::::
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           PROCESO PRINCIPAL
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 document
     .getElementById("formulario")
     .addEventListener("keydown", function (event) {
@@ -135,6 +133,9 @@ document
 
 // ---------------------------
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           limpiarSelecciones
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function limpiarSelecciones() {
     // Obtener todos los inputs tipo radio y checkbox
     var radios = document.querySelectorAll('input[type="radio"]');
@@ -144,20 +145,17 @@ function limpiarSelecciones() {
     radios.forEach(function (radio) {
         radio.checked = false;
     });
-
-    // Desmarcar todos los checkboxes
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
 }
 
-// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           mostrarMiAlerta
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
-    // Mostrar la alerta personalizada
     document.getElementById("miAlerta").style.display = "block";
 
-    //  crea el gauge despues de mostrar la alerta
     const target = document.getElementById("gaugeChart"); // your canvas element
     const gauge = new Gauge(target).setOptions(opts); // create gauge!
     gauge.maxValue = 100; // set max gauge value
@@ -165,45 +163,20 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
     gauge.animationSpeed = 32; // set animation speed (32 is default value)
     gauge.set(porcientoFormateado); // set actual value
 
-    // Actualizar los contenidos
     document.getElementById("maximo").textContent = maximo;
     document.getElementById("calificacion").textContent = valores;
     document.getElementById("porcentual").innerHTML =
         "<strong>" + porcientoFormateado + "%<strong>";
 }
 
-// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-function cerrarAlerta() {
-    // alert("entro en cerrarAlerta");
-    document.getElementById("miAlerta").style.display = "none";
-}
-
-// function continuar() {
-//   cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
-//   window.location.href = "Menu-A.html";
-// }
-
-// function continuar() {
-//   cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
-//   alert("entro en continuar")
-//   grabarResultados(respuestas).then(() => {
-//     console.log('Operacion exitosa')
-//   });
-//   alert("ahora llama al menu-a")
-//   window.location.href = (JSON.parse(localStorage.getItem('idioma'))) == 1 ? "Menu-A.html" : "Menu-A-en.html"
-// }
-
-// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           continuar
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function continuar() {
-    cerrarAlerta(); // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+    document.getElementById("miAlerta").style.display = "none";
 
     grabarResultados2(respuestas)
         .then(() => {
-            const username = localStorage.getItem("username");
-            const CUIT = localStorage.getItem("CUIT");
-            actualizaUserIngreso(username, CUIT);
             window.location.href =
                 JSON.parse(localStorage.getItem("idioma")) == 1
                     ? "Menu-A.html"
@@ -215,26 +188,36 @@ function continuar() {
         });
 }
 
-// grabacion mas completa
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           grabarResultados2
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function grabarResultados2(respuestas) {
+
     const capitulo = "A";
     const seccion = 15;
-    const score = valores;
-    const respuesta = respuestas;
-    const porcentaje = porcientoFormateado;
-
-    const body = {
-        capitulo,
-        seccion,
-        maximo,
-        score,
-        porcentaje,
-        respuesta,
-    };
 
     try {
-        // const response = await fetch("http://localhost:3000/insertar2", {
+        const eliminacionExitosa = await eliminarRegistro(capitulo, seccion);
+
+        if (eliminacionExitosa) {
+            console.log("Continuando con la inserción...");
+        } else {
+            console.warn("No se eliminó ningún registro, pero se procederá con la inserción.");
+        }
+
+        const score = valores;
+        const respuesta = respuestas;
+        const porcentaje = porcientoFormateado;
+
+        const body = {
+            capitulo,
+            seccion,
+            maximo,
+            score,
+            porcentaje,
+            respuesta
+        };
+        
         const response = await fetch("/insertar2", {
             method: "POST",
             headers: {
@@ -256,37 +239,6 @@ async function grabarResultados2(respuestas) {
         // throw error; // Rechaza la promesa en caso de error
     }
 }
-
-// Función para actualizar el campo ingresado del usuario
-function actualizaUserIngreso(username, CUIT) {
-    fetch("/api/updateIngresado", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, CUIT }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.message === "Campo ingresado actualizado correctamente") {
-                console.log("Campo ingresado actualizado correctamente");
-            } else {
-                console.error("Error al actualizar el campo ingresado");
-            }
-        })
-        .catch((error) => {
-            console.error("Error en la solicitud de actualización:", error);
-        });
-}
-
-// Bloquea el botón "Atrás" del navegador
-
-history.pushState(null, "", window.location.href);
-window.addEventListener("popstate", function (event) {
-    history.pushState(null, "", window.location.href);
-    alert("No puedes volver atrás en esta página.");
-});
-
 
 
 // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
@@ -323,19 +275,3 @@ const opts = {
         fractionDigits: 0, // Optional: Numerical precision. 0=round off.
     },
 };
-
-// //
-// let respuestas = [1, 2, 3, 4, 5]; // Ejemplo de arreglo de respuestas
-// let checklistValues = [6, 7, 8]; // Ejemplo de arreglo de valores de checklist
-// let j = 2; // Posición en la que quieres insertar el arreglo checklistValues
-
-// Usar splice para insertar checklistValues como un subarreglo en la posición j
-// respuestas.splice(j, 0, checklistValues);
-
-// console.log(respuestas); // Salida: [1, 2, [6, 7, 8], 3, 4, 5]
-// console.log(respuestas[0]); // Salida: 1
-// console.log(respuestas[2]); // Salida: [6, 7, 8]
-
-// let respuestas = [1, 2, [6, 7, 8], 3, 4, 5];
-// let numeroSiete = respuestas[2][1]; // Accede al subarreglo en la posición 2, y luego al elemento en la posición 1 dentro de ese subarreglo
-// console.log(numeroSiete); // Salida: 7

@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riesgos de Gobierno Corporativo</title>
+    <title>Generación de Resultados</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -130,7 +131,14 @@
                         </tr>
 
                         <tr>
-                            <td class="pregunta-financiera">7. Resultados extraordinarios</td>
+                            <td class="pregunta-financiera">7. Rendimiento sobre las Venta (ROA)</td>
+                            <td class="respuesta-financiera" id="rendiVentas" style="text-align: right"></td>
+                            <td class="respuesta-col" id="rendiVentas-Sco" style="text-align: center"></td>
+                            <td class="respuesta-col" id="rendiVentas-Cal" style="text-align: center"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-financiera">8. Resultados extraordinarios</td>
                             <td class="respuesta-financiera" id="resulExtra" style="text-align: right"></td>
                             <td class="respuesta-col" id="resulExtra-Sco" style="text-align: center"></td>
                             <td class="respuesta-col" id="resulExtra-Cal" style="text-align: center"></td>
@@ -151,7 +159,7 @@
                     </table>
                 </section>
             </section>
-                    <br>
+            <br>
         </div>
 
         <div class="centrado-flex">
@@ -351,6 +359,7 @@
         document.getElementById("rendiCapital-Sco").textContent = puntos;
         document.getElementById("rendiCapital-Cal").textContent = texto;
 
+
         primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[0]) * 100).toFixed(2);
         document.getElementById("rendiActivos").textContent = primero;
         if (primero > 40) {
@@ -369,6 +378,30 @@
         totalScore += puntos;
         document.getElementById("rendiActivos-Sco").textContent = puntos;
         document.getElementById("rendiActivos-Cal").textContent = texto;
+
+
+
+        primero = ((datoParaMirarF.respuesta[3] / datoParaMirarF.respuesta[0] * 100).toFixed(2));
+        document.getElementById("rendiVentas").textContent = primero;
+        if (primero > 40) {
+            texto = "Alto";
+            puntos = 20;
+        } else if (primero > 0 && primero <= 40) {
+            texto = "Medio Alto";
+            puntos = 15;
+        } else if (primero == 0) {
+            texto = "Medio Bajo";
+            puntos = 10;
+        } else {
+            texto = "Bajo";
+            puntos = 5;
+        }
+        totalScore += puntos;
+        document.getElementById("rendiVentas-Sco").textContent = puntos;
+        document.getElementById("rendiVentas-Cal").textContent = texto;
+
+
+
 
         primero = ((datoParaMirarF.respuesta[4] / datoParaMirar.respuesta[8]) * 100).toFixed(2);
         document.getElementById("resulExtra").textContent = primero;

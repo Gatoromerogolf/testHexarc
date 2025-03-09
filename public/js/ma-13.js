@@ -15,17 +15,9 @@ const empresa = localStorage.getItem("empresa");
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-// Agregar una entrada al historial al cargar la página
-history.pushState(null, "", location.href);
-
-// window.history.replaceState(null, "", window.location.href);
-
-window.addEventListener("popstate", function (event) {
-    location.reload();
-});
-
-// OBTIENE LOS VALORES DE RADIO ::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           obtenerValoresSeleccionados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function obtenerValoresSeleccionados() {
     respuestas = [];
     const grupos = ["A-13-1", "A-13-2", "A-13-3"];
@@ -53,12 +45,10 @@ function obtenerValoresSeleccionados() {
     }
 }
 
-// CALCULA RESULTADOS ::::::::::::::::::::::::::::::::::::
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           calculaResultados
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function calculaResultados() {
-    // tabla = respuestas[0] == 1 ? tabla01 : tabla02;
-    // maximo = respuestas[0] == 1 ? tabla01[0][2] : tabla02[0][2];
-    // console.log(respuestas[0], maximo, tabla01[0][2], tabla02[0][2]);
 
     for (let i = 0; i < respuestas.length; i++) {
         if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
@@ -80,15 +70,15 @@ function calculaResultados() {
                 console.log(`caso 4 ${valores}`)
                 break;
         }
-
         console.log(`valor despues calculo: ${valores}`);
-
     }
     const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
     return porcientoFormateado;
 }
 
-// PROCESO PRINCIPAL ::::::::::::::::::::::::::::::::::::::::::
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           PROCESO PRINCIPAL
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 document
     .getElementById("formulario")
     .addEventListener("keydown", function (event) {
@@ -124,38 +114,35 @@ document
                  porcentaje ${porcientoFormateado}`);
             console.table(puntajesIndividuales);
 
-            // Guardar el valor en LocalStorage
             localStorage.setItem("maximo-13", JSON.stringify(maximo));
             localStorage.setItem("valores-13", JSON.stringify(valores));
             localStorage.setItem("porciento-13", JSON.stringify(porcientoFormateado));
-
         }
     });
 
 // ---------------------------
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           limpiarSelecciones
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function limpiarSelecciones() {
     // Obtener todos los inputs tipo radio y checkbox
     var radios = document.querySelectorAll('input[type="radio"]');
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    // Desmarcar todos los radios
+    // Desmarcar todos
     radios.forEach(function (radio) {
         radio.checked = false;
     });
-
-    // Desmarcar todos los checkboxes
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           mostrarMiAlerta
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
-
-    // Mostrar la alerta personalizada
     document.getElementById('miAlerta').style.display = 'block';
-
-    //  crea el gauge despues de mostrar la alerta
     const target = document.getElementById('gaugeChart'); // your canvas element
     const gauge = new Gauge(target).setOptions(opts); // create gauge!
     gauge.maxValue = 100; // set max gauge value
@@ -163,19 +150,16 @@ function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
     gauge.animationSpeed = 32; // set animation speed (32 is default value)
     gauge.set(porcientoFormateado); // set actual value
 
-    // Actualizar los contenidos
     document.getElementById('maximo').textContent = maximo;
     document.getElementById('calificacion').textContent = valores;
     document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
-
 }
 
-function cerrarAlerta() {
-    document.getElementById("miAlerta").style.display = "none";
-}
-
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           continuar
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function continuar() {
-    cerrarAlerta();  // Opcional, depende de si quieres cerrar la alerta antes de cambiar la página
+    document.getElementById("miAlerta").style.display = "none";
 
     grabarResultados2(respuestas)
         .then(() => {
@@ -190,9 +174,22 @@ function continuar() {
         });
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//           grabarResultados2
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function grabarResultados2(respuestas) {
     const capitulo = "A";
     const seccion = 13;
+
+    try {
+        const eliminacionExitosa = await eliminarRegistro(capitulo, seccion);
+
+        if (eliminacionExitosa) {
+            console.log("Continuando con la inserción...");
+        } else {
+            console.warn("No se eliminó ningún registro, pero se procederá con la inserción.");
+        }
+
     const score = valores;
     const respuesta = respuestas;
     const porcentaje = porcientoFormateado;
@@ -206,7 +203,6 @@ async function grabarResultados2(respuestas) {
         respuesta
     };
 
-    try {
         const response = await fetch("/insertar2", {
             method: "POST",
             headers: {
@@ -228,16 +224,6 @@ async function grabarResultados2(respuestas) {
         // throw error; // Rechaza la promesa en caso de error
     }
 }
-
-// Bloquea el botón "Atrás" del navegador
-
-// window.history.replaceState(null, "", window.location.href);
-
-// window.addEventListener("popstate", function (event) {
-//     history.pushState(null, "", window.location.href);
-//     alert("No puedes volver atrás en esta página.");
-// });
-
 
 // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
 const opts = {
