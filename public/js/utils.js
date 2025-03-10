@@ -106,3 +106,14 @@ function mostrarMiAlertaComun(maximo, valores, porcientoFormateado) {
     document.getElementById('calificacion').textContent = valores;
     document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
 }
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//            limpiarSeleccionesComun
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+function limpiarSeleccionesComun() {
+    const radios = document.querySelectorAll('input[type="radio"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    radios.forEach(radio => radio.checked = false);
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+}
