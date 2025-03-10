@@ -1,7 +1,6 @@
 let tablaMenuEs = [];
 let tablaMenuA = [];
 let primeraVez = 0;
-
 const apellidouser = localStorage.getItem("apellido");
 const nombreUser = localStorage.getItem("nombre");
 const apenom = nombreUser + ' ' + apellidouser;
@@ -18,7 +17,6 @@ const capitulo = "A";
 const respuestaSeccion = undefined;
 let textoCheck = [];
 let textoRespuestas = [];
-
 
 // Función autoinvocada - Ejecución inmediata  NUEVA !!!!!!!!!!!!!!1
 (async function () {

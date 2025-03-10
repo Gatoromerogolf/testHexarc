@@ -4,11 +4,11 @@ let CUIT = JSON.parse(localStorage.getItem("CUIT"));
 let totalCapitulos = [];
 
 let var1 = 3;
-let var2 = 3;
-let var3 = 3;
-let var4 = 3;
-let var5 = 3;
-let var6 = 3;
+let var2 = 0;
+let var3 = 0;
+let var4 = 0;
+let var5 = 0;
+let var6 = 0;
 
 // Función autoinvocada - Ejecución inmediata
 (async function () {
@@ -233,7 +233,7 @@ function ejecutarGrafico(datos) {
         },
         align: "end", // Cambiar 'center' a 'end'
         anchor: "end", // Cambiar 'center' a 'end'
-        offset: -20, // Añadir un offset negativo para moverlo dentro de la barra
+        offset: -10, // Añadir un offset negativo para moverlo dentro de la barra
         formatter: function (value) {
           return value + "%";
         },

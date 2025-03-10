@@ -109,28 +109,16 @@ document
         if (!(filasFaltantes.length > 0)) {
             porcientoFormateado = calculaResultados();
             porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
-            // alert(
-            //   `Calificación obtenida: \n
-            //         Puntaje máximo de la sección: ${maximo} \n
-            //         Calificación: ${valores} \n
-            //         Porcentual: ${porcientoFormateado}%`
-            // );
-            // console.log("Mostrando alerta personalizada...");
             mostrarMiAlerta(maximo, valores, porcientoFormateado);
             console.log(`Suma puntos ${valores},
                  valor máximo: ${maximo},
                  porcentaje ${porcientoFormateado}`);
             console.table(puntajesIndividuales);
 
-            // // Supongamos que calculas o recibes algún valor 'nuevoValor'
-            // let nuevoValor = porcientoFormateado; // Función hipotética que genera un valor
-
-            // Guardar el valor en LocalStorage
             localStorage.setItem("maximo-12", JSON.stringify(maximo));
             localStorage.setItem("valores-12", JSON.stringify(valores));
             localStorage.setItem("porciento-12", JSON.stringify(porcientoFormateado));
 
-            // window.location.href = "Menu-A.html";
         }
     });
 
@@ -197,10 +185,8 @@ async function grabarResultados2(respuestas) {
     const seccion = 12;
 
     try {
-        // primero elimina la respuesta anterior (si existe)
         const eliminacionExitosa = await eliminarRegistro(capitulo, seccion);
 
-        // Independientemente de si se eliminó o no un registro, debe continuar con la inserción
         if (eliminacionExitosa) {
             console.log("Continuando con la inserción...");
         } else {

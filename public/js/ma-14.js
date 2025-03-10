@@ -105,7 +105,7 @@ document
         // Si no hay faltantes sigue adelante:::::::::::::::::::::::::
         if (!(filasFaltantes.length > 0)) {
             porcientoFormateado = calculaResultados();
-            porcientoFormateado = ((valores / maximo) * 100).toFixed(2);..");
+            porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
             mostrarMiAlerta(maximo, valores, porcientoFormateado);
             console.log(`Suma puntos ${valores},
                  valor máximo: ${maximo},

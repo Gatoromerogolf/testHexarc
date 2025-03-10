@@ -394,8 +394,8 @@ function continuar() {
             actualizaUserIngreso(username, CUIT)
             window.location.href =
                 JSON.parse(localStorage.getItem("idioma")) == 1
-                    ? "MA-2.html"
-                    : "MA-2-en.html";
+                    ? "Menu-A.html"
+                    : "Menu-A-en.html";
         })
         .catch((error) => {
             console.error("Error en grabarResultados:", error);

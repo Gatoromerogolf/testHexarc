@@ -168,8 +168,8 @@ function continuar() {
         .then(() => {
             window.location.href =
                 JSON.parse(localStorage.getItem("idioma")) == 1
-                    ? "MA-10.html"
-                    : "MA-10-en.html";
+                    ? "Menu-A.html"
+                    : "Menu-A-en.html";
         })
         .catch((error) => {
             console.error("Error en grabarResultados:", error);

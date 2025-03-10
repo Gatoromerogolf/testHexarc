@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación de riesgos</title>
+    <title>Riesgos de Procesos</title>
     <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
     <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -36,7 +36,8 @@
                 <form id="surveyForm">
 
                     <div class="center-container">
-                        <h4 class="tituloSeccion"><a href="Menu-D.html">II - Planificación</a></h4>
+                        <h4 class="tituloSeccion"><a href="Menu-D.html">I - Selección de cartera de productos y
+                                propuesta de valor</a></h4>
                     </div>
 
                     <div class="salida">
@@ -51,12 +52,11 @@
                     <br>
                     <div id="overlay">
                         <div id="ventanaSalida">
-                            <!-- <div class="confirm-modal" id="confirm-modal">-->
                             <div class="confirm-box">
-                                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la
-                                    aplicación, podrá
-                                    completar posteriormente los items faltantes.
-                                    <br>
+                                <p>La información registrada hasta la sección anterior queda almacenada. <br><br> Si
+                                    sale de la
+                                    aplicación, podrá completar posteriormente las secciones faltantes.
+                                    <br><br>
                                     Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
                                 </p>
                                 <button id="confirm-yes">Salir</button>
@@ -80,6 +80,7 @@
                             <!-- Las preguntas se agregarán aquí dinámicamente -->
                         </tbody>
                     </table>
+
                     <div class="centrado-flex">
                         <button type="submit" id="boton-enviar">Enviar</button>
                     </div>
@@ -112,7 +113,7 @@
         </section>
     </div>
 
-    <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+<!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //                    CODIGO
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
     <script src="../../js/utils.js"></script>
@@ -154,7 +155,7 @@
             try {
                 // Llamar a la función para obtener los precios
                 const listaPreciosB = await obtenerListaPreciosB();
-                precios = listaPreciosB.filter(seccion => seccion.seccion == 2 && seccion.capitulo == "D");
+                precios = listaPreciosB.filter(seccion => seccion.seccion == 1 && seccion.capitulo == "D");
                 // Usar reduce para sumar el campo "maximo" de los registros filtrados
                 maximo = precios.reduce((maximo, registro) => {
                     return maximo + Number(registro.maximo);
@@ -204,7 +205,6 @@
                     optionCell.appendChild(optionInput);
                     row.appendChild(optionCell);
                 }
-
                 tableBody.appendChild(row);
             });
         }
@@ -215,10 +215,9 @@
         // Función para obtener las preguntas del servidor
         function loadQuestions() {
             let url = '/preguntas';
-
             // Agregar parámetros a la URL si existen
             let capitulo = "D";
-            let seccion = 2;
+            let seccion = 1;
             if (capitulo || seccion) {
                 url += `?${capitulo ? `capitulo=${encodeURIComponent(capitulo)}` : ''}${capitulo && seccion ? '&' : ''}${seccion ? `seccion=${encodeURIComponent(seccion)}` : ''}`;
             }
@@ -230,12 +229,12 @@
         }
 
         // Cargar las preguntas cuando la página se cargue
-        // document.addEventListener('DOMContentLoaded', loadQuestions);
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+
 
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //              valorizarRadios
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
         function valorizarRadios() {
             total = 0;
             respuestas.forEach((respuesta, index) => {
@@ -280,9 +279,6 @@
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //            PROCESO PRINCIPAL
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // carga las preguntas al cargar la pagina
-        document.addEventListener('DOMContentLoaded', loadQuestions);
-
         document
             .getElementById("surveyForm")
             .addEventListener("keydown", function (event) {
@@ -312,6 +308,7 @@
                     console.log("Faltan respuestas. El formulario no se enviará hasta que se completen todas las opciones.");
                 }
             });
+
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //            limpiarSelecciones
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -324,164 +321,201 @@
         }
 
         // Prevenir el comportamiento por defecto al presionar Enter en el formulario
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('surveyForm').addEventListener('keypress', function (event) {
-                // Si el usuario presiona Enter (keyCode 13) dentro del formulario
-                if (event.key === 'Enter') {
-                    event.preventDefault(); // Evitar el envío del formulario
-                }
-            });
-        });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     document.getElementById('surveyForm').addEventListener('keypress', function (event) {
+        //         // Si el usuario presiona Enter (keyCode 13) dentro del formulario
+        //         if (event.key === 'Enter') {
+        //             event.preventDefault(); // Evitar el envío del formulario
+        //         }
+        //     });
+        // });
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        //            calculaResultados
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        function calculaResultados() {
+            // for (let i = 0; i < responses.length; i++) {
+            //   if (!puntajesIndividuales[i]) puntajesIndividuales[i] = []; // Asegurar que existe el arreglo antes de asignar valores
+
+            //   console.log(`i= ${i} ,
+            //       valores ${valores} ,
+            //       respuestas: ${responses[i]};
+            //       indice del arreglo: ${responses[i]-1};
+            //       numero a sumar: ${Number (precios[i].precio[responses[i]-1])} `)
+
+            //       // vector de precio: ${precios[i].pregunta};
+
+            //   valores += Number (precios[i].precio[responses[i]-1]);
+
+            //   console.log(`valor despues calculo: ${valores}`);
+
+            // }
+            // const porcientoFormateado = ((valores / maximo) * 100).toFixed(2);
+            // return porcientoFormateado;
+        }
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //            continuar
-        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         function continuar() {
             document.getElementById("miAlerta").style.display = "none";
+
             grabarResultados2(respuestas)
                 .then(() => {
                     window.location.href =
                         JSON.parse(localStorage.getItem("idioma")) == 1
-                            ? "MD-3.html"
-                            : "MD-3-en.html";
+                            ? "MD-2.html"
+                            : "MD-2-en.html";
                 })
                 .catch((error) => {
                     console.error("Error en grabarResultados:", error);
                     alert("Hubo un error al grabar los resultados: " + error.message);
                 });
         }
+
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //            grabarResultados2
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         async function grabarResultados2(respuestas) {
 
             const capitulo = "D";
-            const seccion = 2;
+            const seccion = 1;
+
             await grabaNuevoItem(capitulo, seccion)
 
-            // const score = valores;
-            // const respuesta = respuestas;
-            // const porcentaje = porcientoFormateado;
-
-            // const body = {
-            //     capitulo,
-            //     seccion,
-            //     maximo,
-            //     score,
-            //     porcentaje,
-            //     respuesta
-            // };
-
             // try {
-            //     const response = await fetch("/insertar2", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         body: JSON.stringify(body),
-            //         credentials: "include",
-            //     });
+            //     // primero elimina la respuesta anterior (si existe)
+            //     const eliminacionExitosa = await eliminarRegistro(capitulo, seccion);
 
-            //     const result = await response.json();
-            //     if (result.success) {
-            //         console.log("no hay error");
+            //     // Independientemente de si se eliminó o no un registro, debe continuar con la inserción
+            //     if (eliminacionExitosa) {
+            //         console.log("Continuando con la inserción...");
             //     } else {
-            //         throw new Error(result.error || "Error desconocido ins 2");
+            //         console.warn("No se eliminó ningún registro, pero se procederá con la inserción.");
             //     }
-            // } catch (error) {
-            //     console.log("Error:", error);
-            //     alert("estamos en el error (ins 2): " + error.message);
-            //     throw error; // Rechaza la promesa en caso de error
-            // }
-        }
+            //     const score = valores;
+            //     const respuesta = respuestas;
+            //     const porcentaje = porcientoFormateado;
 
+            //     const body = {
+            //         capitulo,
+            //         seccion,
+            //         maximo,
+            //         score,
+            //         porcentaje,
+            //         respuesta
+            //     };
+
+            //         const response = await fetch("/insertar2", {
+            //             method: "POST",
+            //             headers: {
+            //                 "Content-Type": "application/json",
+            //             },
+            //             body: JSON.stringify(body),
+            //             credentials: "include",
+            //         });
+
+            //         const result = await response.json();
+            //         if (result.success) {
+            //             console.log("no hay error");
+            //         } else {
+            //             throw new Error(result.error || "Error desconocido ins 2");
+            //         }
+            //     } catch (error) {
+            //         // console.log("Error:", error);
+            //         // alert("estamos en el error (ins 2): " + error.message);
+            //         // throw error; // Rechaza la promesa en caso de error
+            //     }
+
+            }
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//            mostrarMiAlerta
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         function mostrarMiAlerta(maximo, valores, porcientoFormateado) {
+                document.getElementById('miAlerta').style.display = 'block';
+                //  crea el gauge despues de mostrar la alerta
+                const target = document.getElementById('gaugeChart'); // your canvas element
+                const gauge = new Gauge(target).setOptions(opts); // create gauge!
+                gauge.maxValue = 100; // set max gauge value
+                gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                gauge.set(porcientoFormateado); // set actual value
 
-            // Mostrar la alerta personalizada
-            document.getElementById('miAlerta').style.display = 'block';
+                document.getElementById('maximo').textContent = maximo;
+                document.getElementById('calificacion').textContent = valores;
+                document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
+            }
 
-            //  crea el gauge despues de mostrar la alerta
-            const target = document.getElementById('gaugeChart'); // your canvas element
-            const gauge = new Gauge(target).setOptions(opts); // create gauge!
-            gauge.maxValue = 100; // set max gauge value
-            gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-            gauge.animationSpeed = 32; // set animation speed (32 is default value)
-            gauge.set(porcientoFormateado); // set actual value
+            // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
+            const opts = {
+                angle: -0.3,
+                // The span of the gauge arc
+                lineWidth: 0.2, // The line thickness
+                radiusScale: 0.8, // Relative radius
+                pointer: {
+                    length: 0.6, // // Relative to gauge radius
+                    strokeWidth: 0.035, // The thickness
+                    color: '#000000' // Fill color
+                },
+                limitMax: false,     // If false, max value increases automatically if value > maxValue
+                limitMin: false,     // If true, the min value of the gauge will be fixed
+                colorStart: '#6F6EA0',   // Colors
+                colorStop: '#C0C0DB',    // just experiment with them
+                strokeColor: '#EEEEEE',  // to see which ones work best for you
+                generateGradient: true,
+                highDpiSupport: true,     // High resolution support
 
-            document.getElementById('maximo').textContent = maximo;
-            document.getElementById('calificacion').textContent = valores;
-            document.getElementById('porcentual').innerHTML = '<strong>' + porcientoFormateado + '%<strong>';
-        }
+                // Custom segment colors
+                staticZones: [
+                    { strokeStyle: "red", min: 0, max: 50 }, // Red from 0 to 25
+                    { strokeStyle: "orange", min: 50, max: 70 }, // Red from 0 to 25
+                    { strokeStyle: "green", min: 70, max: 90 }, // Yellow from 50 to 75
+                    { strokeStyle: "blue", min: 90, max: 100 }  // Blue from 75 to 100
+                ],
 
-        // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
-        const opts = {
-            angle: -0.3,
-            // The span of the gauge arc
-            lineWidth: 0.2, // The line thickness
-            radiusScale: 0.8, // Relative radius
-            pointer: {
-                length: 0.6, // // Relative to gauge radius
-                strokeWidth: 0.035, // The thickness
-                color: '#000000' // Fill color
-            },
-            limitMax: false,     // If false, max value increases automatically if value > maxValue
-            limitMin: false,     // If true, the min value of the gauge will be fixed
-            colorStart: '#6F6EA0',   // Colors
-            colorStop: '#C0C0DB',    // just experiment with them
-            strokeColor: '#EEEEEE',  // to see which ones work best for you
-            generateGradient: true,
-            highDpiSupport: true,     // High resolution support
+                staticLabels: {
+                    font: "15px sans-serif",  // Specifies font
+                    labels: [0, 50, 70, 90, 100],  // Print labels at these values
+                    color: "#000000",  // Optional: Label text color
+                    fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+                },
+            };
 
-            // Custom segment colors
-            staticZones: [
-                { strokeStyle: "red", min: 0, max: 50 }, // Red from 0 to 25
-                { strokeStyle: "orange", min: 50, max: 70 }, // Red from 0 to 25
-                { strokeStyle: "green", min: 70, max: 90 }, // Yellow from 50 to 75
-                { strokeStyle: "blue", min: 90, max: 100 }  // Blue from 75 to 100
-            ],
-
-            staticLabels: {
-                font: "15px sans-serif",  // Specifies font
-                labels: [0, 50, 70, 90, 100],  // Print labels at these values
-                color: "#000000",  // Optional: Label text color
-                fractionDigits: 0  // Optional: Numerical precision. 0=round off.
-            },
-        };
+            const apellidouser = localStorage.getItem("apellido");
+            const nombreUser = localStorage.getItem("nombre");
+            const apenom = nombreUser + ' ' + apellidouser;
+            const empresa = localStorage.getItem("empresa");
+            document.getElementById("nombreEmpresa").textContent = empresa;
+            document.getElementById("nombreUsuario").textContent = apenom;
 
 
-        const apellidouser = localStorage.getItem("apellido");
-        const nombreUser = localStorage.getItem("nombre");
-        const apenom = nombreUser + ' ' + apellidouser;
-        const empresa = localStorage.getItem("empresa");
-        document.getElementById("nombreEmpresa").textContent = empresa;
-        document.getElementById("nombreUsuario").textContent = apenom;
+            document.getElementById('surveyForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+            const botonSalida = document.getElementById('boton-salir');
+            const ventanaSale = document.getElementById('ventanaSalida');
+            const botonYes = document.getElementById('confirm-yes');
+            const botonNou = document.getElementById('confirm-no');
 
-        document.getElementById('surveyForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-        });
-        const botonSalida = document.getElementById('boton-salir');
-        const ventanaSale = document.getElementById('ventanaSalida');
-        const botonYes = document.getElementById('confirm-yes');
-        const botonNou = document.getElementById('confirm-no');
+            botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+                let isExiting = true;
+                ventanaSale.style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            });
 
-        botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
-            let isExiting = true;
-            ventanaSale.style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        });
+            botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+                isExiting = true;
+                console.log('dijo que NO')
+                ventanaSale.style.display = 'none';
+                document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+            });
 
-        botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
-            isExiting = true;
-            console.log('dijo que NO')
-            ventanaSale.style.display = 'none';
-            document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
-        });
-
-        botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
-            console.log('dijo que SI')
-            isExiting = true;
-            window.location.href = '../../index.html';
-        });
+            botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+                console.log('dijo que SI')
+                isExiting = true;
+                window.location.href = '../../index.html';
+            });
 
     </script>
 

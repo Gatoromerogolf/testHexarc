@@ -2,744 +2,771 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apetito de riesgo</title>
-  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
-  <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apetito de riesgo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+    <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body class="menu-a-page aperie">
-  <div class="survey-container">
-    <section class="main">
-      <section class="gobCorpo">
-        <div class="header-container">
-            <div class="header-center">
-              <div id="nombreEmpresa" class="company-name"></div>
-              <div id="nombreUsuario" class="user-name"></div>
-            </div>
-          <div class="nav-iconstxt">
-            <h4>B - Manejo del Apetito de Riesgo</a></h4>
-          </div>
-          <div class="nav-iconsxx">
-            <h5> Autoevaluación</h5>
-          </div>
-        </div>
-        <hr>
+    <div class="survey-container">
+        <section class="main">
+            <section class="gobCorpo">
+                <div class="header-container">
+                    <div class="header-center">
+                        <div id="nombreEmpresa" class="company-name"></div>
+                        <div id="nombreUsuario" class="user-name"></div>
+                    </div>
+                    <div class="nav-iconstxt">
+                        <h4>B - Manejo del Apetito de Riesgo</h4>
+                    </div>
+                    <div class="nav-iconsxx">
+                        <h5> Autoevaluación</h5>
+                    </div>
+                </div>
+                <hr>
 
-        <form id="formulario">
+                <form id="formulario">
 
-          <div class="center-container">
-            <h4 class="tituloSeccion"><a href="Menu-B.html">II - Procesos</a></h4>
-          </div>
+                    <div class="center-container">
+                        <h4 class="tituloSeccion"><a href="Menu-B.html">II - Procesos</a></h4>
+                    </div>
 
-          <div class="salida">
-            <p>Seleccione la opción que mejor refleje el grado de cumplimiento o de acuerdo respecto de la situación descripta.</p>
-            <button type="button" id="boton-salir">Salir</button>
-          </div>
-          <br>
-          <div id="overlay">
-            <div id="ventanaSalida">
-              <!-- <div class="confirm-modal" id="confirm-modal">-->
-              <div class="confirm-box">
-                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la aplicación, podrá
-                  completar posteriormente los items faltantes.
-                  <br>
-                </p>Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.</p>
-                <button id="confirm-yes">Salir</button>
-                <button id="confirm-no">Continuar</button><br>
-              </div>
-            </div>
-          </div>
+                    <div class="salida">
+                        <p>Seleccione la opción que mejor refleje el grado de cumplimiento o de acuerdo respecto de la
+                            situación descripta.</p>
+                        <button type="button" id="boton-salir">Salir</button>
+                    </div>
+                    <br>
+                    <div id="overlay">
+                        <div id="ventanaSalida">
+                            <!-- <div class="confirm-modal" id="confirm-modal">-->
+                            <div class="confirm-box">
+                                <p>La información registrada hasta el momento quedará almacenada. <br> Si sale de la
+                                    aplicación, podrá
+                                    completar posteriormente los items faltantes.
+                                    <br>
+                                    Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
+                                </p>
+                                <button id="confirm-yes">Salir</button>
+                                <button id="confirm-no">Continuar</button><br>
+                            </div>
+                        </div>
+                    </div>
 
-          <table>
-            <tr>
-                <!-- <th class="respuesta-colxxx">Situación</th>
+                    <table>
+                        <tr>
+                            <!-- <th class="respuesta-colxxx">Situación</th>
                 <th class="respuesta-colxxx">Irracional</th>
                 <th class="respuesta-colxxx">Poco razonable</th>
                 <th class="respuesta-colxxx">Algo razonable</th>
                 <th class="respuesta-colxxx">Razonable</th> -->
-                <th>Situación</th>
-                <th>Desacuerdo</th>
-                <th>Algo en desacuerdo</th>
-                <th>Algo de acuerdo</th>
-                <th>De acuerdo</th>
-            </tr>
-            <tr>
-              <td class="pregunta-col">1. Tiene un sistema de Gobierno Corporativo acorde con las mejores prácticas</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-1" value="1">
+                            <th>Situación</th>
+                            <th>Desacuerdo</th>
+                            <th>Algo en desacuerdo</th>
+                            <th>Algo de acuerdo</th>
+                            <th>De acuerdo</th>
+                        </tr>
+                        <tr>
+                            <td class="pregunta-col">1. Tiene un sistema de Gobierno Corporativo acorde con las mejores
+                                prácticas</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-1" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-1" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-1" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-1" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">2. Tiene objetivos empresariales claramente definidos, claros y
+                                coherentes y
+                                comprendidos por todo el personal</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-2" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-2" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-2" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-2" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">3. Cuenta con estrategias bien establecidas para alcanzar sus metas
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-3" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-3" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-3" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-3" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">4. Monitorea de manera continua el entorno para identificar nuevas
+                                oportunidades
+                                y riesgos</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-4" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-4" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-4" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-4" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">5. Se realiza un análisis regular de riesgos para evaluar las
+                                amenazas
+                                potenciales y las oportunidades</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-5" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-5" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-5" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-5" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">6. La estructura operativa le permite ajustes rápidos en respuesta
+                                a cambios en
+                                el entorno empresarial</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-6" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-6" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-6" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-6" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">7. Cuenta con profesionales con experiencia en la gestión de
+                                riesgos</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-7" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-7" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-7" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-7" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="pregunta-col">8. Diversifica sus activos para reducir la exposición a riesgos
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-8" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-8" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-8" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-8" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">9. Se adapta rápidamente a los avances tecnológicos, incluso si
+                                implica asumir
+                                riesgos</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-9" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-9" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-9" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-9" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">10. Evalúa regularmente el rendimiento de sus inversiones y ajusta
+                                su enfoque
+                                según los resultados.</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-10" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-10" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-10" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-10" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">11. Tiene cobertura de seguros adecuada para mitigar algunos
+                                riesgos potenciales
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-11" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-11" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-11" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-11" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">12. Directores y empleados reciben capacitación en gestión de
+                                riesgos para tomar
+                                decisiones informadas</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-12" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-12" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-12" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-12" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">13. Monitorea los KPI relevantes y ajusta sus estrategias y
+                                tácticas</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-13" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-13" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-13" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-13" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">14. Realiza análisis FODA para identificar riesgos potenciales</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-14" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-14" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-14" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-14" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">15. Tiene un sistema de planeamiento con metas temporales</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-15" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-15" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-15" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-15" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">16. Existe un mecanismo formal de medición de la satisfacción de
+                                clientes.</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-16" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-16" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-16" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-16" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">17. Se evalúan los riestos éticos asociados a las decisiones y
+                                operaciones</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-17" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-17" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-17" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-17" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">18. Se gestiona adecuadamente los riesgos asociados a la cadena de
+                                suministros
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-18" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-18" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-18" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-18" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">19. Hay planes de contingencia y tácticas de continuidad en caso de
+                                crisis o
+                                desastres</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-19" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-19" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-19" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-19" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="pregunta-col">20. No depende significativamente de una única fuente de ingresos
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-20" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-20" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-20" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-20" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="pregunta-col">21. Invierte lo suficiente en medidas de ciberseguridad</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-21" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-21" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-21" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-21" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="pregunta-col">22. Los empleados reciben la capacitación adecuada en la
+                                identificación y gestión
+                                de riesgos y su gestión posterior</td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-22" value="1">
+                                </div>
+                            </td>
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-22" value="2">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-22" value="3">
+                                </div>
+                            </td>
+
+                            <td class="respuesta-col">
+                                <div class="radio-container">
+                                    <input type="radio" name="B-2-22" value="4">
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <div class="centrado-flex">
+                        <button type="submit" id="boton-enviar">Enviar</button>
+                    </div>
+
+                    <div class="centrado-flex">
+                        <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar
+                            selecciones</button>
+                    </div>
+
+                </form>
+            </section>
+        </section>
+
+        <div id="miAlerta" class="alerta-oculto">
+            <div class="alerta-contenido">
+                <div class="alerta-cabecera">
+                    <span>Resumen de la sección</span>
                 </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-1" value="2">
+                <div class="alerta-cuerpo">
+                    <p>Puntaje máximo posible: <span id="maximo"></span></p>
+                    <p>Calificación obtenida: <span id="calificacion"></span></p>
+                    <p>Porcentual: <span id="porcentual"></span></p>
+
+                    <div class="gauge-container">
+                        <canvas id="gaugeChart" ;></canvas>
+                    </div>
+
+                    <button id="continuar" onclick="continuar()">Continuar</button>
                 </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-1" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-1" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">2. Tiene objetivos empresariales claramente definidos, claros y coherentes y
-                comprendidos por todo el personal</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-2" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-2" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-2" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-2" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">3. Cuenta con estrategias bien establecidas para alcanzar sus metas</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-3" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-3" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-3" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-3" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">4. Monitorea de manera continua el entorno para identificar nuevas oportunidades
-                y riesgos</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-4" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-4" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-4" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-4" value="4">
-                  </div>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="pregunta-col">5. Se realiza un análisis regular de riesgos para evaluar las amenazas
-                potenciales y las oportunidades</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-5" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-5" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-5" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-5" value="4">
-                  </div>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="pregunta-col">6. La estructura operativa le permite ajustes rápidos en respuesta a cambios en
-                el entorno empresarial</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-6" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-6" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-6" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-6" value="4">
-                  </div>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="pregunta-col">7. Cuenta con profesionales con experiencia en la gestión de riesgos</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-7" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-7" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-7" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-7" value="4">
-                </div>
-              </td>
-            </tr>
-
-
-            <tr>
-              <td class="pregunta-col">8. Diversifica sus activos para reducir la exposición a riesgos</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-8" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-8" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-8" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-8" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">9. Se adapta rápidamente a los avances tecnológicos, incluso si implica asumir
-                riesgos</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-9" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-9" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-9" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-9" value="4">
-                  </div>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="pregunta-col">10. Evalúa regularmente el rendimiento de sus inversiones y ajusta su enfoque
-                según los resultados.</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-10" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-10" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-10" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-10" value="4">
-                  </div>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="pregunta-col">11. Tiene cobertura de seguros adecuada para mitigar algunos riesgos potenciales
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-11" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-11" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-11" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-11" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">12. Directores y empleados reciben capacitación en gestión de riesgos para tomar
-                decisiones informadas</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-12" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-12" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-12" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-12" value="4">
-                  </div>
-                </td>
-              </tr>
-
-            <tr>
-              <td class="pregunta-col">13. Monitorea los KPI relevantes y ajusta sus estrategias y tácticas</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-13" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-13" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-13" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-13" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">14. Realiza análisis FODA para identificar riesgos potenciales</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-14" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-14" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-14" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-14" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">15. Tiene un sistema de planeamiento con metas temporales</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-15" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-15" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-15" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-15" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">16. Existe un mecanismo formal de medición de la satisfacción de clientes.</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-16" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-16" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-16" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-16" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">17. Se evalúan los riestos éticos asociados a las decisiones y operaciones</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-17" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-17" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-17" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-17" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">18. Se gestiona adecuadamente los riesgos asociados a la cadena de suministros
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-18" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-18" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-18" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-18" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">19. Hay planes de contingencia y tácticas de continuidad en caso de crisis o
-                desastres</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-19" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-19" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-19" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-19" value="4">
-                  </div>
-                </td>
-              </tr>
-
-
-            <tr>
-              <td class="pregunta-col">20. No depende significativamente de una única fuente de ingresos</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-20" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-20" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-20" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-20" value="4">
-                </div>
-              </td>
-            </tr>
-
-
-            <tr>
-              <td class="pregunta-col">21. Invierte lo suficiente en medidas de ciberseguridad</td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-21" value="1">
-                </div>
-              </td>
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-21" value="2">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-21" value="3">
-                </div>
-              </td>
-
-              <td class="respuesta-col">
-                <div class="radio-container">
-                  <input type="radio"  name="B-2-21" value="4">
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="pregunta-col">22. Los empleados reciben la capacitación adecuada en la identificación y gestión
-                de riesgos y su gestión posterior</td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-22" value="1">
-                  </div>
-                </td>
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-22" value="2">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-22" value="3">
-                  </div>
-                </td>
-
-                <td class="respuesta-col">
-                  <div class="radio-container">
-                    <input type="radio"  name="B-2-22" value="4">
-                  </div>
-                </td>
-              </tr>
-
-          </table>
-
-          <div class="centrado-flex">
-            <button type="submit" id="boton-enviar">Enviar</button>
-          </div>
-
-          <div class="centrado-flex">
-            <button type="button" id="boton-borrar" onclick="limpiarSelecciones()">Limpiar selecciones</button>
-          </div>
-
-    </form>
-    </section>
-    </section>
-
-    <div id="miAlerta" class="alerta-oculto">
-      <div class="alerta-contenido">
-        <div class="alerta-cabecera">
-          <span>Resumen de la sección</span>
+            </div>
         </div>
-        <div class="alerta-cuerpo">
-          <p>Puntaje máximo posible: <span id="maximo"></span></p>
-          <p>Calificación obtenida: <span id="calificacion"></span></p>
-          <p>Porcentual: <span id="porcentual"></span></p>
-  
-        <div class="gauge-container">
-          <canvas id="gaugeChart";></canvas>
-        </div>
-  
-          <button id="continuar" onclick="continuar()">Continuar</button>
-        </div>
-      </div>
     </div>
-
 </body>
 
 <script>
-  document.getElementById('formulario').addEventListener('submit', function (event) {
-    event.preventDefault();
-  });
-  const botonSalida = document.getElementById('boton-salir');
-  const ventanaSale = document.getElementById('ventanaSalida');
-  const botonYes = document.getElementById('confirm-yes');
-  const botonNou = document.getElementById('confirm-no');
+    document.getElementById('formulario').addEventListener('submit', function (event) {
+        event.preventDefault();
+    });
+    const botonSalida = document.getElementById('boton-salir');
+    const ventanaSale = document.getElementById('ventanaSalida');
+    const botonYes = document.getElementById('confirm-yes');
+    const botonNou = document.getElementById('confirm-no');
 
-  botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
-    let isExiting = true;
-    ventanaSale.style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-  });
+    botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+        let isExiting = true;
+        ventanaSale.style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    });
 
-  botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
-    isExiting = true;
-    // console.log('dijo que NO')
-    ventanaSale.style.display = 'none';
-    document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
-  });
+    botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+        isExiting = true;
+        // console.log('dijo que NO')
+        ventanaSale.style.display = 'none';
+        document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+    });
 
-  botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
-    console.log('dijo que SI')
-    isExiting = true;
-    window.location.href = '../../index.html';
-  });
+    botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+        console.log('dijo que SI')
+        isExiting = true;
+        window.location.href = '../../index.html';
+    });
 </script>
 
 <script>
-  function toggleVisibility() {
-    var element = document.getElementById('myElement');
-    if (element.style.display === 'none') {
-      element.style.display = 'block';
-      // Asegúrate de darle tiempo al navegador para que reconozca el cambio de 'display'
-      setTimeout(() => {
-        element.style.opacity = 1;
-      }, 10);
-    } else {
-      element.style.opacity = 0;
-      // Espera a que termine la transición de opacidad para cambiar el display a 'none'
-      element.addEventListener('transitionend', function handler() {
-        element.style.display = 'none';
-        element.removeEventListener('transitionend', handler);
-      });
+    function toggleVisibility() {
+        var element = document.getElementById('myElement');
+        if (element.style.display === 'none') {
+            element.style.display = 'block';
+            // Asegúrate de darle tiempo al navegador para que reconozca el cambio de 'display'
+            setTimeout(() => {
+                element.style.opacity = 1;
+            }, 10);
+        } else {
+            element.style.opacity = 0;
+            // Espera a que termine la transición de opacidad para cambiar el display a 'none'
+            element.addEventListener('transitionend', function handler() {
+                element.style.display = 'none';
+                element.removeEventListener('transitionend', handler);
+            });
+        }
     }
-  }
 
 </script>
 
+<script src="../../js/utils.js"></script>
 <script src="../../js/mb-2.js"></script>
+
 </html>

@@ -12,21 +12,6 @@ const ExcelJS = require("exceljs");
 const cron = require("node-cron");
 
 require("dotenv").config(); //
-// console.log('Variables de entorno cargadas:', process.env);
-
-// const nodemailer = require("nodemailer");
-// const { google } = require("googleapis");
-
-// const oAuth2Client = new google.auth.OAuth2(
-//     process.env.CLIENT_ID, // Usar directamente process.env
-//     process.env.CLIENT_SECRET, // Usar directamente process.env
-//     process.env.REDIRECT_URI // Usar directamente process.env
-// );
-
-// // Configuración del token de actualización
-// oAuth2Client.setCredentials({
-//     refresh_token: process.env.REFRESH_TOKEN,
-// });
 
 const app = express();
 
