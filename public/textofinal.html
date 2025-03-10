@@ -379,19 +379,19 @@ function obtieneTipificacion(ria, GC, AR, RM, RP, SF, GR) {
         )
             {
             tipificacion = "RESILIENTE";
-            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Resiliente porque en el marco del Sistema HexaRCi una empresa es tipificada como Resiliente cuando detenta un desempeño destacado en su manejo de los Riesgos de Gobierno Corporativo y un desempeño relevante en su manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Su situación financiera así como la generación de resultados son saludables.<br><br>En general las empresas resilientes son capaces de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo."
+            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Resiliente porque en el marco del Sistema HexaRCi una empresa es tipificada como Resiliente cuando detenta un desempeño destacado en su manejo de los Riesgos de Gobierno Corporativo y un desempeño relevante en su manejo de los riesgos del Apetito de Riesgo, de los Riesgos de Mercado y de los Riesgos de los Procesos.  Su situación financiera así como la generación de resultados son saludables.<br><br>En general las empresas resilientes son capaces de adaptarse, resistir y recuperarse rápidamente frente a adversidades, crisis o cambios bruscos en el entorno. La resiliencia empresarial se refleja en la habilidad para, no solo superar desafíos, sino también aprender de ellos y salir fortalecida mediante su estructura, cultura y recursos y mantener su operación en el largo plazo.";
             return { tipificacion, textoTipificacion };
         }
 
         if (Number(capituloE) > valor3) { // VULNERABLE - 5
             tipificacion = "VULNERABLE";
-            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Vulnerable porque en el marco del Sistema HexaRCi una empresa es tipificada como Vulnerable cuando frente una situación financiera endeble detenta un desempeño destacado en su manejo de los riesgos de Gobierno Corporativo, siendo ésta la fortaleza que debería permitir su recuperación.<br><br>En general las empresas vulnerables enfrentan desafíos significativos, tales como competencia creciente, presión en los márgenes, falta de diferenciación en el mercado o endeblez financiera. Aunque operan con normalidad, su posición no es segura a mediano o largo plazo.".""
+            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Vulnerable porque en el marco del Sistema HexaRCi una empresa es tipificada como Vulnerable cuando frente una situación financiera endeble detenta un desempeño destacado en su manejo de los riesgos de Gobierno Corporativo, siendo ésta la fortaleza que debería permitir su recuperación.<br><br>En general las empresas vulnerables enfrentan desafíos significativos, tales como competencia creciente, presión en los márgenes, falta de diferenciación en el mercado o endeblez financiera. Aunque operan con normalidad, su posición no es segura a mediano o largo plazo.";
             return { tipificacion, textoTipificacion };
         }
 
         //  INESTABLE  - 8
         tipificacion = "INESTABLE"
-        textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Inestable porque en el marco del Sistema HexaRCi una empresa es tipificada como Inestable cuando, aun detentando a una situación financiera delicada, muestra un desempeño destacado en su manejo de los riesgos de Gobierno Corporativo, siendo ésta la fortaleza que debería permitir su recuperación.<br><br>En general las empresas inestables enfrentan problemas significativos, como pérdidas recurrentes, modelos de negocio obsoletos o mala gestión. Su viabilidad está en riesgo si no implementan cambios significativos."
+        textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Inestable porque en el marco del Sistema HexaRCi una empresa es tipificada como Inestable cuando, aun detentando a una situación financiera delicada, muestra un desempeño destacado en su manejo de los riesgos de Gobierno Corporativo, siendo ésta la fortaleza que debería permitir su recuperación.<br><br>En general las empresas inestables enfrentan problemas significativos, como pérdidas recurrentes, modelos de negocio obsoletos o mala gestión. Su viabilidad está en riesgo si no implementan cambios significativos.";
         return { tipificacion, textoTipificacion };
     }
 
@@ -402,7 +402,7 @@ function obtieneTipificacion(ria, GC, AR, RM, RP, SF, GR) {
             Number(capituloE) > valor1)  //  SOLIDA -  3
             {
             tipificacion = "SOLIDA";
-            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Sólida porque en el marco del Sistema HexaRCi una empresa es tipificada como Sólida cuando detenta un desempeño relevante en su manejo de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Su Situación Financiera es muy saludable.<br><br>En general las empresas sólidas son capaces  de manejar el quehacer diario sin contratiempos significativos. Las empresas sólidas son estables, financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado."
+            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Sólida porque en el marco del Sistema HexaRCi una empresa es tipificada como Sólida cuando detenta un desempeño relevante en su manejo de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Su Situación Financiera es muy saludable.<br><br>En general las empresas sólidas son capaces  de manejar el quehacer diario sin contratiempos significativos. Las empresas sólidas son estables, financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado.";
             return { tipificacion, textoTipificacion };
             }
 
@@ -410,7 +410,7 @@ function obtieneTipificacion(ria, GC, AR, RM, RP, SF, GR) {
             Number(capituloE) > valor2)     //  SOLIDA -  4
             {
             tipificacion = "SOLIDA";
-            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Sólida porque en el marco del Sistema HexaRCi una empresa es tipificada como Sólida cuando detenta un desempeño relevante en su manejo de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Su Situación Financiera es saludable.<br><br>En general las empresas sólidas son capaces  de manejar el quehacer diario sin contratiempos significativos. Las empresas sólidas son estables, financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado."
+            textoTipificacion = "Nombre Empresa se tipifica preliminarmente como Sólida porque en el marco del Sistema HexaRCi una empresa es tipificada como Sólida cuando detenta un desempeño relevante en su manejo de los Riesgos de Gobierno Corporativo y de los Riesgos de los Procesos. Su Situación Financiera es saludable.<br><br>En general las empresas sólidas son capaces  de manejar el quehacer diario sin contratiempos significativos. Las empresas sólidas son estables, financieramente seguras, con fundamentos sólidos y procesos eficientes. Su estabilidad y consistencia las hacen confiables en su mercado.";
             return { tipificacion, textoTipificacion };
             } 
 
