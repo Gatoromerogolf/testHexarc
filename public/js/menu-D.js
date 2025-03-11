@@ -18,6 +18,19 @@ const respuestaSeccion = undefined;
 // Función autoinvocada - Ejecución inmediata  NUEVA !!!!!!!!!!!!!!1
 (async function () {
     try {
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const closeModalBtn = document.getElementById("closeDialog");
+            const modal = document.getElementById("modalGeneral"); 
+            const overlay = document.querySelector(".dialog-overlay");
+        
+            closeModalBtn.addEventListener("click", function() {
+                console.log("Botón de cierre clickeado"); 
+                modal.style.display = "none";
+                overlay.style.display = "none"; // Solo si hay un overlay
+            });
+        });
+        
         let seccionRec = await leerSecciones();
         console.table(seccionRec.records);
         if (!Array.isArray(seccionRec.records)) throw new Error("leerSecciones no devolvió un array");
@@ -30,11 +43,11 @@ const respuestaSeccion = undefined;
             return true; // En caso de que servicio tenga otro valor, no se filtra nada.
         });
 
-        // secciones = seccionRec.records;
-
-        console.log("Secciones filtradas:", secciones);
-
         respuestas = await leerRespuestas(CUIT, capitulo);
+        basura = respuestas.records;
+        textoCheck = await leeTextoCheck();
+        textoRespuestas = await leeTextoRespuestas();
+        matrizPreguntas = await recuperarPreguntas(capitulo);
 
         actualizarHTML(secciones);
 
@@ -45,45 +58,6 @@ const respuestaSeccion = undefined;
     }
 })();
 
-async function leerSecciones() {
-    try {
-        const response = await fetch(
-            `/secciones?idioma=${idioma}&capitulo=${capitulo}`
-        );
-        if (response.ok) {
-            const seccionRec = await response.json(); //registro seccion recibido en formato JSON
-            return { exists: true, records: seccionRec };
-        } else {
-            console.error("Error al obtener los datos");
-            return [];
-        }
-    } catch (error) {
-        console.error("Error al realizar la solicitud:", error);
-    }
-    return false;
-}
-
-async function leerRespuestas(CUIT, capitulo) {
-    try {
-        // console.time("Tiempo de busca Respuesta cuit, capit");
-        const response = await fetch(
-            `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
-        );
-        if (response.ok) {
-            const result = await response.json();
-            if (result.exists) {
-                return { exists: true, records: result.records };
-            }
-        } else {
-            console.error(
-                `Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`
-            );
-        }
-    } catch (error) {
-        console.error("Error al realizar la solicitud en buscaRespuesta:", error);
-    }
-    return { exists: false };
-}
 
 // Función para actualizar el HTML con los datos de la tabla
 function actualizarHTML(secciones) {
@@ -139,14 +113,14 @@ function actualizarHTML(secciones) {
 
         // busca la respuesta de la seccion que procesa
         // si no hay respuestas, llena con nada....
-        if (respuestas.records) {
-            respuestaSeccion = respuestas.records.find(
-                (respuesta) =>
-                    respuesta.CUIT === CUIT &&
-                    respuesta.capitulo === seccion.capitulo &&
-                    respuesta.seccion === seccion.seccion
-            );
-        }
+        // if (respuestas.records) {
+        //     respuestaSeccion = respuestas.records.find(
+        //         (respuesta) =>
+        //             respuesta.CUIT === CUIT &&
+        //             respuesta.capitulo === seccion.capitulo &&
+        //             respuesta.seccion === seccion.seccion
+        //     );
+        // }
 
         if (respuestaSeccion) {
             let celdaMaximo = lineaDatosFd.insertCell(-1);
@@ -165,6 +139,20 @@ function actualizarHTML(secciones) {
             celdaPorciento.textContent = respuestaSeccion.porcentaje || "";
             celdaPorciento.classList.add("ajustado-derecha");
             // totalPor = (Number(tablaMenuA[i][4]) / Number(tablaMenuA[i][3]) * 100).toFixed(2);
+
+            let botonVer = lineaDatosFd.insertCell(-1)
+            const boton = document.createElement("button");
+            botonVer.className = "pepe";
+            let nombreBoton = respuestaSeccion.seccion;
+            botonVer.setAttribute("data-info", nombreBoton);
+            botonVer.setAttribute("data-nombre-seccion", seccion.descripcion);
+            botonVer.setAttribute("data-puntaje-obtenido", respuestaSeccion.score);
+            botonVer.setAttribute("data-porciento-obtenido", respuestaSeccion.porcentaje);
+            idioma == 1 ? (botonVer.textContent = "Ver") : (botonVer.textContent = "View");
+            botonVer.style.width = '40px';
+            botonVer.classList.add("centered");
+
+
         } else {
             let celdaMaximo = lineaDatosFd.insertCell(-1);
             celdaMaximo.textContent = "";
@@ -179,6 +167,25 @@ function actualizarHTML(secciones) {
         }
     });
 
+    const botones = document.querySelectorAll(".pepe");
+
+    botones.forEach((boton) => {
+        boton.addEventListener("click", (event) => {
+            event.stopPropagation(); // Asegura que no se propague el evento
+            const info = event.target.getAttribute("data-info");
+            const nombreSeccion = event.target.getAttribute("data-nombre-seccion");
+            const puntaje = event.target.getAttribute("data-puntaje-obtenido");
+            const porciento = event.target.getAttribute("data-porciento-obtenido");
+
+            console.log(`info recibida ${info}`)
+            armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, basura, textoCheck, textoRespuestas);
+            const modal = document.getElementById("modalGeneral");
+            if (modal) {
+                // mostrarModalOculto(modal)
+                modal.style.display = "block";
+            }
+        });
+    });
     // Procesa linea final, si la linea 14 tuvo resultados.
 
     if (ultimaRespuestaSeccion) {
@@ -224,6 +231,133 @@ function actualizarHTML(secciones) {
     }
 }
 
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             armarDetalleGeneral
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, basura, textoCheck, textoRespuestas) {
+    let lineaModalGeneral = document.getElementById("lineaModalGeneral");
+    eliminarFilas();
+    let preguntasSeccion = matrizPreguntas.filter(pregunta =>
+        pregunta.Seccion == info
+    );
+
+    document.getElementById("nombreSeccion").textContent = nombreSeccion;
+    document.getElementById("nombrePuntaje").textContent = puntaje;
+    document.getElementById("nombrePorciento").textContent = porciento;
+
+
+    console.table(preguntasSeccion);
+
+    for (const pregunta of preguntasSeccion) {
+
+        const fila = lineaModalGeneral.insertRow();     // Crear una nueva fila en la tabla
+
+        const celdaSeccion = fila.insertCell(-1);
+        celdaSeccion.textContent = pregunta.seccionRomano;
+
+        const celdaNumero = fila.insertCell(-1);
+        celdaNumero.textContent = pregunta.Numero;
+
+        const celdaNombre = fila.insertCell(-1);
+        celdaNombre.textContent = pregunta.Descrip;
+
+        // busca el rgistro de respuesta de la seccion que está trabajando
+        const celdaRpta = fila.insertCell(-1);
+        console.log(`pregunta tipo  ${pregunta.tipo}`)
+        celdaRpta.textContent = pregunta.tipo;
+
+        if (!Array.isArray(basura)) {
+            console.error("Error: respuestas no es un array", basura);
+            return;
+        }
+
+        const registroRespuestasSeccion = basura.find(item => item.seccion === pregunta.Seccion)
+        // registroRespuestasSeccion: es el arreglo de respuestas para todas las preguntas de la seccion)
+        // ahora recupera la respuesta segun el numero de pregunta....;
+
+        let arrayRespuestas = registroRespuestasSeccion.respuesta;
+        console.log(`respuesta encontrada ${arrayRespuestas}`)
+
+        valorRespuesta = arrayRespuestas[pregunta.Numero - 1];// resta 1 por la posición 0
+        // segun el tipo de respuesta (en pregunta.tipo) se convierte para mostrar
+        // tipo 1:  1: si,  2: no
+        if (pregunta.tipo == 1) {
+            if (valorRespuesta == 1) {
+                celdaRpta.textContent = "SI"
+            } else {
+                celdaRpta.textContent = "NO"
+            }
+        };
+
+        if (pregunta.tipo == 3) {
+            celdaRpta.textContent = valorRespuesta;
+        }
+
+        if (pregunta.tipo == 51) {
+            const registroTextoRespuestas = textoRespuestas.find(item => item.pregunta == pregunta.tipo);
+            celdaRpta.textContent = registroTextoRespuestas.textos[valorRespuesta - 1]
+        }
+
+        if (pregunta.tipo > 51) {
+            const registroTextoRespuestas = textoRespuestas.find(item => item.pregunta == pregunta.tipo);
+            valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
+            const texto = registroTextoRespuestas.textos[valorRespuesta - 1];
+
+            console.log(`pregunta.tipo: ${pregunta.tipo}, valorRespuesta ${valorRespuesta}, pregunta.Numero ${pregunta.Numero}, resta: ${[(pregunta.Numero) - 1]}`)
+
+            if (valorRespuesta == 9) {
+                celdaRpta.textContent = "No aplica"
+            }
+            else {
+                //  celdaRpta.textContent = registroTextoRespuestas.textos[valorRespuesta];
+                celdaRpta.textContent = texto;
+            }
+        };
+
+        if (pregunta.tipo > 40 && pregunta.tipo < 50) {
+            let indicesCheck = 0;
+            const registroTextoCheck = textoCheck.find(item => item.pregunta == pregunta.tipo);
+            if (!registroTextoCheck) {
+                console.log("No se encontró ninguna fila con la pregunta:", fila.tipo);
+                return;
+            }
+
+            valorRespuesta = arrayRespuestas[(pregunta.Numero) - 1];// resta 1 por la posición 0
+
+            const valoresTextoCheck = registroTextoCheck.textos;
+
+            console.log(`registro Respuestas seccion  ${registroRespuestasSeccion.respuesta}`);
+            console.log(`registro Respuestas seccion [6] ${registroRespuestasSeccion.respuesta[6]}`);
+            console.log(`fila tipo = ${fila.tipo}`);
+
+            if (pregunta.tipo == 42 || pregunta.tipo == 43) {
+                arrayRespuestas = registroRespuestasSeccion.respuesta;
+            } else {
+                arrayRespuestas = registroRespuestasSeccion.respuesta[6]
+            };
+
+            console.log(`array rsepuestas  ${arrayRespuestas}`)
+
+            let conjunto = '';
+
+            arrayRespuestas.forEach((indice, i) => {
+                const texto = valoresTextoCheck[indice - 1]; // Obtener el texto correspondiente al índice
+                if (i > 0) {
+                    conjunto += ", "; // Agregar una coma y un espacio antes de cada texto (excepto el primero)
+                }
+                conjunto += texto;
+            });
+
+            celdaRpta.textContent = conjunto;
+        }
+    }
+
+    document.getElementById("modalGeneral").style.display = "flex";
+}
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//            actualizaCapitulos
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
     fetch("/total-Capitulo", {
         method: "POST",
@@ -244,4 +378,134 @@ function actualizaCapitulos(capitulo, maximo, score, porcentaje) {
         .catch((error) => {
             console.error(error);
         });
+}
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             eliminarfilas
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+function eliminarFilas() {
+    const filasEliminar = dataTable.getElementsByTagName("tr");
+    for (let i = filasEliminar.length - 1; i > 0; i--) {
+        dataTable.deleteRow(i);
+    }
+}
+
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//            leerSecciones
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+async function leerSecciones() {
+    try {
+        const response = await fetch(
+            `/secciones?idioma=${idioma}&capitulo=${capitulo}`
+        );
+        if (response.ok) {
+            const seccionRec = await response.json(); //registro seccion recibido en formato JSON
+            return { exists: true, records: seccionRec };
+        } else {
+            console.error("Error al obtener los datos");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+    }
+    return false;
+}
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//            leerRespuestas
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+async function leerRespuestas(CUIT, capitulo) {
+    try {
+        // console.time("Tiempo de busca Respuesta cuit, capit");
+        const response = await fetch(
+            `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
+        );
+        if (response.ok) {
+            const result = await response.json();
+            if (result.exists) {
+                return { exists: true, records: result.records };
+            }
+        } else {
+            console.error(
+                `Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`
+            );
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+    }
+    return { exists: false };
+}
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             leeTextoCheck
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+async function leeTextoCheck() {
+    try {
+        const response = await fetch("/textocheck");
+        if (response.ok) {
+            const result = await response.json();
+            return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+        } else {
+            console.error("Error al obtener las preguntas:", response.statusText);
+            return [];
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+        return [];
+    }
+}
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             leeTextoRespuestas
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+async function leeTextoRespuestas() {
+    try {
+        const response = await fetch("/textorespuestas");
+        if (response.ok) {
+            const result = await response.json();
+            return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+        } else {
+            console.error("Error al obtener las preguntas:", response.statusText);
+            return [];
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+        return [];
+    }
+}
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             recuperarPreguntas
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+async function recuperarPreguntas(capitulo) {
+    try {
+        let url = "/preguntas";
+        if (capitulo !== null) {
+            url += `?capitulo=${encodeURIComponent(capitulo)}`;
+        }
+
+        const response = await fetch(url);
+        if (response.ok) {
+            const result = await response.json();
+            return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+        } else {
+            console.error("Error al obtener las preguntas:", response.statusText);
+            return [];
+        }
+    } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+        return [];
+    }
+}
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//             cerrarModal
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+function cerrarModal(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        console.log("Cerrando modal"); // Debugging: Confirmar que el modal se cierra
+        modal.style.display = "none";
+    }
 }

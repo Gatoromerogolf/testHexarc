@@ -33,9 +33,7 @@
                 </div>
                 <hr>
 
-
                 <form id="surveyForm">
-
                     <div class="center-container">
                         <h4 class="tituloSeccion"><a href="Menu-D.html">V - Personas y Cultura</a></h4>
                     </div>
@@ -90,7 +88,6 @@
                     </div>
                 </form>
 
-
                 <div id="miAlerta" class="alerta-oculto">
                     <div class="alerta-contenido">
                         <div class="alerta-cabecera">
@@ -113,8 +110,7 @@
         </section>
     </div>
 
-
-    <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+<!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //                    CODIGO
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
     <script src="../../js/utils.js"></script>
@@ -130,7 +126,6 @@
         let isExiting = false;
         let porcientoFormateado = 0;
         let total = 0;
-
 
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //              obtenerListaPreciosB
@@ -171,10 +166,10 @@
         }
 
         precios = filtrarPrecios();
+
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //              buildForm
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
         function buildForm(questions) {
             const tableBody = document.getElementById('questionsTableBody');
             questions.forEach(question => {
@@ -367,8 +362,8 @@
             const capitulo = "D";
             const seccion = 5;
             await grabaNuevoItem(capitulo, seccion)
-
         }
+
         // Armar velocimetro ::::::::::::::::::::::::::::::::::::::
         const opts = {
             angle: -0.3,
