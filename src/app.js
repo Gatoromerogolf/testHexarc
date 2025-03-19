@@ -38,9 +38,11 @@ app.get("/ejs", (req, res) => {
 // invoca bcryptjs
 const bcryptjs = require("bcryptjs");
 
-// Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::::::::::::::
+// Endpoint para validar credenciales :::::::::::::::::::::::::::::::::::::::
 app.use(cookieParser()); // Configura el middleware para leer cookies
 
+
+// Acceso a Base de Datos :::::::::::::::::::::::::::::::::::::::::::::::::::
 const options = {
     host: process.env.MYSQL_HOST,
     port: process.env.MYSQL_PORT,
@@ -49,6 +51,8 @@ const options = {
     database: process.env.MYSQL_DB,
 };
 
+
+// envio de mails ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 

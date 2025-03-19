@@ -154,6 +154,7 @@ function completarHtml() {
         else {
             enlace.style.color = "black";
             enlace.style.fontWeight = "600";
+            enlace.href = capitulo.paginaCap; // Establecer el atributo href con el valor correspondiente}
         }
         enlace.style.textDecoration = "none";
         celdaEnlace.appendChild(enlace);
