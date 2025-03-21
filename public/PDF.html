@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de riesgos</title>
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+    <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+    <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="survey-container">
+        <section class="main">
+            <section class="gobCorpo">
+                <div class="header-container">
+                    <div class="header-center">
+                        <div id="nombreEmpresa" class="company-name"></div>
+                        <div id="nombreUsuario" class="user-name"></div>
+                    </div>
+                    <div class="nav-iconsxx">
+                        <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+                    </div>
+                    <div class="nav-iconsxx">
+                        <h5> Autoevaluación</h5>
+                    </div>
+                </div>
+                <hr>
+
+                <form id="formulario">
+
+                    <div class="center-container">
+                        <h4 class="tituloSeccion"><a href="Menu-A.html">II - Estructura organizacional</a></h4>
+                    </div>
+
+
+                    <div class="centrado-flex">
+                        <button type="submit" id="boton-enviar">Generar</button>
+                        <button type="button" id="boton-generar-pdf">Generar PDF</button>
+                    </div>
+
+
+                </form>
+            </section>
+        </section>
+    </div>
+
+</body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("boton-generar-pdf").addEventListener("click", generarPDF);
+});
+
+// function generarPDF() {
+//     const { jsPDF } = window.jspdf;
+//     const doc = new jsPDF();
+
+//     // Cargar la imagen institucional
+//     const img = new Image();
+//     img.src = "../img/imagenPDF.webp";
+
+//     img.onload = function () {
+//         // Primera página con la imagen institucional
+//         const pageWidth = doc.internal.pageSize.getWidth();
+//         const pageHeight = doc.internal.pageSize.getHeight();
+//         doc.addImage(img, "WEBP", 0, 0, pageWidth, pageHeight);
+
+//         // Segunda página - Índice
+//         doc.addPage();
+//         doc.setFont("helvetica", "bold");
+//         doc.setFontSize(16);
+//         doc.text("Índice General", 105, 20, { align: "center" });
+
+//         const indice = ["1. Introducción", "2. Desarrollo", "3. Conclusión"];
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(12);
+//         let yOffset = 40;
+//         indice.forEach((item, index) => {
+//             doc.text(`${index + 1}. ${item}`, 20, yOffset);
+//             yOffset += 10;
+//         });
+
+//         // Tercera página - Contenido
+//         doc.addPage();
+//         doc.setFontSize(14);
+
+//         // Definir el texto completo
+//         const texto = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma. De acuerdo con la información cargada por BDT Advisory y a los parámetros del Modelo HexaRCi, la Compañia BDT Advisory es una compañia calificada preliminarmente como tipo:";      
+
+//         // Definir los márgenes y ancho de texto disponible
+//         const margenIzquierdo = 20;
+//         const margenSuperior = 20;
+//         const anchoDisponible = pageWidth - margenIzquierdo * 2; // Resto márgenes izquierdo y derecho
+
+//         // Aplicar splitTextToSize para dividir el texto en líneas que quepan en el ancho disponible
+//         const lineasTexto = doc.splitTextToSize(texto, anchoDisponible);
+
+//         // Agregar el texto con saltos de línea
+//         doc.text(lineasTexto, margenIzquierdo, margenSuperior);
+
+//         // Agregar el texto destacado con espacio adicional
+//         doc.setFont("helvetica", "bold");
+//         doc.text("INESTABLE", margenIzquierdo, margenSuperior + 40);
+//         doc.setFont("helvetica", "normal");
+
+//         // Guardar el PDF
+//         doc.save("documento.pdf");
+//     };
+// }
+
+function generarPDF() {
+    // Crear un elemento temporal para construir el contenido HTML
+    const contenido = document.createElement('div');
+    
+    const primeraPagina = document.createElement('div');
+    primeraPagina.style.width = 'calc(100% - 20mm)'; // Ancho ajustado para márgenes
+    primeraPagina.style.height = '277mm'; // Altura A4 menos márgenes
+    primeraPagina.style.margin = '10mm';
+    primeraPagina.style.border = '1px solid #000';
+    primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
+    primeraPagina.style.backgroundSize = 'cover';
+    primeraPagina.style.backgroundPosition = 'center';
+    primeraPagina.style.pageBreakAfter = 'always';
+
+    contenido.appendChild(primeraPagina);
+    
+    // Añadir la segunda página (índice)
+
+    const segundaPagina = crearPaginaConMarco();
+    segundaPagina.style.padding = '10mm';
+    segundaPagina.style.pageBreakAfter = 'always';
+    
+    const tituloIndice = document.createElement('h1');
+    tituloIndice.textContent = 'Índice General';
+    tituloIndice.style.textAlign = 'center';
+    tituloIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    segundaPagina.appendChild(tituloIndice);
+    
+    const indice = ["Introducción", "Desarrollo", "Conclusión"];
+    const listaIndice = document.createElement('ol');
+    listaIndice.style.marginTop = '20mm';
+    listaIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    
+    indice.forEach(item => {
+        const elementoLista = document.createElement('li');
+        elementoLista.textContent = item;
+        elementoLista.style.marginBottom = '5mm';
+        listaIndice.appendChild(elementoLista);
+    });
+    
+    segundaPagina.appendChild(listaIndice);
+    contenido.appendChild(segundaPagina);
+    
+    // Añadir la tercera página (contenido)
+    // Añadir la tercera página (contenido) con un borde
+    const terceraPagina = crearPaginaConMarco();
+    terceraPagina.style.padding = '10mm';
+    terceraPagina.style.margin = '10mm';
+    terceraPagina.style.border = '2px solid #000'; // Borde más grueso
+    terceraPagina.style.borderRadius = '5mm'; // Bordes redondeados
+    terceraPagina.style.boxShadow = '0 0 10mm rgba(0,0,0,0.1)'; // Sombra suave
+    terceraPagina.style.minHeight = '240mm';
+
+    terceraPagina.appendChild(esquinaSuperiorIzquierda);
+    terceraPagina.appendChild(esquinaSuperiorDerecha);
+    terceraPagina.appendChild(esquinaInferiorIzquierda);
+    terceraPagina.appendChild(esquinaInferiorDerecha);
+
+// El resto del código para crear y añadir el contenido a terceraPagina...
+    
+    const parrafo = document.createElement('p');
+    parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    parrafo.style.fontSize = '14pt';
+    parrafo.style.lineHeight = '1.5';
+    parrafo.innerHTML = "<strong><span class='company-name' style='font-size: 16px'></span></strong> se tipifica preliminarmente como Vulnerable porque en el marco del Sistema HexaRCi una empresa es tipificada como Vulnerable cuando frente una situación financiera endeble detenta un desempeño destacado en su manejo de los riesgos de Gobierno Corporativo, siendo ésta la fortaleza que debería permitir su recuperación.<br><br>En general las empresas vulnerables enfrentan desafíos significativos, tales como competencia creciente, presión en los márgenes, falta de diferenciación en el mercado o endeblez financiera. Aunque operan con normalidad, su posición no es segura a mediano o largo plazo.";
+    terceraPagina.appendChild(parrafo);
+    
+    const resultado = document.createElement('p');
+    resultado.textContent = "INESTABLE";
+    resultado.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    resultado.style.fontSize = '16pt';
+    resultado.style.fontWeight = 'bold';
+    resultado.style.marginTop = '15mm';
+    terceraPagina.appendChild(resultado);
+    
+    contenido.appendChild(terceraPagina);
+    
+    // Configurar las opciones de html2pdf
+    const opciones = {
+        margin: 0,
+        filename: 'documento.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    // Generar el PDF
+    html2pdf().from(contenido).set(opciones).save();
+}
+
+function crearPaginaConMarco() {
+    const pagina = document.createElement('div');
+    pagina.style.padding = '10mm';
+    pagina.style.margin = '10mm';
+    pagina.style.border = '1px solid #000';
+    pagina.style.minHeight = '240mm';
+    pagina.style.position = 'relative'; // Para posicionar elementos internos
+    pagina.style.pageBreakAfter = 'always'; // Salto de página después
+    return pagina;
+}
+
+// Función para crear un elemento decorativo en la esquina
+function crearEsquinaDecorativa(top, left, transform) {
+    const esquina = document.createElement('div');
+    esquina.style.position = 'absolute';
+    esquina.style.width = '15mm';
+    esquina.style.height = '15mm';
+    esquina.style.borderTop = '3px solid #000';
+    esquina.style.borderLeft = '3px solid #000';
+    esquina.style.top = top;
+    esquina.style.left = left;
+    esquina.style.transform = transform;
+    return esquina;
+}
+
+    const esquinaSuperiorIzquierda = crearEsquinaDecorativa('5mm', '5mm', 'none');
+    const esquinaSuperiorDerecha = crearEsquinaDecorativa('5mm', 'calc(100% - 20mm)', 'rotate(90deg)');
+    const esquinaInferiorIzquierda = crearEsquinaDecorativa('calc(100% - 20mm)', '5mm', 'rotate(270deg)');
+    const esquinaInferiorDerecha = crearEsquinaDecorativa('calc(100% - 20mm)', 'calc(100% - 20mm)', 'rotate(180deg)');
+
+</script>
+
+</body>
+
+</html>
+
+function generarPDF() {
+    // Crear un elemento temporal para construir el contenido HTML
+    const contenido = document.createElement('div');
+    
+    // Añadir la primera página (imagen institucional)
+    const primeraPagina = document.createElement('div');
+    primeraPagina.style.width = '100%';
+    primeraPagina.style.height = '297mm'; // Altura A4
+    primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
+    primeraPagina.style.backgroundSize = 'cover';
+    primeraPagina.style.backgroundPosition = 'center';
+    primeraPagina.style.pageBreakAfter = 'always';
+    contenido.appendChild(primeraPagina);
+    
+    // Añadir la segunda página (índice)
+    const segundaPagina = document.createElement('div');
+    segundaPagina.style.padding = '20mm';
+    segundaPagina.style.pageBreakAfter = 'always';
+    
+    const tituloIndice = document.createElement('h1');
+    tituloIndice.textContent = 'Índice General';
+    tituloIndice.style.textAlign = 'center';
+    tituloIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    segundaPagina.appendChild(tituloIndice);
+    
+    const indice = ["Introducción", "Desarrollo", "Conclusión"];
+    const listaIndice = document.createElement('ol');
+    listaIndice.style.marginTop = '20mm';
+    listaIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    
+    indice.forEach(item => {
+        const elementoLista = document.createElement('li');
+        elementoLista.textContent = item;
+        elementoLista.style.marginBottom = '5mm';
+        listaIndice.appendChild(elementoLista);
+    });
+    
+    segundaPagina.appendChild(listaIndice);
+    contenido.appendChild(segundaPagina);
+    
+    // Añadir la tercera página (contenido)
+    const terceraPagina = document.createElement('div');
+    terceraPagina.style.padding = '20mm';
+    
+    const parrafo = document.createElement('p');
+    parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    parrafo.style.fontSize = '14pt';
+    parrafo.style.lineHeight = '1.5';
+    parrafo.textContent = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma. De acuerdo con la información cargada por BDT Advisory y a los parámetros del Modelo HexaRCi, la Compañia BDT Advisory es una compañia calificada preliminarmente como tipo:";
+    terceraPagina.appendChild(parrafo);
+    
+    const resultado = document.createElement('p');
+    resultado.textContent = "INESTABLE";
+    resultado.style.fontFamily = 'Helvetica, Arial, sans-serif';
+    resultado.style.fontSize = '16pt';
+    resultado.style.fontWeight = 'bold';
+    resultado.style.marginTop = '15mm';
+    terceraPagina.appendChild(resultado);
+    
+    contenido.appendChild(terceraPagina);
+    
+    // Configurar las opciones de html2pdf
+    const opciones = {
+        margin: 0,
+        filename: 'documento.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    // Generar el PDF
+    html2pdf().from(contenido).set(opciones).save();
+}
