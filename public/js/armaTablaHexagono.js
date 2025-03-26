@@ -55,12 +55,17 @@ async function ejecutarProceso() {
     document.getElementById("tipificacion").textContent = tipificacion;
     document.getElementById("causaTipificacion").innerHTML = textoTipificacion;
 
+    // localStorage.setItem("textoTipificacion", textoTipificacion);
+    // localStorage.setItem("tipificacion", tipificacion);
+
     const elementos = document.querySelectorAll(".company-name");
 
     elementos.forEach((elemento) => {
         elemento.textContent = empresa;
     });
 
+    localStorage.setItem("textoTipificacion", textoTipificacion);
+    localStorage.setItem("tipificacion", tipificacion);
     // await buscaPrintResultados(CUIT, capitulo);
     // capitulo = "B"
     // matrizPreguntas = await recuperarPreguntas(capitulo);
