@@ -25,13 +25,6 @@ let textoRespuestas = [];
 document.getElementById("nombreEmpresa").textContent = empresa;
 document.getElementById("nombreUsuario").textContent = apenom;
 
-// const elementos = document.querySelectorAll(".company-name");
-
-// elementos.forEach((elemento) => {
-//     elemento.textContent = empresa;
-// }
-// );
-
 /* -----------------------------------------
 ejecutarProceso         
 ------------------------------------------> */
@@ -55,9 +48,6 @@ async function ejecutarProceso() {
     document.getElementById("tipificacion").textContent = tipificacion;
     document.getElementById("causaTipificacion").innerHTML = textoTipificacion;
 
-    // localStorage.setItem("textoTipificacion", textoTipificacion);
-    // localStorage.setItem("tipificacion", tipificacion);
-
     const elementos = document.querySelectorAll(".company-name");
 
     elementos.forEach((elemento) => {
@@ -66,9 +56,7 @@ async function ejecutarProceso() {
 
     localStorage.setItem("textoTipificacion", textoTipificacion);
     localStorage.setItem("tipificacion", tipificacion);
-    // await buscaPrintResultados(CUIT, capitulo);
-    // capitulo = "B"
-    // matrizPreguntas = await recuperarPreguntas(capitulo);
+
 }
 
 //  ver si no va esto....

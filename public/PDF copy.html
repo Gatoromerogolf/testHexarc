@@ -67,16 +67,24 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
     });
 
     function generarPDF() {
+
+        const opciones = {
+            margin: 0,
+            filename: 'documento.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
         // Crear un elemento temporal para construir el contenido HTML
         const contenido = document.createElement('div');
-        
+
         const primeraPagina = document.createElement('div');
         primeraPagina.style.width = 'calc(100% - 20mm)'; // Ancho ajustado para márgenes
         primeraPagina.style.height = '277mm'; // Altura A4 menos márgenes
         primeraPagina.style.margin = '10mm';
         primeraPagina.style.border = '1px solid #000';
-        primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
-        // primeraPagina.style.backgroundImage = 'url("../img/calidad.jpg")';
+        // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
+        primeraPagina.style.backgroundImage = 'url("../img/imagenPDF2.png")';
         primeraPagina.style.backgroundSize = 'cover';
         primeraPagina.style.backgroundPosition = 'center';
         primeraPagina.style.pageBreakAfter = 'always';
@@ -86,8 +94,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // ♦ Añadir la segunda página (índice)
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const segundaPagina = crearPaginaConMarco();
-        segundaPagina.style.padding = '10mm';
-        segundaPagina.style.pageBreakAfter = 'always';
 
         const tituloIndice = document.createElement('h1');
         tituloIndice.textContent = 'Índice General';
@@ -119,12 +125,53 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const terceraPagina = crearPaginaConMarco();
 
-        let parrafo = document.createElement('p');
+        const tituloTercera = document.createElement('p');
+        tituloTercera.innerHTML = "Introducción: Optimización Empresarial y Gestión de Riesgos";
+        tituloTercera.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        tituloTercera.style.fontSize = '16pt';
+        tituloTercera.style.fontWeight = 'bold';
+        tituloTercera.style.textAlign = 'center';
+        tituloTercera.style.marginTop = '15mm';
+        terceraPagina.appendChild(tituloTercera);
+
+        parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        parrafo.style.fontSize = '14pt';
+        parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma.<br><br>  De acuerdo con la información cargada por BDT Advisory y a los parámetros del Modelo HexaRCi, la Compañia <strong><span class='company-name' style='font-size: 16px'>BDT Advisory </span></strong> es una compañia calificada preliminarmente como tipo:";
+        parrafo.innerHTML = "En el dinámico escenario empresarial actual, las organizaciones enfrentan el desafío constante de incrementar su rentabilidad y mantener una posición competitiva sólida. Este objetivo fundamental requiere una comprensión profunda y un manejo estratégico de los diversos factores de riesgo que pueden impactar el desempeño y la sostenibilidad del negocio.<br><br>Cada estructura empresarial aspira a un modelo de organización y funcionamiento ideal, un esquema que maximice la eficiencia operativa y minimice la exposición a riesgos potenciales. Sin embargo, alcanzar este estado óptimo no es un proceso simple, sino un ejercicio complejo de análisis, evaluación y adaptación continua.<br><br>En este contexto, surge la herramienta HexaRCi como un instrumento innovador que permite a las organizaciones navegar de manera sistemática y racional a través de su modelo de negocio. HexaRCi ofrece a los usuarios una perspectiva integral para recorrer los elementos críticos de la organización, facilitando la elaboración de estrategias que aproximan a la empresa hacia su esquema de funcionamiento ideal.<br><br>Mediante un enfoque metódico, esta herramienta proporciona un marco de referencia para identificar, analizar y gestionar los riesgos empresariales, transformando lo que tradicionalmente se percibe como una amenaza en una oportunidad de mejora y crecimiento estratégico.";
         terceraPagina.appendChild(parrafo);
+
+        contenido.appendChild(terceraPagina);
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir la cuarta página (contenido) con un borde
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        const cuartaPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "Conclusiones";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'center';
+        parrafo.style.marginTop = '15mm';
+        cuartaPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '11pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.style.fontStyle = 'italic'; // Agregar estilo itálico
+        parrafo.innerHTML = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma."
+        cuartaPagina.appendChild(parrafo);
+        
+        parrafo2 = document.createElement('p');
+        parrafo2.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo2.style.fontSize = '13pt';
+        parrafo2.style.lineHeight = '1.5';
+        parrafo2.style.fontStyle = 'normal'; // Agregar estilo itálico
+        parrafo2.innerHTML = "De acuerdo con la información cargada por <strong><span class='company-name' style='font-size: 16px'>BDT Advisory </span></strong> y a los parámetros del Modelo HexaRCi, la Compañia <strong><span class='company-name' style='font-size: 16px'>BDT Advisory </span></strong> es una compañia calificada preliminarmente como tipo:"
+        cuartaPagina.appendChild(parrafo2);
 
         const resultado = document.createElement('p');
         resultado.innerHTML = tipificacion;
@@ -132,17 +179,17 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         resultado.style.fontSize = '16pt';
         resultado.style.fontWeight = 'bold';
         resultado.style.textAlign = 'center';
-        resultado.style.marginTop = '15mm';
-        terceraPagina.appendChild(resultado);
+        resultado.style.marginTop = '7mm';
+        cuartaPagina.appendChild(resultado);
 
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        parrafo.style.fontSize = '14pt';
+        parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = textoTipificacion;
-        terceraPagina.appendChild(parrafo);
+        parrafo.innerHTML = 'BDT ADVISORY '+textoTipificacion;
+        cuartaPagina.appendChild(parrafo);
 
-        contenido.appendChild(terceraPagina);
+        contenido.appendChild(cuartaPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la quinta página (contenido) con un borde
@@ -150,587 +197,223 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         const quintaPagina = crearPaginaConMarco();
 
+
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '14pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "<strong><span class='company-name' style='font-size: 16px'>QUINTA PAGINA</span></strong> modelo grafico";
-
+        parrafo.innerHTML = "<strong><span class='company-name' style='font-size: 16px'>Representación gráfica</span></strong>";
         quintaPagina.appendChild(parrafo);
 
-        // Añadir el container para el canvas
-        const canvasContainer = document.createElement('div');
-        canvasContainer.style.width = '100%';
-        canvasContainer.style.display = 'flex';
-        canvasContainer.style.justifyContent = 'center';
-        canvasContainer.style.marginTop = '10mm';
+        function crearContenidoPDF() {
 
-        // Crear el canvas para el hexágono
-        const hexagonoCanvas = document.createElement('canvas');
-        hexagonoCanvas.id = 'hexagonoPDF';
-        hexagonoCanvas.width = 500;
-        hexagonoCanvas.height = 500;
-        canvasContainer.appendChild(hexagonoCanvas);
+            // Crear canvas para el hexágono
+            const hexagonoCanvas = document.createElement('canvas');
+            hexagonoCanvas.id = 'hexagonoPDF';
+            hexagonoCanvas.width = 700;
+            hexagonoCanvas.height = 700;
+            hexagonoCanvas.style.maxWidth = '100%';
+            hexagonoCanvas.style.height = 'auto';
 
-        quintaPagina.appendChild(canvasContainer);
+            // Contexto del canvas
+            const ctx = hexagonoCanvas.getContext('2d');
 
-        // Agregar la página completa al contenido
-        if (contenido) {
-            contenido.appendChild(quintaPagina);
-        } else {
-            console.error("El contenedor 'contenido' no existe.");
-        }
+            // Variables para el hexágono
+            const var1 = 59.91, var2 = 89.50, var3 = 59.09, var4 = 72.64, var5 = 63.00, var6 = 41.36;
+            const variablesHexagono = [var1, var2, var3, var4, var5, var6];
 
-        // Ahora dibujamos el hexágono en el canvas
-        const canvasPDF = document.getElementById('hexagonoPDF');
+            const rotulosHexagono = [
+                'Gobierno Corporativo',
+                'Apetito Riesgo',
+                'Riesgos Mercado',
+                'Riesgos Procesos',
+                'Situación Financiera',
+                'Generación Resultados'
+            ];
 
-        if (!canvasPDF) {
-            console.error("No se encontró el canvas con ID 'hexagonoPDF'.");
-        } else {
-            const ctx = canvasPDF.getContext('2d');
-            if (!ctx) {
-                console.error("No se pudo obtener el contexto 2D del canvas.");
-            } else {
-                const var1 = 59.91, var2 = 89.50, var3 = 59.09, var4 = 72.64, var5 = 63.00, var6 = 41.36;
-                let variablesHexagono = [var1, var2, var3, var4, var5, var6];
+            const centerX = hexagonoCanvas.width / 2;
+            const centerY = hexagonoCanvas.height / 2;
+            const radioMax = 170;
+            const radio90 = radioMax * 0.9;
+            const radio70 = radioMax * 0.7;
+            const radio50 = radioMax * 0.5;
 
-                const rotulosHexagono = ['Gobierno Corporativo', 'Apetito Riesgo', 'Riesgos Mercado', 'Riesgos Procesos', 'Situación Financiera', 'Generación Resultados'];
+            ctx.clearRect(0, 0, hexagonoCanvas.width, hexagonoCanvas.height);
 
-                // Dibujamos el hexágono en el canvas del PDF
-                setTimeout(() => {
-                    const canvasPDF = document.getElementById('hexagonoPDF');
+            // Dibujar hexágonos de fondo
+            function dibujarHexagonoFondo(radio, color, strokeColor) {
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3;
+                    const x = centerX + radio * Math.cos(angulo);
+                    const y = centerY + radio * Math.sin(angulo);
 
-                    if (!canvasPDF) {
-                        console.error("No se encontró el canvas con ID 'hexagonoPDF'.");
-                        return;
-                    }
-
-                    if (canvasPDF) {
-                        const ctx = canvasPDF.getContext('2d');
-                        const centerX = canvasPDF.width / 2;
-                        const centerY = canvasPDF.height / 2;
-                        const radioMax = 170;
-                        const radio90 = radioMax * 0.9;
-                        const radio70 = radioMax * 0.7;
-                        const radio50 = radioMax * 0.5;
-
-                        ctx.clearRect(0, 0, canvasPDF.width, canvasPDF.height);
-
-                        // Aquí insertaría todo el código de dibujarHexagono
-                        // Dibuja el fondo celeste del hexágono principal
-                        ctx.beginPath();
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const x = centerX + radioMax * Math.cos(angulo);
-                            const y = centerY + radioMax * Math.sin(angulo);
-
-                            if (i === 0) {
-                                ctx.moveTo(x, y);
-                            } else {
-                                ctx.lineTo(x, y);
-                            }
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = 'rgba(173, 216, 230, 0.7)';
-                        ctx.fill();
-                        ctx.strokeStyle = 'black';
-                        ctx.stroke();
-
-                        // Dibuja el hexágono verde (90%)
-                        ctx.beginPath();
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const x = centerX + radio90 * Math.cos(angulo);
-                            const y = centerY + radio90 * Math.sin(angulo);
-
-                            if (i === 0) {
-                                ctx.moveTo(x, y);
-                            } else {
-                                ctx.lineTo(x, y);
-                            }
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = 'rgba(0, 255, 0, 0.7)';
-                        ctx.fill();
-                        ctx.strokeStyle = 'green';
-                        ctx.stroke();
-
-                        // Dibuja el hexágono amarillo (70%)
-                        ctx.beginPath();
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const x = centerX + radio70 * Math.cos(angulo);
-                            const y = centerY + radio70 * Math.sin(angulo);
-
-                            if (i === 0) {
-                                ctx.moveTo(x, y);
-                            } else {
-                                ctx.lineTo(x, y);
-                            }
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = 'rgba(255, 255, 0, 0.7)';
-                        ctx.fill();
-                        ctx.strokeStyle = 'yellow';
-                        ctx.stroke();
-
-                        // Dibuja el hexágono rojo (50%)
-                        ctx.beginPath();
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const x = centerX + radio50 * Math.cos(angulo);
-                            const y = centerY + radio50 * Math.sin(angulo);
-
-                            if (i === 0) {
-                                ctx.moveTo(x, y);
-                            } else {
-                                ctx.lineTo(x, y);
-                            }
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = 'rgba(255, 0, 0, 0.9)';
-                        ctx.fill();
-                        ctx.strokeStyle = 'red';
-                        ctx.stroke();
-
-                        // Dibuja las líneas desde el centro hacia los vértices
-                        ctx.beginPath();
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const x = centerX + radioMax * Math.cos(angulo);
-                            const y = centerY + radioMax * Math.sin(angulo);
-
-                            ctx.moveTo(centerX, centerY);
-                            ctx.lineTo(x, y);
-                        }
-                        ctx.strokeStyle = 'gray';
-                        ctx.stroke();
-
-                        // Dibuja el área basada en las variables
-                        ctx.beginPath();
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const porcentaje = variablesHexagono[i] / 100;
-                            const radio = radioMax * porcentaje;
-                            const x = centerX + radio * Math.cos(angulo);
-                            const y = centerY + radio * Math.sin(angulo);
-
-                            if (i === 0) {
-                                ctx.moveTo(x, y);
-                            } else {
-                                ctx.lineTo(x, y);
-                            }
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = 'rgba(0, 150, 255, 0.7)';
-                        ctx.fill();
-                        ctx.strokeStyle = 'blue';
-                        ctx.stroke();
-
-                        // Agregar el valor de cada variable
-                        ctx.font = '17px "Arial", strong';
-                        ctx.fillStyle = 'black';
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const porcentaje = variablesHexagono[i] / 100;
-                            const radioTexto = radioMax * porcentaje * 0.9;
-                            const xTexto = centerX + radioTexto * Math.cos(angulo);
-                            const yTexto = centerY + radioTexto * Math.sin(angulo);
-                            ctx.fillText(`${variablesHexagono[i]}%`, xTexto - 15, yTexto + 5);
-                        }
-
-                        // Agregar los rótulos
-                        ctx.font = '15px "Arial", strong';
-                        ctx.fillStyle = 'black';
-                        for (let i = 0; i < 6; i++) {
-                            const angulo = (i * Math.PI) / 3;
-                            const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo);
-                            const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
-                            const palabras = rotulosHexagono[i].split(' ');
-
-                            if (i === 3) {
-                                ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5);
-                                ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14);
-                            } else {
-                                ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5);
-                                ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14);
-                            }
-                        }
-                        console.log("Hexágono dibujado correctamente.");
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
                     } else {
-                        console.error("no se encontró el canvas con ID 'hexagonoPDF'.");
+                        ctx.lineTo(x, y);
                     }
-                    // Generar el PDF después de dibujar el hexágono
-                    setTimeout(() => {
-                        html2pdf().from(contenido).set(opciones).save().then(() => {
-                            document.body.removeChild(contenido);
-                        });
-                    }, 500);
-                }, 2000);
-
-                // Generamos el PDF después de dibujar el hexágono
-                const opciones = {
-                    margin: 0,
-                    filename: 'documento.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                };
+                }
+                ctx.closePath();
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = strokeColor;
+                ctx.stroke();
             }
+
+            // Dibujar hexágonos de fondo
+            dibujarHexagonoFondo(radioMax, 'rgba(173, 216, 230, 0.7)', 'black');
+            dibujarHexagonoFondo(radio90, 'rgba(0, 255, 0, 0.7)', 'green');
+            dibujarHexagonoFondo(radio70, 'rgba(255, 255, 0, 0.7)', 'yellow');
+            dibujarHexagonoFondo(radio50, 'rgba(255, 0, 0, 0.9)', 'red');
+
+            // Dibujar líneas desde el centro
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3;
+                const x = centerX + radioMax * Math.cos(angulo);
+                const y = centerY + radioMax * Math.sin(angulo);
+
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = 'gray';
+            ctx.stroke();
+
+            // Dibujar área de variables
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angulo = (i * Math.PI) / 3;
+                const porcentaje = variablesHexagono[i] / 100;
+                const radio = radioMax * porcentaje;
+                const x = centerX + radio * Math.cos(angulo);
+                const y = centerY + radio * Math.sin(angulo);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(0, 150, 255, 0.7)';
+            ctx.fill();
+            ctx.strokeStyle = 'blue';
+            ctx.stroke();
+
+            // Agregar valores de variables
+            ctx.font = '17px Arial, strong';
+            ctx.fillStyle = 'black';
+            variablesHexagono.forEach((valor, i) => {
+                const angulo = (i * Math.PI) / 3;
+                const porcentaje = valor / 100;
+                const radioTexto = radioMax * porcentaje * 0.9;
+                const xTexto = centerX + radioTexto * Math.cos(angulo);
+                const yTexto = centerY + radioTexto * Math.sin(angulo);
+                ctx.fillText(`${valor}%`, xTexto - 15, yTexto + 5);
+            });
+
+            // Agregar rótulos
+            ctx.font = '15px Arial, strong';
+            ctx.fillStyle = 'black';
+            rotulosHexagono.forEach((rotulo, i) => {
+                const angulo = (i * Math.PI) / 3;
+                const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo);
+                const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
+                const palabras = rotulo.split(' ');
+
+                if (i === 3) {
+                    ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5);
+                    ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14);
+                } else {
+                    ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5);
+                    ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14);
+                }
+            });
+
+            // Contenedor para la imagen del canvas
+            const canvasContainer = document.createElement('div');
+            canvasContainer.style.width = '100%';
+            canvasContainer.style.display = 'flex';
+            canvasContainer.style.justifyContent = 'center';
+            canvasContainer.style.marginTop = '20px';
+
+            // Convertir canvas a imagen
+            const imagenHexagono = document.createElement('img');
+            imagenHexagono.src = hexagonoCanvas.toDataURL('image/png');
+            imagenHexagono.style.maxWidth = '100%';
+            imagenHexagono.style.height = 'auto';
+
+            canvasContainer.appendChild(imagenHexagono);
+            quintaPagina.appendChild(canvasContainer);
+            // contenido.appendChild(quintaPagina);
+
+            console.log("llego hasta aca")
+            return contenido;
         }
 
-            ///
-            // Alternativa: Capturar el canvas existente
-            // const canvasExistente = document.getElementById('hexagonoCanvas');
-            // if (canvasExistente) {
-            //     const imagenDataURL = canvasExistente.toDataURL('image/png');
+        crearContenidoPDF();
 
-            //     const imagenHexagono = document.createElement('img');
-            //     imagenHexagono.src = imagenDataURL;
-            //     imagenHexagono.style.maxWidth = '100%';
-            //     imagenHexagono.style.height = 'auto';
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.innerHTML = "Si cada factor alcanzare el 100% se conformaría un 'Hexágono perfecto' y de esa manera <strong><span class='company-name' style='font-size: 16px'></span></strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi.<br><br>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades de <strong><span class='company-name' style='font-size: 16px'>BDT ADVISORY</span></strong>, de forma que mediante un proceso de mejora continua en el manejo de los riesgos se la prepare para ir alcanzando el 'Hexágono Perfecto'";
+        quintaPagina.appendChild(parrafo);
 
-            //     cuartaPagina.appendChild(imagenHexagono);
-            // }
-            ///
-        function crearPaginaConMarco() {
-            const pagina = document.createElement('div');
-            pagina.style.padding = '10mm';
-            pagina.style.margin = '10mm';
-            pagina.style.border = '2px solid #000';
-            pagina.style.boxShadow = '0 0 10mm rgba(0,0,0,0.1)'; // Sombra suave
-            pagina.style.minHeight = '240mm';
-            pagina.style.borderRadius = '5mm';
-            pagina.style.position = 'relative'; // Para posicionar elementos internos
-            pagina.style.pageBreakAfter = 'always'; // Salto de página después
-            return pagina;
-        }
+        contenido.appendChild(quintaPagina);
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir la sexta pagina con un borde
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        const sextaPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "Oportunidades de mejora";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'center';
+        parrafo.style.marginTop = '15mm';
+        sextaPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.innerHTML = "El análisis realizado a través del Modelo HEXARCi mediante la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.<br><br>Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.<br><br>Los aspectos a mejorar más significativos en cada factor de riesgo: Manejo de los Riesgos de Gobierno Corporativo (MRG); Manejo de los Riesgos del Apetito de Riesgo (MAR); Manejo de los Riesgos de Mercado (MRM) y Manejo de los Riesgos de los Procesos se exponen a continuación:";
+        sextaPagina.appendChild(parrafo);
+
+        contenido.appendChild(sextaPagina);
+
+        // Generar contenido del PDF
+
+        // crearContenidoPDF();
+
+        // quintaPagina.appendChild(contenidoCanvas);
+        // contenido.appendChild(quintaPagina);
+
+
+        // Generar PDF directamente
+        html2pdf().from(contenido).set(opciones).save()
+            .catch(error => {
+                console.error("Error generando PDF:", error);
+            });
+    }
+
+
+    function crearPaginaConMarco() {
+        const pagina = document.createElement('div');
+        pagina.style.padding = '10mm';
+        pagina.style.margin = '10mm';
+        pagina.style.border = '2px solid #000';
+        pagina.style.boxShadow = '0 0 10mm rgba(0,0,0,0.1)'; // Sombra suave
+        pagina.style.minHeight = '240mm';
+        pagina.style.borderRadius = '5mm';
+        pagina.style.position = 'relative'; // Para posicionar elementos internos
+        pagina.style.pageBreakAfter = 'always'; // Salto de página después
+        return pagina;
     }
 </script>
+
 </html>
-
-<!-- // <script> -->
-
-//     const apellidouser = localStorage.getItem("apellido");
-//     const nombreUser = localStorage.getItem("nombre");
-//     const apenom = nombreUser + ' ' + apellidouser;
-//     const empresa = localStorage.getItem("empresa");
-//     const CUIT = localStorage.getItem("CUIT");
-
-//     document.getElementById("nombreEmpresa").textContent = empresa;
-//     document.getElementById("nombreUsuario").textContent = apenom;
-
-//     let var1 = 3;
-//     let var2 = 3;
-//     let var3 = 3;
-//     let var4 = 3;
-//     let var5 = 3;
-//     let var6 = 3;
-
-//     // Función autoinvocada - Ejecución inmediata
-//     (async function () {
-//         try {
-//             // Espera a que la función `leerTotalCapitulos` se complete antes de continuar
-//             totalCapitulos = await leerTotalCapitulos(CUIT);
-
-//             // Ejecuta el código que depende de `totalCapitulos` aquí, ya que ahora tienes los datos
-//             if (totalCapitulos && totalCapitulos.exists) {
-//                 // console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
-//                 // Aquí puedes colocar más lógica que depende de los datos de `totalCapitulos`
-//                 ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
-//             } else {
-//                 console.log("No se encontraron capítulos.");
-//             }
-//         } catch (error) {
-//             console.error("Error en la función autoinvocada:", error);
-//         }
-//     })();
-
-//     async function leerTotalCapitulos() {
-//         try {
-//             const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
-//             if (response.ok) {
-//                 totalCapitulos = await response.json(); //registro seccion recibido en formato JSON
-//                 // console.table(totalCapitulos);
-//                 return { exists: true, records: totalCapitulos };
-//             } else {
-//                 console.error("Error al obtener los datos");
-//             }
-//         } catch (error) {
-//             console.error("Error al realizar la solicitud:", error);
-//         }
-//         return false;
-//     }
-
-//     function ejecutarGrafico(datos) {
-//         if (totalCapitulos && totalCapitulos.exists) {
-//             totalCapitulos.records.forEach((datos) => {
-//                 switch (datos.capitulo) {
-//                     case "A":
-//                         var1 = datos.porcentaje; // Asigna el porcentaje a var1
-//                         break;
-//                     case "B":
-//                         var2 = datos.porcentaje; // Asigna el porcentaje a var2
-//                         break;
-//                     case "C":
-//                         var3 = datos.porcentaje; // Asigna el porcentaje a var3
-//                         break;
-//                     case "D":
-//                         var4 = datos.porcentaje; // Asigna el porcentaje a var4
-//                         break;
-//                     case "E":
-//                         var5 = datos.porcentaje; // Asigna el porcentaje a var5
-//                         break;
-//                     case "F":
-//                         var6 = datos.porcentaje; // Asigna el porcentaje a var6
-//                         break;
-//                     default:
-//                         console.warn(`Capítulo no reconocido: ${datos.CAPITULO}`);
-//                         break;
-//                 }
-//             });
-//         }
-
-//         // Mostrar las variables después de asignarles valores
-//         // console.log({ var1, var2, var3, var4, var5, var6 });
-
-//         const variables = [var1, var2, var3, var4, var5, var6]; // Porcentajes de cada área (0 a 100)
-//         const rotulos = ['Gobierno Corporativo', 'Apetito Riesgo', 'Riesgos Mercado', 'Riesgos Procesos', 'Situación Financiera', 'Generación Resultados']; // Rótulos para cada eje
-
-//         function dibujarHexagono(variables, rotulos) {
-//             const canvas = document.getElementById('hexagonoCanvas');
-//             const ctx = canvas.getContext('2d');
-//             const centerX = canvas.width / 2;
-//             const centerY = canvas.height / 2;
-//             const radioMax = 170; // Radio máximo (el tamaño máximo del hexágono)
-//             const radio90 = radioMax * 0.9; // Radio del hexágono amarillo (90%)
-//             const radio70 = radioMax * 0.7; // Radio del hexágono verde (70%)
-//             const radio50 = radioMax * 0.5; // Radio del hexágono rojo (50%)
-
-//             ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
-
-//             // Dibuja el fondo celeste del hexágono principal (100% del hexágono externo)
-//             ctx.beginPath();
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const x = centerX + radioMax * Math.cos(angulo);
-//                 const y = centerY + radioMax * Math.sin(angulo);
-
-//                 if (i === 0) {
-//                     ctx.moveTo(x, y); // Mueve al primer punto
-//                 } else {
-//                     ctx.lineTo(x, y); // Dibuja los bordes del hexágono externo
-//                 }
-//             }
-//             ctx.closePath();
-//             ctx.fillStyle = 'rgba(173, 216, 230, 0.7)'; // Color celeste con opacidad 0.5
-//             ctx.fill(); // Rellena el área del hexágono externo con fondo celeste
-//             ctx.strokeStyle = 'black';
-//             ctx.stroke(); // Dibuja el borde exterior del hexágono
-
-//             // Dibuja el hexágono verde (90% del hexágono externo)
-//             ctx.beginPath();
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const x = centerX + radio90 * Math.cos(angulo);
-//                 const y = centerY + radio90 * Math.sin(angulo);
-
-//                 if (i === 0) {
-//                     ctx.moveTo(x, y); // Mueve al primer punto
-//                 } else {
-//                     ctx.lineTo(x, y); // Dibuja los bordes del hexágono verde
-//                 }
-//             }
-//             ctx.closePath();
-//             ctx.fillStyle = 'rgba(0, 255, 0, 0.7)'; // Color de relleno verde con transparencia
-//             ctx.fill(); // Rellena el área del hexágono verde
-//             ctx.strokeStyle = 'green';
-
-//             // Dibuja el hexágono amarillo (70% del hexágono externo)
-//             ctx.beginPath();
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const x = centerX + radio70 * Math.cos(angulo);
-//                 const y = centerY + radio70 * Math.sin(angulo);
-
-//                 if (i === 0) {
-//                     ctx.moveTo(x, y); // Mueve al primer punto
-//                 } else {
-//                     ctx.lineTo(x, y); // Dibuja los bordes del hexágono amarillo
-//                 }
-//             }
-//             ctx.closePath();
-//             ctx.fillStyle = 'rgba(255, 255, 0, 0.7)'; // Color de relleno verde con transparencia
-//             ctx.fill(); // Rellena el área del hexágono verde
-//             ctx.strokeStyle = 'yellow';
-
-//             // Dibuja el hexágono rojo (50% del hexágono externo)
-//             ctx.beginPath();
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const x = centerX + radio50 * Math.cos(angulo);
-//                 const y = centerY + radio50 * Math.sin(angulo);
-
-//                 if (i === 0) {
-//                     ctx.moveTo(x, y); // Mueve al primer punto
-//                 } else {
-//                     ctx.lineTo(x, y); // Dibuja los bordes del hexágono rojo
-//                 }
-//             }
-//             ctx.closePath();
-//             ctx.fillStyle = 'rgba(255, 0, 0, 0.9)'; // Color de relleno rojo con menos transparencia
-//             ctx.fill(); // Rellena el área del hexágono rojo
-//             ctx.strokeStyle = 'red';
-//             ctx.stroke(); // Dibuja el borde del hexágono rojo
-
-//             // Dibuja las líneas desde el centro hacia los vértices
-//             ctx.beginPath();
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const x = centerX + radioMax * Math.cos(angulo);
-//                 const y = centerY + radioMax * Math.sin(angulo);
-
-//                 ctx.moveTo(centerX, centerY); // Empieza desde el centro
-//                 ctx.lineTo(x, y); // Línea desde el centro hasta el borde
-//             }
-//             ctx.strokeStyle = 'gray';
-//             ctx.stroke(); // Dibuja las líneas radiales
-
-//             // Dibuja el área basada en las variables (llenado parcial)
-//             ctx.beginPath();
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
-//                 const radio = radioMax * porcentaje; // Ajusta el radio según el porcentaje
-//                 const x = centerX + radio * Math.cos(angulo);
-//                 const y = centerY + radio * Math.sin(angulo);
-
-//                 if (i === 0) {
-//                     ctx.moveTo(x, y); // Mueve al primer punto
-//                 } else {
-//                     ctx.lineTo(x, y); // Dibuja las líneas para el área rellena
-//                 }
-//             }
-//             ctx.closePath();
-//             ctx.fillStyle = 'rgba(0, 150, 255, 0.7)'; // Color de relleno con transparencia
-//             ctx.fill(); // Rellena el área del hexágono dinámico
-//             ctx.strokeStyle = 'blue';
-//             ctx.stroke(); // Dibuja el borde de la forma rellena
-
-//             // Agregar el valor de cada variable dentro de su triángulo
-//             ctx.font = '17px "Abel", strong';
-//             ctx.fillStyle = 'black';
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
-//                 const radioTexto = radioMax * porcentaje * 0.9; // Posición del texto, más cerca del centro
-
-//                 // Coordenadas del texto basado en el porcentaje
-//                 const xTexto = centerX + radioTexto * Math.cos(angulo);
-//                 const yTexto = centerY + radioTexto * Math.sin(angulo);
-
-//                 // Dibujar el valor de la variable en la posición calculada
-//                 ctx.fillText(`${variables[i]}%`, xTexto - 15, yTexto + 5); // Ajuste menor para centrar el texto
-//             }
-
-//             // Agregar los rótulos fuera del hexágono en dos filas
-//             ctx.font = '15px "Abel", strong';
-//             ctx.fillStyle = 'black'; // Color de los rótulos
-//             for (let i = 0; i < 6; i++) {
-//                 const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-//                 const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
-//                 const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
-
-//                 const palabras = rotulos[i].split(' ');
-
-//                 if (i === 3) {
-//                     ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5); // Primera palabra
-//                     ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14); // Segunda palabra
-//                 } else {
-//                     ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5); // Primera palabra
-//                     ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14); // Segunda palabra
-//                 }
-//             }
-//         }
-//         dibujarHexagono(variables, rotulos);
-//     }
-
-<!-- // </script>
-
-// </body>
-
-// </html> -->
-
-// // <!-- function generarPDF() {
-// //     // Crear un elemento temporal para construir el contenido HTML
-// //     const contenido = document.createElement('div');
-    
-// //     // Añadir la primera página (imagen institucional)
-// //     const primeraPagina = document.createElement('div');
-// //     primeraPagina.style.width = '100%';
-// //     primeraPagina.style.height = '297mm'; // Altura A4
-// //     primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
-// //     primeraPagina.style.backgroundSize = 'cover';
-// //     primeraPagina.style.backgroundPosition = 'center';
-// //     primeraPagina.style.pageBreakAfter = 'always';
-// //     contenido.appendChild(primeraPagina);
-    
-// //     // Añadir la segunda página (índice)
-// //     const segundaPagina = document.createElement('div');
-// //     segundaPagina.style.padding = '20mm';
-// //     segundaPagina.style.pageBreakAfter = 'always';
-    
-// //     const tituloIndice = document.createElement('h1');
-// //     tituloIndice.textContent = 'Índice General';
-// //     tituloIndice.style.textAlign = 'center';
-// //     tituloIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
-// //     segundaPagina.appendChild(tituloIndice);
-    
-// //     const indice = ["Introducción", "Desarrollo", "Conclusión"];
-// //     const listaIndice = document.createElement('ol');
-// //     listaIndice.style.marginTop = '20mm';
-// //     listaIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
-    
-// //     indice.forEach(item => {
-// //         const elementoLista = document.createElement('li');
-// //         elementoLista.textContent = item;
-// //         elementoLista.style.marginBottom = '5mm';
-// //         listaIndice.appendChild(elementoLista);
-// //     });
-    
-// //     segundaPagina.appendChild(listaIndice);
-// //     contenido.appendChild(segundaPagina);
-    
-// //     // Añadir la tercera página (contenido)
-// //     const terceraPagina = document.createElement('div');
-// //     terceraPagina.style.padding = '20mm';
-    
-// //     const parrafo = document.createElement('p');
-// //     parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
-// //     parrafo.style.fontSize = '14pt';
-// //     parrafo.style.lineHeight = '1.5';
-// //     parrafo.textContent = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma. De acuerdo con la información cargada por BDT Advisory y a los parámetros del Modelo HexaRCi, la Compañia BDT Advisory es una compañia calificada preliminarmente como tipo:";
-// //     terceraPagina.appendChild(parrafo);
-    
-// //     const resultado = document.createElement('p');
-// //     resultado.textContent = "INESTABLE";
-// //     resultado.style.fontFamily = 'Helvetica, Arial, sans-serif';
-// //     resultado.style.fontSize = '16pt';
-// //     resultado.style.fontWeight = 'bold';
-// //     resultado.style.marginTop = '15mm';
-// //     terceraPagina.appendChild(resultado);
-    
-// //     contenido.appendChild(terceraPagina);
-    
-// //     // Configurar las opciones de html2pdf
-// //     const opciones = {
-// //         margin: 0,
-// //         filename: 'documento.pdf',
-// //         image: { type: 'jpeg', quality: 0.98 },
-// //         html2canvas: { scale: 2, useCORS: true },
-// //         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-// //     };
-    
-// //     // Generar el PDF
-// //     html2pdf().from(contenido).set(opciones).save();
-// // } -->

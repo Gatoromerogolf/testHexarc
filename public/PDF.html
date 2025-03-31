@@ -59,6 +59,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
 <script>
 
+    const idioma = localStorage.getItem("idioma");
+    const CUIT = localStorage.getItem("CUIT");
+    let max = 90;
+
     const textoTipificacion = localStorage.getItem("textoTipificacion");
     const tipificacion = localStorage.getItem("tipificacion");
 
@@ -66,7 +70,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         document.getElementById("boton-generar-pdf").addEventListener("click", generarPDF);
     });
 
-    function generarPDF() {
+    async function generarPDF() {
+
+        textoCheck = await leeTextoCheck();
+        textoRespuestas = await leeTextoRespuestas();
 
         const opciones = {
             margin: 0,
@@ -84,30 +91,45 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         primeraPagina.style.margin = '10mm';
         primeraPagina.style.border = '1px solid #000';
         // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
-        primeraPagina.style.backgroundImage = 'url("../img/imagenPDF2.png")';
-        primeraPagina.style.backgroundSize = 'cover';
+        // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF2.png")';
+        // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF3.png")';
+        primeraPagina.style.backgroundImage = 'url("../img/imagenEdificios.webp")';
+        primeraPagina.style.backgroundSize = 'contain';
         primeraPagina.style.backgroundPosition = 'center';
         primeraPagina.style.pageBreakAfter = 'always';
+
+        const tituloCaratula = document.createElement('h1');
+        tituloCaratula.textContent = 'Índice General';
+        tituloCaratula.style.textAlign = 'center';
+        tituloCaratula.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        tituloCaratula.style.fontSize = '26pt';
+        tituloCaratula.style.color = 'white';
+        // tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
+        tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.3)';
+        tituloCaratula.style.marginTop = '40mm';
+        tituloCaratula.innerHTML = "Aplicación del Modelo HEXA RCi"
+        primeraPagina.appendChild(tituloCaratula);
+
         contenido.appendChild(primeraPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la segunda página (índice)
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        const segundaPagina = crearPaginaConMarco();
+        const paginaIndice = crearPaginaConMarco();
 
         const tituloIndice = document.createElement('h1');
         tituloIndice.textContent = 'Índice General';
         tituloIndice.style.textAlign = 'center';
         tituloIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        segundaPagina.appendChild(tituloIndice);
+        paginaIndice.appendChild(tituloIndice);
 
-        const indice = ["Introducción",
+        const indice = ["Introducción: Optimización Empresarial y Gestión de Riesgos",
             "El Modelo HexaRCi",
-            "Aplicación del Modelo",
+            "Aplicación del Modelo y Conclusiones",
             "Representación gráfica",
-            "Recomendaciones"];
+            "Recomendaciones.  Oportunidades de mejora"];
         const listaIndice = document.createElement('ol');
-        listaIndice.style.marginTop = '10mm';
+        listaIndice.style.marginTop = '5mm';
         listaIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
 
         indice.forEach(item => {
@@ -117,8 +139,21 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             listaIndice.appendChild(elementoLista);
         });
 
-        segundaPagina.appendChild(listaIndice);
-        contenido.appendChild(segundaPagina);
+        paginaIndice.appendChild(listaIndice);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '11pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.style.fontStyle = 'italic'; // Agregar estilo itálico
+        parrafo.style.marginTop = '150mm';
+        parrafo.innerHTML = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma."
+        paginaIndice.appendChild(parrafo);
+
+        contenido.appendChild(paginaIndice);
+
+
+
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la tercera página (contenido) con un borde
@@ -131,7 +166,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         tituloTercera.style.fontSize = '16pt';
         tituloTercera.style.fontWeight = 'bold';
         tituloTercera.style.textAlign = 'center';
-        tituloTercera.style.marginTop = '15mm';
+        tituloTercera.style.marginTop = '5mm';
         terceraPagina.appendChild(tituloTercera);
 
         parrafo = document.createElement('p');
@@ -143,28 +178,48 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(terceraPagina);
 
+
+
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir la sexta pagina con un borde
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        const paginaHexa = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "El Modelo HexaRCi";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'center';
+        parrafo.style.marginTop = '5mm';
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.innerHTML = "El Modelo HexaRCi está preparado para empresas que tengan una estructura de Directorio de tres o más directores. En consecuencia, no es aplicable a empresas con estructuras más pequeñas. Tampoco es aplicable a empresas específicamente reguladas como ser Bancos y Compañías de seguro.<br><br>Una versión también interactiva, Modelo HexaRCiS, para compañías más pequeñas, está en desarrollo, con un enfoque conceptual idéntico, pero adaptado a las características de este tipo de empresas.<br><br>Cada factor de los seis arriba indicados tiene una metodología plasmada en las 'Planillas de Autoevaluación'.<br><br>Existe una Planilla por cada factor evaluado. Así, existen seis Planillas: de Apetito de Riesgo; de Riesgos de Mercado; de Riesgos de Procesos; de Riesgos de Gobierno Corporativo; de Generación de Resultados y de Situación Financiera.<br><br>Cada Planilla presenta un número determinado de afirmaciones; a cada afirmación le corresponde un puntaje predeterminado; el puntaje representa el nivel de efectividad en el cumplimiento de la afirmación; el evaluador debe seleccionar, de acuerdo con su criterio, el puntaje que considera cumple la compañía. Cada Planilla, luego de ser completada por el evaluador concluye en un puntaje total que representa el porcentaje de cumplimiento respecto de un puntaje total posible del factor evaluado.";
+
+        paginaHexa.appendChild(parrafo);
+
+        contenido.appendChild(paginaHexa);
+
+
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la cuarta página (contenido) con un borde
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const cuartaPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Conclusiones";
+        parrafo.innerHTML = "Aplicación del Modelo y Conclusiones";
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
         parrafo.style.textAlign = 'center';
-        parrafo.style.marginTop = '15mm';
+        parrafo.style.marginTop = '5mm';
         cuartaPagina.appendChild(parrafo);
 
-        parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        parrafo.style.fontSize = '11pt';
-        parrafo.style.lineHeight = '1.5';
-        parrafo.style.fontStyle = 'italic'; // Agregar estilo itálico
-        parrafo.innerHTML = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma."
-        cuartaPagina.appendChild(parrafo);
-        
         parrafo2 = document.createElement('p');
         parrafo2.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo2.style.fontSize = '13pt';
@@ -186,13 +241,13 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = 'BDT ADVISORY '+textoTipificacion;
+        parrafo.innerHTML = 'BDT ADVISORY ' + textoTipificacion;
         cuartaPagina.appendChild(parrafo);
 
         contenido.appendChild(cuartaPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir la quinta página (contenido) con un borde
+        // ♦ Añadir la quinta página dibuho hexagono
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const quintaPagina = crearPaginaConMarco();
@@ -364,34 +419,176 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         contenido.appendChild(quintaPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir la sexta pagina con un borde
+        // ♦ Añadir la sexta pagina presenta mejoras
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const sextaPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Oportunidades de mejora";
+        parrafo.innerHTML = "Recomendaciones.  Oportunidades de mejora";
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
         parrafo.style.textAlign = 'center';
-        parrafo.style.marginTop = '15mm';
+        parrafo.style.marginTop = '5mm';
         sextaPagina.appendChild(parrafo);
 
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "El análisis realizado a través del Modelo HEXARCi mediante la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.<br><br>Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.<br><br>Los aspectos a mejorar más significativos en cada factor de riesgo: Manejo de los Riesgos de Gobierno Corporativo (MRG); Manejo de los Riesgos del Apetito de Riesgo (MAR); Manejo de los Riesgos de Mercado (MRM) y Manejo de los Riesgos de los Procesos se exponen a continuación:";
+        parrafo.innerHTML = "El análisis realizado a través del Modelo HEXARCi mediante la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.<br><br>Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.<br><br>Los aspectos a mejorar más significativos en cada factor de riesgo:<br><br>♦ Manejo de los Riesgos de Gobierno Corporativo (MRG);<br><br> Manejo de los Riesgos del Apetito de Riesgo (MAR);<br><br> Manejo de los Riesgos de Mercado (MRM) y<br><br> Manejo de los Riesgos de los Procesos<br><br>se exponen a continuación:";
         sextaPagina.appendChild(parrafo);
 
         contenido.appendChild(sextaPagina);
 
-        // Generar contenido del PDF
 
-        // crearContenidoPDF();
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir paginas con mejoras
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-        // quintaPagina.appendChild(contenidoCanvas);
-        // contenido.appendChild(quintaPagina);
+        capitulos = await leeCapitulos();
+        console.log(capitulos)
+
+        for (const capitulo of capitulos) {
+            if (capitulo.letra == "E" || capitulo.letra == "F") {
+                continue;
+            }
+
+            matrizPreguntas = await recuperarPreguntas(capitulo.letra);
+
+            const mejorasPagina = crearPaginaConMarco();
+
+            parrafo = document.createElement('p');
+            parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            parrafo.style.fontSize = '16pt';
+            parrafo.style.fontWeight = 'bold';
+            parrafo.style.textAlign = 'center';
+            parrafo.style.marginTop = '5mm';
+
+            // Crear el título del capítulo ::::::::::::::::::::::::::.
+            // let titulo = document.createElement("h3");
+            parrafo.innerHTML = `Factor: ${capitulo.nombre}`;
+            // contenedor.appendChild(titulo);
+            mejorasPagina.appendChild(parrafo);
+
+            // Busca las respuestas de ese capítulo
+            const data = await buscaRespuesta(CUIT, capitulo.letra);
+            console.log(`cuit ${CUIT}, capitulo ${capitulo.letra}`)
+            const respuestas = data.respuestas || []; // Si no hay respuestas, asigna un array vacío
+            console.log(respuestas)
+
+            // Crear el encabezado (seccion):::::::::::::::::::::::::::
+            for (const respuesta of respuestas) {
+                if (respuesta.porcentaje > max) { // descarta capitulo
+                    continue;
+                }
+
+                const existeTipo = matrizPreguntas.some(
+                    (p) =>
+                        p.Capitulo == respuesta.capitulo &&
+                        p.Seccion == respuesta.seccion &&
+                        (p.tipo == 1 || p.tipo == 52)
+                );
+
+                if (!existeTipo) { // No hay 1 o 52 en matrizPreguntas para seccion
+                    continue; // Salta a la siguiente iteración del bucle
+                }
+
+                const indice = respuesta.seccion;
+                const descripcion = await obtenerNombreSeccion(
+                    indice,
+                    idioma,
+                    capitulo.letra
+                );
+
+                const descripcionElemento = document.createElement('div');
+                descripcionElemento.style.fontSize = "15px";
+                if (capitulo.letra == "A") {
+                    descripcionElemento.style.backgroundColor = "#FAF0E6";
+                }
+                if (capitulo.letra == "B") {
+                    descripcionElemento.style.backgroundColor = "#F0E68C";
+                }
+                if (capitulo.letra == "C") {
+                    descripcionElemento.style.backgroundColor = "#D3D3D3";
+                }
+                if (capitulo.letra == "D") {
+                    descripcionElemento.style.backgroundColor = "#F0F8FF";
+                }
+                descripcionElemento.innerHTML = "[ " + respuesta.porcentaje + " % ]  -  Sección: " + respuesta.seccion + ". " + descripcion;
+                mejorasPagina.appendChild(descripcionElemento);
+
+
+                // contenido.appendChild(mejorasPagina);
+
+
+                // Crear el cuerpo de la tabla::::::::::::::::::::::::::::::
+                let info = respuesta.seccion;
+                let preguntasSeccion = matrizPreguntas.filter( //  Filtra las preguntas para la seccion seleccionada
+                    (pregunta) => pregunta.Seccion == info
+                );
+
+                // itera por todas las preguntas filtradas
+                for (const pregunta of preguntasSeccion) {
+                    let filaSeccion = document.createElement("tr");
+                    filaSeccion.classList.add("situacion2");
+
+                    let filaRespuesta = document.createElement("div");
+                    filaRespuesta.classList.add("situacion2");
+
+                    let celdaNumero = document.createElement("div");
+                    celdaNumero.style.width = "5px"; // Define el ancho en píxeles
+                    celdaNumero.textContent = pregunta.Numero;
+                    filaRespuesta.appendChild(celdaNumero);
+
+                    let consigna = document.createElement("div");
+                    consigna.style.width = "300px"; // Define el ancho en píxeles
+                    consigna.textContent = pregunta.Descrip;
+                    consigna.style.fontSize = "16px";
+                    filaRespuesta.appendChild(consigna);
+
+                    poneRespuesta(respuesta, pregunta).then((texto) => {
+                        if (pregunta.tipo == "52") {
+                            if (texto == "No efectivo" || texto == "Poco efectivo") {
+                                mejorasPagina.appendChild(filaRespuesta);
+                            }
+                        };
+
+                        if (pregunta.tipo == "1") {
+                            if (texto == "NO") {
+                                mejorasPagina.appendChild(filaRespuesta);
+                            }
+                        };
+                    })
+                }
+
+                contenido.appendChild(mejorasPagina);
+            }
+        }
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ ultima pagina
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        const ultimaPagina = crearPaginaConMarco('Autoevaluación', '890');
+
+        const tituloUltima = document.createElement('p');
+        tituloUltima.innerHTML = "Ejemplo de borde";
+        tituloUltima.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        tituloUltima.style.fontSize = '16pt';
+        tituloUltima.style.fontWeight = 'bold';
+        tituloUltima.style.textAlign = 'center';
+        tituloUltima.style.marginTop = '5mm';
+        ultimaPagina.appendChild(tituloUltima);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.innerHTML = "Solo para el borde.";
+        ultimaPagina.appendChild(parrafo);
+
+        contenido.appendChild(ultimaPagina);
+
 
 
         // Generar PDF directamente
@@ -402,7 +599,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
     }
 
 
-    function crearPaginaConMarco() {
+    function crearPaginaConMarco(textoLateral, numeroPagina) {
         const pagina = document.createElement('div');
         pagina.style.padding = '10mm';
         pagina.style.margin = '10mm';
@@ -412,8 +609,263 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         pagina.style.borderRadius = '5mm';
         pagina.style.position = 'relative'; // Para posicionar elementos internos
         pagina.style.pageBreakAfter = 'always'; // Salto de página después
+
+        // Si se proporciona texto lateral
+        if (textoLateral) {
+            const textoLateralElemento = document.createElement('div');
+            textoLateralElemento.textContent = textoLateral;
+            textoLateralElemento.style.position = 'absolute';
+            textoLateralElemento.style.left = '85%'; // centrado horizontalmente
+            textoLateralElemento.style.top = '-3%'; // centrado verticalmente
+            textoLateralElemento.style.transform = 'translateX(-50%, -50%)';
+            textoLateralElemento.style.transformOrigin = 'left center';
+            // textoLateralElemento.style.bottom = '-200px'; // Ajusta este valor según necesites
+            textoLateralElemento.style.whiteSpace = 'nowrap';
+            textoLateralElemento.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            textoLateralElemento.style.fontSize = '10pt';
+            textoLateralElemento.style.color = '#666'; // Color gris para mayor visibilidad
+            // textoLateralElemento.style.opacity = '0.8'; // Semi-transparente
+
+            pagina.appendChild(textoLateralElemento);
+        }
+
+        // Número de página
+        if (numeroPagina !== undefined) {
+            const paginaNumero = document.createElement('div');
+            paginaNumero.textContent = `Página ${numeroPagina}`;
+            paginaNumero.style.position = 'absolute';
+            paginaNumero.style.left = '50%';
+            paginaNumero.style.transform = 'translateX(-50%)';
+            paginaNumero.style.bottom = '-20px'; // Ajusta según necesites
+            paginaNumero.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            paginaNumero.style.fontSize = '10pt';
+            paginaNumero.style.color = '#666';
+
+            pagina.appendChild(paginaNumero);
+        }
         return pagina;
     }
+
+    /* ----------------------------------------- */
+    /*           lee Capitulos
+    /* ----------------------------------------- */
+    async function leeCapitulos() {
+        try {
+            const respuesta = await fetch(`/capitulos?idioma=${idioma}`);
+            if (respuesta.ok) {
+                const capitulos = await respuesta.json();
+                return capitulos;
+            } else {
+                console.error("Error al obtener los datos");
+            }
+        } catch (error) {
+            console.error("Error al realizar la solicitud:", error);
+        }
+        return false;
+    }
+
+    // -----------------------------------------
+    //   recuperarPreguntas          
+    /* ----------------------------------------- */
+    async function recuperarPreguntas(capitulo) {
+        try {
+            let url = "/preguntas";
+            if (capitulo !== null) {
+                url += `?capitulo=${encodeURIComponent(capitulo)}`;
+            }
+
+            const response = await fetch(url);
+            if (response.ok) {
+                const result = await response.json(); // Procesa la respuesta como JSON
+                // console.log("termino lectura preguntas");
+                return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+            } else {
+                console.error("Error al obtener las preguntas:", response.statusText);
+                return [];
+            }
+        } catch (error) {
+            console.error("Error al realizar la solicitud:", error);
+            return [];
+        }
+    }
+
+    /* -----------------------------------------
+    //     buscaRespuesta    
+    /* ----------------------------------------- */
+    async function buscaRespuesta(CUIT, capitulo) {
+        try {
+            const response = await fetch(
+                `/busca-respuesta-capitulo-ordenado?CUIT=${CUIT}&capitulo=${capitulo}`
+            );
+            if (!response.ok) {
+                throw new Error("Respuesta no OK de buscaRespuesta");
+            }
+
+            const resultado = await response.json();
+            return { exists: resultado.exists, respuestas: resultado.records || [] };
+        } catch (error) {
+            console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+            return { exists: false, respuestas: [] };
+        }
+    }
+
+    /* -----------------------------------------
+    obtenerNombreSeccion
+    /* ----------------------------------------- */
+    async function obtenerNombreSeccion(indice, idioma, capitulo) {
+        try {
+            const response = await fetch(
+                `/secciones?indice=${indice}&idioma=${idioma}&capitulo=${capitulo}`
+            );
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            if (data.length > 0) {
+                return data[0].descripcion;
+            } else {
+                return "Descripción no disponible";
+            }
+        } catch (error) {
+            console.error(
+                `para leer indice ${indice}, idioma ${idioma}, capitulo ${capitulo}`
+            );
+            console.error("Error al obtener la descripción:", error);
+            return "Descripción no disponible";
+        }
+    }
+
+
+    /* -----------------------------------------
+    poneRespuesta
+    /* ----------------------------------------- */
+    async function poneRespuesta(respuesta, pregunta) {
+        // recupera la respuesta segun el numero de pregunta....;
+        const registroRespuestasSeccion = respuesta; //es el arreglo de respuestas para todas las preguntas de la seccion)
+        let arrayRespuestas = registroRespuestasSeccion.respuesta;
+
+        valorRespuesta = arrayRespuestas[pregunta.Numero - 1]; // resta 1 por la posición 0
+
+        // segun el tipo de respuesta (en pregunta.tipo) se convierte para mostrar
+        // tipo 1:  1: si,  2: no
+        if (pregunta.tipo == 1) {
+            if (valorRespuesta == 1) {
+                return "SI";
+            } else {
+                return "NO";
+            }
+        }
+
+        if (pregunta.tipo == 3) {
+            return valorRespuesta;
+        }
+
+        if (pregunta.tipo == 51) {
+            const registroTextoRespuestas = textoRespuestas.find(
+                (item) => item.pregunta == pregunta.tipo
+            );
+            return registroTextoRespuestas.textos[valorRespuesta - 1];
+        }
+
+        if (pregunta.tipo > 50) {
+            try {
+                const registroTextoRespuestas = textoRespuestas.find(
+                    (registro) => registro.pregunta === pregunta.tipo
+                );
+                if (!registroTextoRespuestas) {
+                    console.error(
+                        `No se encontró un registro con pregunta igual a ${pregunta.tipo}`
+                    );
+                }
+                valorRespuesta = arrayRespuestas[pregunta.Numero - 1]; // resta 1 por la posición 0
+                if (valorRespuesta == "9") {
+                    return "No aplica";
+                } else {
+                    const texto = registroTextoRespuestas.textos[valorRespuesta - 1];
+                    return texto;
+                }
+            } catch (error) {
+                console.error("Error procesando bloque para pregunta.tipo > 50:", error);
+            }
+        }
+
+        if (pregunta.tipo > 40 && pregunta.tipo < 50) {
+            console.log(
+                `\n Pregunta a procesar ${pregunta.Numero} y tipo ${pregunta.tipo} \n`
+            );
+            let indicesCheck = 0;
+            const registroTextoCheck = textoCheck.find(
+                (item) => item.pregunta == pregunta.tipo
+            );
+            if (!registroTextoCheck) {
+                console.log(
+                    "No se encontró ninguna fila con la pregunta:",
+                    pregunta.tipo
+                );
+                return;
+            }
+            valorRespuesta = arrayRespuestas[pregunta.Numero - 1]; // resta 1 por la posición 0
+            const valoresTextoCheck = registroTextoCheck.textos;
+            // console.log(`registro Respuestas seccion  ${registroRespuestasSeccion.respuesta}`);
+            if (pregunta.tipo == 42 || pregunta.tipo == 43) {
+                arrayRespuestas = registroRespuestasSeccion.respuesta;
+            } else {
+                arrayRespuestas = registroRespuestasSeccion.respuesta[6];
+            }
+            // console.log(`array rsepuestas  ${arrayRespuestas}`)
+            let conjunto = "";
+            arrayRespuestas.forEach((indice, i) => {
+                const texto = valoresTextoCheck[indice - 1]; // Obtener el texto correspondiente al índice
+                if (i > 0) {
+                    conjunto += ", "; // Agregar una coma y un espacio antes de cada texto (excepto el primero)
+                }
+                conjunto += texto;
+            });
+            return conjunto;
+        }
+    }
+
+
+    /* -----------------------------------------
+    leeTextoCheck          
+    /* ----------------------------------------- */
+    async function leeTextoCheck() {
+        try {
+            const response = await fetch("/textocheck");
+            if (response.ok) {
+                const result = await response.json();
+                return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+            } else {
+                console.error("Error al obtener las preguntas:", response.statusText);
+                return [];
+            }
+        } catch (error) {
+            console.error("Error al realizar la solicitud:", error);
+            return [];
+        }
+    }
+
+    /* -----------------------------------------
+    leeTextoRespuestas         
+    /* ----------------------------------------- */
+    async function leeTextoRespuestas() {
+        try {
+            const response = await fetch("/textorespuestas");
+            if (response.ok) {
+                const result = await response.json();
+                // console.log("Datos recibidos de /textorespuestas:", result); // Verifica la estructura aquí
+                return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
+            } else {
+                console.error("Error al obtener las preguntas:", response.statusText);
+                return [];
+            }
+        } catch (error) {
+            console.error("Error al realizar la solicitud:", error);
+            return [];
+        }
+    }
+
 </script>
 
 </html>
