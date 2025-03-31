@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de riesgos</title>
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+    <link href="../estilos/estiloEncuestas.css" rel="stylesheet">
+    <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="survey-container">
+        <section class="main">
+            <section class="gobCorpo">
+                <div class="header-container">
+                    <div class="header-center">
+                        <div id="nombreEmpresa" class="company-name"></div>
+                        <div id="nombreUsuario" class="user-name"></div>
+                    </div>
+                    <div class="nav-iconsxx">
+                        <h4> A - Manejo de los Riesgos de Gobierno Corporativo</h4>
+                    </div>
+                    <div class="nav-iconsxx">
+                        <h5> Autoevaluación</h5>
+                    </div>
+                </div>
+                <hr>
+
+                <form id="formulario">
+
+                    <div class="center-container">
+                        <h4 class="tituloSeccion"><a href="Menu-A.html">II - Estructura organizacional</a></h4>
+                    </div>
+
+
+                    <div id="overlay">
+                        <div id="ventanaSalida">
+                            <div class="confirm-box">
+                                <p>La información registrada hasta la sección anterior queda almacenada. <br><br> Si sale de la
+                                    aplicación, podrá completar posteriormente las secciones faltantes.
+                                    <br><br>
+                                    Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
+                                </p>
+                                <button id="confirm-yes">Salir</button>
+                                <button id="confirm-no">Continuar</button><br>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="centrado-flex">
+                        <button type="submit" id="boton-enviar">Generar</button>
+                        <button type="button" id="boton-generar-pdf">Generar PDF</button>
+                    </div>
+
+
+                </form>
+            </section>
+        </section>
+    </div>
+
+</body>
+
+<script>
+
+document.getElementById("boton-generar-pdf").addEventListener("click", generarPDF);
+
+
+// Función para generar el PDF
+function generarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+            // Cargar la imagen
+            const img = new Image();
+            img.src = "../img/imagenPDF.webp";
+
+            img.onload = function () {
+                // Primera página con la imagen institucional
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                doc.addImage(img, "WEBP", 0, 0, pageWidth, pageHeight);
+
+                // Segunda página - Índice
+                doc.addPage();
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(16);
+                doc.text("Índice General", 105, 20, { align: "center" });
+
+                const indice = [
+                    "1. Introducción",
+                    "2. Desarrollo",
+                    "3. Conclusión"
+                ];
+
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(12);
+                let yOffset = 40;
+                indice.forEach((item, index) => {
+                    doc.text(`${index + 1}. ${item}`, 20, yOffset);
+                    yOffset += 10;
+                });
+
+                // Tercera página - Contenido
+                doc.addPage();
+                doc.setFontSize(14);
+                doc.text("Contenido generado desde la aplicación", 20, 20);
+
+                // Guardar el PDF
+                doc.save("documento.pdf");
+            };
+        }
+    </script>
+
+</body>
+
+</html>
