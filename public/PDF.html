@@ -107,7 +107,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
         tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.3)';
         tituloCaratula.style.marginTop = '40mm';
-        tituloCaratula.innerHTML = "Aplicación del Modelo HEXA RCi"
+        tituloCaratula.innerHTML = "Aplicación del Modelo HexaRci"
         primeraPagina.appendChild(tituloCaratula);
 
         contenido.appendChild(primeraPagina);
@@ -123,9 +123,9 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         tituloIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
         paginaIndice.appendChild(tituloIndice);
 
-        const indice = ["Introducción: Optimización Empresarial y Gestión de Riesgos",
-            "El Modelo HexaRCi",
-            "Aplicación del Modelo y Conclusiones",
+        const indice = ["El Modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos",
+            "Estructura del Modelo HexaRCi",
+            "Aplicación del Modelo HexaRCi y conclusiones",
             "Representación gráfica",
             "Recomendaciones.  Oportunidades de mejora"];
         const listaIndice = document.createElement('ol');
@@ -161,7 +161,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const terceraPagina = crearPaginaConMarco();
 
         const tituloTercera = document.createElement('p');
-        tituloTercera.innerHTML = "Introducción: Optimización Empresarial y Gestión de Riesgos";
+        tituloTercera.innerHTML = "El Modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos";
         tituloTercera.style.fontFamily = 'Helvetica, Arial, sans-serif';
         tituloTercera.style.fontSize = '16pt';
         tituloTercera.style.fontWeight = 'bold';
@@ -173,7 +173,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "En el dinámico escenario empresarial actual, las organizaciones enfrentan el desafío constante de incrementar su rentabilidad y mantener una posición competitiva sólida. Este objetivo fundamental requiere una comprensión profunda y un manejo estratégico de los diversos factores de riesgo que pueden impactar el desempeño y la sostenibilidad del negocio.<br><br>Cada estructura empresarial aspira a un modelo de organización y funcionamiento ideal, un esquema que maximice la eficiencia operativa y minimice la exposición a riesgos potenciales. Sin embargo, alcanzar este estado óptimo no es un proceso simple, sino un ejercicio complejo de análisis, evaluación y adaptación continua.<br><br>En este contexto, surge la herramienta HexaRCi como un instrumento innovador que permite a las organizaciones navegar de manera sistemática y racional a través de su modelo de negocio. HexaRCi ofrece a los usuarios una perspectiva integral para recorrer los elementos críticos de la organización, facilitando la elaboración de estrategias que aproximan a la empresa hacia su esquema de funcionamiento ideal.<br><br>Mediante un enfoque metódico, esta herramienta proporciona un marco de referencia para identificar, analizar y gestionar los riesgos empresariales, transformando lo que tradicionalmente se percibe como una amenaza en una oportunidad de mejora y crecimiento estratégico.";
+        parrafo.innerHTML = "En el dinámico escenario empresarial actual, las organizaciones enfrentan el desafío constante de incrementar su rentabilidad y mantener una posición competitiva sólida. Este objetivo fundamental requiere una comprensión profunda y un manejo estratégico de los diversos factores de riesgo que pueden impactar el desempeño y la sostenibilidad del negocio.<br><br>Cada estructura empresarial aspira a un modelo de organización y funcionamiento ideal, un esquema que maximice la eficiencia operativa y minimice la exposición a riesgos potenciales. Sin embargo, alcanzar este estado óptimo no es un proceso simple, sino un ejercicio complejo de análisis, evaluación y adaptación continua.<br><br>En este contexto, la herramienta HexaRCi se presenta como un instrumento innovador que permite a las organizaciones navegar de manera sistemática y racional a través de su modelo de negocio. HexaRCi ofrece a los usuarios una perspectiva integral para recorrer los elementos críticos de la organización, facilitando la elaboración de estrategias que aproximan a la empresa hacia su esquema de funcionamiento ideal.<br><br>Como resultado de su aplicación, la Alta Dirección obtiene un recurso fundamental: un informe detallado pero abarcativo que proporciona una visión panorámica de toda la organización. Este documento no solo presenta un diagnóstico general, sino que identifica con precisión los aspectos más débiles que obstaculizan la consecución de una organización de excelencia. Un valor agregado distintivo de este informe radica en su origen: es elaborado mediante una autoevaluación realizada por el personal interno, lo que garantiza una perspectiva auténtica, inmediata y profundamente conocedora de los procesos y dinámicas organizacionales<br><br>Mediante un enfoque metódico, esta herramienta proporciona un marco de referencia para identificar, analizar y gestionar los riesgos empresariales, transformando lo que tradicionalmente se percibe como una amenaza en una oportunidad de mejora y crecimiento estratégico.";
         terceraPagina.appendChild(parrafo);
 
         contenido.appendChild(terceraPagina);
@@ -184,10 +184,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la sexta pagina con un borde
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        const paginaHexa = crearPaginaConMarco();
+        let paginaHexa = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "El Modelo HexaRCi";
+        parrafo.innerHTML = "Estructura del Modelo HexaRCi";
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
@@ -198,13 +198,80 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
-        parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "El Modelo HexaRCi está preparado para empresas que tengan una estructura de Directorio de tres o más directores. En consecuencia, no es aplicable a empresas con estructuras más pequeñas. Tampoco es aplicable a empresas específicamente reguladas como ser Bancos y Compañías de seguro.<br><br>Una versión también interactiva, Modelo HexaRCiS, para compañías más pequeñas, está en desarrollo, con un enfoque conceptual idéntico, pero adaptado a las características de este tipo de empresas.<br><br>Cada factor de los seis arriba indicados tiene una metodología plasmada en las 'Planillas de Autoevaluación'.<br><br>Existe una Planilla por cada factor evaluado. Así, existen seis Planillas: de Apetito de Riesgo; de Riesgos de Mercado; de Riesgos de Procesos; de Riesgos de Gobierno Corporativo; de Generación de Resultados y de Situación Financiera.<br><br>Cada Planilla presenta un número determinado de afirmaciones; a cada afirmación le corresponde un puntaje predeterminado; el puntaje representa el nivel de efectividad en el cumplimiento de la afirmación; el evaluador debe seleccionar, de acuerdo con su criterio, el puntaje que considera cumple la compañía. Cada Planilla, luego de ser completada por el evaluador concluye en un puntaje total que representa el porcentaje de cumplimiento respecto de un puntaje total posible del factor evaluado.";
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "El proceso de autoevaluación del modelo HexaRCi fue completado por el personal de la empresa que asumió la responsabilidad de evaluar cada consigna. La información presentada en este informe refleja directamente la perspectiva y el análisis realizados, cuya validez y precisión dependen directamente del grado de objetividad y certeza con el que se respondió a cada consulta. En este sentido, las conclusiones aquí expuestas están directamente condicionadas por la rigurosidad y transparencia con que se abordó cada aspecto de la evaluación, siendo fundamental reconocer que la calidad del diagnóstico es un reflejo directo de la objetividad en el proceso de autoevaluación.<br><br><strong>Alcance de la Autoevaluación</strong><br><br>El proceso de autoevaluación comprendió el análisis de cuatro factores de riesgo fundamentales y dos factores temporales, proporcionando una visión integral de la situación organizacional:<br><br>Factores de Riesgo Evaluados<br><br>1. <strong>Riesgos del Gobierno Corporativo.</strong> Representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos.<br>Se han propuesto <strong> 84 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
+
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "2. <strong>Apetito de Riesgo.</strong> Representa la cantidad de riesgo que la empresa está dispuesta a 'tomar'. Un Apetito de Riesgo alto puede llevar al crecimiento y a utilidades, pero puede llevar también a enfrentar pérdidas importantes. Un Apetito de Riesgo bajo puede llevar a perder posiciones competitivas o a la inmovilidad. El objetivo es tener un Apetito de Riesgo adecuado en relación con las necesidades competitivas y la cultura de la empresa.<br>Se han propuesto <strong> 71 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
 
         paginaHexa.appendChild(parrafo);
 
         contenido.appendChild(paginaHexa);
 
+        paginaHexa = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "3. <strong>Riesgos de Mercado.</strong>Se refieren a las amenazas o peligros debido a factores externos y que pueden tener un impacto negativo en los objetivos y resultados deseados. Los riesgos del mercado son parte del sistema estratégico/táctico de la compañía y, conjuntamente con los riesgos de los procesos y el apetito de riesgo constituyen los riesgos que tiene que manejar el Sistema de Gobierno Corporativo.<br>Se han propuesto <strong> 43 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
+
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "4. <strong>Riesgos de los Procesos.</strong>Comprenden las secuencias de actividades interrelacionadas que se llevan a cabo para alcanzar los objetivos de la empresa. Incluyen conceptualmente: Procesos de Gestión, Procesos Operativos y Procesos de Soporte. La identificación, modelado y mejora continua de estos procesos son elementos clave para aumentar la eficiencia, la calidad y la competitividad de la empresa. El objetivo es tener procesos sólidos que minimicen la posibilidad de incurrir en pérdidas por mal manejo de los mismos.<br>Se han propuesto <strong> 276 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
+
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontSize = '13pt';
+        // parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Factores temporales.";
+
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontSize = '13pt';
+        // parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Situación Financiera.";
+
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontSize = '13pt';
+        // parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Generación de Resultados.";
+
+        paginaHexa.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "<strong>Evaluación de Cumplimiento</strong><br><br>Basándonos en las respuestas proporcionadas, se estableció un grado de cumplimiento o acercamiento hacia la situación ideal para cada factor de riesgo, representado mediante una magnitud porcentual. Cada riesgo obtuvo un 'porcentaje de cumplimiento' que refleja su estado actual en relación con los estándares óptimos del modelo HexaRCi.";
+        // Crear la imagen
+        const imagen = document.createElement('img');
+        imagen.src = '../img/cuadroGeneral.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '300px';    // Ajusta el tamaño según necesites
+
+        paginaHexa.appendChild(parrafo);
+        paginaHexa.appendChild(imagen);
+
+        contenido.appendChild(paginaHexa);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la cuarta página (contenido) con un borde
@@ -212,7 +279,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const cuartaPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Aplicación del Modelo y Conclusiones";
+        parrafo.innerHTML = "Aplicación del Modelo HexaRCi y Conclusiones";
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
@@ -436,7 +503,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "El análisis realizado a través del Modelo HEXARCi mediante la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.<br><br>Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.<br><br>Los aspectos a mejorar más significativos en cada factor de riesgo:<br><br>♦ Manejo de los Riesgos de Gobierno Corporativo (MRG);<br><br> Manejo de los Riesgos del Apetito de Riesgo (MAR);<br><br> Manejo de los Riesgos de Mercado (MRM) y<br><br> Manejo de los Riesgos de los Procesos<br><br>se exponen a continuación:";
+        parrafo.innerHTML = "El análisis realizado a través del Modelo HEXARCi mediante la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.<br><br>Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.<br><br>Los aspectos a mejorar más significativos en cada factor de riesgo:<br><br> ♦ Manejo de los Riesgos de Gobierno Corporativo (MRG);<br><br> ♦ Manejo de los Riesgos del Apetito de Riesgo (MAR);<br><br> ♦ Manejo de los Riesgos de Mercado (MRM) y<br><br> ♦ Manejo de los Riesgos de los Procesos<br><br>se exponen a continuación:";
         sextaPagina.appendChild(parrafo);
 
         contenido.appendChild(sextaPagina);
@@ -447,7 +514,9 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         capitulos = await leeCapitulos();
-        console.log(capitulos)
+        // console.log(capitulos)
+        let alturaMaxima = 40;
+        let alturaActual = 0;
 
         for (const capitulo of capitulos) {
             if (capitulo.letra == "E" || capitulo.letra == "F") {
@@ -456,7 +525,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
             matrizPreguntas = await recuperarPreguntas(capitulo.letra);
 
-            const mejorasPagina = crearPaginaConMarco();
+            let mejorasPagina = crearPaginaConMarco();
 
             parrafo = document.createElement('p');
             parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
@@ -473,9 +542,9 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
             // Busca las respuestas de ese capítulo
             const data = await buscaRespuesta(CUIT, capitulo.letra);
-            console.log(`cuit ${CUIT}, capitulo ${capitulo.letra}`)
+            // console.log(`cuit ${CUIT}, capitulo ${capitulo.letra}`)
             const respuestas = data.respuestas || []; // Si no hay respuestas, asigna un array vacío
-            console.log(respuestas)
+            // console.log(respuestas)
 
             // Crear el encabezado (seccion):::::::::::::::::::::::::::
             for (const respuesta of respuestas) {
@@ -503,6 +572,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
                 const descripcionElemento = document.createElement('div');
                 descripcionElemento.style.fontSize = "15px";
+                descripcionElemento.style.borderRadius = "8px";
+                descripcionElemento.style.marginTop = "15px"; // Agrega espacio arriba
+                descripcionElemento.style.padding = "10px"; // Espacio interno entre el borde y el texto
+
                 if (capitulo.letra == "A") {
                     descripcionElemento.style.backgroundColor = "#FAF0E6";
                 }
@@ -518,9 +591,13 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                 descripcionElemento.innerHTML = "[ " + respuesta.porcentaje + " % ]  -  Sección: " + respuesta.seccion + ". " + descripcion;
                 mejorasPagina.appendChild(descripcionElemento);
 
+                // Obtener la altura real del elemento después de agregarlo al DOM
+                // let alturaElemento = descripcionElemento.offsetHeight;
+                // console.log(`altura titulo ${alturaElemento}`)
+                // alturaActual += alturaElemento;
+                alturaActual += 3;
 
                 // contenido.appendChild(mejorasPagina);
-
 
                 // Crear el cuerpo de la tabla::::::::::::::::::::::::::::::
                 let info = respuesta.seccion;
@@ -536,40 +613,44 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                     let filaRespuesta = document.createElement("div");
                     filaRespuesta.classList.add("situacion2");
 
-                    let celdaNumero = document.createElement("div");
-                    celdaNumero.style.width = "5px"; // Define el ancho en píxeles
-                    celdaNumero.textContent = pregunta.Numero;
-                    filaRespuesta.appendChild(celdaNumero);
-
-                    let consigna = document.createElement("div");
-                    consigna.style.width = "300px"; // Define el ancho en píxeles
-                    consigna.textContent = pregunta.Descrip;
-                    consigna.style.fontSize = "16px";
-                    filaRespuesta.appendChild(consigna);
+                    let renglon = document.createElement("div");
+                    renglon.textContent = pregunta.Numero + " - " + pregunta.Descrip;
+                    renglon.style.marginLeft = "15px"; // Agrega espacio 
+                    renglon.style.marginTop = "5px"; // Agrega espacio 
+                    filaRespuesta.appendChild(renglon);
 
                     poneRespuesta(respuesta, pregunta).then((texto) => {
-                        if (pregunta.tipo == "52") {
-                            if (texto == "No efectivo" || texto == "Poco efectivo") {
-                                mejorasPagina.appendChild(filaRespuesta);
-                            }
-                        };
+                        if (
+                            (pregunta.tipo == "52" && (texto == "No efectivo" || texto == "Poco efectivo")) ||
+                            (pregunta.tipo == "1" && texto == "NO")) {
+                            mejorasPagina.appendChild(filaRespuesta);
 
-                        if (pregunta.tipo == "1") {
-                            if (texto == "NO") {
-                                mejorasPagina.appendChild(filaRespuesta);
-                            }
+                        const textoCompleto = renglon.textContent || renglon.innerText;
+                        const lineasEstimadas = estimarLineasPorCaracteres(textoCompleto, 80);
+                        alturaActual += lineasEstimadas;                       
+                        }
+
+                        function estimarLineasPorCaracteres(texto, caracteresPromedioPorLinea) {
+                            // Remover HTML si hay
+                            const textoPlano = texto.replace(/<[^>]*>/g, '');
+                            return Math.ceil(textoPlano.length / caracteresPromedioPorLinea);
+                        }
+
+                        // Si la altura acumulada excede el límite, crear nueva hoja
+                        if (alturaActual >= alturaMaxima) {
+                            mejorasPagina = crearPaginaConMarco();
+                            alturaActual = 0; // Reiniciar el contador de altura
                         };
                     })
+                    contenido.appendChild(mejorasPagina);
                 }
-
-                contenido.appendChild(mejorasPagina);
             }
         }
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ ultima pagina
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        const ultimaPagina = crearPaginaConMarco('Autoevaluación', '890');
+        const ultimaPagina = crearPaginaConMarco('Autoevaluación', '890', 'BDT Advisory', 'Nombre del Cliente')
 
         const tituloUltima = document.createElement('p');
         tituloUltima.innerHTML = "Ejemplo de borde";
@@ -589,8 +670,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(ultimaPagina);
 
-
-
         // Generar PDF directamente
         html2pdf().from(contenido).set(opciones).save()
             .catch(error => {
@@ -599,7 +678,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
     }
 
 
-    function crearPaginaConMarco(textoLateral, numeroPagina) {
+    function crearPaginaConMarco(textoLateral, numeroPagina, marcaElemento, clienteElemento) {
         const pagina = document.createElement('div');
         pagina.style.padding = '10mm';
         pagina.style.margin = '10mm';
@@ -642,7 +721,38 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             paginaNumero.style.color = '#666';
 
             pagina.appendChild(paginaNumero);
+
         }
+        //  marca BDT Advisory
+        if (marcaElemento !== undefined) {
+            const marca = document.createElement('div');
+            marca.textContent = marcaElemento;
+            marca.style.position = 'absolute';
+            marca.style.left = '10%';
+            marca.style.transform = 'translateX(-50%)';
+            marca.style.bottom = '-20px'; // Ajusta según necesites
+            marca.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            marca.style.fontSize = '10pt';
+            marca.style.color = '#666';
+
+            pagina.appendChild(marca);
+        }
+
+        if (clienteElemento !== undefined) {
+            const cliente = document.createElement('div');
+            cliente.textContent = clienteElemento;
+            cliente.style.position = 'absolute';
+            cliente.style.top = '-3%'; // centrado verticalmente
+            cliente.style.left = '10%';
+            cliente.style.transform = 'translateX(-50%)';
+            cliente.style.bottom = '-20px'; // Ajusta según necesites
+            cliente.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            cliente.style.fontSize = '10pt';
+            cliente.style.color = '#666';
+
+            pagina.appendChild(cliente);
+        }
+
         return pagina;
     }
 
@@ -736,7 +846,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         }
     }
 
-
     /* -----------------------------------------
     poneRespuesta
     /* ----------------------------------------- */
@@ -791,9 +900,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         }
 
         if (pregunta.tipo > 40 && pregunta.tipo < 50) {
-            console.log(
-                `\n Pregunta a procesar ${pregunta.Numero} y tipo ${pregunta.tipo} \n`
-            );
             let indicesCheck = 0;
             const registroTextoCheck = textoCheck.find(
                 (item) => item.pregunta == pregunta.tipo
@@ -825,7 +931,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             return conjunto;
         }
     }
-
 
     /* -----------------------------------------
     leeTextoCheck          
