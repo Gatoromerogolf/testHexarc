@@ -62,6 +62,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
     const idioma = localStorage.getItem("idioma");
     const CUIT = localStorage.getItem("CUIT");
     let max = 90;
+    let numPagina = 0;
 
     const textoTipificacion = localStorage.getItem("textoTipificacion");
     const tipificacion = localStorage.getItem("tipificacion");
@@ -101,7 +102,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const tituloCaratula = document.createElement('h1');
         tituloCaratula.textContent = 'Índice General';
         tituloCaratula.style.textAlign = 'center';
-        tituloCaratula.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        tituloCaratula.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         tituloCaratula.style.fontSize = '26pt';
         tituloCaratula.style.color = 'white';
         // tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
@@ -110,44 +111,82 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         tituloCaratula.innerHTML = "Aplicación del Modelo HexaRci"
         primeraPagina.appendChild(tituloCaratula);
 
+        const segundaLeyenda = document.createElement('h2');
+        segundaLeyenda.innerHTML = 'Informe confidencial<BR> correspondiente a<BR>NOMBRE DEL CLIENTE';
+        segundaLeyenda.style.textAlign = 'center';
+        segundaLeyenda.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        segundaLeyenda.style.fontSize = '20pt';
+        segundaLeyenda.style.color = 'white';
+        segundaLeyenda.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
+        segundaLeyenda.style.marginTop = '150px'; // Ajusta según necesites
+        primeraPagina.appendChild(segundaLeyenda);
+
         contenido.appendChild(primeraPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la segunda página (índice)
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const paginaIndice = crearPaginaConMarco();
+        // Establecer la imagen de fondo
+        // paginaIndice.style.backgroundImage = 'url("../img/imagenEdificios.webp")';
+        // paginaIndice.style.backgroundSize = 'cover';
+        // paginaIndice.style.position = 'relative';
+        // paginaIndice.style.width = 'calc(100% - 20mm)'; // Ancho ajustado para márgenes
+        // paginaIndice.style.height = '277mm'; // Altura A4 menos márgenes
+        // paginaIndice.style.margin = '10mm';
+
+        // Crear un div overlay
+        // let overlay = document.createElement("div");
+        // overlay.style.position = "absolute";
+        // overlay.style.top = "0";
+        // overlay.style.left = "0";
+        // overlay.style.width = 'calc(100% - 20mm)'; // Ancho ajustado para márgenes
+        // overlay.style.height = '277mm'; // Altura A4 menos márgenes
+        // overlay.style.backgroundColor = "rgba(255, 255, 255, 0.9)"; // Ajusta la transparencia
+        // overlay.style.pointerEvents = "none"; // Evita interferencias con eventos
+        // Agregar el overlay al elemento
+        // paginaIndice.appendChild(overlay);
 
         const tituloIndice = document.createElement('h1');
         tituloIndice.textContent = 'Índice General';
         tituloIndice.style.textAlign = 'center';
-        tituloIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        tituloIndice.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         paginaIndice.appendChild(tituloIndice);
 
-        const indice = ["El Modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos",
-            "Estructura del Modelo HexaRCi",
-            "Aplicación del Modelo HexaRCi y conclusiones",
-            "Representación gráfica",
-            "Recomendaciones.  Oportunidades de mejora"];
-        const listaIndice = document.createElement('ol');
-        listaIndice.style.marginTop = '5mm';
-        listaIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // const indice = ["El Modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos",
+        //     "Estructura del Modelo HexaRCi",
+        //     "Aplicación del Modelo HexaRCi y conclusiones",
+        //     "Representación gráfica",
+        //     "Recomendaciones.  Oportunidades de mejora"];
+        // const listaIndice = document.createElement('ol');
+        // listaIndice.style.marginTop = '5mm';
+        // listaIndice.style.fontFamily = 'Helvetica, Arial, sans-serif';
 
-        indice.forEach(item => {
-            const elementoLista = document.createElement('li');
-            elementoLista.textContent = item;
-            elementoLista.style.marginBottom = '5mm';
-            listaIndice.appendChild(elementoLista);
-        });
+        // indice.forEach(item => {
+        //     const elementoLista = document.createElement('li');
+        //     elementoLista.textContent = item;
+        //     elementoLista.style.marginBottom = '5mm';
+        //     listaIndice.appendChild(elementoLista);
+        // });
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '12pt';
+        parrafo.style.lineHeight = '1.5';
+        parrafo.style.fontStyle = 'normal'; // Agregar estilo itálico
+        parrafo.style.marginTop = '5mm';
+        parrafo.innerHTML = "1. El modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos<br>2. Estructura del Modelo HexaRCi.<br>2.1. Alcance de la Autoevaluación<br>2.2. Factores de Riesgo evaluados<br>2.3. Factores temporales.<br>3. Evaluación del Cumplimiento<br>3.1. Gobierno Corporativo<br>3.2. Apetito de Riesgo<br>3.3. Riesgos de Mercado<br>3.4. Riesgos de Procesos.<br>3.5. Sistema Financiero<br>3.6. Generación de Resultados<br>4.  Aplicación del modelo HexaRCi y Conclusiones.<br>5. Representación Gráfica<br>6. Recomendaciones.  Oportunidades de mejora."
+        paginaIndice.appendChild(parrafo);
 
-        paginaIndice.appendChild(listaIndice);
+
+        // paginaIndice.appendChild(listaIndice);
 
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '11pt';
         parrafo.style.lineHeight = '1.5';
         parrafo.style.fontStyle = 'italic'; // Agregar estilo itálico
-        parrafo.style.marginTop = '150mm';
-        parrafo.innerHTML = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para BDT Advisory del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma."
+        parrafo.style.marginTop = '100mm';
+        parrafo.innerHTML = "De acuerdo con los términos de la Propuesta de servicios profesionales de BDT Advisory LLC para NOMBRE DEL CLIENTE del Sistema HexaRCi, el presente informe tiene el ámbito de uso reservado previsto en la misma."
         paginaIndice.appendChild(parrafo);
 
         contenido.appendChild(paginaIndice);
@@ -161,16 +200,16 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const terceraPagina = crearPaginaConMarco();
 
         const tituloTercera = document.createElement('p');
-        tituloTercera.innerHTML = "El Modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos";
-        tituloTercera.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        tituloTercera.innerHTML = "1. El Modelo HexaRCi en la optimización empresarial y la Gestión de Riesgos";
+        tituloTercera.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         tituloTercera.style.fontSize = '16pt';
         tituloTercera.style.fontWeight = 'bold';
-        tituloTercera.style.textAlign = 'center';
+        tituloTercera.style.textAlign = 'left';
         tituloTercera.style.marginTop = '5mm';
         terceraPagina.appendChild(tituloTercera);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
         parrafo.innerHTML = "En el dinámico escenario empresarial actual, las organizaciones enfrentan el desafío constante de incrementar su rentabilidad y mantener una posición competitiva sólida. Este objetivo fundamental requiere una comprensión profunda y un manejo estratégico de los diversos factores de riesgo que pueden impactar el desempeño y la sostenibilidad del negocio.<br><br>Cada estructura empresarial aspira a un modelo de organización y funcionamiento ideal, un esquema que maximice la eficiencia operativa y minimice la exposición a riesgos potenciales. Sin embargo, alcanzar este estado óptimo no es un proceso simple, sino un ejercicio complejo de análisis, evaluación y adaptación continua.<br><br>En este contexto, la herramienta HexaRCi se presenta como un instrumento innovador que permite a las organizaciones navegar de manera sistemática y racional a través de su modelo de negocio. HexaRCi ofrece a los usuarios una perspectiva integral para recorrer los elementos críticos de la organización, facilitando la elaboración de estrategias que aproximan a la empresa hacia su esquema de funcionamiento ideal.<br><br>Como resultado de su aplicación, la Alta Dirección obtiene un recurso fundamental: un informe detallado pero abarcativo que proporciona una visión panorámica de toda la organización. Este documento no solo presenta un diagnóstico general, sino que identifica con precisión los aspectos más débiles que obstaculizan la consecución de una organización de excelencia. Un valor agregado distintivo de este informe radica en su origen: es elaborado mediante una autoevaluación realizada por el personal interno, lo que garantiza una perspectiva auténtica, inmediata y profundamente conocedora de los procesos y dinámicas organizacionales<br><br>Mediante un enfoque metódico, esta herramienta proporciona un marco de referencia para identificar, analizar y gestionar los riesgos empresariales, transformando lo que tradicionalmente se percibe como una amenaza en una oportunidad de mejora y crecimiento estratégico.";
@@ -178,25 +217,22 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(terceraPagina);
 
-
-
-
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la sexta pagina con un borde
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         let paginaHexa = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Estructura del Modelo HexaRCi";
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.innerHTML = "2. Estructura del Modelo HexaRCi";
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
-        parrafo.style.textAlign = 'center';
+        parrafo.style.textAlign = 'left';
         parrafo.style.marginTop = '5mm';
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
         parrafo.innerHTML = "El proceso de autoevaluación del modelo HexaRCi fue completado por el personal de la empresa que asumió la responsabilidad de evaluar cada consigna. La información presentada en este informe refleja directamente la perspectiva y el análisis realizados, cuya validez y precisión dependen directamente del grado de objetividad y certeza con el que se respondió a cada consulta. En este sentido, las conclusiones aquí expuestas están directamente condicionadas por la rigurosidad y transparencia con que se abordó cada aspecto de la evaluación, siendo fundamental reconocer que la calidad del diagnóstico es un reflejo directo de la objetividad en el proceso de autoevaluación.<br><br><strong>Alcance de la Autoevaluación</strong><br><br>El proceso de autoevaluación comprendió el análisis de cuatro factores de riesgo fundamentales y dos factores temporales, proporcionando una visión integral de la situación organizacional:<br><br>Factores de Riesgo Evaluados<br><br>1. <strong>Riesgos del Gobierno Corporativo.</strong> Representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos.<br>Se han propuesto <strong> 84 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
@@ -204,7 +240,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
         parrafo.innerHTML = "2. <strong>Apetito de Riesgo.</strong> Representa la cantidad de riesgo que la empresa está dispuesta a 'tomar'. Un Apetito de Riesgo alto puede llevar al crecimiento y a utilidades, pero puede llevar también a enfrentar pérdidas importantes. Un Apetito de Riesgo bajo puede llevar a perder posiciones competitivas o a la inmovilidad. El objetivo es tener un Apetito de Riesgo adecuado en relación con las necesidades competitivas y la cultura de la empresa.<br>Se han propuesto <strong> 71 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
@@ -216,7 +252,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         paginaHexa = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
         parrafo.innerHTML = "3. <strong>Riesgos de Mercado.</strong>Se refieren a las amenazas o peligros debido a factores externos y que pueden tener un impacto negativo en los objetivos y resultados deseados. Los riesgos del mercado son parte del sistema estratégico/táctico de la compañía y, conjuntamente con los riesgos de los procesos y el apetito de riesgo constituyen los riesgos que tiene que manejar el Sistema de Gobierno Corporativo.<br>Se han propuesto <strong> 43 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
@@ -224,7 +260,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
         parrafo.innerHTML = "4. <strong>Riesgos de los Procesos.</strong>Comprenden las secuencias de actividades interrelacionadas que se llevan a cabo para alcanzar los objetivos de la empresa. Incluyen conceptualmente: Procesos de Gestión, Procesos Operativos y Procesos de Soporte. La identificación, modelado y mejora continua de estos procesos son elementos clave para aumentar la eficiencia, la calidad y la competitividad de la empresa. El objetivo es tener procesos sólidos que minimicen la posibilidad de incurrir en pérdidas por mal manejo de los mismos.<br>Se han propuesto <strong> 276 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
@@ -243,7 +279,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         // parrafo.style.fontSize = '13pt';
         // parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Situación Financiera.";
+        parrafo.innerHTML = "Situación Financiera.<br><br>Algún texto habría que poner para homogeneizar con lo anterior";
 
         paginaHexa.appendChild(parrafo);
 
@@ -251,27 +287,243 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         // parrafo.style.fontSize = '13pt';
         // parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Generación de Resultados.";
+        parrafo.innerHTML = "Generación de Resultados.<br><br>Igual que en situación financiera";
 
         paginaHexa.appendChild(parrafo);
+
+        contenido.appendChild(paginaHexa);
+        console.log ("pagina 2. Estructura")
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3. Evaluación del Cumplimiento";
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Con base en las respuestas proporcionadas, se determinó el grado de cumplimiento o aproximación a la situación ideal para cada factor de riesgo, expresado como un porcentaje.<br><br>Cada factor o elemento de riesgo recibió un 'porcentaje de cumplimiento' que refleja su estado actual en comparación con los estándares óptimos establecidos en el modelo HexaRCi. Los resultados obtenidos se presentan a continuación:<br><br>Cuadro General:<br><br>(Ahora está esta imagen pegada, pero despues se construirá automáticamente, con un formato similar al de las recomendaciones que aparecen al final.   NO se incluirá ni los puntos maximos ni los logrados, solo el porcentaje de cumplimiento.)";
+        // Crear la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/cuadroGeneral.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
+
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
+
+        contenido.appendChild(otraPagina);
+        console.log ("pagina 3 Evaluacion")
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento - Gobierno Corporativo
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3.1. Evaluación del Cumplimiento - Gobierno Corporativo";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
 
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "<strong>Evaluación de Cumplimiento</strong><br><br>Basándonos en las respuestas proporcionadas, se estableció un grado de cumplimiento o acercamiento hacia la situación ideal para cada factor de riesgo, representado mediante una magnitud porcentual. Cada riesgo obtuvo un 'porcentaje de cumplimiento' que refleja su estado actual en relación con los estándares óptimos del modelo HexaRCi.";
+        parrafo.innerHTML = "Algun texto descriptivo....:<br><br>Igual que en el cuadro general anterior se completara automaticamente con solo porcentajes";
         // Crear la imagen
-        const imagen = document.createElement('img');
-        imagen.src = '../img/cuadroGeneral.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/gobCorporativo.png';  // Reemplaza con la URL o ruta de la imagen
         imagen.alt = 'Descripción de la imagen';
         imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
         imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
-        imagen.style.width = '300px';    // Ajusta el tamaño según necesites
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
 
-        paginaHexa.appendChild(parrafo);
-        paginaHexa.appendChild(imagen);
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
 
-        contenido.appendChild(paginaHexa);
+        contenido.appendChild(otraPagina);
+        console.log ("pagina 3.1. Gob Corpo")
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento - Apetito de riesgo
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3.2. Evaluación del Cumplimiento - Apetito de Riesgo";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Algun texto descriptivo....:<br><br>Igual que en el cuadro general anterior se completara automaticamente con solo porcentajes";
+        // Crear la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/apeRiesgo.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
+
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
+
+        contenido.appendChild(otraPagina);
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento -  Riesgos de mercado
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3.3. Evaluación del Cumplimiento - Riesgos de Mercado";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Tiene otro formato...Habría que normalizarlo....";
+        // Crear la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/mercado.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
+
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
+
+        contenido.appendChild(otraPagina);
+
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento -  Riesgos de mercado
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3.4 Evaluación del Cumplimiento - Riesgos de Procesos";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Texto descriptivo...<br><br>Igual que en el cuadro general anterior se completara automaticamente con solo porcentajes";
+        // Crear la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/procesos.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
+
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
+
+        contenido.appendChild(otraPagina);
+
+
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento -  Financiero
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3.5 Evaluación del Cumplimiento - Sistema Financiero";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Texto descriptivo...Tiene otro formato.  Habría que tratar de normalizarlo.";
+        // Crear la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/financiero.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
+
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
+
+        contenido.appendChild(otraPagina);
+
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Añadir evaluacion de cumplimiento -  Financiero
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        otraPagina = crearPaginaConMarco();
+
+        parrafo = document.createElement('p');
+        parrafo.innerHTML = "3.6 Evaluación del Cumplimiento - Generación de Resultados";
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
+        otraPagina.appendChild(parrafo);
+
+        parrafo = document.createElement('p');
+        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "Texto descriptivo...Tiene otro formato igual que financiero....";
+        // Crear la imagen
+        imagen = document.createElement('img');
+        imagen.src = '../img/financiero.png';  // Reemplaza con la URL o ruta de la imagen
+        imagen.alt = 'Descripción de la imagen';
+        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
+        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
+        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
+
+        otraPagina.appendChild(parrafo);
+        otraPagina.appendChild(imagen);
+
+        contenido.appendChild(otraPagina);
+
+        console.log ("pagina 3.6. Resultados")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la cuarta página (contenido) con un borde
@@ -279,16 +531,16 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const cuartaPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Aplicación del Modelo HexaRCi y Conclusiones";
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.innerHTML = "4. Aplicación del Modelo HexaRCi y Conclusiones";
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
-        parrafo.style.textAlign = 'center';
+        parrafo.style.textAlign = 'left';
         parrafo.style.marginTop = '5mm';
         cuartaPagina.appendChild(parrafo);
 
         parrafo2 = document.createElement('p');
-        parrafo2.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo2.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo2.style.fontSize = '13pt';
         parrafo2.style.lineHeight = '1.5';
         parrafo2.style.fontStyle = 'normal'; // Agregar estilo itálico
@@ -297,7 +549,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         const resultado = document.createElement('p');
         resultado.innerHTML = tipificacion;
-        resultado.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        resultado.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         resultado.style.fontSize = '16pt';
         resultado.style.fontWeight = 'bold';
         resultado.style.textAlign = 'center';
@@ -305,7 +557,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         cuartaPagina.appendChild(resultado);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
         parrafo.innerHTML = 'BDT ADVISORY ' + textoTipificacion;
@@ -313,18 +565,21 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(cuartaPagina);
 
+        console.log ("pagina 4 Aplicacion Modelo")
+
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la quinta página dibuho hexagono
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const quintaPagina = crearPaginaConMarco();
 
-
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        parrafo.style.fontSize = '14pt';
-        parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "<strong><span class='company-name' style='font-size: 16px'>Representación gráfica</span></strong>";
+        parrafo.innerHTML = "5. Representación gráfica";
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '16pt';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.textAlign = 'left';
+        parrafo.style.marginTop = '5mm';
         quintaPagina.appendChild(parrafo);
 
         function crearContenidoPDF() {
@@ -470,20 +725,20 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             quintaPagina.appendChild(canvasContainer);
             // contenido.appendChild(quintaPagina);
 
-            console.log("llego hasta aca")
             return contenido;
         }
 
         crearContenidoPDF();
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
         parrafo.innerHTML = "Si cada factor alcanzare el 100% se conformaría un 'Hexágono perfecto' y de esa manera <strong><span class='company-name' style='font-size: 16px'></span></strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi.<br><br>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades de <strong><span class='company-name' style='font-size: 16px'>BDT ADVISORY</span></strong>, de forma que mediante un proceso de mejora continua en el manejo de los riesgos se la prepare para ir alcanzando el 'Hexágono Perfecto'";
         quintaPagina.appendChild(parrafo);
 
         contenido.appendChild(quintaPagina);
+        console.log ("pagina 5. Dibujito")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la sexta pagina presenta mejoras
@@ -491,16 +746,16 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const sextaPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Recomendaciones.  Oportunidades de mejora";
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.innerHTML = "6. Recomendaciones.  Oportunidades de mejora";
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
-        parrafo.style.textAlign = 'center';
+        parrafo.style.textAlign = 'left';
         parrafo.style.marginTop = '5mm';
         sextaPagina.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
         parrafo.innerHTML = "El análisis realizado a través del Modelo HEXARCi mediante la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.<br><br>Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.<br><br>Los aspectos a mejorar más significativos en cada factor de riesgo:<br><br> ♦ Manejo de los Riesgos de Gobierno Corporativo (MRG);<br><br> ♦ Manejo de los Riesgos del Apetito de Riesgo (MAR);<br><br> ♦ Manejo de los Riesgos de Mercado (MRM) y<br><br> ♦ Manejo de los Riesgos de los Procesos<br><br>se exponen a continuación:";
@@ -508,7 +763,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(sextaPagina);
 
-
+        console.log ("pagina 6. Recomendaciones")
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir paginas con mejoras
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -528,7 +783,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             let mejorasPagina = crearPaginaConMarco();
 
             parrafo = document.createElement('p');
-            parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
             parrafo.style.fontSize = '16pt';
             parrafo.style.fontWeight = 'bold';
             parrafo.style.textAlign = 'center';
@@ -538,6 +793,13 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             // let titulo = document.createElement("h3");
             parrafo.innerHTML = `Factor: ${capitulo.nombre}`;
             // contenedor.appendChild(titulo);
+            mejorasPagina.appendChild(parrafo);
+
+            // contenedor.appendChild(titulo);
+            parrafo = document.createElement('p');
+            parrafo.style.marginTop = '15px';
+            parrafo.style.fontSize = '13pt';
+            parrafo.innerHTML = 'Las declaraciones presentadas a continuación han sido informadas como incumplidas o no cumplidas satisfactoriamente: ';            
             mejorasPagina.appendChild(parrafo);
 
             // Busca las respuestas de ese capítulo
@@ -625,9 +887,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                             (pregunta.tipo == "1" && texto == "NO")) {
                             mejorasPagina.appendChild(filaRespuesta);
 
-                        const textoCompleto = renglon.textContent || renglon.innerText;
-                        const lineasEstimadas = estimarLineasPorCaracteres(textoCompleto, 80);
-                        alturaActual += lineasEstimadas;                       
+                            const textoCompleto = renglon.textContent || renglon.innerText;
+                            const lineasEstimadas = estimarLineasPorCaracteres(textoCompleto, 80);
+                            alturaActual += lineasEstimadas;
+                            console.log ("puso recomendación")
                         }
 
                         function estimarLineasPorCaracteres(texto, caracteresPromedioPorLinea) {
@@ -641,6 +904,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                             mejorasPagina = crearPaginaConMarco();
                             alturaActual = 0; // Reiniciar el contador de altura
                         };
+
                     })
                     contenido.appendChild(mejorasPagina);
                 }
@@ -650,28 +914,28 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ ultima pagina
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        const ultimaPagina = crearPaginaConMarco('Autoevaluación', '890', 'BDT Advisory', 'Nombre del Cliente')
+        // const ultimaPagina = crearPaginaConMarco('Autoevaluación', numPagina, 'BDT Advisory', 'Nombre del Cliente')
 
-        const tituloUltima = document.createElement('p');
-        tituloUltima.innerHTML = "Ejemplo de borde";
-        tituloUltima.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        tituloUltima.style.fontSize = '16pt';
-        tituloUltima.style.fontWeight = 'bold';
-        tituloUltima.style.textAlign = 'center';
-        tituloUltima.style.marginTop = '5mm';
-        ultimaPagina.appendChild(tituloUltima);
+        // const tituloUltima = document.createElement('p');
+        // tituloUltima.innerHTML = "Ejemplo de borde";
+        // tituloUltima.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // tituloUltima.style.fontSize = '16pt';
+        // tituloUltima.style.fontWeight = 'bold';
+        // tituloUltima.style.textAlign = 'center';
+        // tituloUltima.style.marginTop = '5mm';
+        // ultimaPagina.appendChild(tituloUltima);
 
-        parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
-        parrafo.style.fontSize = '13pt';
-        parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "Solo para el borde.";
-        ultimaPagina.appendChild(parrafo);
+        // parrafo = document.createElement('p');
+        // parrafo.style.fontFamily = 'Helvetica, Arial, sans-serif';
+        // parrafo.style.fontSize = '13pt';
+        // parrafo.style.lineHeight = '1.5';
+        // parrafo.innerHTML = "Solo para el borde.";
+        // ultimaPagina.appendChild(parrafo);
 
-        contenido.appendChild(ultimaPagina);
+        // contenido.appendChild(ultimaPagina);
 
         // Generar PDF directamente
-        html2pdf().from(contenido).set(opciones).save()
+        html2pdf().from(contenido).set(opciones).save("Informe HexaRCi.pdf")
             .catch(error => {
                 console.error("Error generando PDF:", error);
             });
@@ -688,7 +952,11 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         pagina.style.borderRadius = '5mm';
         pagina.style.position = 'relative'; // Para posicionar elementos internos
         pagina.style.pageBreakAfter = 'always'; // Salto de página después
-
+        numPagina ++;
+        numeroPagina = numPagina;
+        marcaElemento = "BDT Advisory";
+        clienteElemento = "Nombre del Cliente";
+        textoLateral = "Autoevaluación"
         // Si se proporciona texto lateral
         if (textoLateral) {
             const textoLateralElemento = document.createElement('div');
