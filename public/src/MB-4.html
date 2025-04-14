@@ -54,7 +54,7 @@
                                     aplicación, podrá
                                     completar posteriormente los items faltantes.
                                     <br>
-                                Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
+                                    Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
                                 </p>
                                 <button id="confirm-yes">Salir</button>
                                 <button id="confirm-no">Continuar</button><br>
@@ -609,72 +609,70 @@
                 <span>Resumen de la sección</span>
             </div>
             <div class="alerta-cuerpo">
-                <p>Puntaje máximo posible: <span id="maximo"></span></p>
-                <p>Calificación obtenida: <span id="calificacion"></span></p>
+                <p>Puntaje óptimo: <span id="maximo"></span></p>
+                <p>Puntaje obtenido: <span id="calificacion"></span></p>
                 <p>Porcentual: <span id="porcentual"></span></p>
-
                 <div class="gauge-container">
                     <canvas id="gaugeChart" ;></canvas>
                 </div>
-
                 <button id="continuar" onclick="continuar()">Continuar</button>
             </div>
         </div>
     </div>
 
-</body>
+    <script>
+        document.getElementById('formulario').addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
+        const botonSalida = document.getElementById('boton-salir');
+        const ventanaSale = document.getElementById('ventanaSalida');
+        const botonYes = document.getElementById('confirm-yes');
+        const botonNou = document.getElementById('confirm-no');
 
-<script>
-    document.getElementById('formulario').addEventListener('submit', function (event) {
-        event.preventDefault();
-    });
-    const botonSalida = document.getElementById('boton-salir');
-    const ventanaSale = document.getElementById('ventanaSalida');
-    const botonYes = document.getElementById('confirm-yes');
-    const botonNou = document.getElementById('confirm-no');
+        botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+            let isExiting = true;
+            ventanaSale.style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
 
-    botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
-        let isExiting = true;
-        ventanaSale.style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    });
+        botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+            isExiting = true;
+            console.log('dijo que NO')
+            ventanaSale.style.display = 'none';
+            document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+        });
 
-    botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
-        isExiting = true;
-        console.log('dijo que NO')
-        ventanaSale.style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
-    });
+        botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+            console.log('dijo que SI')
+            isExiting = true;
+            window.location.href = '../../index.html';
+        });
+    </script>
 
-    botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
-        console.log('dijo que SI')
-        isExiting = true;
-        window.location.href = '../../index.html';
-    });
-</script>
-
-<script>
-    function toggleVisibility() {
-        var element = document.getElementById('myElement');
-        if (element.style.display === 'none') {
-            element.style.display = 'block';
-            // Asegúrate de darle tiempo al navegador para que reconozca el cambio de 'display'
-            setTimeout(() => {
-                element.style.opacity = 1;
-            }, 10);
-        } else {
-            element.style.opacity = 0;
-            // Espera a que termine la transición de opacidad para cambiar el display a 'none'
-            element.addEventListener('transitionend', function handler() {
-                element.style.display = 'none';
-                element.removeEventListener('transitionend', handler);
-            });
+    <script>
+        function toggleVisibility() {
+            var element = document.getElementById('myElement');
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+                // Asegúrate de darle tiempo al navegador para que reconozca el cambio de 'display'
+                setTimeout(() => {
+                    element.style.opacity = 1;
+                }, 10);
+            } else {
+                element.style.opacity = 0;
+                // Espera a que termine la transición de opacidad para cambiar el display a 'none'
+                element.addEventListener('transitionend', function handler() {
+                    element.style.display = 'none';
+                    element.removeEventListener('transitionend', handler);
+                });
+            }
         }
-    }
 
-</script>
+    </script>
 
-<script src="../../js/utils.js"></script>
-<script src="../../js/mb-4.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/mb-4.js"></script>
+
+</body>
 
 </html>

@@ -43,16 +43,18 @@
                     </div>
 
                     <div class="salida">
-                        <p>Seleccione la opción que mejor refleje el grado de cumplimiento de la declaración descripta en
-                            su organización, donde 'Muy efectivo' indica coincidencia o certeza total, y 'No efectivo'
-                            refleja la ausencia de aplicación.  </p>
+                        <p>Seleccione la opción que mejor refleje el grado de cumplimiento de la declaración descripta
+                            en
+                            su empresa, donde 'Muy efectivo' indica coincidencia o certeza total, y 'No efectivo'
+                            refleja la ausencia de aplicación. </p>
                         <button type="button" id="boton-salir">Salir</button>
                     </div>
                     <br>
                     <div id="overlay">
                         <div id="ventanaSalida">
                             <div class="confirm-box">
-                                <p>La información registrada hasta la sección anterior queda almacenada. <br><br> Si sale de la
+                                <p>La información registrada hasta la sección anterior queda almacenada. <br><br> Si
+                                    sale de la
                                     aplicación, podrá completar posteriormente las secciones faltantes.
                                     <br><br>
                                     Confirme si desea 'Salir' de la aplicación o 'Continuar' con el registro de datos.
@@ -160,67 +162,66 @@
                     <span>Resumen de la sección</span>
                 </div>
                 <div class="alerta-cuerpo">
-                    <p>Puntaje máximo posible: <span id="maximo"></span></p>
-                    <p>Calificación obtenida: <span id="calificacion"></span></p>
+                    <p>Puntaje óptimo: <span id="maximo"></span></p>
+                    <p>Puntaje obtenido: <span id="calificacion"></span></p>
                     <p>Porcentual: <span id="porcentual"></span></p>
-
                     <div class="gauge-container">
                         <canvas id="gaugeChart" ;></canvas>
                     </div>
-
                     <button id="continuar" onclick="continuar()">Continuar</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
-<script>
-    document.getElementById('formulario').addEventListener('submit', function (event) {
-        event.preventDefault();
-    });
-    const botonSalida = document.getElementById('boton-salir');
-    const ventanaSale = document.getElementById('ventanaSalida');
-    const botonYes = document.getElementById('confirm-yes');
-    const botonNou = document.getElementById('confirm-no');
 
-    botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
-        let isExiting = true;
-        ventanaSale.style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    });
+    <script>
+        document.getElementById('formulario').addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
+        const botonSalida = document.getElementById('boton-salir');
+        const ventanaSale = document.getElementById('ventanaSalida');
+        const botonYes = document.getElementById('confirm-yes');
+        const botonNou = document.getElementById('confirm-no');
 
-    botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
-        isExiting = true;
-        console.log('dijo que NO')
-        ventanaSale.style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
-    });
-
-    botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
-        console.log('dijo que SI')
-        isExiting = true;
-        window.location.href = '../../index.html';
-    });
-
-    window.addEventListener("load", function () {
-        // Insertamos dos estados en el historial para evitar que el usuario vuelva atrás
-        history.pushState(null, "", location.href);
-        history.pushState(null, "", location.href);
-
-        window.addEventListener("popstate", function () {
-            location.reload(); // Recarga la misma página en lugar de solo mostrar el mensaje
-            // history.pushState(null, "", location.href); // Restauramos el estado en el historial
+        botonSalida.addEventListener('click', () => { // Agrega un evento al botón para mostrar la ventana
+            let isExiting = true;
+            ventanaSale.style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
         });
 
-        // Opcional: Asegurar que el evento popstate se registre correctamente después de un tiempo
-        setTimeout(() => {
-            history.pushState(null, "", location.href);
-        }, 10);
-    });
-</script>
+        botonNou.addEventListener('click', () => {  // Agrega un evento para el botón NO
+            isExiting = true;
+            console.log('dijo que NO')
+            ventanaSale.style.display = 'none';
+            document.getElementById('overlay').style.display = 'none'; // Continúa con la operación original de la página
+        });
 
-<script src="../../js/utils.js"></script>
-<script src="../../js/ma-13.js"></script>
+        botonYes.addEventListener('click', () => {  // Agrega un evento para el botón SI
+            console.log('dijo que SI')
+            isExiting = true;
+            window.location.href = '../../index.html';
+        });
+
+        window.addEventListener("load", function () {
+            // Insertamos dos estados en el historial para evitar que el usuario vuelva atrás
+            history.pushState(null, "", location.href);
+            history.pushState(null, "", location.href);
+
+            window.addEventListener("popstate", function () {
+                location.reload(); // Recarga la misma página en lugar de solo mostrar el mensaje
+                // history.pushState(null, "", location.href); // Restauramos el estado en el historial
+            });
+
+            // Opcional: Asegurar que el evento popstate se registre correctamente después de un tiempo
+            setTimeout(() => {
+                history.pushState(null, "", location.href);
+            }, 10);
+        });
+    </script>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/ma-13.js"></script>
+</body>
 
 </html>
