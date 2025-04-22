@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="centrado-flex">
-                        <button type="button" id="boton-borrar" onclick="limpiarYRecargar()">Limpiar
+                        <button type="button" id="boton-borrar" onclick="limpiarSeleccionesComun()">Limpiar
                             selecciones</button>
                     </div>
                 </form>
@@ -168,11 +168,6 @@
         let porcientoFormateado = 0;
         let total = 0;
 
-        function limpiarYRecargar() {
-            limpiarSeleccionesComun();  // Ejecuta tu limpieza
-            location.reload();          // Recarga completa de la página
-        }
-
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //              obtenerListaPreciosB
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -198,14 +193,16 @@
         async function filtrarPrecios() {
             try {
                 // Llamar a la función para obtener los precios
-                const lista = await obtenerListaPreciosB();
-                const filtrados = lista.filter(item => item.seccion == 17 && item.capitulo == "D");
+                const listaPreciosB = await obtenerListaPreciosB();
+                precios = listaPreciosB.filter(seccion => seccion.seccion == 17 && seccion.capitulo == "D");
                 // Usar reduce para sumar el campo "maximo" de los registros filtrados
-                maximo = filtrados.reduce((a, b) => a + Number(b.maximo), 0);
-                return filtrados;
+                maximo = precios.reduce((maximo, registro) => {
+                    return maximo + Number(registro.maximo);
+                }, 0);  // El segundo parámetro (0) es el valor inicial del acumulador
+                console.log('Suma total de maximos:', maximo);
+                console.log(precios)
             } catch (error) {
                 console.error('Error mostrando los precios:', error);
-                return [];
             }
         }
 
@@ -213,7 +210,6 @@
 
         async function init() {
             precios = await filtrarPrecios();
-            console.table (precios)
             // loadQuestions();
         }
         init();
@@ -224,7 +220,7 @@
         function buildForm(questions) {
             const tableBody = document.getElementById('questionsTableBody');
             questions.forEach(question => {
-                if (question.Numero > 1) {
+                if (question.Numero != 1) {
                     const row = document.createElement('tr');
 
                     // Numero de pregunta
@@ -288,9 +284,7 @@
             total = 0;
             respuestas.forEach((respuesta, index) => {
                 if (respuesta >= 1 && respuesta <= 4) {
-                    console.table (precios)
-                    console.log (`valores: index : ${index}, precios(index):  respuesta: ${respuesta}`)
-                    let precioCorrespondiente = precios[index + 1].precio[respuesta - 1];
+                    let precioCorrespondiente = precios[index].precio[respuesta - 1];
                     total += Number(precioCorrespondiente); // Sumar el precio al total
                 }
             });
@@ -302,27 +296,19 @@
         //              obtenerRespuestas
         // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         function obtenerRespuestas() {
-            const questions = document.querySelectorAll('#formulario tbody tr');
+            const questions = document.querySelectorAll('tbody tr');
             const responses = [];
             allAnswered = true;
             unansweredQuestions = [];
 
             questions.forEach((row, index) => {
-                const radioInput = row.querySelector('input[type="radio"]');
-
-                if (!radioInput) {
-                    console.warn(`Fila sin radio button en el índice ${index + 1}:`, row.innerHTML);
-                    return;
-                }
-
-                const questionId = radioInput.name.split('_')[1]; // Obtener el ID de la pregunta desde el name
-                // const questionId = row.querySelector('input[type="radio"]').name.split('_')[1]; // Obtener el ID de la pregunta desde el name
+                const questionId = row.querySelector('input[type="radio"]').name.split('_')[1]; // Obtener el ID de la pregunta desde el name
                 const selectedOption = row.querySelector(`input[name="question_${questionId}"]:checked`);
 
                 if (selectedOption) {
                     responses.push(selectedOption.value);
                 } else {
-                    unansweredQuestions.push(index + 2); // Agregar el número de la pregunta que falta responder //suma uno más por el numero 1 que esta fuera de la tabla
+                    unansweredQuestions.push(index + 1); // Agregar el número de la pregunta que falta responder
                     allAnswered = false;
                 }
             });
@@ -350,12 +336,7 @@
 
                         if (valor === "2") {
                             // Si elige NO
-                            respuestas = ["9"]
-                            maximo = 100;
-                            valores = 100;
-                            porcientoFormateado = 100.00;
-                            continuar()
-                            // window.location.href = "MD-18.html";
+                            window.location.href = "MD-18.html";
                         } else if (valor === "1") {
                             // Si elige SÍ
                             formulario.style.display = "table"; // Mostrar preguntas
