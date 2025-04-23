@@ -2,661 +2,492 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evaluación de riesgos</title>
-  <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
-  <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
-  <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-  <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
-    rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de riesgos</title>
+    <!-- <link href="../estilos/st-homePrueba.css" rel="stylesheet"> -->
+    <!-- <link href="css/st-gobCorpo.css" rel="stylesheet"> -->
+    <link href="../estilos/estiloConclusiones.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- <script src="../js/chart.js"></script> Tu archivo que contiene el código del gráfico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Courgette&family=Gupter:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap"
+        rel="stylesheet">
 
 
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
 
-    .canvas-container {
-      display: flex;
-      justify-content: center;
-      /* Centra horizontalmente */
-      align-items: center;
-      /* Centra verticalmente */
-      height: auto;
-      /* Altura del contenedor (ajusta según necesites) */
-      margin-bottom: 0;
-      /* Asegúrate de que no haya margen inferior */
-    }
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            /* Centra horizontalmente */
+            align-items: center;
+            /* Centra verticalmente */
+            height: auto;
+            /* Altura del contenedor (ajusta según necesites) */
+            margin-bottom: 0;
+            /* Asegúrate de que no haya margen inferior */
+        }
 
-    p {
-      margin-top: 10px;
-      /* Ajusta el margen superior del párrafo para acercarlo */
-      margin: 15px;
-    }
+        p {
+            margin-top: 10px;
+            /* Ajusta el margen superior del párrafo para acercarlo */
+            margin: 15px;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+        table,
+        th,
+        td {
+            font-family: "Abel", sans-serif !important;
+        }
 
-    table,
-    th,
-    td {
-      font-family: "Abel", sans-serif !important;
-    }
 
-    th,
-    td {
-      border: 2px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
+        #contenedorTablas {
+            max-width: 600px;
+            margin: 20px auto;
+            /* Centra horizontalmente */
+            justify-content: center;
+            /* Centra la tabla dentro */
+            align-items: center;
+        }
 
-    th {
-      background-color: #d7e8ec;
-      font-weight: bold;
-    }
+        #tablaHexagono {
+            width: 100%;
+            /* Ajusta al ancho del contenedor */
+            max-width: 600px;
+            /* Opcional, define un ancho máximo */
+            border-collapse: collapse;
+            border: 2px solid #ddd;
+        }
 
-    .factor {
-      background-color: #e8f8f5;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
+        th {
+            border: 2px solid #ddd;
+            padding: 5px;
+            text-align: left;
+            background-color: #d7e8ec;
+            font-weight: bold;
+        }
 
-    .seccion th {
-      background-color: #e8f8f5;
-      padding-left: 15px;
-      /* Indent for Sección */
-    }
+        .factor {
+            background-color: #97d0f2;
+            border: 1px solid #0a0a0a;
+        }
 
-    .situacion th,
-    .situacion td {
-      padding-left: 30px;
-      /* Additional indent for Situación*/
-      background-color: #e8f8f5;
-    }
+        /* Estilo para la primera fila (Nombre del factor) */
+        .fila-factor {
+            background-color: #e8f8f5;
+            border: 2px solid #0a0a0a;
+            /* background-color: #01a2ff;
+            background-color: #f29797; */
+        }
 
-    .situacion2 th,
-    .situacion2 td {
-      padding-left: 30px;
-      /* Additional indent for Situación*/
-    }
+        .fila-factor tr {
+            /* text-align: center; */
+            padding: 5px;
+            /* border: 5px solid #ddd; */
+            /* border: 5px solid #a20101; */
+        }
 
-    .respuesta {
-      width: 75px;
-      /* Ajusta el valor según lo necesario */
-      text-align: center;
-    }
-  </style>
+        .situacion2 th {
+            padding-left: 10px;
+            background-color: #fafcfc;
+            font-weight: normal;
+        }
+    </style>
+
 </head>
 
 <body id="conclusiones">
-  <div class="survey-container-conclusiones">
-    <section class="main">
-      <section class="gobCorpo">
-        <div class="header-container">
-          <div>
-            <div id="nombreEmpresa" class="company-name"></div>
-            <div id="nombreUsuario" class="user-name"></div>
-          </div>
-          <h4> Autoevaluación de la calidad del manejo de la empresa</h4>
-          <h5> </h5>
-        </div>
-        <hr>
+    <div class="survey-container-conclusiones">
+        <section class="main">
+            <section class="gobCorpo">
+                <div class="header-container">
+                    <div>
+                        <div id="nombreEmpresa" class="company-name"></div>
+                        <div id="nombreUsuario" class="user-name"></div>
+                    </div>
+                    <h4> Autoevaluación de la calidad del manejo de la empresa</h4>
+                    <h5> </h5>
+                </div>
+                <hr>
 
-        <!-- <form id="formulario"> -->
-        <div class="contenedorTitulo">
-          <div class="logo-container">
-            <a href="Menu-General.html">
-              <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
+                <!-- <form id="formulario"> -->
+                <div class="contenedorTitulo">
+                    <div class="logo-container">
+                        <a href="Menu-General.html">
+                            <img src="../img/contenido (1).png" alt="Logo Izquierda" class="logo" style="width: 30px; 
                           height: auto">;
-            </a>
-          </div>
-          <div class="center-container-titulo">
-            <h4 class="tituloSeccionContainer"><a href="Menu-General.html">Conclusiones</a></h4>
-          </div>
-        </div>
-        <br>
-        <div id="comentarios-finales">
+                        </a>
+                    </div>
+                    <div class="center-container-titulo">
+                        <h4 class="tituloSeccionContainer"><a href="Menu-General.html">Conclusiones</a></h4>
+                    </div>
+                </div>
+                <br>
 
-          <p>Informe relativo a la autoevaluación de <STRONG>BDT ADVISORY</STRONG> de acuerdo con el Modelo HexaRCi.</p>
-          <p>De acuerdo con la información cargada por <STRONG>BDT ADVISORY</STRONG> y a los parámetros del Sistema,
-            <STRONG>BDT ADVISORY</STRONG> es una compañia calificada preliminarmente como tipo:
-          </p>
-          <CENTER><STRONG>"TIPIFICACION"</STRONG></CENTER>
+                <div id="comentarios-finales">
+                    <p style="text-align: justify">De acuerdo con los términos de la Propuesta de servicios
+                        profesionales de BDT Advisory LLC para <strong><span class="company-name"
+                                style="font-size: 16px"></span></strong> del Sistema HexaRCi, el presente informe tiene
+                        el ámbito de uso reservado previsto en la misma.</p>
+                    <p style="text-align: justify">De acuerdo con la información cargada por <strong><span
+                                class="company-name" style="font-size: 16px"></span></strong> y a los parámetros del
+                        Modelo HexaRCi, la Compañia <strong><span class="company-name"
+                                style="font-size: 16px"></span></strong> es una compañia calificada preliminarmente como
+                        tipo:
+                    </p>
+                    <div id="tipificacion" style="font-weight: 700; font-size: 20px; text-align: center;"></div>
+                    <p>La calificacion adquiere la condición de Preliminar debido al hecho de que una tipificación
+                        Definitiva corresponderá al resultado de la aplicación de un Modelo de mayor profundidad, como
+                        ser el del Modelo HexaRC de BDT Advisory LCC.</p>
+                    <p id="causaTipificacion" style="text-align: justify"></p>
 
-          <!-- 
-          <p style="color: red">(El tipo surgirá de la combinación de los valores de cada factor. Se agrega el texto
-            correspondiente a la tipificación resultante. Si es valor fuese
-            Resiliente, se mostraria:)</p> -->
-
-          <p>Resiliente.</p>
-          <p>Empresas que, aunque pueden no ser las líderes absolutas, tienen una capacidad destacada para
-            adaptarse y recuperarse de crisis o cambios en el mercado derivadas de un manejo Superior en
-            el Gobierno Corporativo y un nivel Alto en el Apetito de Riesgo, los Riesgos del mercado y en
-            sus Procesos. La Situación Financiera es sólida y estable, aunque podría necesitar recurrir a
-            financiamiento externo para inversiones. En consecuencia están bien posicionada para
-            aprovechar oportunidades y enfrentar desafíos</p>
-
-          <p>Los aspectos a mejorar más significativos en cada factor de riesgo MRM, MRP, MRG y MAR se detallan
-            en el siguiente punto</p>
-
-          <table>
-            <thead>
-              <tr class="factor">
-                <th colspan="2">Factor: Manejo de Riesgos de Gobierno Corporativo</th>
-              </tr>
-              <tr class="seccion">
-                <th>Sección: Información para el Directorio</th>
-                <th class="respuesta">12,50 %</th>
-              </tr>
-              <tr class="situacion">
-                <th>Situación</th>
-                <th>Informado</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr class="situacion2">
-                <td>El Directorio recibe KPI‹s suficientes y sólidos desde la Gerencia</td>
-                <td class="respuesta">No efectivo</td>
-              </tr>
-              <tr class="situacion2">
-                <td>El Directorio ejerce consistentemente un desafio creible a la informacion gerencial</td>
-                <td class="respuesta">Poco efectivo</td>
-              </tr>
-              <tr class="situacion2">
-                <td>El Directorio aprueba los contratos significativos celebrados por la Gerencia</td>
-                <td class="respuesta">No</td>
-              </tr>
-
-              <tr class="seccion">
-                <th>Sección: Estructura organizacional</th>
-                <th class="respuesta">25,0 %</th>
-              </tr>
-
-              <tr class="situacion">
-                <th>Situación</th>
-                <th>Informado</th>
-              </tr>
-
-              <tr class="situacion2">
-                <td>El Directorio ha conformado una estructura donde existen los siguientes roles efectivos:</td>
-                <td class="respuesta">CEO, Gte Adm y Finanzas, Gte Riesgos, Gte Legales</td>
-              </tr>
+                    <!-- <p style="text-align: justify">El análisis realizado a través del Modelo HEXARCi de la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.</p>
+                    <p style="text-align: justify">Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.</p> -->
 
 
-              <tr class="seccion">
-                <th>Sección: El Directorio y su articulación con las Gerencias</th>
-                <th class="respuesta">32,26 %</th>
-              </tr>
-
-              <tr class="situacion">
-                <th>Situación</th>
-                <th>Informado</th>
-              </tr>
-
-              <tr class="situacion2">
-                <td>Los miembros del Directorio ( y en su caso el Advisory Board) tienen acceso a y participan con
-                  cierta frecuencia en reuniones con:</td>
-                <td class="respuesta">Gte Adm y Finanzas, Gte Riesgos, Secr Directorio</td>
-              </tr>
+                    <div class="centrado-flex">
+                        <button type="button" onclick="generaInfoFinal()" id="boton-enviar">Generar informe con recomendaciones</button>
+                    </div>
 
 
-              <tr class="seccion">
-                <th>Sección: Comité de Auditoría</th>
-                <th class="respuesta">52,50 %</th>
-              </tr>
+                    <p style="text-align: justify">Los aspectos a mejorar más significativos en cada factor de riesgo:
+                        Manejo de los Riesgos de Gobierno Corporativo (MRG); Manejo de los Riesgos del Apetito de Riesgo
+                        (MAR); Manejo de los Riesgos de Mercado (MRM) y Manejo de los Riesgos de los Procesos se exponen
+                        a continuación:.</p>
+                </div>
 
-              <tr class="situacion">
-                <th>Situación</th>
-                <th>Informado</th>
-              </tr>
-
-              <tr class="situacion2">
-                <td>Su Presidente es un director independiente</td>
-                <td class="respuesta">NO</td>
-              </tr>
-
-              <tr class="situacion2">
-                <td>Asegura la subsanacion de las debilidades de control interno detectadas por la Auditoria Interna
-                </td>
-                <td class="respuesta">Poco efectivo</td>
-              </tr>
-
-
-              <tr class="seccion">
-                <th>Sección: Comités del Directorio</th>
-                <th class="respuesta">54,84 %</th>
-              </tr>
-
-              <tr class="situacion">
-                <th>Situación</th>
-                <th>Informado</th>
-              </tr>
-
-              <tr class="situacion2">
-                <td>Existe un Comité de Nominaciones y Sucesiones</td>
-                <td class="respuesta">NO</td>
-              </tr>
-
-              <tr class="situacion2">
-                <td>Existe un Comité de Compensaciones
-                </td>
-                <td class="respuesta">NO</td>
-              </tr>
-
-              
-              <tr class="situacion2">
-                <td>Existe un Comité de Riesgos</td>
-                <td class="respuesta">NO</td>
-              </tr>
-
-              <tr class="situacion2">
-                <td>La estructura de Comités del Directorio está documentada
-                </td>
-                <td class="respuesta">No efectivo</td>
-              </tr>
-
-              <tr class="situacion2">
-                <td>Cada Comité envía informes al Directorio
-                </td>
-                <td class="respuesta">Efectivo</td>
-              </tr>
-            </tbody>
-          </table>
+                <!-- Contenedor donde se generarán dinámicamente las tablas -->
+                <div id="contenedorTablas"></div>
+                <table id="tablaHexagono">
+                    <thead>
+                        <tr class="fila-factor">
+                            <th id="factor" class="factor"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="situacion2">
+                            <th id="lineaModalGeneral" class="respuesta"></th>
+                        </tr>
+                    </tbody>
+                </table>
 
 
-          <table>
-            <thead>
-              <tr class="factor">
-                <th colspan="2">Factor: Manejo de Riesgos de Gobierno Corporativo</th>
-              </tr>
-              <tr class="seccion">
-                <th>Sección: Información para el Directorio</th>
-                <th class="respuesta">12,50 %</th>
-              </tr>
-              <tr class="situacion">
-                <th>Situación</th>
-                <th>Informado</th>
-              </tr>
-            </thead>
+                <div>
+                    <p>La representación gráfica de la situación de <strong><span class="company-name"
+                                style="font-size: 16px"></span></strong> es la siguiente:</p>
+                </div>
 
-            <tbody>
-              <tr class="situacion2">
-                <td>El Directorio recibe KPI‹s suficientes y sólidos desde la Gerencia</td>
-                <td class="respuesta">No efectivo</td>
-              </tr>
-              <tr class="situacion2">
-                <td>El Directorio ejerce consistentemente un desafio creible a la informacion gerencial</td>
-                <td class="respuesta">Poco efectivo</td>
-              </tr>
-              <tr class="situacion2">
-                <td>El Directorio aprueba los contratos significativos celebrados por la Gerencia</td>
-                <td class="respuesta">No</td>
-              </tr>
+                <div class="canvas-container">
+                    <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
+                </div>
+                <br>
+                <br>
 
+                <!-- <p style="text-align: justify">Si cada factor alcanzare el 100% se conformaría un ‘Hexágono perfecto’ y de esa manera <strong><span class="company-name" style="font-size: 16px"></span></strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi.
+                </p>
+                <p style="text-align: justify">Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades
+                    de <strong><span class="company-name" style="font-size: 16px"></span></strong>, de forma que mediante un proceso de mejora continua en el manejo de los riesgos se la prepare para ir alcanzando el “Hexágono Perfecto”.</p> -->
+            </section>
+        </section>
+    </div>
 
-          <p>Manejo de los Riesgos de Gobierno Corporativo</p>
-          <ul>
-            <li>Información para el Directorio.</li>
-            <li>Estructura organizacional.</li>
-            <li>El Directorio y su articulación con las Gerencias.</li>
-            <li>Comité de Auditoría.</li>
-            <li>Comités del Directorio.</li>
-            <li>Gestión de Riesgos.</li>
-            <li>Funcionamiento del Directorio.</li>
-            <li>El Directorio y las Gerencias.</li>
-            <li>Presidente del Directorio.</li>
-            <li>La composición y responsabilidad del Directorio.</li>
-            <li>Estrategia.</li>
-            <li>Cumplimiento y control.</li>
-            <li>Sucesiones.</li>
-          </ul>
+    <br>
 
-          <p>Manejo del Apetito de Riesgo</p>
-          <center>*** No hay elementos en esta categoría ***</center>
+    <script>
 
-          <p>Manejo de los Riesgos de Mercado</p>
-          <ul>
-            <li>Valores y Comportamientos.</li>
-          </ul>
+        const apellidouser = localStorage.getItem("apellido");
+        const nombreUser = localStorage.getItem("nombre");
+        const apenom = nombreUser + ' ' + apellidouser;
+        const empresa = localStorage.getItem("empresa");
+        const CUIT = localStorage.getItem("CUIT");
 
-          <p>Manejo de los Riesgos de Procesos</p>
-          <ul>
-            <li>Gestión Financiera.</li>
-            <li>Ventas.</li>
-            <li>Contabilidad e impuestos.</li>
-            <li>Sistema de control.</li>
-            <li>Marketing.</li>
-            <li>Legales y cumplimiento.</li>
-            <li>Gestión de riesgos.</li>
-            <li>Transformación digital.</li>
-            <li>Sistemas de Información de Gestión (MIS).</li>
-            <li>Personas y Cultura.</li>
-            <li>Ciberseguridad y resuperación de desastres.</li>
-            <li>Cumplimiento ambiental.</li>
-            <li>Selección de cartera de productos.</li>
-            <li>Auditoría interna.</li>
-            <li>Consultoría externa o customización.</li>
-            <li>Innovación.</li>
-            <li>Planificación.</li>
-            <li>Atención y satisfacción del cliente.</li>
-            <li>Gestión y generación de los productos(manufacturas).</li>
-            <li>Tecnología de la información.</li>
-          </ul>
+        document.getElementById("nombreEmpresa").textContent = empresa;
+        document.getElementById("nombreUsuario").textContent = apenom;
 
+        let var1 = 3;
+        let var2 = 3;
+        let var3 = 3;
+        let var4 = 3;
+        let var5 = 3;
+        let var6 = 3;
 
-          <p>La representación gráfica del Hexágono que conforma los seis factores se expone a continuación. El grado de
-            cumplimiento de cada factor conforma el porcentaje posible respecto de cada eje.</p>
-
-          <p>Si cada factor alcanzare el 100% se conformaría un ‘Hexágono perfecto’ y de esa manera <strong>BDTA
-              ADVISORY</strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi</p>
-        </div>
-        <div class="canvas-container">
-          <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
-        </div>
-        <p>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades
-          de <strong>BDTA ADVISORY</strong>, de forma que mediante un proceso de mejora continua en el manejo de los
-          riesgos se la prepare para ir alzanzando el “Hexágono Perfecto”.</p>
-
-        <br>
-        <!-- <div class="centrado-flex">
-            <button onclick="printPage()" id="boton-enviar">Generar Informe</button>
-          </div> -->
-        <script>
-
-          const apellidouser = localStorage.getItem("apellido");
-          const nombreUser = localStorage.getItem("nombre");
-          const apenom = nombreUser + ' ' + apellidouser;
-          const empresa = localStorage.getItem("empresa");
-          const CUIT = localStorage.getItem("CUIT");
-
-          document.getElementById("nombreEmpresa").textContent = empresa;
-          document.getElementById("nombreUsuario").textContent = apenom;
-
-          let var1 = 3;
-          let var2 = 3;
-          let var3 = 3;
-          let var4 = 3;
-          let var5 = 3;
-          let var6 = 3;
-
-          // Función autoinvocada - Ejecución inmediata
-          (async function () {
+        // Función autoinvocada - Ejecución inmediata
+        (async function () {
             try {
-              // Espera a que la función `leerTotalCapitulos` se complete antes de continuar
-              totalCapitulos = await leerTotalCapitulos(CUIT);
+                // Espera a que la función `leerTotalCapitulos` se complete antes de continuar
+                totalCapitulos = await leerTotalCapitulos(CUIT);
 
-              // Ejecuta el código que depende de `totalCapitulos` aquí, ya que ahora tienes los datos
-              if (totalCapitulos && totalCapitulos.exists) {
-                console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
-                // Aquí puedes colocar más lógica que depende de los datos de `totalCapitulos`
-                ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
-              } else {
-                console.log("No se encontraron capítulos.");
-              }
+                // Ejecuta el código que depende de `totalCapitulos` aquí, ya que ahora tienes los datos
+                if (totalCapitulos && totalCapitulos.exists) {
+                    // console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
+                    // Aquí puedes colocar más lógica que depende de los datos de `totalCapitulos`
+                    ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
+                } else {
+                    console.log("No se encontraron capítulos.");
+                }
             } catch (error) {
-              console.error("Error en la función autoinvocada:", error);
+                console.error("Error en la función autoinvocada:", error);
             }
-          })();
+        })();
 
-          async function leerTotalCapitulos() {
+        async function leerTotalCapitulos() {
             try {
-              const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
-              if (response.ok) {
-                totalCapitulos = await response.json(); //registro seccion recibido en formato JSON
-                console.table(totalCapitulos);
-                return { exists: true, records: totalCapitulos };
-              } else {
-                console.error("Error al obtener los datos");
-              }
+                const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
+                if (response.ok) {
+                    totalCapitulos = await response.json(); //registro seccion recibido en formato JSON
+                    // console.table(totalCapitulos);
+                    return { exists: true, records: totalCapitulos };
+                } else {
+                    console.error("Error al obtener los datos");
+                }
             } catch (error) {
-              console.error("Error al realizar la solicitud:", error);
+                console.error("Error al realizar la solicitud:", error);
             }
             return false;
-          }
+        }
 
-          function ejecutarGrafico(datos) {
+        function ejecutarGrafico(datos) {
             if (totalCapitulos && totalCapitulos.exists) {
-              totalCapitulos.records.forEach((datos) => {
-                switch (datos.capitulo) {
-                  case "A":
-                    var1 = datos.porcentaje; // Asigna el porcentaje a var1
-                    break;
-                  case "B":
-                    var2 = datos.porcentaje; // Asigna el porcentaje a var2
-                    break;
-                  case "C":
-                    var3 = datos.porcentaje; // Asigna el porcentaje a var3
-                    break;
-                  case "D":
-                    var4 = datos.porcentaje; // Asigna el porcentaje a var4
-                    break;
-                  case "E":
-                    var5 = datos.porcentaje; // Asigna el porcentaje a var5
-                    break;
-                  case "F":
-                    var6 = datos.porcentaje; // Asigna el porcentaje a var6
-                    break;
-                  default:
-                    console.warn(`Capítulo no reconocido: ${datos.CAPITULO}`);
-                    break;
-                }
-              });
+                totalCapitulos.records.forEach((datos) => {
+                    switch (datos.capitulo) {
+                        case "A":
+                            var1 = datos.porcentaje; // Asigna el porcentaje a var1
+                            break;
+                        case "B":
+                            var2 = datos.porcentaje; // Asigna el porcentaje a var2
+                            break;
+                        case "C":
+                            var3 = datos.porcentaje; // Asigna el porcentaje a var3
+                            break;
+                        case "D":
+                            var4 = datos.porcentaje; // Asigna el porcentaje a var4
+                            break;
+                        case "E":
+                            var5 = datos.porcentaje; // Asigna el porcentaje a var5
+                            break;
+                        case "F":
+                            var6 = datos.porcentaje; // Asigna el porcentaje a var6
+                            break;
+                        default:
+                            console.warn(`Capítulo no reconocido: ${datos.CAPITULO}`);
+                            break;
+                    }
+                });
             }
 
             // Mostrar las variables después de asignarles valores
-            console.log({ var1, var2, var3, var4, var5, var6 });
+            // console.log({ var1, var2, var3, var4, var5, var6 });
 
             const variables = [var1, var2, var3, var4, var5, var6]; // Porcentajes de cada área (0 a 100)
             const rotulos = ['Gobierno Corporativo', 'Apetito Riesgo', 'Riesgos Mercado', 'Riesgos Procesos', 'Situación Financiera', 'Generación Resultados']; // Rótulos para cada eje
 
             function dibujarHexagono(variables, rotulos) {
-              const canvas = document.getElementById('hexagonoCanvas');
-              const ctx = canvas.getContext('2d');
-              const centerX = canvas.width / 2;
-              const centerY = canvas.height / 2;
-              const radioMax = 170; // Radio máximo (el tamaño máximo del hexágono)
-              const radio90 = radioMax * 0.9; // Radio del hexágono amarillo (90%)
-              const radio70 = radioMax * 0.7; // Radio del hexágono verde (70%)
-              const radio50 = radioMax * 0.5; // Radio del hexágono rojo (50%)
+                const canvas = document.getElementById('hexagonoCanvas');
+                const ctx = canvas.getContext('2d');
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radioMax = 170; // Radio máximo (el tamaño máximo del hexágono)
+                const radio90 = radioMax * 0.9; // Radio del hexágono amarillo (90%)
+                const radio70 = radioMax * 0.7; // Radio del hexágono verde (70%)
+                const radio50 = radioMax * 0.5; // Radio del hexágono rojo (50%)
 
-              ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
 
-              // Dibuja el fondo celeste del hexágono principal (100% del hexágono externo)
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const x = centerX + radioMax * Math.cos(angulo);
-                const y = centerY + radioMax * Math.sin(angulo);
+                // Dibuja el fondo celeste del hexágono principal (100% del hexágono externo)
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const x = centerX + radioMax * Math.cos(angulo);
+                    const y = centerY + radioMax * Math.sin(angulo);
 
-                if (i === 0) {
-                  ctx.moveTo(x, y); // Mueve al primer punto
-                } else {
-                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono externo
+                    if (i === 0) {
+                        ctx.moveTo(x, y); // Mueve al primer punto
+                    } else {
+                        ctx.lineTo(x, y); // Dibuja los bordes del hexágono externo
+                    }
                 }
-              }
-              ctx.closePath();
-              ctx.fillStyle = 'rgba(173, 216, 230, 0.7)'; // Color celeste con opacidad 0.5
-              ctx.fill(); // Rellena el área del hexágono externo con fondo celeste
-              ctx.strokeStyle = 'black';
-              ctx.stroke(); // Dibuja el borde exterior del hexágono
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(173, 216, 230, 0.7)'; // Color celeste con opacidad 0.5
+                ctx.fill(); // Rellena el área del hexágono externo con fondo celeste
+                ctx.strokeStyle = 'black';
+                ctx.stroke(); // Dibuja el borde exterior del hexágono
 
 
-              // Dibuja el hexágono verde (90% del hexágono externo)
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const x = centerX + radio90 * Math.cos(angulo);
-                const y = centerY + radio90 * Math.sin(angulo);
+                // Dibuja el hexágono verde (90% del hexágono externo)
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const x = centerX + radio90 * Math.cos(angulo);
+                    const y = centerY + radio90 * Math.sin(angulo);
 
-                if (i === 0) {
-                  ctx.moveTo(x, y); // Mueve al primer punto
-                } else {
-                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono verde
+                    if (i === 0) {
+                        ctx.moveTo(x, y); // Mueve al primer punto
+                    } else {
+                        ctx.lineTo(x, y); // Dibuja los bordes del hexágono verde
+                    }
                 }
-              }
-              ctx.closePath();
-              ctx.fillStyle = 'rgba(0, 255, 0, 0.7)'; // Color de relleno verde con transparencia
-              ctx.fill(); // Rellena el área del hexágono verde
-              ctx.strokeStyle = 'green';
-              // ctx.stroke(); // Dibuja el borde del hexágono verde
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.7)'; // Color de relleno verde con transparencia
+                ctx.fill(); // Rellena el área del hexágono verde
+                ctx.strokeStyle = 'green';
+                // ctx.stroke(); // Dibuja el borde del hexágono verde
 
 
-              // Dibuja el hexágono amarillo (70% del hexágono externo)
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const x = centerX + radio70 * Math.cos(angulo);
-                const y = centerY + radio70 * Math.sin(angulo);
+                // Dibuja el hexágono amarillo (70% del hexágono externo)
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const x = centerX + radio70 * Math.cos(angulo);
+                    const y = centerY + radio70 * Math.sin(angulo);
 
-                if (i === 0) {
-                  ctx.moveTo(x, y); // Mueve al primer punto
-                } else {
-                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono amarillo
+                    if (i === 0) {
+                        ctx.moveTo(x, y); // Mueve al primer punto
+                    } else {
+                        ctx.lineTo(x, y); // Dibuja los bordes del hexágono amarillo
+                    }
                 }
-              }
-              ctx.closePath();
-              ctx.fillStyle = 'rgba(255, 255, 0, 0.7)'; // Color de relleno verde con transparencia
-              ctx.fill(); // Rellena el área del hexágono verde
-              ctx.strokeStyle = 'yellow';
-              // ctx.stroke(); // Dibuja el borde del hexágono amarillo
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(255, 255, 0, 0.7)'; // Color de relleno verde con transparencia
+                ctx.fill(); // Rellena el área del hexágono verde
+                ctx.strokeStyle = 'yellow';
+                // ctx.stroke(); // Dibuja el borde del hexágono amarillo
 
 
-              // Dibuja el hexágono rojo (50% del hexágono externo)
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const x = centerX + radio50 * Math.cos(angulo);
-                const y = centerY + radio50 * Math.sin(angulo);
+                // Dibuja el hexágono rojo (50% del hexágono externo)
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const x = centerX + radio50 * Math.cos(angulo);
+                    const y = centerY + radio50 * Math.sin(angulo);
 
-                if (i === 0) {
-                  ctx.moveTo(x, y); // Mueve al primer punto
-                } else {
-                  ctx.lineTo(x, y); // Dibuja los bordes del hexágono rojo
+                    if (i === 0) {
+                        ctx.moveTo(x, y); // Mueve al primer punto
+                    } else {
+                        ctx.lineTo(x, y); // Dibuja los bordes del hexágono rojo
+                    }
                 }
-              }
-              ctx.closePath();
-              ctx.fillStyle = 'rgba(255, 0, 0, 0.9)'; // Color de relleno rojo con menos transparencia
-              ctx.fill(); // Rellena el área del hexágono rojo
-              ctx.strokeStyle = 'red';
-              ctx.stroke(); // Dibuja el borde del hexágono rojo
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.9)'; // Color de relleno rojo con menos transparencia
+                ctx.fill(); // Rellena el área del hexágono rojo
+                ctx.strokeStyle = 'red';
+                ctx.stroke(); // Dibuja el borde del hexágono rojo
 
 
-              // Dibuja las líneas desde el centro hacia los vértices
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const x = centerX + radioMax * Math.cos(angulo);
-                const y = centerY + radioMax * Math.sin(angulo);
+                // Dibuja las líneas desde el centro hacia los vértices
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const x = centerX + radioMax * Math.cos(angulo);
+                    const y = centerY + radioMax * Math.sin(angulo);
 
-                ctx.moveTo(centerX, centerY); // Empieza desde el centro
-                ctx.lineTo(x, y); // Línea desde el centro hasta el borde
-              }
-              ctx.strokeStyle = 'gray';
-              ctx.stroke(); // Dibuja las líneas radiales
-
-              // Dibuja el área basada en las variables (llenado parcial)
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
-                const radio = radioMax * porcentaje; // Ajusta el radio según el porcentaje
-                const x = centerX + radio * Math.cos(angulo);
-                const y = centerY + radio * Math.sin(angulo);
-
-                if (i === 0) {
-                  ctx.moveTo(x, y); // Mueve al primer punto
-                } else {
-                  ctx.lineTo(x, y); // Dibuja las líneas para el área rellena
+                    ctx.moveTo(centerX, centerY); // Empieza desde el centro
+                    ctx.lineTo(x, y); // Línea desde el centro hasta el borde
                 }
-              }
-              ctx.closePath();
-              ctx.fillStyle = 'rgba(0, 150, 255, 0.7)'; // Color de relleno con transparencia
-              ctx.fill(); // Rellena el área del hexágono dinámico
-              ctx.strokeStyle = 'blue';
-              ctx.stroke(); // Dibuja el borde de la forma rellena
+                ctx.strokeStyle = 'gray';
+                ctx.stroke(); // Dibuja las líneas radiales
 
-              // Agregar el valor de cada variable dentro de su triángulo
-              ctx.font = '17px "Abel", strong';
-              ctx.fillStyle = 'black';
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
-                const radioTexto = radioMax * porcentaje * 0.9; // Posición del texto, más cerca del centro
+                // Dibuja el área basada en las variables (llenado parcial)
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
+                    const radio = radioMax * porcentaje; // Ajusta el radio según el porcentaje
+                    const x = centerX + radio * Math.cos(angulo);
+                    const y = centerY + radio * Math.sin(angulo);
 
-                // Coordenadas del texto basado en el porcentaje
-                const xTexto = centerX + radioTexto * Math.cos(angulo);
-                const yTexto = centerY + radioTexto * Math.sin(angulo);
+                    if (i === 0) {
+                        ctx.moveTo(x, y); // Mueve al primer punto
+                    } else {
+                        ctx.lineTo(x, y); // Dibuja las líneas para el área rellena
+                    }
+                }
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(0, 150, 255, 0.7)'; // Color de relleno con transparencia
+                ctx.fill(); // Rellena el área del hexágono dinámico
+                ctx.strokeStyle = 'blue';
+                ctx.stroke(); // Dibuja el borde de la forma rellena
 
-                // Dibujar el valor de la variable en la posición calculada
-                ctx.fillText(`${variables[i]}%`, xTexto - 15, yTexto + 5); // Ajuste menor para centrar el texto
-              }
+                // Agregar el valor de cada variable dentro de su triángulo
+                ctx.font = '17px "Abel", strong';
+                ctx.fillStyle = 'black';
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const porcentaje = variables[i] / 100; // Porcentaje de llenado del triángulo
+                    const radioTexto = radioMax * porcentaje * 0.9; // Posición del texto, más cerca del centro
 
-              // // Agregar los rótulos fuera del hexágono
-              // ctx.font = '14px Abel strong';
-              // ctx.fillStyle = 'red'; // Color de los rótulos
-              // for (let i = 0; i < 6; i++) {
-              //   const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-              //   const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
-              //   const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
+                    // Coordenadas del texto basado en el porcentaje
+                    const xTexto = centerX + radioTexto * Math.cos(angulo);
+                    const yTexto = centerY + radioTexto * Math.sin(angulo);
 
-              //   // Dibujar el rótulo en la posición calculada
-              //   ctx.fillText(rotulos[i], xRotulo - 15, yRotulo + 5); // Ajuste menor para centrar el texto
-              // }
+                    // Dibujar el valor de la variable en la posición calculada
+                    ctx.fillText(`${variables[i]}%`, xTexto - 15, yTexto + 5); // Ajuste menor para centrar el texto
+                }
 
-              // Agregar los rótulos fuera del hexágono en dos filas
-              ctx.font = '15px "Abel", strong';
-              ctx.fillStyle = 'red'; // Color de los rótulos
-              for (let i = 0; i < 6; i++) {
-                const angulo = (i * Math.PI) / 3; // 60 grados por vértice
-                const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
-                const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
+                // // Agregar los rótulos fuera del hexágono
+                // ctx.font = '14px Abel strong';
+                // ctx.fillStyle = 'red'; // Color de los rótulos
+                // for (let i = 0; i < 6; i++) {
+                //   const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                //   const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
+                //   const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
 
-                //     // Modificar la posición del rótulo cuando i = 3
-                // if (i === 3) {
-                //     xRotulo -= 50; // Ajustar este valor para moverlo más a la izquierda
+                //   // Dibujar el rótulo en la posición calculada
+                //   ctx.fillText(rotulos[i], xRotulo - 15, yRotulo + 5); // Ajuste menor para centrar el texto
                 // }
 
-                // Dividir el rótulo en dos palabras (puedes ajustar esto si tus rótulos tienen más o menos de dos palabras)
-                const palabras = rotulos[i].split(' ');
+                // Agregar los rótulos fuera del hexágono en dos filas
+                ctx.font = '15px "Abel", strong';
+                ctx.fillStyle = 'black'; // Color de los rótulos
+                for (let i = 0; i < 6; i++) {
+                    const angulo = (i * Math.PI) / 3; // 60 grados por vértice
+                    const xRotulo = centerX + (radioMax + 20) * Math.cos(angulo); // Posición del rótulo (fuera del hexágono)
+                    const yRotulo = centerY + (radioMax + 20) * Math.sin(angulo);
 
-                // // Dibujar cada palabra en una línea
-                // ctx.fillText(palabras[0], xRotulo - 15, yRotulo - 5); // Primera palabra, un poco más arriba
-                // ctx.fillText(palabras[1], xRotulo - 15, yRotulo + 15); // Segunda palabra, un poco más abajo
-                // Dibujar cada palabra en una línea, ajustando el texto correctamente
-                // ctx.fillText(palabras[0], xRotulo - 20, yRotulo - 5); // Primera palabra
-                // ctx.fillText(palabras[1], xRotulo - 20, yRotulo + 15); // Segunda palabra
+                    //     // Modificar la posición del rótulo cuando i = 3
+                    // if (i === 3) {
+                    //     xRotulo -= 50; // Ajustar este valor para moverlo más a la izquierda
+                    // }
 
-                if (i === 3) {
-                  ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5); // Primera palabra
-                  ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14); // Segunda palabra
-                } else {
-                  ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5); // Primera palabra
-                  ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14); // Segunda palabra
+                    // Dividir el rótulo en dos palabras (puedes ajustar esto si tus rótulos tienen más o menos de dos palabras)
+                    const palabras = rotulos[i].split(' ');
+
+                    // // Dibujar cada palabra en una línea
+                    // ctx.fillText(palabras[0], xRotulo - 15, yRotulo - 5); // Primera palabra, un poco más arriba
+                    // ctx.fillText(palabras[1], xRotulo - 15, yRotulo + 15); // Segunda palabra, un poco más abajo
+                    // Dibujar cada palabra en una línea, ajustando el texto correctamente
+                    // ctx.fillText(palabras[0], xRotulo - 20, yRotulo - 5); // Primera palabra
+                    // ctx.fillText(palabras[1], xRotulo - 20, yRotulo + 15); // Segunda palabra
+
+                    if (i === 3) {
+                        ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5); // Primera palabra
+                        ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14); // Segunda palabra
+                    } else {
+                        ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5); // Primera palabra
+                        ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14); // Segunda palabra
+                    }
                 }
-              }
             }
             dibujarHexagono(variables, rotulos);
-          }
+        }
 
-        </script>
-  </div>
-  </form>
-  </div>
+    </script>
+
+    <script src="../../js/armaTablaHexagono.js"></script>
+    <!-- </div>
+    </form>
+    </div> -->
 </body>
 
 </html>

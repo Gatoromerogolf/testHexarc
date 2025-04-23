@@ -2,11 +2,6 @@ let tablaMenuEs = [];
 let tablaMenuA = [];
 let primeraVez = 0;
 let max = 0;
-// let apellidouser = localStorage.getItem("apellido");
-// const nombreUser = localStorage.getItem("nombre");
-// const apenom = nombreUser + ' ' + apellidouser;
-// const empresa = localStorage.getItem("empresa");
-// const CUIT = localStorage.getItem("CUIT");
 
 const ria = localStorage.getItem("ria");
 // const max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
@@ -63,12 +58,12 @@ async function ejecutarProceso() {
 document.addEventListener("DOMContentLoaded", async function () {
     await ejecutarProceso(); // Ejecuta todo cuando el DOM está listo
 
-    console.table(capitulos);
+    // console.table(capitulos);
     // matrizPreguntas = await recuperarPreguntas(capitulo);
     let contenedor = document.getElementById("contenedorTablas"); // Contenedor donde agregaremos todo
 
     for (const capitulo of capitulos) {
-        console.log(`procesando capitulo ${capitulo.letra}`);
+        // console.log(`procesando capitulo ${capitulo.letra}`);
         if (capitulo.letra == "E" || capitulo.letra == "F") {
             continue;
         }
@@ -78,23 +73,26 @@ document.addEventListener("DOMContentLoaded", async function () {
         // Crear tres líneas en blanco antes del título
         for (let i = 0; i < 2; i++) {
             let espacio = document.createElement("br");
-            contenedor.appendChild(espacio);
+            //  ⛔ anula esto para que no se muestre ⛔
+            // contenedor.appendChild(espacio);
         }
 
         // Crear el título del capítulo ::::::::::::::::::::::::::.
         let titulo = document.createElement("h3");
         titulo.textContent = `Factor: ${capitulo.nombre}`;
-        contenedor.appendChild(titulo);
+
+        //  ⛔ anula esto para que no se muestre ⛔
+        // contenedor.appendChild(titulo);
 
         // Crear la tabla :::::::::::::::::::::::::::::::::::::::::
         let tabla = document.createElement("table");
         tabla.classList.add("tablaHexagono");
 
         // Busca las respuestas de ese capítulo
-        console.log(`busca respuesta de CUIT ${CUIT} y capitulo ${capitulo.letra}`);
+        // console.log(`busca respuesta de CUIT ${CUIT} y capitulo ${capitulo.letra}`);
         const data = await buscaRespuesta(CUIT, capitulo.letra);
         const respuestas = data.respuestas || []; // Si no hay respuestas, asigna un array vacío
-        console.table(respuestas);
+        // console.table(respuestas);
 
         // Crear el encabezado (seccion):::::::::::::::::::::::::::
 
@@ -109,16 +107,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         for (const respuesta of respuestas) {
             if (respuesta.porcentaje > max) {
-                console.log(
-                    `descarto capitulo ${capitulo.nombre}, seccion ${respuesta.seccion} con % ${respuesta.porcentaje}`
-                );
-                console.log("**********************");
+                // console.log(
+                //     `descarto capitulo ${capitulo.nombre}, seccion ${respuesta.seccion} con % ${respuesta.porcentaje}`
+                // );
+                // console.log("**********************");
                 continue;
             }
 
-            console.log(
-                `encontro para incluir capitulo ${capitulo.nombre}, seccion ${respuesta.seccion} con % ${respuesta.porcentaje}`
-            );
+            // console.log(
+            //     `encontro para incluir capitulo ${capitulo.nombre}, seccion ${respuesta.seccion} con % ${respuesta.porcentaje}`
+            // );
 
             const existeTipo = matrizPreguntas.some(
                 (p) =>
@@ -128,9 +126,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             );
 
             if (!existeTipo) {
-                console.log(
-                    `No hay 1 o 52 en matrizPreguntas para seccion ${respuesta.seccion}.`
-                );
+                // console.log(
+                //     `No hay 1 o 52 en matrizPreguntas para seccion ${respuesta.seccion}.`
+                // );
                 continue; // Salta a la siguiente iteración del bucle
             }
 
@@ -200,18 +198,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             // celdaInformado.style.fontSize = "16px";
             // filaSituacion.appendChild(celdaInformado);
 
-            tbody.appendChild(filaSituacion);
 
-            // let thFactor2 = document.createElement("th");
-            // const indice2 = respuesta.seccion;
-            // const descripcion2 = await obtenerNombreSeccion(indice, idioma, capitulo.letra);
-            // thFactor2.textContent = "[ " + respuesta.porcentaje + " % ]   -   Seccion: " + respuesta.seccion + '. ' + descripcion;
-            // thFactor2.style.fontSize = "17px";
-            // thFactor2.classList.add("factor");
-            // thFactor2.setAttribute('colspan', '4');
-            // filaEncabezado.appendChild(thFactor2);
-            // thead.appendChild(filaEncabezado2);
-            // tabla.appendChild(thead2);
+            //  ⛔ anula esto para que no se muestre ⛔
+            // tbody.appendChild(filaSituacion);
+
 
             // Crear el cuerpo de la tabla::::::::::::::::::::::::::::::
 
@@ -226,37 +216,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             for (const pregunta of preguntasSeccion) {
                 let filaSeccion = document.createElement("tr");
                 filaSeccion.classList.add("situacion2");
-
-                // let celdaNumero = document.createElement('th');
-                // celdaNumero.style.width = "5px"; // Define el ancho en píxeles
-                // celdaNumero.textContent = pregunta.Numero;
-                // filaSeccion.appendChild(celdaNumero);
-
-                // let consigna = document.createElement('th');
-                // consigna.style.width = "300px"; // Define el ancho en píxeles
-                // consigna.textContent = pregunta.Descrip;
-                // filaSeccion.appendChild(consigna);
-
-                // let respondido = document.createElement('th');
-                // respondido.style.width = "20px"; // Define el ancho en píxeles
-                // poneRespuesta(respuesta, pregunta).then((texto) => {
-                //     respondido.textContent = texto;
-                //     filaSeccion.appendChild(respondido);
-
-                //     if (pregunta.tipo == "52") {
-                //         if (texto == "No efectivo" || texto == "Poco efectivo" ) {
-                //         // if (texto == "No efectivo") {
-                //         lineaDatosFd.appendChild(filaSeccion)}
-                //     };
-
-                //     if (pregunta.tipo == "1") {
-                //         if (texto == "NO") {
-                //         // if (texto == "No efectivo") {
-                //         lineaDatosFd.appendChild(filaSeccion)}
-                //     };
-                // })
-
-                // let tbody = document.createElement("tbody");
 
                 let filaRespuesta = document.createElement("tr");
                 filaRespuesta.classList.add("situacion2");
@@ -275,9 +234,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 // let respondido = document.createElement('td');
                 // respondido.style.width = "90px"; // Define el ancho en píxeles
                 poneRespuesta(respuesta, pregunta).then((texto) => {
-                    // respondido.textContent = texto;
-                    // respondido.style.fontSize = "16px";
-                    // filaRespuesta.appendChild(respondido);
 
                     if (pregunta.tipo == "52") {
                         if (texto == "No efectivo" || texto == "Poco efectivo" ) {
@@ -297,7 +253,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                 tabla.appendChild(tbody);
 
                 // Agregar la tabla al contenedor
-                contenedor.appendChild(tabla);
+
+                // ⛔ anula esto para no mostrarlo  ⛔
+                // contenedor.appendChild(tabla);
             }
         }
     }
@@ -467,318 +425,14 @@ async function buscaRespuesta(CUIT, capitulo) {
     }
 }
 
-/* -----------------------------------------  ::::: ANULADO .  NO SE LLAMA :::::::
-actualizarHTML  
------------------------------------------->  ::::::::::::::::::::::::::::::::::::*/
-// async function actualizarHTML(respuestas) {
-//     let lineaDatosFd = document.getElementById("factor");
-
-//     // Crear fila con la clase 'factor'
-//     let filaFactor = document.createElement("tr");
-//     filaFactor.classList.add("factor");
-
-//     let celdaFactor = document.createElement("th");
-//     celdaFactor.colSpan = 4; // Para que ocupe cuatro columnas
-//     celdaFactor.style.fontSize = "20px"; // Ajusta el tamaño según necesites
-
-//     switch (capitulo) {
-//         case "A":
-//             celdaFactor.textContent =
-//                 "Factor: Manejo de los Riesgos de Gobierno Corporativo";
-//             break;
-//         case "B":
-//             celdaFactor.textContent = "Factor: Manejo del Apetito de Riesgo";
-//             break;
-//         case "C":
-//             celdaFactor.textContent = "Factor: Manejo de los Riesgos de Mercado";
-//             break;
-//         case "D":
-//             celdaFactor.textContent = "Factor: Manejo de los Riesgos de Procesos";
-//             break;
-//         default:
-//             celdaFactor.textContent = "error en el Factor";
-//     }
-
-//     filaFactor.appendChild(celdaFactor);
-//     lineaDatosFd.appendChild(filaFactor);
-
-//     // const max = Number(ria === 0 ? valorCategorias[0].precio[1] : valorCategorias[1].precio[1]);
-
-//     // console.log (`valor de maximo ${max}`)
-
-//     await procesarCategoria({ min: 0, max: max }, "tablaSeccion");
-
-//     async function procesarCategoria(rango, elementoID) {
-//         let tablaMenuA = respuestas.filter(
-//             (respuesta) =>
-//                 respuesta.porcentaje > rango.min && respuesta.porcentaje <= rango.max
-//         );
-
-//         if (tablaMenuA.length > 0) {
-//             await llenaUnaParte(tablaMenuA, lineaDatosFd);
-//         } else {
-//             let fila = document.createElement("tr");
-//             let celdaNombre = document.createElement("td");
-//             celdaNombre.style.width = "500px";
-//             celdaNombre.textContent = "*** No hay elementos en esta categoría ***";
-//             celdaNombre.style.textAlign = "center";
-//             fila.appendChild(celdaNombre);
-//             lineaDatosFd.appendChild(fila);
-//         }
-//     }
-// }
-
-
-
-
-
-
-
 
 
 
 /* -----------------------------------------  ::::: ANULADO .  NO SE LLAMA :::::::
-
-// /* -----------------------------------------
-// llenaUnaParte
-// ------------------------------------------> */
-// async function llenaUnaParte(tablaMenuA, lineaDatosFd) {
-//     console.table(matrizPreguntas);
-
-//     for (const respuesta of tablaMenuA) {
-//         // hay que ver de cada seccion que tipo de pregunta tiene
-//         // solo tienen que considerarse si contienen preguntas tipo 1 o 52
-//         // si tienen 1 solo van las que tienen como respuesta un 2 (NO)
-//         // si tienen 52 solo van las que tienen como respuesta NO (un 2) o (1 o 2) enlas
-//         // que van de 1 a 4 (No efectivo, Poco efectivo)
-
-//         // tablaMenuaA tiene todas las respuestas que hayan tenido como porcentaje de
-//         // sección un valor menor al maximo (70 o75%)
-//         //  tiene capitulo, seccion y el string de respuestas de todas las preguntas
-
-//         // habria que buscar por cada elemento de tablaMenuA, donde indica la seccion,
-//         // recorrer las preguntas de esa seccion para ver si tiene tipo 1 o 52
-//         // si no tiene ninguna, eliminar la fila de tablaMenuaA
-
-//         // if (!existeTipo) continue;
 
 //         // console.log(`✅ Se encontró tipo 1 o 52 para capitulo=${respuesta.capitulo}, seccion=${respuesta.seccion}`);
-
-//         const existeTipo = matrizPreguntas.some(
-//             (p) =>
-//                 p.Capitulo == respuesta.capitulo &&
-//                 p.Seccion == respuesta.seccion &&
-//                 (p.tipo == 1 || p.tipo == 52)
-//         );
-
-//         if (!existeTipo) {
-//             console.log(
-//                 `No hay 1 o 52 en matrizPreguntas para capitulo ${respuesta.capitulo} y seccion ${respuesta.seccion}.`
-//             );
-//             continue; // Salta a la siguiente iteración del bucle
-//         }
-
-//         // Ahora tengo que ver que la respuesta tenga al menos un valor 2 si es tipo 1 (es el NO como respuesta) o un valor 1 o 2 si es tipo  52 (No efectivo o Poco efectivo)
-//         // si no lo tienen, hay que ignorar la seccion.
-
-//         // con cada respuesta leida de tablaMenuA
-
-//         //  con la respuesta.seccion recorrer toda la matrizPreguntas con matrizPreguntas.Seccion = respuesta.seccion
-//         // selecciono la que tenga tipo 1 o 52.
-//         // Si es tipo 1
-//         //       si respuesta.respuesta[matrizPreguntas.Numero - 1] == 2 hay que seguir imprimiendo
-//         // Si es tipo 52
-//         //       si respuesta.respuesta[matrizPreguntas.Numero - 1] < 3 hay que seguir imprimiendo
-
-//         // puedo definir sigoProceso = false
-//         // lo pongo en true si hay que seguir imprimiendo
-//         // despues pregunto   if (!sigoProceso) continue;
-
-//         console.log(`Procesando respuesta: seccion=${respuesta.seccion}`);
-
-//         // Filtrar las preguntas que cumplen con capitulo y seccion
-//         const preguntasFiltradas = matrizPreguntas.filter(
-//             (p) =>
-//                 p.Capitulo === respuesta.capitulo &&
-//                 p.Seccion === respuesta.seccion &&
-//                 (p.tipo === 1 || p.tipo === 52)
-//         );
-
-//         console.log(`Preguntas filtradas:`, preguntasFiltradas);
-
-//         let sigoProceso = false;
-
-//         // Recorrer las preguntas filtradas
-//         for (const pregunta of preguntasFiltradas) {
-//             const indice = pregunta.Numero - 1; // Calcular la posición
-//             const valorLeido = respuesta.respuesta[indice]; // Obtener respuesta
-
-//             // console.log(`🔍 Evalua pregunta ${pregunta.Numero}: tipo=${pregunta.tipo}, valorLeido=${valorLeido}`);
-
 //             //     console.log(`⛔ Condición no cumplida,
-//             if (
-//                 (pregunta.tipo === 1 && valorLeido == 2) ||
-//                 (pregunta.tipo === 52 && valorLeido < 3)
-//             ) {
-//                 sigoProceso = true;
-//             }
-//         }
-
-//         if (!sigoProceso) {
 //             console.log(`⛔ No cumplida, salta sgte seccion : ${respuesta.seccion}`);
-//             continue;
-//         }
-
-//         let filaSeccion = document.createElement("tr");
-//         filaSeccion.classList.add("seccion");
-
-//         let celdaNombre = document.createElement("th");
-//         celdaNombre.setAttribute("colspan", "4"); // Combina 4 columnas
-//         // const capitulo = "A";
-//         const indice = respuesta.seccion;
-//         const descripcion = await obtenerNombreSeccion(indice, idioma, capitulo);
-//         celdaNombre.textContent =
-//             "[ " +
-//             respuesta.porcentaje +
-//             " % ]   -   Seccion: " +
-//             respuesta.seccion +
-//             ". " +
-//             descripcion;
-//         // celdaNombre.style.width = '550px';
-//         celdaNombre.style.fontSize = "17px";
-//         filaSeccion.appendChild(celdaNombre);
-
-//         lineaDatosFd.appendChild(filaSeccion);
-
-//         let filaSituacion = document.createElement("tr"); //fila adicional "Situación"
-//         filaSituacion.classList.add("seccion");
-
-//         let celdaSituacionNum = document.createElement("th");
-//         celdaSituacionNum.textContent = " # "; // Texto de la situación
-//         celdaSituacionNum.style.width = "10px";
-//         filaSituacion.appendChild(celdaSituacionNum);
-
-//         let celdaSituacion = document.createElement("th");
-//         celdaSituacion.textContent = "Situación"; // Texto de la situación
-//         celdaSituacion.style.width = "500px";
-//         filaSituacion.appendChild(celdaSituacion);
-
-//         let celdaInformado = document.createElement("th");
-//         celdaInformado.textContent = "Informado"; // Texto de 'Informado'
-//         celdaInformado.style.width = "50px";
-//         filaSituacion.appendChild(celdaInformado);
-
-//         lineaDatosFd.appendChild(filaSituacion);
-
-//         // let celdaFlag = document.createElement('th');
-//         // celdaFlag.textContent = "Obs"; // Texto de 'banderida'
-//         // celdaFlag.style.width = '10px';
-//         // filaSituacion.appendChild(celdaFlag);
-
-//         let info = respuesta.seccion;
-//         let preguntasSeccion = matrizPreguntas.filter(
-//             (pregunta) => pregunta.Seccion == info
-//         );
-
-//         for (const pregunta of preguntasSeccion) {
-//             let filaSeccion = document.createElement("tr");
-//             filaSeccion.classList.add("situacion2");
-
-//             let celdaNumero = document.createElement("th");
-//             celdaNumero.style.width = "5px"; // Define el ancho en píxeles
-//             celdaNumero.textContent = pregunta.Numero;
-//             filaSeccion.appendChild(celdaNumero);
-
-//             let consigna = document.createElement("th");
-//             consigna.style.width = "400px"; // Define el ancho en píxeles
-//             consigna.textContent = pregunta.Descrip;
-//             consigna.style.fontSize = "14px";
-//             filaSeccion.appendChild(consigna);
-
-//             let respondido = document.createElement("th");
-//             respondido.style.width = "20px"; // Define el ancho en píxeles
-//             poneRespuesta(respuesta, pregunta).then((texto) => {
-//                 respondido.textContent = texto;
-//                 filaSeccion.appendChild(respondido);
-
-//                 if (pregunta.tipo == "52") {
-//                     if (texto == "No efectivo" || texto == "Poco efectivo") {
-//                         // if (texto == "No efectivo") {
-//                         lineaDatosFd.appendChild(filaSeccion);
-//                     }
-//                 }
-
-//                 if (pregunta.tipo == "1") {
-//                     if (texto == "NO") {
-//                         // if (texto == "No efectivo") {
-//                         lineaDatosFd.appendChild(filaSeccion);
-//                     }
-//                 }
-//             });
-
-//             // const imagen = document.createElement('img');
-//             // if (texto == "NO") {
-//             // imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-//             // celdaRpta.textContent = imagen;
-//             // celdaRpta.appendChild(imagen);
-//             // }
-//             // if (texto == "No efectivo") {
-//             // imagen.src = '../img/advertencia-rojo.png';  // Reemplaza con la ruta de tu imagen
-//             //     celdaRpta.appendChild(imagen);
-//             // }
-
-//             // if(texto == "Poco efectivo") {
-//             //         imagen.src = '../img/alerta-rojo.png';  // Reemplaza con la ruta de tu imagen
-//             //         celdaRpta.appendChild(imagen);
-//             // }
-
-//             // if(texto == "Efectivo") {
-//             //         imagen.src = '../img/advertencia.png';  // Reemplaza con la ruta de tu imagen
-//             //         celdaRpta.appendChild(imagen);
-//             // }
-//             //     else {
-//             //     celdaRpta.textContent = ' ';
-//             //     }
-
-//             // celdaRpta.textContent = pregunta.tipo;
-//             // celdaRpta.style.width = "20px"; // Define el ancho en píxeles
-//             // filaSeccion.appendChild(celdaRpta);
-//         }
-//     }
-
-//     // lineaDatosFd.appendChild(filaSeccion);
-// }
-
-/* -----------------------------------------
-armarDetalleGeneral
-------------------------------------------> */
-// function armarDetalleGeneral(info, nombreSeccion, puntaje, porciento, respuestas, textoCheck, textoRespuestas) {
-//     let lineaModalGeneral = document.getElementById("lineaModalGeneral");
-//     // eliminarFilas();
-//     let preguntasSeccion = matrizPreguntas.filter(pregunta =>
-//         pregunta.Seccion == info
-//     );
-
-//     // console.table(preguntasSeccion);
-
-//     for (const pregunta of preguntasSeccion) {
-
-//         let filaSeccion = document.createElement('tr');
-//         // const fila = lineaModalGeneral.insertRow();     // Crear una nueva fila en la tabla
-
-//         let celdaNumero = document.createElement('th');
-//         celdaNumero.textContent = pregunta.Numero;
-//         filaSeccion.appendChild(celdaNumero);
-
-//         let consigna = document.createElement('th');
-//         consigna.textContent = pregunta.Descrip;
-//         filaSeccion.appendChild(consigna);
-
-//         // busca el registro de respuesta de la seccion que está trabajando
-//         let celdaRpta = document.createElement('th');
-//         celdaRpta.textContent = pregunta.tipo;
-//     }
-// }
 
 /* -----------------------------------------
 poneRespuesta
@@ -834,9 +488,9 @@ async function poneRespuesta(respuesta, pregunta) {
     }
 
     if (pregunta.tipo > 40 && pregunta.tipo < 50) {
-        console.log(
-            `\n Pregunta a procesar ${pregunta.Numero} y tipo ${pregunta.tipo} \n`
-        );
+        // console.log(
+        //     `\n Pregunta a procesar ${pregunta.Numero} y tipo ${pregunta.tipo} \n`
+        // );
         let indicesCheck = 0;
         const registroTextoCheck = textoCheck.find(
             (item) => item.pregunta == pregunta.tipo

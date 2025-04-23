@@ -155,14 +155,22 @@
 
                     <!-- <p style="text-align: justify">El análisis realizado a través del Modelo HEXARCi de la valoración otorgada a cada situación, ha permitido identificar diversas oportunidades de mejora en la gestión de riesgos. El adecuado tratamiento de estas oportunidades puede fortalecer sus procesos y estrategias para una gestión más eficiente y proactiva.</p>
                     <p style="text-align: justify">Al implementar medidas correctivas o de optimización, se logrará reducir la brecha entre la situación actual de la organización y el estado ideal, mejorando su capacidad de respuesta ante posibles riesgos y fortaleciendo su sostenibilidad a largo plazo.</p> -->
+                        <br>
+                    <div class="centrado-flex">
+                        <button type="button" onclick="window.location.href='PDF.html'" id="boton-enviar">
+                            Generar informe con recomendaciones
+                        </button>
+                    </div>
+
+<!-- 
                     <p style="text-align: justify">Los aspectos a mejorar más significativos en cada factor de riesgo:
                         Manejo de los Riesgos de Gobierno Corporativo (MRG); Manejo de los Riesgos del Apetito de Riesgo
                         (MAR); Manejo de los Riesgos de Mercado (MRM) y Manejo de los Riesgos de los Procesos se exponen
-                        a continuación:.</p>
+                        a continuación:.</p> -->
                 </div>
 
                 <!-- Contenedor donde se generarán dinámicamente las tablas -->
-                <div id="contenedorTablas"></div>
+                <!-- <div id="contenedorTablas"></div>
                 <table id="tablaHexagono">
                     <thead>
                         <tr class="fila-factor">
@@ -174,17 +182,17 @@
                             <th id="lineaModalGeneral" class="respuesta"></th>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
 
 
-                <div>
+                <!-- <div>
                     <p>La representación gráfica de la situación de <strong><span class="company-name"
                                 style="font-size: 16px"></span></strong> es la siguiente:</p>
-                </div>
+                </div> -->
 
-                <div class="canvas-container">
+                <!-- <div class="canvas-container">
                     <canvas id="hexagonoCanvas" width="500" height="500"></canvas>
-                </div>
+                </div> -->
                 <br>
                 <br>
 
@@ -226,7 +234,10 @@
                 if (totalCapitulos && totalCapitulos.exists) {
                     // console.table(totalCapitulos.records); // Muestra los resultados una vez que están disponibles
                     // Aquí puedes colocar más lógica que depende de los datos de `totalCapitulos`
-                    ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
+
+                    //  ⛔ anula esto para que no se muestre ⛔
+                    // ejecutarGrafico(totalCapitulos.records); // Llama a una función que necesite los datos
+
                 } else {
                     console.log("No se encontraron capítulos.");
                 }

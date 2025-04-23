@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Calor</title>
+
+    <!-- Cargar Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Cargar Leaflet.heat -->
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/leaflet-heat.js"></script>
+
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mapa de Calor en la República Argentina</h1>
+    <div id="map"></div>
+
+    <script>
+        // Asegurarse de que las bibliotecas están cargadas antes de usar cualquier funcionalidad de Leaflet
+        document.addEventListener("DOMContentLoaded", function() {
+            // Crear el mapa y establecer la vista inicial
+            var map = L.map('map').setView([-38.4161, -63.6167], 5); // Coordenadas de Argentina
+
+            // Cargar un mapa base de OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Datos de puntos de calor con coordenadas y valor de intensidad
+            var heatPoints = [
+                [-34.6118, -58.4173, 0.5], // Buenos Aires
+                [-31.4201, -64.1888, 0.9], // Córdoba
+                [-32.9442, -60.6393, 0.7], // Rosario
+                [-38.4161, -63.6167, 0.8], // Santa Fe
+            ];
+
+            // Crear la capa de calor y agregarla al mapa
+            var heat = L.heatLayer(heatPoints, {
+                radius: 25, // Radio de cada punto de calor
+                blur: 15,   // Desenfoque de los puntos
+                maxZoom: 17,
+                gradient: { // Definir gradiente de colores
+                    0.1: 'blue',
+                    0.3: 'green',
+                    0.5: 'yellow',
+                    0.7: 'orange',
+                    1: 'red'
+                }
+            }).addTo(map);
+        });
+    </script>
+
+</body>
+
+</html>

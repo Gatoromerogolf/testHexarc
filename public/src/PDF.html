@@ -17,6 +17,69 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+    <style>
+        .google-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            height: 100px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) {
+            background-color: #4285F4;
+            /* Azul Google */
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            background-color: #EA4335;
+            /* Rojo Google */
+            animation-delay: 0.15s;
+        }
+
+        .dot:nth-child(3) {
+            background-color: #FBBC05;
+            /* Amarillo Google */
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(4) {
+            background-color: #34A853;
+            /* Verde Google */
+            animation-delay: 0.45s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .loader-text {
+            margin-top: 10px;
+            font-size: 18px;
+            text-align: center;
+            font-family: "Abel";
+        }
+    </style>
+
 </head>
 
 <body>
@@ -32,21 +95,45 @@
                         <h4>Autoevaluación de la calidad del manejo de la empresa</h4>
                     </div>
                     <div class="nav-iconsxx">
-                        <h5> Autoevaluación</h5>
                     </div>
                 </div>
                 <hr>
 
-                <form id="formulario">
+                <form id="formularioFinal" style="display: block;">
                     <div class="center-container">
-                        <h4 class="tituloSeccion"><a href="Menu-A.html">II - Estructura organizacional</a></h4>
+                        <h4 class="tituloSeccion"><a href="Menu-A.html">Generación del informe con recomendaciones</a>
+                        </h4>
                     </div>
 
-                    <div class="centrado-flex">
-                        <button type="submit" id="boton-enviar">Generar</button>
-                        <button type="button" id="boton-generar-pdf">Generar PDF</button>
+                    <p>Este proceso crea el documento
+                        <span style="text-align: center; font-size: 22px; font-weight: bold;"> Informe HexaRCi.pdf
+                        </span>
+                        que se descargará automáticamente. Aguarde, por favor...
+                    </p>
+
+                    <div id="loader" class="loader-container" style="display: block;">
+                        <div class="google-loader">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="loader-text">Generando documento...</div>
                     </div>
                 </form>
+
+                <form id="formularioSaludo" style="display: none;">
+                    <div class="center-container">
+                        <h4 class="tituloSeccion"><a href="Menu-A.html">Generación del informe con recomendaciones</a>
+                        </h4>
+                    </div>
+                    <br><br>
+                    <div style="text-align: center;">
+                        <span style="font-size: 22px; font-weight: bold;">El documento ha sido creado</span>
+                    </div>
+
+                </form>
+
             </section>
         </section>
     </div>
@@ -59,17 +146,49 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
 <script>
 
-    const idioma = localStorage.getItem("idioma");
+    const apellidouser = localStorage.getItem("apellido");
+    const nombreUser = localStorage.getItem("nombre");
+    const apenom = nombreUser + ' ' + apellidouser;
+    const empresa = localStorage.getItem("empresa");
     const CUIT = localStorage.getItem("CUIT");
+    document.getElementById("nombreEmpresa").textContent = empresa;
+    document.getElementById("nombreUsuario").textContent = apenom;
+    const idioma = localStorage.getItem("idioma");
+
     let max = 90;
     let numPagina = 0;
 
     const textoTipificacion = localStorage.getItem("textoTipificacion");
     const tipificacion = localStorage.getItem("tipificacion");
 
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     document.getElementById("boton-generar-pdf").addEventListener("click", generarPDF);
+    // });
+
     document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("boton-generar-pdf").addEventListener("click", generarPDF);
+        // Mostramos el loader (ya está visible por defecto, pero por si acaso)
+        document.getElementById("loader").style.display = "block";
+
+        // Esperamos 200 ms antes de empezar para que el loader se pinte
+        setTimeout(() => {
+            iniciarGeneracion();
+        }, 200);
     });
+
+    async function iniciarGeneracion() {
+        try {
+            // Aguardamos un poco para que el texto "Generando informe..." aparezca
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Ahora llamamos a la función que empieza el trabajo pesado
+            await generarPDF();
+
+            // Ocultamos el loader si querés
+            document.getElementById("loader").style.display = "none";
+        } catch (error) {
+            console.error("Error al generar el PDF:", error);
+        }
+    }
 
     async function generarPDF() {
 
@@ -373,7 +492,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Algun texto descriptivo....:";
+        parrafo.innerHTML = "Se han formulado <strong>84 declaraciones</strong>, distribuidas en 15 secciones temáticas, con el propósito de evaluar su nivel de implementación o adhesión dentro de la organización.  El resultado de esta evaluación se presenta en el porcentaje de cumplimiento alcanzado.";
         otraPagina.appendChild(parrafo);
 
         // Crear la tabla
@@ -1031,6 +1150,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             .catch(error => {
                 console.error("Error generando PDF:", error);
             });
+
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("formularioFinal").style.display = "none";
+        document.getElementById("formularioSaludo").style.display = "block";
     }
 
 
@@ -1414,6 +1537,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         }
         return { exists: false };
     }
+
+
 
 </script>
 
