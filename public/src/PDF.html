@@ -213,31 +213,31 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF.webp")';
         // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF2.png")';
         // primeraPagina.style.backgroundImage = 'url("../img/imagenPDF3.png")';
-        primeraPagina.style.backgroundImage = 'url("../img/imagenEdificios.webp")';
+        // primeraPagina.style.backgroundImage = 'url("../img/imagenEdificios.webp")';
+        primeraPagina.style.backgroundImage = 'url("../img/caratula_hexarci.jpeg")';
         primeraPagina.style.backgroundSize = 'contain';
         primeraPagina.style.backgroundPosition = 'center';
         primeraPagina.style.pageBreakAfter = 'always';
 
-        const tituloCaratula = document.createElement('h1');
-        tituloCaratula.textContent = 'Índice General';
-        tituloCaratula.style.textAlign = 'center';
-        tituloCaratula.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
-        tituloCaratula.style.fontSize = '26pt';
-        tituloCaratula.style.color = 'white';
-        // tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
-        tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.3)';
-        tituloCaratula.style.marginTop = '40mm';
-        tituloCaratula.innerHTML = "Aplicación del Modelo HexaRci"
-        primeraPagina.appendChild(tituloCaratula);
+        // const tituloCaratula = document.createElement('h1');
+        // tituloCaratula.textContent = 'Índice General';
+        // tituloCaratula.style.textAlign = 'center';
+        // tituloCaratula.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        // tituloCaratula.style.fontSize = '26pt';
+        // tituloCaratula.style.color = 'white';
+        // tituloCaratula.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.3)';
+        // tituloCaratula.style.marginTop = '40mm';
+        // tituloCaratula.innerHTML = ""
+        // primeraPagina.appendChild(tituloCaratula);
 
         const segundaLeyenda = document.createElement('h2');
-        segundaLeyenda.innerHTML = 'Informe confidencial<BR> correspondiente a<BR>NOMBRE DEL CLIENTE';
+        segundaLeyenda.innerHTML = empresa;
         segundaLeyenda.style.textAlign = 'center';
         segundaLeyenda.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
-        segundaLeyenda.style.fontSize = '20pt';
-        segundaLeyenda.style.color = 'white';
-        segundaLeyenda.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
-        segundaLeyenda.style.marginTop = '150px'; // Ajusta según necesites
+        segundaLeyenda.style.fontSize = '35pt';
+        segundaLeyenda.style.color = 'black';
+        segundaLeyenda.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.3)';
+        segundaLeyenda.style.marginTop = '550px'; // Ajusta según necesites
         primeraPagina.appendChild(segundaLeyenda);
 
         contenido.appendChild(primeraPagina);
@@ -1170,7 +1170,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         numPagina++;
         numeroPagina = numPagina;
         marcaElemento = "BDT Advisory";
-        clienteElemento = "Nombre del Cliente";
+        clienteElemento = empresa;
         textoLateral = "Autoevaluación"
         // Si se proporciona texto lateral
         if (textoLateral) {
