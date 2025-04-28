@@ -205,6 +205,10 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // Crear un elemento temporal para construir el contenido HTML
         const contenido = document.createElement('div');
 
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ♦ Caratula
+        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::        
+
         const primeraPagina = document.createElement('div');
         primeraPagina.style.width = 'calc(100% - 20mm)'; // Ancho ajustado para márgenes
         primeraPagina.style.height = '277mm'; // Altura A4 menos márgenes
@@ -241,6 +245,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         primeraPagina.appendChild(segundaLeyenda);
 
         contenido.appendChild(primeraPagina);
+
+
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ♦ Añadir la segunda página (índice)

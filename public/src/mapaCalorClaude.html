@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa de Calor - Argentina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #map-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+        }
+        .province {
+            stroke: #fff;
+            stroke-width: 0.5px;
+            transition: opacity 0.3s;
+        }
+        .province:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        .tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 14px;
+            display: none;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        .controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3367d6;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mapa de Calor de Argentina</h1>
+        <div class="controls">
+            <button id="btn-poblacion">Población</button>
+            <button id="btn-temperatura">Temperatura</button>
+            <button id="btn-precipitacion">Precipitación</button>
+        </div>
+        <div id="map-container">
+            <div class="loading">Cargando mapa...</div>
+            <div class="tooltip"></div>
+        </div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #ffffcc;"></div>
+                <span>Bajo</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fd8d3c;"></div>
+                <span>Medio</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #800026;"></div>
+                <span>Alto</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script>
+        // Variables globales
+        let currentData = 'poblacion';
+        const width = 900;
+        const height = 600;
+        
+        // Crear el SVG
+        const svg = d3.select("#map-container")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", height)
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .attr("preserveAspectRatio", "xMidYMid meet");
+            
+        // Configurar la proyección para Argentina
+        const projection = d3.geoMercator()
+            .center([-65, -40])
+            .scale(1100)
+            .translate([width / 2, height / 2]);
+            
+        const path = d3.geoPath().projection(projection);
+        
+        // Datos simulados para cada provincia
+        const provinciasData = {
+            "Buenos Aires": { id: "BA", poblacion: 95, temperatura: 65, precipitacion: 80 },
+            "Capital Federal": { id: "CABA", poblacion: 100, temperatura: 70, precipitacion: 75 },
+            "Catamarca": { id: "CT", poblacion: 25, temperatura: 85, precipitacion: 20 },
+            "Chaco": { id: "CH", poblacion: 35, temperatura: 90, precipitacion: 60 },
+            "Chubut": { id: "CB", poblacion: 20, temperatura: 40, precipitacion: 30 },
+            "Córdoba": { id: "CD", poblacion: 70, temperatura: 70, precipitacion: 65 },
+            "Corrientes": { id: "CR", poblacion: 40, temperatura: 85, precipitacion: 75 },
+            "Entre Ríos": { id: "ER", poblacion: 45, temperatura: 75, precipitacion: 70 },
+            "Formosa": { id: "FO", poblacion: 30, temperatura: 95, precipitacion: 65 },
+            "Jujuy": { id: "JY", poblacion: 35, temperatura: 75, precipitacion: 40 },
+            "La Pampa": { id: "LP", poblacion: 20, temperatura: 65, precipitacion: 50 },
+            "La Rioja": { id: "LR", poblacion: 20, temperatura: 90, precipitacion: 15 },
+            "Mendoza": { id: "MZ", poblacion: 50, temperatura: 75, precipitacion: 20 },
+            "Misiones": { id: "MN", poblacion: 45, temperatura: 80, precipitacion: 90 },
+            "Neuquén": { id: "NQ", poblacion: 30, temperatura: 50, precipitacion: 35 },
+            "Río Negro": { id: "RN", poblacion: 25, temperatura: 45, precipitacion: 30 },
+            "Salta": { id: "SA", poblacion: 40, temperatura: 80, precipitacion: 50 },
+            "San Juan": { id: "SJ", poblacion: 30, temperatura: 85, precipitacion: 10 },
+            "San Luis": { id: "SL", poblacion: 25, temperatura: 75, precipitacion: 45 },
+            "Santa Cruz": { id: "SC", poblacion: 15, temperatura: 30, precipitacion: 25 },
+            "Santa Fe": { id: "SF", poblacion: 65, temperatura: 75, precipitacion: 70 },
+            "Santiago del Estero": { id: "SE", poblacion: 35, temperatura: 90, precipitacion: 40 },
+            "Tierra del Fuego": { id: "TF", poblacion: 10, temperatura: 20, precipitacion: 40 },
+            "Tucumán": { id: "TM", poblacion: 60, temperatura: 80, precipitacion: 60 }
+        };
+        
+        // Escalas de color para los diferentes tipos de datos
+        const colorScales = {
+            poblacion: d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 100]),
+            temperatura: d3.scaleSequential(d3.interpolateReds).domain([0, 100]),
+            precipitacion: d3.scaleSequential(d3.interpolateBlues).domain([0, 100])
+        };
+
+        // GeoJSON simplificado de Argentina (provincias principales)
+        const argentinaGeoJSON = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Buenos Aires" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-60, -38], [-58, -34], [-56, -36], [-58, -40], [-60, -38]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Capital Federal" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-58.5, -34.7], [-58.3, -34.5], [-58.4, -34.6], [-58.5, -34.7]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Catamarca" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-68, -27], [-65.5, -27], [-65.5, -29], [-68, -29], [-68, -27]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Chaco" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-62, -24], [-59, -24], [-59, -27], [-62, -27], [-62, -24]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Chubut" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-71, -42], [-64, -42], [-64, -46], [-71, -46], [-71, -42]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Córdoba" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-65, -30], [-62, -30], [-62, -35], [-65, -35], [-65, -30]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Corrientes" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-59, -27], [-56, -27], [-56, -30], [-59, -30], [-59, -27]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Entre Ríos" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-60, -30], [-58, -30], [-58, -33], [-60, -33], [-60, -30]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Formosa" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-62, -22], [-58, -22], [-58, -26], [-62, -26], [-62, -22]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Jujuy" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-67, -22], [-64, -22], [-64, -24], [-67, -24], [-67, -22]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "La Pampa" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-68, -35], [-63, -35], [-63, -39], [-68, -39], [-68, -35]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "La Rioja" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-69, -28], [-66, -28], [-66, -32], [-69, -32], [-69, -28]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Mendoza" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-70, -32], [-66, -32], [-66, -37], [-70, -37], [-70, -32]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Misiones" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-56, -26], [-54, -26], [-54, -28], [-56, -28], [-56, -26]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Neuquén" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-71, -37], [-68, -37], [-68, -40], [-71, -40], [-71, -37]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Río Negro" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-71, -39], [-63, -39], [-63, -42], [-71, -42], [-71, -39]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Salta" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-68, -22], [-63, -22], [-63, -26], [-68, -26], [-68, -22]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "San Juan" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-70, -29], [-67, -29], [-67, -32], [-70, -32], [-70, -29]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "San Luis" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-67, -32], [-65, -32], [-65, -35], [-67, -35], [-67, -32]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Santa Cruz" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-73, -46], [-65, -46], [-65, -52], [-73, -52], [-73, -46]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Santa Fe" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-62, -28], [-59, -28], [-59, -34], [-62, -34], [-62, -28]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Santiago del Estero" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-65, -26], [-62, -26], [-62, -29], [-65, -29], [-65, -26]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Tierra del Fuego" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-68, -53], [-64, -53], [-64, -55], [-68, -55], [-68, -53]]] }
+                },
+                {
+                    "type": "Feature",
+                    "properties": { "nombre": "Tucumán" },
+                    "geometry": { "type": "Polygon", "coordinates": [[[-66, -26], [-64, -26], [-64, -28], [-66, -28], [-66, -26]]] }
+                }
+            ]
+        };
+        
+        // Eliminar el mensaje de carga
+        d3.select(".loading").remove();
+        
+        // Dibujar el mapa con el GeoJSON embebido
+        svg.selectAll("path")
+            .data(argentinaGeoJSON.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .attr("class", "province")
+            .attr("fill", function(d) {
+                const provinceName = d.properties.nombre;
+                const data = provinciasData[provinceName];
+                return data ? colorScales[currentData](data[currentData]) : "#ccc";
+            })
+            .on("mouseover", function(event, d) {
+                const tooltip = d3.select(".tooltip");
+                const provinceName = d.properties.nombre;
+                const data = provinciasData[provinceName];
+                
+                let valueLabel;
+                if (currentData === 'poblacion') valueLabel = "Densidad poblacional";
+                else if (currentData === 'temperatura') valueLabel = "Temperatura promedio";
+                else valueLabel = "Precipitación anual";
+                
+                tooltip
+                    .style("display", "block")
+                    .style("left", (event.pageX - 100) + "px")
+                    .style("top", (event.pageY - 70) + "px")
+                    .html(`<strong>${provinceName}</strong><br>${valueLabel}: ${data ? data[currentData] : "N/A"}`);
+            })
+            .on("mouseout", function() {
+                d3.select(".tooltip").style("display", "none");
+            });
+        
+        // Controladores de eventos para los botones
+        d3.select("#btn-poblacion").on("click", function() {
+            updateMap("poblacion");
+        });
+        
+        d3.select("#btn-temperatura").on("click", function() {
+            updateMap("temperatura");
+        });
+        
+        d3.select("#btn-precipitacion").on("click", function() {
+            updateMap("precipitacion");
+        });
+        
+        // Función para actualizar el mapa
+        function updateMap(dataType) {
+            currentData = dataType;
+            
+            svg.selectAll(".province")
+                .transition()
+                .duration(750)
+                .attr("fill", function(d) {
+                    const provinceName = d.properties.nombre;
+                    const data = provinciasData[provinceName];
+                    return data ? colorScales[currentData](data[currentData]) : "#ccc";
+                });
+            
+            // Actualizar la leyenda
+            let legendTitle;
+            if (dataType === 'poblacion') {
+                legendTitle = "Densidad de población";
+                d3.selectAll(".legend-color").each(function(d, i) {
+                    d3.select(this).style("background-color", colorScales.poblacion(i * 50));
+                });
+            } else if (dataType === 'temperatura') {
+                legendTitle = "Temperatura promedio";
+                d3.selectAll(".legend-color").each(function(d, i) {
+                    d3.select(this).style("background-color", colorScales.temperatura(i * 50));
+                });
+            } else {
+                legendTitle = "Precipitación anual";
+                d3.selectAll(".legend-color").each(function(d, i) {
+                    d3.select(this).style("background-color", colorScales.precipitacion(i * 50));
+                });
+            }
+        }
+    </script>
+</body>
+</html>
