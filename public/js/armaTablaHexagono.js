@@ -42,7 +42,7 @@ async function ejecutarProceso() {
 
     document.getElementById("tipificacion").textContent = tipificacion;
     document.getElementById("causaTipificacion").innerHTML = textoTipificacion;
-    document.getElementById("botonGenerar").style.display = "block";
+    document.getElementById("botonGenerar").style.display = "flex";
 
     const elementos = document.querySelectorAll(".company-name");
 
