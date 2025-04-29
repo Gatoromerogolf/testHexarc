@@ -37,66 +37,6 @@ let direct3o4 = 0;
     }
 })();
 
-// // :::::::::::::::::::::::::::::::::::::::::::::::
-// //                        leerListaPrecios
-// // :::::::::::::::::::::::::::::::::::::::::::::::
-// async function leerListaPrecios() {
-//   try {
-//     const response = await fetch("/leeListaPrecios");
-//     if (response.ok) {
-//       const result = await response.json();
-//       return Array.isArray(result) ? result : []; // Asegura devolver un arreglo
-//     } else {
-//       console.error("Error al obtener la lista de precios", response.statusText);
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud:", error);
-//     return [];
-//   }
-//   return false;
-// }
-
-// // :::::::::::::::::::::::::::::::::::::::::::::::
-// //                                  leeCapitulos
-// // :::::::::::::::::::::::::::::::::::::::::::::::
-// async function leeCapitulos() {
-//   try {
-//     const respuesta = await fetch(`/capitulos?idioma=${idioma}`);
-//     if (respuesta.ok) {
-//       const capitulos = await respuesta.json();
-//       return capitulos;
-//     } else {
-//       console.error("Error al obtener los datos");
-//     }
-//   } catch (error) {
-//     console.error("Error al realizar la solicitud:", error);
-//   }
-//   return false;
-// }
-
-// // :::::::::::::::::::::::::::::::::::::::::::::::
-// //                          obtenerTotalCapitulos
-// // :::::::::::::::::::::::::::::::::::::::::::::::
-// async function obtenerTotalCapitulos(CUIT) {
-//   try {
-//     const response = await fetch(`/totalCapitulos?CUIT=${CUIT}`);
-//     if (response.ok) {
-//       const data = await response.json();
-//       return data; // Devuelve los datos obtenidos si la respuesta es exitosa
-//     } else {
-//       console.error(
-//         "Error en la respuesta:",
-//         response.status,
-//         response.statusText
-//       );
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error("Error en la solicitud:", error);
-//     return null;
-//   }
-// }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::
 //                          completarHtml

@@ -158,6 +158,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
     let max = 90;
     let numPagina = 0;
 
+    let var1, var2, var3, va4, var5, var6 = 0;
+
     const textoTipificacion = localStorage.getItem("textoTipificacion");
     const tipificacion = localStorage.getItem("tipificacion");
 
@@ -314,7 +316,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         let paginaHexa = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "2. El Sistema HexaRCi y " + empresa+".";
+        parrafo.innerHTML = "2. El Sistema HexaRCi y " + empresa + ".";
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
@@ -326,14 +328,14 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "La versión del Modelo HexaRC denominada Sistema HexaRCi se encuentra materializada en el Software que "+ empresa + " ha adoptado y sus resultados son el objeto de este Informe.<br><br>El proceso de autoevaluación del Sistema HexaRCi fue completado por el personal de la empresa que asumió la responsabilidad de evaluar cada  declaración. Las conclusiones presentadas en este Informe reflejan  la perspectiva y el análisis realizados, cuya validez y precisión dependieron directamente del grado de objetividad y certeza con el que se respondió a cada  declaración.";
+        parrafo.innerHTML = "La versión del Modelo HexaRC denominada Sistema HexaRCi se encuentra materializada en el Software que " + empresa + " ha adoptado y sus resultados son el objeto de este Informe.<br><br>El proceso de autoevaluación del Sistema HexaRCi fue completado por el personal de la empresa que asumió la responsabilidad de evaluar cada  declaración. Las conclusiones presentadas en este Informe reflejan  la perspectiva y el análisis realizados, cuya validez y precisión dependieron directamente del grado de objetividad y certeza con el que se respondió a cada  declaración.";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "<strong>Alcance de la Autoevaluación.</strong><br><br>El proceso de autoevaluación comprendió las respuestas a cuatro factores de riesgo  y dos factores temporales, proporcionando una visión integral de la situación de la empresa:Factores de Riesgo Auto-Evaluados.<br><br>";
+        parrafo.innerHTML = "<strong>Alcance de la Autoevaluación.</strong><br><br>El proceso de autoevaluación comprendió las respuestas a cuatro factores de riesgo  y dos factores temporales, proporcionando una visión integral de la situación de la empresa,<br><br><strong>Factores de Riesgo Auto-Evaluados.</strong><br><br>";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
@@ -347,7 +349,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "2. <strong>Apetito de Riesgo.</strong> Representa la cantidad de riesgo que la empresa está dispuesta a 'tomar'. Un Apetito de Riesgo alto puede llevar al crecimiento y a utilidades, pero puede llevar también a enfrentar pérdidas importantes. Un Apetito de Riesgo bajo puede llevar a perder posiciones competitivas o a la inmovilidad. El objetivo es tener un Apetito de Riesgo adecuado en relación con las necesidades competitivas y la cultura de la empresa.<br>Se han propuesto <strong> 71 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
+        parrafo.innerHTML = "2. <strong>Apetito de Riesgo.</strong> Representa la cantidad de riesgo que la empresa está dispuesta a 'tomar'. Un Apetito de Riesgo alto puede llevar al crecimiento y a utilidades, pero puede llevar también a enfrentar pérdidas importantes. Un Apetito de Riesgo bajo puede llevar a perder posiciones competitivas o a la inmovilidad. El objetivo es tener un Apetito de Riesgo adecuado en relación con las necesidades competitivas y la cultura de la empresa.";
 
         paginaHexa.appendChild(parrafo);
 
@@ -372,7 +374,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Factores temporales.";
+        parrafo.innerHTML = "<strong>Factores temporales.</strong>";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
@@ -387,12 +389,12 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         console.log("pagina 2. Estructura")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ⛔ Cumplimiento por factor
+        // ⛔ Cumplimiento por factor  ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "3. Niveles de cumplimiento por Factor";
+        parrafo.innerHTML = "3. Niveles de cumplimiento por factor";
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
@@ -426,7 +428,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         tabla.appendChild(encabezado);
 
         // Llenar la tabla con datos
-        for (const capitulo of totalCapitulos) {
+        // for (const capitulo of totalCapitulos) {
+        totalCapitulos.forEach((capitulo, index) => {
             const capituloNombre = capitulos.find(c => c.letra === capitulo.capitulo)?.nombre || 'Nombre no encontrado';
 
             const fila = document.createElement("tr");
@@ -439,7 +442,17 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                 `;
 
             tabla.appendChild(fila);
-        }
+
+            // Asignar valores a variables según el índice
+            switch (index) {
+                case 0: var1 = capitulo.porcentaje; break;
+                case 1: var2 = capitulo.porcentaje; break;
+                case 2: var3 = capitulo.porcentaje; break;
+                case 3: var4 = capitulo.porcentaje; break;
+                case 4: var5 = capitulo.porcentaje; break;
+                case 5: var6 = capitulo.porcentaje; break;
+            }
+        });
 
         // Finalmente, agregar la tabla a la página
         otraPagina.appendChild(tabla);
@@ -448,7 +461,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         console.log("pagina 3 Evaluacion")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir evaluacion de cumplimiento - Gobierno Corporativo
+        // ⛔  Añadir Gobierno Corporativo  ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
@@ -513,7 +526,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         console.log("pagina 3.1. Gob Corpo")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir evaluacion de cumplimiento - Apetito de riesgo
+        // ⛔ Añadir  Apetito de riesgo  ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
@@ -530,7 +543,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Algun texto descriptivo....:<br><br>";
+        parrafo.innerHTML = "Se han propuesto <strong>71 declaraciones</strong>, distribuidas en 4 secciones temáticas, con el propósito de evaluar su nivel de implementación, cumplimiento o adhesión dentro de la organización.  El resultado de esta evaluación se presenta en el porcentaje alcanzado.";
         otraPagina.appendChild(parrafo);
 
         // crea la tabla de totales por capitulo
@@ -572,7 +585,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir evaluacion de cumplimiento -  Riesgos de mercado
+        // ⛔  Añadir  -  Riesgos de mercado  ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
@@ -586,27 +599,99 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         otraPagina.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Tiene otro formato...Habría que normalizarlo....";
-        // Crear la imagen
-        imagen = document.createElement('img');
-        imagen.src = '../img/mercado.png';  // Reemplaza con la URL o ruta de la imagen
-        imagen.alt = 'Descripción de la imagen';
-        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
-        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
-        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
-
+        parrafo.innerHTML = "Se han propuesto <strong>43 declaraciones</strong>, para evaluar su nivel de implementación, cumplimiento o adhesión dentro de la organización.  El resultado de esta evaluación se presenta en el porcentaje alcanzado.";
         otraPagina.appendChild(parrafo);
-        otraPagina.appendChild(imagen);
+
+
+        async function obtenerListaPreciosB() {
+            try {
+                const response = await fetch('/leeListaPrecios'); // Usa la URL correcta para tu API
+                if (response.ok) {
+                    const listaPrecios = await response.json();
+                    return listaPrecios;
+                } else {
+                    console.error('Error en la respuesta:', response.status, response.statusText);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+                return null;
+            }
+        }
+        async function filtrarPrecios() {
+            try {
+                // Llamar a la función para obtener los precios
+                const listaPreciosB = await obtenerListaPreciosB();
+                precios = listaPreciosB.filter(seccion => seccion.seccion == 1 && seccion.capitulo == "C");
+                // Usar reduce para sumar el campo "maximo" de los registros filtrados
+                maximo = precios.reduce((maximo, registro) => {
+                    return maximo + Number(registro.maximo);
+                }, 0);  // El segundo parámetro (0) es el valor inicial del acumulador
+
+                console.log('Suma total de maximos:', maximo);
+                //  le suma 290 puntos por seleccionar los 29 checkboxes.
+                maximo += 290;
+                console.log('suma con checkboxes:', maximo);
+
+            } catch (error) {
+                console.error('Error mostrando los precios:', error);
+            }
+        }
+
+        //  buscar el valor de las repuestas para sacar el porcentaje
+        // contar la cantidad de numeros que hay en el campo de la posición 15.  cada uno vale 10 y se divide por 290 para sacar el porcentaje
+        // ambos porcentajes se pasan a la tabla.
+
+
+        // Crear la tabla si no existe
+        tabla = document.createElement("table");
+        tabla.style.width = "90%";
+        tabla.style.borderCollapse = "collapse";
+
+        // Agregar encabezado (opcional)
+        encabezado = document.createElement("tr");
+        encabezado.innerHTML = `
+                <th style="text-align: center; padding: 5px;">#</th>
+                <th style="text-align: left; padding: 15px;">Sección</th>
+                <th style="text-align: center; padding: 5px;">%</th>
+            `;
+        tabla.appendChild(encabezado);
+
+        // Llenar la tabla con datos
+        let porceCumpli = 50;
+
+        let fila = document.createElement("tr");
+        fila.classList.add("situacion2");
+
+        fila.innerHTML = `
+                    <td style="padding: 10px;">I</td>
+                    <td style="text-align: left; padding: 10px; font-size: 18px">Consideración de riesgos</td>
+                    <td style="text-align: center; padding: 10px;">${porceCumpli}</td>
+                `;
+        tabla.appendChild(fila);
+
+        porceCumpli = 60;
+
+        fila = document.createElement("tr");
+        fila.classList.add("situacion2");
+
+        fila.innerHTML = `
+                    <td style="padding: 10px;">II</td>
+                    <td style="text-align: left; padding: 10px; font-size: 18px">Creación de la estrategia</td>
+                    <td style="text-align: center; padding: 10px;">${porceCumpli}</td>
+                `;
+        tabla.appendChild(fila);
+
+        otraPagina.appendChild(tabla);
 
         contenido.appendChild(otraPagina);
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir evaluacion de cumplimiento -  Riesgos de procesos
-        // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // ⛔ Añadir -  Riesgos de procesos
+        // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
@@ -622,7 +707,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Texto descriptivo...<br>";
+        parrafo.innerHTML = "Se han formulado <strong>276 declaraciones</strong>, distribuidas en 20 secciones temáticas, con el propósito de evaluar su nivel de implementación, cumplimiento o adhesión dentro de la organización.  El resultado de esta evaluación se presenta en el porcentaje alcanzado.";
         otraPagina.appendChild(parrafo);
 
 
@@ -667,7 +752,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir evaluacion de cumplimiento -  Financiero
+        // ⛔ Añadir FINANCIERO ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
@@ -699,7 +784,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         contenido.appendChild(otraPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir evaluacion de cumplimiento -  Financiero
+        // ⛔ Añadir GENERACION DE RESULTADOS  ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         otraPagina = crearPaginaConMarco();
 
@@ -733,7 +818,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         console.log("pagina 3.6. Resultados")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir la cuarta página (contenido) con un borde
+        // ⛔ Añadir pagina de DIAGNOSTICO ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const cuartaPagina = crearPaginaConMarco();
 
@@ -751,7 +836,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo2.style.fontSize = '13pt';
         parrafo2.style.lineHeight = '1.5';
         parrafo2.style.fontStyle = 'normal'; // Agregar estilo itálico
-        parrafo2.innerHTML = "De acuerdo con la información cargada por <strong><span class='company-name' style='font-size: 16px'>BDT Advisory </span></strong> y a los parámetros del Modelo HexaRCi, la Compañia <strong><span class='company-name' style='font-size: 16px'>BDT Advisory </span></strong> es una compañia calificada preliminarmente como tipo:"
+        parrafo2.innerHTML = "De acuerdo con la información cargada por <strong><span class='company-name' style='font-size: 16px'>" + empresa + "</span></strong> y a los parámetros del Modelo HexaRCi, la compañía <strong><span class='company-name' style='font-size: 16px'>" + empresa + " </span></strong> es una compañía calificada preliminarmente como tipo:"
         cuartaPagina.appendChild(parrafo2);
 
         const resultado = document.createElement('p');
@@ -767,7 +852,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = 'BDT ADVISORY ' + textoTipificacion;
+        parrafo.innerHTML = "<strong><span class='company-name' style='font-size: 16px'>" + empresa + "</span></strong>" + textoTipificacion;
         cuartaPagina.appendChild(parrafo);
 
         contenido.appendChild(cuartaPagina);
@@ -775,7 +860,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         console.log("pagina 4 Aplicacion Modelo")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir la quinta página dibuho hexagono
+        // ⛔ Añadir la quinta página dibuho hexagono ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const quintaPagina = crearPaginaConMarco();
@@ -794,8 +879,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             // Crear canvas para el hexágono
             const hexagonoCanvas = document.createElement('canvas');
             hexagonoCanvas.id = 'hexagonoPDF';
-            hexagonoCanvas.width = 700;
-            hexagonoCanvas.height = 700;
+            hexagonoCanvas.width = 600;
+            hexagonoCanvas.height = 600;
             hexagonoCanvas.style.maxWidth = '100%';
             hexagonoCanvas.style.height = 'auto';
 
@@ -803,7 +888,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             const ctx = hexagonoCanvas.getContext('2d');
 
             // Variables para el hexágono
-            const var1 = 59.91, var2 = 89.50, var3 = 59.09, var4 = 72.64, var5 = 63.00, var6 = 41.36;
+            // const var1 = 59.91, var2 = 89.50, var3 = 59.09, var4 = 72.64, var5 = 63.00, var6 = 41.36;
             const variablesHexagono = [var1, var2, var3, var4, var5, var6];
 
             const rotulosHexagono = [
@@ -817,7 +902,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
             const centerX = hexagonoCanvas.width / 2;
             const centerY = hexagonoCanvas.height / 2;
-            const radioMax = 170;
+            const radioMax = 190;
             const radio90 = radioMax * 0.9;
             const radio70 = radioMax * 0.7;
             const radio50 = radioMax * 0.5;
@@ -886,7 +971,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             ctx.stroke();
 
             // Agregar valores de variables
-            ctx.font = '17px Arial, strong';
+            ctx.font = '15px Arial, strong';
             ctx.fillStyle = 'black';
             variablesHexagono.forEach((valor, i) => {
                 const angulo = (i * Math.PI) / 3;
@@ -907,8 +992,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                 const palabras = rotulo.split(' ');
 
                 if (i === 3) {
-                    ctx.fillText(palabras[0], xRotulo - 35, yRotulo - 5);
-                    ctx.fillText(palabras[1], xRotulo - 35, yRotulo + 14);
+                    ctx.fillText(palabras[0], xRotulo - 45, yRotulo - 5);
+                    ctx.fillText(palabras[1], xRotulo - 45, yRotulo + 14);
                 } else {
                     ctx.fillText(palabras[0], xRotulo - 18, yRotulo - 5);
                     ctx.fillText(palabras[1], xRotulo - 18, yRotulo + 14);
@@ -941,14 +1026,14 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "Si cada factor alcanzare el 100% se conformaría un 'Hexágono perfecto' y de esa manera <strong><span class='company-name' style='font-size: 16px'></span></strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi.<br><br>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades de <strong><span class='company-name' style='font-size: 16px'>BDT ADVISORY</span></strong>, de forma que mediante un proceso de mejora continua en el manejo de los riesgos se la prepare para ir alcanzando el 'Hexágono Perfecto'";
+        parrafo.innerHTML = "Si cada factor alcanzare el 100% se conformaría un 'Hexágono perfecto' y de esa manera <strong><span class='company-name' style='font-size: 16px'> " + empresa + "</span></strong> se constituiría en una empresa competitiva de acuerdo con el Modelo HexaRCi.<br><br>Consecuentemente se debe construir una estrategia de mejora adaptada a las características y particularidades de <strong><span class='company-name' style='font-size: 16px'> " + empresa + "</span></strong>, de forma que mediante un proceso de mejora continua en el manejo de los riesgos se la prepare para ir alcanzando el 'Hexágono Perfecto'";
         quintaPagina.appendChild(parrafo);
 
         contenido.appendChild(quintaPagina);
         console.log("pagina 5. Dibujito")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir la sexta pagina presenta mejoras
+        // ⛔ Añadir la sexta pagina presenta mejoras ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         const sextaPagina = crearPaginaConMarco();
 
@@ -965,7 +1050,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "El análisis realizado a través del Sistema HEXARCi mediante la valoración otorgada a cada declaración, ha permitido identificar diversas oportunidades de mejora.<br><br>Mediante la implantación de dichas oportunidades se logrará reducir la brecha entre la situación actual de " + empresa + " y el estado ideal, mejorando en el futuro su  desempeño económico-financiero y su competitividad.";
+        parrafo.innerHTML = "El análisis realizado a través del Sistema HEXARCi mediante la valoración otorgada a cada declaración, ha permitido identificar diversas oportunidades de mejora.<br><br>Mediante la implantación de dichas oportunidades se logrará reducir la brecha entre la situación actual de <strong><span class='company-name' style='font-size: 16px'>" + empresa + "</span></strong> y el estado ideal, mejorando en el futuro su  desempeño económico-financiero y su competitividad.";
         sextaPagina.appendChild(parrafo);
 
         contenido.appendChild(sextaPagina);
@@ -974,7 +1059,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ♦ Añadir paginas con mejoras
+        // ⛔ Añadir paginas con mejoras ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         capitulos = await leeCapitulos();
@@ -985,7 +1070,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         for (const capitulo of capitulos) {
 
             //  ⛔ interrumpe el proceso ⛔
-             break;
+            break;
 
 
             if (capitulo.letra == "E" || capitulo.letra == "F") {
