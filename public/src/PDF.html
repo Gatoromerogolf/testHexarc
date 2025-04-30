@@ -167,6 +167,38 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
     //     document.getElementById("boton-generar-pdf").addEventListener("click", generarPDF);
     // });
 
+
+    //  🏀  da fornmato a la fecha de aceptacion del acuerdo  🏀
+
+    function formatearFechaConMes(fechaStr) {
+        if (!fechaStr) return "";
+
+        const fecha = new Date(fechaStr);
+
+        const dia = String(fecha.getDate()).padStart(2, "0");
+        const anio = fecha.getFullYear();
+
+        const meses = [
+            "enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        ];
+        const mesNombre = meses[fecha.getMonth()]; // getMonth() da de 0 a 11
+
+        return `${dia} de ${mesNombre} de ${anio}`;
+    }
+
+    // Leer la fecha guardada
+    const fechaAceptacion = localStorage.getItem("aceptacion");
+    const fechaFormateada = formatearFechaConMes(fechaAceptacion);
+
+    //   Aceptacion: 2025-04-10T03:00:00.000Zformateada 10T03:00:00.000Z - 04 - 2025
+
+    // Mostrarla en el HTML
+    // document.getElementById("campo-fecha").textContent = fechaFormateada;
+
+    // 🥎  FIN da fornmato a la fecha de aceptacion del acuerdo  🥎
+
+
     document.addEventListener("DOMContentLoaded", function () {
         // Mostramos el loader (ya está visible por defecto, pero por si acaso)
         document.getElementById("loader").style.display = "block";
@@ -252,11 +284,11 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.lineHeight = '1.5';
         parrafo.style.fontStyle = 'normal'; // Agregar estilo itálico
         parrafo.style.marginTop = '5mm';
-        parrafo.innerHTML = "El presente informe ha sido elaborado por BDT Advisory LLC en el marco del Sistema HexaRCi, conforme a los términos establecidos en la Propuesta de Servicios Profesionales suscripta con " + empresa + ", aceptada con fecha [FECHA DE ACEPTACIÓN].<br><br>Su contenido está destinado exclusivamente al uso interno de " + empresa + " y no podrá ser reproducido, divulgado ni distribuido —total o parcialmente— fuera de " + empresa + ", sin la autorización previa y por escrito de BDT Advisory LLC.<br><br>Los términos de confidencialidad que rigen este informe han sido establecidos en el acuerdo de confidencialidad firmado con fecha [FECHA DE FIRMA DEL ACUERDO] entre " + empresa + " y BDT Advisory LLC.<br><br>Cualquier uso no autorizado del presente documento será considerado una infracción a dicho acuerdo, así como a los derechos de propiedad intelectual de BDT Advisory LLC."
+        parrafo.innerHTML = "El presente informe ha sido elaborado por BDT Advisory LLC en el marco del Sistema HexaRCi, conforme a los términos establecidos en la Propuesta de Servicios Profesionales suscripta con <strong>" + empresa + "</strong>, aceptada con fecha " + fechaFormateada + ".<br><br>Su contenido está destinado exclusivamente al uso interno de <strong>" + empresa + "</strong> y no podrá ser reproducido, divulgado ni distribuido —total o parcialmente— fuera de <strong>" + empresa + "</strong>, sin la autorización previa y por escrito de BDT Advisory LLC.<br><br>Los términos de confidencialidad que rigen este informe han sido establecidos en el acuerdo de confidencialidad firmado con fecha " + fechaFormateada + " entre <strong> " + empresa + "</strong> y BDT Advisory LLC.<br><br>Cualquier uso no autorizado del presente documento será considerado una infracción a dicho acuerdo, así como a los derechos de propiedad intelectual de BDT Advisory LLC."
         confidencialidad.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "<strong>Introducción.</strong><br><br>El producto de la aplicación por parte de " + empresa + " del Sistema HexaRCi, que se encuentra  materializada en los Niveles de Cumplimiento por factor, la Representación Gráfica, el Diagnóstico y las Oportunidades de Mejora son el resultado de: <br><br>1.	la autoevaluación de los distintos factores del Sistema HexaRCi efectuada por ejecutivos de " + empresa + " y<br><br> 2. de los parámetros, algoritmos, tablas y valores contenidos en el software del Sistema HexaRCi. El software del Sistema HexaRCi ha sido aceptado por " + empresa + " al haber firmado la propuesta de BDT Advisory LLC de fecha [FECHA DE FIRMA DE LA PROPUESTA].";
+        parrafo.innerHTML = "<strong>Introducción.</strong><br><br>El producto de la aplicación por parte de <strong> " + empresa + "</strong> del Sistema HexaRCi, que se encuentra  materializada en los Niveles de Cumplimiento por factor, la Representación Gráfica, el Diagnóstico y las Oportunidades de Mejora son el resultado de: <br><br>1.	la autoevaluación de los distintos factores del Sistema HexaRCi efectuada por ejecutivos de <strong>" + empresa + "</strong> y<br><br> 2. de los parámetros, algoritmos, tablas y valores contenidos en el software del Sistema HexaRCi. El software del Sistema HexaRCi ha sido aceptado por <strong>" + empresa + "</strong> al haber firmado la propuesta de BDT Advisory LLC de fecha " + fechaFormateada + ".";
 
         confidencialidad.appendChild(parrafo);
 
@@ -279,7 +311,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // parrafo.style.lineHeight = '1.5';
         // parrafo.style.fontStyle = 'normal'; // Agregar estilo itálico
         // parrafo.style.marginTop = '5mm';
-        parrafo.innerHTML = "1. El modelo HexaRC<br><br>2. El Sistema HewxaRCi y " + empresa + ".<br><br>3. Niveles de Cumplimiento por factor<br><br>4. Diagnóstico<br><br>5.  Representación Gráfica<br><br>6. Oportunidades de Mejora por factor"
+        parrafo.innerHTML = "1. El modelo HexaRC<br><br>2. El Sistema HewxaRCi y <strong>" + empresa + "</strong>.<br><br>3. Niveles de Cumplimiento por factor<br><br>4. Diagnóstico<br><br>5.  Representación Gráfica<br><br>6. Oportunidades de Mejora por factor"
         paginaIndice.appendChild(parrafo);
 
         contenido.appendChild(paginaIndice);
@@ -305,7 +337,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '12pt';
         parrafo.style.lineHeight = '1.5';
-        parrafo.innerHTML = "HexaRC es un Modelo creado por BDT Advisory para mejorar el desempeño y la competitividad de las compañías  basado en el hecho de que una rentabilidad superior y una optimización de la competitividad se logran optimizando el manejo de los riesgos del negocio.<br><br>La inversión es el punto de partida de toda actividad empresarial e implica asumir esos riesgos. Al invertir, las empresas enfrentan incertidumbres que pueden representar tanto oportunidades de ganancia como amenazas de pérdida.<br><br>La clave del éxito radica en gestionar los riesgos de manera integral y holística, maximizando el potencial de ganancias sin descuidar la importancia de minimizar posibles pérdidas. <br><br>Una gestión de riesgos holística abarca la identificación, evaluación y mitigación de riesgos estratégicos, financieros, operativos, reputacional y regulatorios, permitiendo transformar amenazas en impulsores del crecimiento y aprovechar al máximo las oportunidades emergentes.<br><br>Este enfoque integral asegura que los distintos riesgos estén interconectados y se gestionen de manera coordinada, fortaleciendo competitividad de la empresa. <br><br>Así, la adecuada gestión de riesgos permite obtener beneficios de manera consistente convirtiéndose en un factor clave para el éxito de la empresa. <br><br>Con esta visión fue concebido el Modelo HexaRC";
+        parrafo.innerHTML = "HexaRC es un Modelo creado por BDT Advisory para mejorar el desempeño y la competitividad de las compañías  basado en el hecho de que una rentabilidad superior y una optimización de la competitividad se logran optimizando el manejo de los riesgos del negocio.<br><br>La inversión es el punto de partida de toda actividad empresarial e implica asumir esos riesgos. Al invertir, las empresas enfrentan incertidumbres que pueden representar tanto oportunidades de ganancia como amenazas de pérdida.<br><br>La clave del éxito radica en gestionar los riesgos de manera integral y holística, maximizando el potencial de ganancias sin descuidar la importancia de minimizar posibles pérdidas. <br><br>Una gestión de riesgos holística abarca la identificación, evaluación y mitigación de riesgos estratégicos, financieros, operativos, reputacional y regulatorios, permitiendo transformar amenazas en impulsores del crecimiento y aprovechar al máximo las oportunidades emergentes.<br><br>Este enfoque integral asegura que los distintos riesgos estén interconectados y se gestionen de manera coordinada, fortaleciendo competitividad de la empresa. <br><br>Así, la adecuada gestión de riesgos permite obtener beneficios de manera consistente convirtiéndose en un factor clave para el éxito de la empresa. <br><br>Con esta visión fue concebido el Modelo HexaRC.";
         terceraPagina.appendChild(parrafo);
 
         contenido.appendChild(terceraPagina);
@@ -328,29 +360,35 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "La versión del Modelo HexaRC denominada Sistema HexaRCi se encuentra materializada en el Software que " + empresa + " ha adoptado y sus resultados son el objeto de este Informe.<br><br>El proceso de autoevaluación del Sistema HexaRCi fue completado por el personal de la empresa que asumió la responsabilidad de evaluar cada  declaración. Las conclusiones presentadas en este Informe reflejan  la perspectiva y el análisis realizados, cuya validez y precisión dependieron directamente del grado de objetividad y certeza con el que se respondió a cada  declaración.";
+        parrafo.innerHTML = "La versión del Modelo HexaRC denominada Sistema HexaRCi se encuentra materializada en el Software que <strong>" + empresa + "</strong> ha adoptado y sus resultados son el objeto de este Informe.<br><br>El proceso de autoevaluación del Sistema HexaRCi fue completado por el personal de la empresa que asumió la responsabilidad de evaluar cada  declaración. Las conclusiones presentadas en este Informe reflejan  la perspectiva y el análisis realizados, cuya validez y precisión dependieron directamente del grado de objetividad y certeza con el que se respondió a cada  declaración.";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "<strong>Alcance de la Autoevaluación.</strong><br><br>El proceso de autoevaluación comprendió las respuestas a cuatro factores de riesgo  y dos factores temporales, proporcionando una visión integral de la situación de la empresa,<br><br><strong>Factores de Riesgo Auto-Evaluados.</strong><br><br>";
+        parrafo.innerHTML = "<strong>Alcance de la Autoevaluación.</strong><br><br>El proceso de autoevaluación comprendió las respuestas a cuatro factores de riesgo  y dos factores temporales, proporcionando una visión integral de la situación de la empresa,<br><br><strong>Factores de Riesgo Auto-Evaluados.</strong><br>";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
         // parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "1. <strong>Manejo de los Riesgos del Gobierno Corporativo.</strong> Representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos. Se han presentado 84 declaraciones que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
+        parrafo.innerHTML = "1. <strong>Manejo de los Riesgos del Gobierno Corporativo.</strong> Representa el conjunto de procesos, principios y valores que rigen la forma en que una organización es estrategizada, administrada, controlada y transparentada. Las fallas en el sistema de Gobierno pueden conducir a la disfuncionalidad de los procesos. El sistema de gobierno corporativo impacta en el Apetito de Riesgo y su calidad operativa-funcional determina el manejo de los riesgos de mercado y de los procesos.";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
         // parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "2. <strong>Apetito de Riesgo.</strong> Representa la cantidad de riesgo que la empresa está dispuesta a 'tomar'. Un Apetito de Riesgo alto puede llevar al crecimiento y a utilidades, pero puede llevar también a enfrentar pérdidas importantes. Un Apetito de Riesgo bajo puede llevar a perder posiciones competitivas o a la inmovilidad. El objetivo es tener un Apetito de Riesgo adecuado en relación con las necesidades competitivas y la cultura de la empresa.";
+        parrafo.innerHTML = "2. <strong>Manejo del Apetito de Riesgo.</strong> Representa la cantidad de riesgo que la empresa está dispuesta a 'tomar'. Un Apetito de Riesgo alto puede llevar al crecimiento y a utilidades, pero puede llevar también a enfrentar pérdidas importantes. Un Apetito de Riesgo bajo puede llevar a perder posiciones competitivas o a la inmovilidad. El objetivo es tener un Apetito de Riesgo adecuado en relación con las necesidades competitivas y la cultura de la empresa.";
+        paginaHexa.appendChild(parrafo);
 
+        parrafo = document.createElement('p');
+        // parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "3. <strong>Manejo de los Riesgos de Mercado.</strong> Se refieren a las amenazas o peligros debido a factores externos y que pueden tener un impacto negativo en los objetivos y resultados deseados. Los riesgos del mercado son parte del sistema estratégico/táctico de la compañía y, conjuntamente con los riesgos de los procesos y el apetito de riesgo constituyen los riesgos que tiene que manejar el Sistema de Gobierno Corporativo.";
         paginaHexa.appendChild(parrafo);
 
         contenido.appendChild(paginaHexa);
@@ -361,28 +399,25 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "3. <strong>Riesgos de Mercado.</strong>Se refieren a las amenazas o peligros debido a factores externos y que pueden tener un impacto negativo en los objetivos y resultados deseados. Los riesgos del mercado son parte del sistema estratégico/táctico de la compañía y, conjuntamente con los riesgos de los procesos y el apetito de riesgo constituyen los riesgos que tiene que manejar el Sistema de Gobierno Corporativo.<br>Se han propuesto <strong> 43 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
-
+        parrafo.innerHTML = "4. <strong>Manejo de los Riesgos de los Procesos.</strong> Comprenden las secuencias de actividades interrelacionadas que se llevan a cabo para alcanzar los objetivos de la empresa. Incluyen conceptualmente: Procesos de Gestión, Procesos Operativos y Procesos de Soporte. La identificación, modelado y mejora continua de estos procesos son elementos clave para aumentar la eficiencia, la calidad y la competitividad de la empresa. El objetivo es tener procesos sólidos que minimicen la posibilidad de incurrir en pérdidas por mal manejo de los mismos.";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        // parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "4. <strong>Riesgos de los Procesos.</strong>Comprenden las secuencias de actividades interrelacionadas que se llevan a cabo para alcanzar los objetivos de la empresa. Incluyen conceptualmente: Procesos de Gestión, Procesos Operativos y Procesos de Soporte. La identificación, modelado y mejora continua de estos procesos son elementos clave para aumentar la eficiencia, la calidad y la competitividad de la empresa. El objetivo es tener procesos sólidos que minimicen la posibilidad de incurrir en pérdidas por mal manejo de los mismos.<br>Se han propuesto <strong> 276 declaraciones </strong> que han sido evaluadas identificando su grado de cumplimiento o aplicación en la empresa.";
-
-        paginaHexa.appendChild(parrafo);
-
-        parrafo = document.createElement('p');
         parrafo.innerHTML = "<strong>Factores temporales.</strong>";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Situación Financiera.<br><br>Algún texto habría que poner para homogeneizar con lo anterior";
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "5. <strong>Manejo de los Riesgos de la Situación Financiera.</strong><br><br> Se refiere a la posibilidad de que la empresa experimente dificultades para cumplir con sus obligaciones financieras a corto, mediano o largo plazo. Esto puede manifestarse a través de problemas de liquidez, endeudamiento excesivo, incapacidad para generar flujo de efectivo suficiente, o una estructura de capital inadecuada. El manejo de este riesgo implica la implementación de estrategias y controles para asegurar la solidez financiera de la organización, incluyendo la gestión eficiente del capital de trabajo, el monitoreo constante de los indicadores financieros clave, y la planificación financiera a largo plazo.";
         paginaHexa.appendChild(parrafo);
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "Generación de Resultados.<br><br>Igual que en situación financiera";
+        parrafo.style.fontSize = '13pt';
+        parrafo.style.lineHeight = '1.4';
+        parrafo.innerHTML = "6. <strong>Manejo de los Riesgos de la Generación de Resultados.</strong><br><br>Se relaciona con la incertidumbre sobre la capacidad de la empresa para alcanzar sus objetivos de rentabilidad y crecimiento. Esto puede ser influenciado por factores internos como la eficiencia operativa, la gestión de costos, la innovación y la calidad de los productos o servicios, así como por factores externos como la competencia, las condiciones económicas, los cambios regulatorios y las tendencias del mercado. El manejo de este riesgo implica establecer metas claras y medibles, monitorear el desempeño en relación con estas metas, analizar las desviaciones y tomar acciones correctivas, así como adaptarse proactivamente a los cambios del entorno para asegurar la sostenibilidad y el crecimiento del negocio.";
         paginaHexa.appendChild(parrafo);
 
         contenido.appendChild(paginaHexa);
@@ -605,45 +640,45 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         otraPagina.appendChild(parrafo);
 
 
-        async function obtenerListaPreciosB() {
+        // :::::::::::::::::::::::::::::::::::::::::::::::
+        //                          recuperarRespuestas
+        // :::::::::::::::::::::::::::::::::::::::::::::::
+
+        respuestas = await obtenerRespuestas(CUIT, "C");
+        const respondidosSegundaParte = respuestas[0].respuesta[14];
+        const ctddRespondidos = respondidosSegundaParte.length
+        const puntosTotales = respuestas[0].score;
+
+        console.log("respuestas:", respuestas);
+        console.log("respuestas[0]:", respuestas[0]);
+        console.log("respuestas[0][14]:", respuestas[0].respuesta[14]);
+        console.log("ctdd respondidos", ctddRespondidos);
+
+        // :::::::::::::::::::::::::::::::::::::::::::::::
+        //                          obtenerRespuestas
+        // :::::::::::::::::::::::::::::::::::::::::::::::
+        async function obtenerRespuestas(CUIT, capitulo) {
+            // leo las respuestas del CUIT para el capítulo
             try {
-                const response = await fetch('/leeListaPrecios'); // Usa la URL correcta para tu API
+                const response = await fetch(
+                    `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
+                );
                 if (response.ok) {
-                    const listaPrecios = await response.json();
-                    return listaPrecios;
+                    const result = await response.json();
+                    return result.records || []; // Devuelve los registros o un arreglo vacío
                 } else {
-                    console.error('Error en la respuesta:', response.status, response.statusText);
-                    return null;
+                    console.error(
+                        `Sin respuesta para capitulo ${capitulo} en obtenerRespuestas`
+                    );
                 }
             } catch (error) {
-                console.error('Error en la solicitud:', error);
-                return null;
+                console.error(
+                    "Error al realizar la solicitud en obtenerRespuestas:",
+                    error
+                );
             }
+            return [];
         }
-        async function filtrarPrecios() {
-            try {
-                // Llamar a la función para obtener los precios
-                const listaPreciosB = await obtenerListaPreciosB();
-                precios = listaPreciosB.filter(seccion => seccion.seccion == 1 && seccion.capitulo == "C");
-                // Usar reduce para sumar el campo "maximo" de los registros filtrados
-                maximo = precios.reduce((maximo, registro) => {
-                    return maximo + Number(registro.maximo);
-                }, 0);  // El segundo parámetro (0) es el valor inicial del acumulador
-
-                console.log('Suma total de maximos:', maximo);
-                //  le suma 290 puntos por seleccionar los 29 checkboxes.
-                maximo += 290;
-                console.log('suma con checkboxes:', maximo);
-
-            } catch (error) {
-                console.error('Error mostrando los precios:', error);
-            }
-        }
-
-        //  buscar el valor de las repuestas para sacar el porcentaje
-        // contar la cantidad de numeros que hay en el campo de la posición 15.  cada uno vale 10 y se divide por 290 para sacar el porcentaje
-        // ambos porcentajes se pasan a la tabla.
-
 
         // Crear la tabla si no existe
         tabla = document.createElement("table");
@@ -660,26 +695,28 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         tabla.appendChild(encabezado);
 
         // Llenar la tabla con datos
-        let porceCumpli = 50;
+        let porceCumpli = ((puntosTotales - (10 * ctddRespondidos)) / ((respuestas[0].maximo) - 290)) * 100;
+        porceCumpli = parseFloat(porceCumpli.toFixed(2));
 
         let fila = document.createElement("tr");
         fila.classList.add("situacion2");
 
         fila.innerHTML = `
                     <td style="padding: 10px;">I</td>
-                    <td style="text-align: left; padding: 10px; font-size: 18px">Consideración de riesgos</td>
+                    <td style="text-align: left; padding: 10px; font-size: 18px">Análisis FODA y evaluación de riesgos</td>
                     <td style="text-align: center; padding: 10px;">${porceCumpli}</td>
                 `;
         tabla.appendChild(fila);
 
-        porceCumpli = 60;
+        porceCumpli = ((10 * ctddRespondidos) / 290 * 100);
+        porceCumpli = parseFloat(porceCumpli.toFixed(2));
 
         fila = document.createElement("tr");
         fila.classList.add("situacion2");
 
         fila.innerHTML = `
                     <td style="padding: 10px;">II</td>
-                    <td style="text-align: left; padding: 10px; font-size: 18px">Creación de la estrategia</td>
+                    <td style="text-align: left; padding: 10px; font-size: 18px">Planificación estratégica</td>
                     <td style="text-align: center; padding: 10px;">${porceCumpli}</td>
                 `;
         tabla.appendChild(fila);
@@ -737,7 +774,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             const fila = document.createElement("tr");
             fila.classList.add("situacion2");
 
-            const color = porceCumpli < 60.0 ? 'red' : 'black'; // Podés elegir otro color si querés
+            // const color = porceCumpli < 60.0 ? 'red' : 'black'; // Podés elegir otro color si querés
+            const color = 'black'; // Podés elegir otro color si querés
 
             fila.innerHTML = `
                 <td style="height: 10px; padding: 0px 5px; font-size: 17px; line-height: 1.9;">${secc.seccionromano}</td>
@@ -1069,11 +1107,11 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         for (const capitulo of capitulos) {
 
-            //  ⛔ interrumpe el proceso ⛔
-            break;
+            // //  ⛔ interrumpe el proceso ⛔
+            // break;
 
 
-            if (capitulo.letra == "E" || capitulo.letra == "F") {
+            if (capitulo.letra == "B" || capitulo.letra == "D" || capitulo.letra == "E" || capitulo.letra == "F") {
                 continue;
             }
 
@@ -1221,6 +1259,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         document.getElementById("formularioSaludo").style.display = "block";
     }
 
+    // ⚽ Crea pagina con marco ⚽
 
     function crearPaginaConMarco(textoLateral, numeroPagina, marcaElemento, clienteElemento) {
         const pagina = document.createElement('div');
@@ -1303,6 +1342,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         return pagina;
     }
+    // ⚽⚽⚽
+
 
     /* ----------------------------------------- */
     /*           lee Capitulos

@@ -176,6 +176,7 @@ app.post("/api/login", (req, res) => {
                     idioma: user.idioma,
                     ria: user.ria,
                     servicio: user.servicio,
+                    aceptacion: user.aceptacion,
                 };
                 res.status(200).json({
                     message: "Login exitoso",
@@ -190,6 +191,7 @@ app.post("/api/login", (req, res) => {
                         idioma: user.idioma,
                         ria: user.ria,
                         servicio: user.servicio,
+                        aceptacion: user.aceptacion,
                     },
                 });
                 // Llama a esta función donde necesites en tu aplicación

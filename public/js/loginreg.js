@@ -31,6 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
                     localStorage.setItem('idioma', data.user.idioma);
                     localStorage.setItem('ria', data.user.ria);
                     localStorage.setItem('servicio', data.user.servicio);
+                    localStorage.setItem("aceptacion", data.user.aceptacion);
 
                     if (data.user.ingresado == 0) {
                         window.location.href = '../registro3.html';
