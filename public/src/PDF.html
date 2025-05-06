@@ -231,7 +231,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         const opciones = {
             margin: 0,
-            filename: 'documento.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -275,6 +274,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const tituloConfiden = document.createElement('h2');
         tituloConfiden.textContent = 'Nota de Confidencialidad y Uso Restringido';
         tituloConfiden.style.textAlign = 'center';
+        tituloConfiden.style.color = 'green';
         tituloConfiden.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         confidencialidad.appendChild(tituloConfiden);
 
@@ -328,9 +328,9 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         tituloTercera.innerHTML = "1. El Modelo HexaRC";
         // tituloTercera.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         tituloTercera.style.fontSize = '16pt';
-        // tituloTercera.style.fontWeight = 'bold';
-        // tituloTercera.style.textAlign = 'left';
-        // tituloTercera.style.marginTop = '5mm';
+        tituloTercera.style.fontWeight = 'bold';
+        tituloTercera.style.textAlign = 'left';
+        tituloTercera.style.marginTop = '5mm';
         terceraPagina.appendChild(tituloTercera);
 
         parrafo = document.createElement('p');
@@ -501,7 +501,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         otraPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "3.1. Manejo de los riesgos de Gobierno Corporativo";
+        parrafo.innerHTML = "3.1. Manejo de los Riesgos de Gobierno Corporativo";
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
@@ -732,7 +732,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         otraPagina = crearPaginaConMarco();
 
         parrafo = document.createElement('p');
-        parrafo.innerHTML = "3.4. Manejo de los riesgos de los Procesos";
+        parrafo.innerHTML = "3.4. Manejo de los Riesgos de los Procesos";
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '16pt';
         parrafo.style.fontWeight = 'bold';
@@ -807,19 +807,324 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Texto descriptivo...Tiene otro formato.  Habría que tratar de normalizarlo.";
-        // Crear la imagen
-        imagen = document.createElement('img');
-        imagen.src = '../img/financiero.png';  // Reemplaza con la URL o ruta de la imagen
-        imagen.alt = 'Descripción de la imagen';
-        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
-        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
-        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
-
+        parrafo.innerHTML = "Se han formulado 10 declaraciones, con el propósito de evaluar la siuación financiera de la empresa.  El resultado de esta evaluación se presenta en las cifras obtenidas.";
         otraPagina.appendChild(parrafo);
-        otraPagina.appendChild(imagen);
 
-        contenido.appendChild(otraPagina);
+        // Crear la tabla 
+        tabla = document.createElement("table");
+        tabla.style.width = "90%";
+        tabla.style.borderCollapse = "collapse";
+
+        // Agregar encabezado 
+        encabezado = document.createElement("tr");
+        encabezado.innerHTML = `
+                <th style="text-align: center; padding: 5px;">Indicador</th>
+                <th style="text-align: left; padding: 15px;">Resultado</th>
+                <th style="text-align: center; padding: 5px;">Calificación</th>
+            `;
+        tabla.appendChild(encabezado);
+
+        // Llenar la tabla con datos
+        fila = document.createElement("tr");
+        fila.classList.add("situacion2");
+
+        // 🔔 copia rutina de ME-1  🔔
+        respuestas = [];
+        capitulo = "E";
+        // const CUIT = localStorage.getItem("CUIT");
+        let datoParaMirar;
+        let maximo = 200;
+        let puntaje = 0;
+        let totalScore = 0;
+        let porcientoFormateado = 0;
+
+        async function iniciarProceso() {
+            try {
+                respuestas = await leerRespuestas(CUIT, capitulo);
+                datoParaMirar = respuestas.records[0];
+
+                await realizaCalculos(datoParaMirar);
+            }
+            catch (error) {
+                console.error("Error en la función autoinvocada:", error);
+            }
+        };
+
+        await iniciarProceso();
+
+        async function leerRespuestas(CUIT, capitulo) {
+            try {
+                const response = await fetch(
+                    `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
+                );
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log(result.records)
+                    if (result.exists) {
+                        return { exists: true, records: result.records };
+                    }
+                } else {
+                    console.error(`Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`);
+                }
+            } catch (error) {
+                console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+            }
+            return { exists: false };
+        }
+
+        async function realizaCalculos() {
+            console.log('muestra cuit', datoParaMirar.CUIT);
+            totalScore = 0;
+            let puntos = 0;
+            let texto;
+
+            let primero = (datoParaMirar.respuesta[0] / datoParaMirar.respuesta[1]).toFixed(2);
+            if (primero > 1) {
+                texto = "Muy bueno";
+                puntos = 20;
+            } else if (primero == 1) {
+                texto = "Bueno";
+                puntos = 15;
+            } else if (primero > 0, 5 && primero < 1) {
+                texto = "Malo";
+                puntos = 10;
+            } else {
+                texto = "Muy malo";
+                puntos = 5;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">1. Capital de trabajo</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = datoParaMirar.respuesta[2];
+            compara = (datoParaMirar.respuesta[14] / datoParaMirar.respuesta[8] * 100).toFixed(2);
+            if (primero > compara) {
+                texto = "Muy bueno";
+                puntos = 20;
+            } else if (primero > 0 && primero <= compara) {
+                texto = "Bueno";
+                puntos = 15;
+            } else if (primero == 0) {
+                texto = "Malo";
+                puntos = 10;
+            } else {
+                texto = "Muy malo";
+                puntos = 5;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">2. Flujo de fondos derivados de las operaciones</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = (datoParaMirar.respuesta[3] / datoParaMirar.respuesta[4]).toFixed(2);
+            if (primero > 2) {
+                texto = "Muy bueno";
+                puntos = 16;
+            } else if (primero > 1 && primero <= 2) {
+                texto = "Bueno";
+                puntos = 12;
+            } else if (primero > 0, 5 && primero <= 1) {
+                texto = "Malo";
+                puntos = 8;
+            } else {
+                texto = "Muy malo";
+                puntos = 4;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">3. Índice de cobertura de intereses</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = datoParaMirar.respuesta[5] + datoParaMirar.respuesta[6];
+            if (primero < 70) {
+                texto = "Muy bueno";
+                puntos = 24;
+            } else if (primero >= 70 && primero < 140) {
+                texto = "Bueno";
+                puntos = 18;
+            } else if (primero >= 140 && primero < 210) {
+                texto = "Malo";
+                puntos = 12;
+            } else {
+                texto = "Muy malo";
+                puntos = 6;
+            }
+            totalScore += puntos
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">4. Ciclo de conversión de caja</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirar.respuesta[7] / datoParaMirar.respuesta[8]) * 360).toFixed(2);
+            if (primero < 30) {
+                texto = "Muy bueno";
+                puntos = 24;
+            } else if (primero >= 30 && primero < 60) {
+                texto = "Bueno";
+                puntos = 18;
+            } else if (primero >= 60 && primero < 90) {
+                texto = "Malo";
+                puntos = 12;
+            } else {
+                texto = "Muy malo";
+                puntos = 6;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">5. Días de venta en la calle</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirar.respuesta[9] / datoParaMirar.respuesta[10]) * 360).toFixed(2);
+            if (primero > 90) {
+                texto = "Muy bueno";
+                puntos = 24;
+            } else if (primero > 60 && primero <= 90) {
+                texto = "Bueno";
+                puntos = 18;
+            } else if (primero > 30 && primero <= 60) {
+                texto = "Malo";
+                puntos = 12;
+            } else {
+                texto = "Muy malo";
+                puntos = 6;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">6. Días de deuda en la calle</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirar.respuesta[11] / datoParaMirar.respuesta[12]) * 360).toFixed(2);
+            if (primero < 40) {
+                texto = "Muy bueno";
+                puntos = 16;
+            } else if (primero >= 40 && primero < 80) {
+                texto = "Bueno";
+                puntos = 12;
+            } else if (primero >= 80 && primero < 120) {
+                texto = "Malo";
+                puntos = 8;
+            } else {
+                texto = "Muy malo";
+                puntos = 4;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">7. Rotación de inventarios</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirar.respuesta[1] / datoParaMirar.respuesta[13]) * 100).toFixed(2);
+            if (primero < 100) {
+                texto = "Muy bueno";
+                puntos = 16;
+            } else if (primero >= 100 && primero < 150) {
+                texto = "Bueno";
+                puntos = 12;
+            } else if (primero >= 150 && primero < 200) {
+                texto = "Malo";
+                puntos = 8;
+            } else {
+                texto = "Muy malo";
+                puntos = 4;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">8. Índice Deuda/Capital</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirar.respuesta[0] / datoParaMirar.respuesta[1]) * 100).toFixed(2);
+            if (primero > 150) {
+                texto = "Muy bueno";
+                puntos = 24;
+            } else if (primero <= 150 && primero > 0) {
+                texto = "Bueno";
+                puntos = 18;
+            } else if (primero == 0) {
+                texto = "Malo";
+                puntos = 12;
+            } else {
+                texto = "Muy malo";
+                puntos = 6;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">9. Liquidez</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = (((datoParaMirar.respuesta[0] - datoParaMirar.respuesta[11]) / datoParaMirar.respuesta[1]) * 100).toFixed(2);
+            if (primero > 120) {
+                texto = "Muy bueno";
+                puntos = 16;
+            } else if (primero >= 0 && primero <= 120) {
+                texto = "Bueno";
+                puntos = 12;
+            } else if (primero == 0) {
+                texto = "Malo";
+                puntos = 8;
+            } else {
+                texto = "Muy malo";
+                puntos = 4;
+            }
+            totalScore += puntos;
+            // document.getElementById("liquidezSeca-Sco").textContent = puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">10. Liquidez seca</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            otraPagina.appendChild(tabla);
+            contenido.appendChild(otraPagina);
+
+        }
+
+        // otraPagina.appendChild(tabla);
+        // contenido.appendChild(otraPagina);
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir GENERACION DE RESULTADOS  ⛔
@@ -839,21 +1144,278 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         parrafo.style.fontFamily = 'Abel, Helvetica, Arial, sans-serif';
         parrafo.style.fontSize = '13pt';
         parrafo.style.lineHeight = '1.4';
-        parrafo.innerHTML = "Texto descriptivo...Tiene otro formato igual que financiero....";
-        // Crear la imagen
-        imagen = document.createElement('img');
-        imagen.src = '../img/financiero.png';  // Reemplaza con la URL o ruta de la imagen
-        imagen.alt = 'Descripción de la imagen';
-        imagen.style.display = 'block';  // Para asegurarse de que quede en una línea nueva
-        imagen.style.marginTop = '10px'; // Espacio entre el párrafo y la imagen
-        imagen.style.width = '500px';    // Ajusta el tamaño según necesites
-
+        parrafo.innerHTML = "Se han formulado 8 declaraciones, con el propósito de evaluar los resultados de la empresa. El resultado de esta evaluación se presenta en las cifras obtenidas";
         otraPagina.appendChild(parrafo);
-        otraPagina.appendChild(imagen);
 
+        // Crear la tabla si no existe
+        tabla = document.createElement("table");
+        tabla.style.width = "90%";
+        tabla.style.borderCollapse = "collapse";
+
+        // Agregar encabezado (opcional)
+        encabezado = document.createElement("tr");
+        encabezado.innerHTML = `
+                <th style="text-align: center; padding: 5px;">Indicador</th>
+                <th style="text-align: left; padding: 15px;">Resultado</th>
+                <th style="text-align: center; padding: 5px;">Calificación</th>
+            `;
+        tabla.appendChild(encabezado);
+
+        otraPagina.appendChild(tabla);
         contenido.appendChild(otraPagina);
 
+        fila = document.createElement("tr");
+        fila.classList.add("situacion2");
+
+        // Llenar la tabla con datos
+
+        // 🔔 copia rutina de MF-1  🔔
+        respuestas = [];
+        capitulo = "F";
+        // const CUIT = localStorage.getItem("CUIT");
+        datoParaMirar = [];
+        maximo = 220;
+        puntaje = 0;
+        totalScore = 0;
+        porcientoFormateado = 0;
+
+        async function iniciarProcesoResultados() {
+            try {
+                respuestas = await leerRespuestas(CUIT, "E");
+                datoParaMirar = respuestas.records[0];
+
+                respuestasF = await leerRespuestas(CUIT, "F")
+                datoParaMirarF = respuestasF.records[0];
+
+                await realizaCalculosResultados(datoParaMirar, datoParaMirarF);
+            }
+            catch (error) {
+                console.error("Error en la función autoinvocada:", error);
+            }
+        };
+
+        await iniciarProcesoResultados();
+
+        // async function leerRespuestas(CUIT, capitulo) {
+        //     try {
+        //         const response = await fetch(
+        //             `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
+        //         );
+        //         if (response.ok) {
+        //             const result = await response.json();
+        //             console.log(result.records)
+        //             if (result.exists) {
+        //                 return { exists: true, records: result.records };
+        //             }
+        //         } else {
+        //             console.error(`Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`);
+        //         }
+        //     } catch (error) {
+        //         console.error("Error al realizar la solicitud en buscaRespuesta:", error);
+        //     }
+        //     return { exists: false };
+        // }
+
+        async function realizaCalculosResultados(datoParaMirar, datoParaMirarF) {
+            console.log('muestra cuit', datoParaMirar.CUIT);
+            totalScore = 0;
+            let puntos = 0;
+            let texto;
+
+            let primero = ((datoParaMirarF.respuesta[0] - datoParaMirarF.respuesta[1]) / datoParaMirarF.respuesta[1] * 100).toFixed(2);
+            if (primero > 80) {
+                texto = "Alto";
+                puntos = 30;
+            } else if (primero > 0 && primero <= 80) {
+                texto = "Medio Alto";
+                puntos = 23;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 15;
+            } else {
+                texto = "Bajo";
+                puntos = 8;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">1. Evolución de los ingresos</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            if (primero > 60) {
+                texto = "Alto";
+                puntos = 20;
+            } else if (primero > 0 && primero <= 60) {
+                texto = "Medio Alto";
+                puntos = 15;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 10;
+            } else {
+                texto = "Bajo";
+                puntos = 5;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">2. Margen bruto</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[8]) * 100).toFixed(2);
+            if (primero > 30) {
+                texto = "Alto";
+                puntos = 40;
+            } else if (primero > 0 && primero <= 30) {
+                texto = "Medio Alto";
+                puntos = 30;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 20;
+            } else {
+                texto = "Bajo";
+                puntos = 10;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">3. Margen neto</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirar.respuesta[14] / datoParaMirar.respuesta[8]) * 100).toFixed(2);
+            if (primero > 40) {
+                texto = "Alto";
+                puntos = 40;
+            } else if (primero > 0 && primero <= 40) {
+                texto = "Medio Alto";
+                puntos = 30;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 20;
+            } else {
+                texto = "Bajo";
+                puntos = 10;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">4. Utilidad antes de intereses, impuestos, depreciación y amortización (EBITDA)</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[13]) * 100).toFixed(2);
+            if (primero > 20) {
+                texto = "Alto";
+                puntos = 30;
+            } else if (primero > 0 && primero <= 20) {
+                texto = "Medio Alto";
+                puntos = 23;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 15;
+            } else {
+                texto = "Bajo";
+                puntos = 8;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">5. Rendimiento sobre el Capital (ROE)</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            primero = ((datoParaMirarF.respuesta[3] / datoParaMirar.respuesta[0]) * 100).toFixed(2);
+            if (primero > 40) {
+                texto = "Alto";
+                puntos = 20;
+            } else if (primero > 0 && primero <= 40) {
+                texto = "Medio Alto";
+                puntos = 15;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 10;
+            } else {
+                texto = "Bajo";
+                puntos = 5;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">6. Rendimiento sobre los Activos (ROA)</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            primero = ((datoParaMirarF.respuesta[3] / datoParaMirarF.respuesta[0] * 100).toFixed(2));
+            if (primero > 40) {
+                texto = "Alto";
+                puntos = 20;
+            } else if (primero > 0 && primero <= 40) {
+                texto = "Medio Alto";
+                puntos = 15;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 10;
+            } else {
+                texto = "Bajo";
+                puntos = 5;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">7. Rendimiento sobre las Ventas (ROA)</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            fila = document.createElement("tr");
+            fila.classList.add("situacion2");
+            primero = ((datoParaMirarF.respuesta[4] / datoParaMirar.respuesta[8]) * 100).toFixed(2);
+            if (primero > 20) {
+                texto = "Alto";
+                puntos = 20;
+            } else if (primero > 0 && primero <= 20) {
+                texto = "Medio Alto";
+                puntos = 15;
+            } else if (primero == 0) {
+                texto = "Medio Bajo";
+                puntos = 10;
+            } else {
+                texto = "Bajo";
+                puntos = 5;
+            }
+            totalScore += puntos;
+            fila.innerHTML = `
+                    <td style="text-align: left; padding: 10px; font-size: 18px">8. Resultados extraordinarios</td>
+                    <td style="text-align: center; padding: 10px;">${primero}</td>
+                    <td style="text-align: center; padding: 10px;">${texto}</td>
+                `;
+            tabla.appendChild(fila);
+
+            otraPagina.appendChild(tabla);
+            contenido.appendChild(otraPagina);
+        }
+
+        // otraPagina.appendChild(tabla);
+        // contenido.appendChild(otraPagina);
+
         console.log("pagina 3.6. Resultados")
+
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir pagina de DIAGNOSTICO ⛔
@@ -898,7 +1460,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         console.log("pagina 4 Aplicacion Modelo")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        // ⛔ Añadir la quinta página dibuho hexagono ⛔
+        // ⛔ Añadir la quinta página dibujo hexagono ⛔
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const quintaPagina = crearPaginaConMarco();
@@ -1101,17 +1663,15 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         capitulos = await leeCapitulos();
-        // console.log(capitulos)
         let alturaMaxima = 40;
         let alturaActual = 0;
 
         for (const capitulo of capitulos) {
 
-            // //  ⛔ interrumpe el proceso ⛔
+            //  ⛔ interrumpe el proceso ⛔
             // break;
 
-
-            if (capitulo.letra == "B" || capitulo.letra == "D" || capitulo.letra == "E" || capitulo.letra == "F") {
+            if (capitulo.letra == "E" || capitulo.letra == "F") {
                 continue;
             }
 
@@ -1141,9 +1701,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
             // Busca las respuestas de ese capítulo
             const data = await buscaRespuesta(CUIT, capitulo.letra);
-            // console.log(`cuit ${CUIT}, capitulo ${capitulo.letra}`)
             const respuestas = data.respuestas || []; // Si no hay respuestas, asigna un array vacío
-            // console.log(respuestas)
 
             // Crear el encabezado (seccion):::::::::::::::::::::::::::
             for (const respuesta of respuestas) {
@@ -1194,9 +1752,9 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                 // let alturaElemento = descripcionElemento.offsetHeight;
                 // console.log(`altura titulo ${alturaElemento}`)
                 // alturaActual += alturaElemento;
-                alturaActual += 3;
 
-                // contenido.appendChild(mejorasPagina);
+                alturaActual += 3;
+                // alturaActual = 0;
 
                 // Crear el cuerpo de la tabla::::::::::::::::::::::::::::::
                 let info = respuesta.seccion;
@@ -1231,7 +1789,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                         }
 
                         function estimarLineasPorCaracteres(texto, caracteresPromedioPorLinea) {
-                            // Remover HTML si hay
                             const textoPlano = texto.replace(/<[^>]*>/g, '');
                             return Math.ceil(textoPlano.length / caracteresPromedioPorLinea);
                         }
@@ -1249,7 +1806,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         }
 
         // Generar PDF directamente
-        html2pdf().from(contenido).set(opciones).save("Informe HexaRCi.pdf")
+        await html2pdf().from(contenido).set(opciones).save("Informe HexaRCi.pdf")
             .catch(error => {
                 console.error("Error generando PDF:", error);
             });
@@ -1259,13 +1816,13 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         document.getElementById("formularioSaludo").style.display = "block";
     }
 
-    // ⚽ Crea pagina con marco ⚽
+    // ⚽ Crea pagina con marco ⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽⚽
 
     function crearPaginaConMarco(textoLateral, numeroPagina, marcaElemento, clienteElemento) {
         const pagina = document.createElement('div');
         pagina.style.padding = '10mm';
         pagina.style.margin = '10mm';
-        pagina.style.border = '2px solid #000';
+        pagina.style.border = '2px solid #007BFF'; // #1E90FF (azul dodger) #007BFF (azul bootstrap) #3399FF (azul claro)
         pagina.style.boxShadow = '0 0 10mm rgba(0,0,0,0.1)'; // Sombra suave
         pagina.style.minHeight = '240mm';
         pagina.style.borderRadius = '5mm';
