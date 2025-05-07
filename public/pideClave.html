@@ -94,7 +94,7 @@
                         ? [...email.map(e => e.trim()) ] // Si es array, agrega la cuenta extra
                         : [email.trim() ], // Si es string, lo convierte en array con la cuenta extra
                         subject: "Información solicitada",
-                        text: `Tu contraseña es ${password}`,
+                        text: `Tu contraseña es protegida ${password}`,
                         html: htmlContent,
                     })
                 });
@@ -111,12 +111,12 @@
                     const mailUser = await response.json();
                     return { exists: mailUser.exists, records: mailUser.records };
                 } else {
-                    console.error("Error al obtener los datos");
+                    console.error("Error en pideClave al obtener los datos");
                     return { exists: false, records: [] };
                 }
 
             } catch (error) {
-                console.error("Error al realizar la solicitud:", error);
+                console.error("Error en pideClave al realizar la solicitud:", error);
                 return { exists: false, records: [] };
             }
         }

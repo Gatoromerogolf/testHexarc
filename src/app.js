@@ -119,10 +119,10 @@ app.post("/enviar-correo", async (req, res) => {
   // Llamada a la función para enviar el correo
   await sendMail(to, subject, text, html)
     .then(() => {
-      res.send("Correo enviado correctamente");
+      res.send("👍 Correo enviado correctamente");
     })
     .catch((error) => {
-      res.status(500).send("Error al enviar el correo");
+      res.status(500).send("❌ Error al enviar el correo");
     });
 });
 
@@ -172,7 +172,7 @@ async function sendMail(to, subject, text, html, useGmail = true) {
 //   ⚽⚽⚽      Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
 //  * * * * *  # minuto, hora, día del mes, mes, día de la semana
-cron.schedule("0 */2 * * *", () => {
+cron.schedule("*/30 * * * *", () => {
   // Esta expresión ejecutará la tarea cada 2 horas (a las 00:00, 02:00, 04:00, etc.)
   // a las 15 hs
   console.log("Ejecutando tarea programada: registrando en la base de datos");
@@ -329,7 +329,7 @@ app.get("/buscaMail", (req, res) => {
     return res.status(400).json({ error: "Email requerido" });
   }
 
-  console.log(`Solicitud recibida en /buscaMail con email: ${email}`);
+  console.log(`Solicitud recibida en app/buscaMail con email: ${email}`);
 
   pool.query(
     "SELECT id, password FROM users WHERE email = ?",
@@ -341,14 +341,14 @@ app.get("/buscaMail", (req, res) => {
       }
 
       if (results.length > 0) {
-        console.log(`El email ${email} existe en la base de datos.`);
+        console.log(`✔ El email ${email} existe en la base de datos.`);
         return res.status(200).json({
           exists: true,
           records: results,
           password: results[0].password, // Recupera el password
         });
       } else {
-        console.log(`El email ${email} no está registrado.`);
+        console.log(`❌ El email ${email} no está registrado.`);
         return res.status(200).json({
           exists: false,
           records: [],

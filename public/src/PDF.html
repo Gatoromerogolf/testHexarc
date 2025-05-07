@@ -304,6 +304,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         confidencialidad.appendChild(parrafo);
 
         contenido.appendChild(confidencialidad)
+        console.log("pagina. Nota Confidencialidad")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir Contenido - Indice)
@@ -327,8 +328,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         paginaIndice.appendChild(parrafo);
 
         contenido.appendChild(paginaIndice);
-
-
+        console.log("pagina. Contenido")
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -353,6 +353,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         terceraPagina.appendChild(parrafo);
 
         contenido.appendChild(terceraPagina);
+        console.log("pagina. El Modelo HexaRC")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ El Sistema  HexaRCi
@@ -433,7 +434,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         paginaHexa.appendChild(parrafo);
 
         contenido.appendChild(paginaHexa);
-        console.log("pagina 2. Estructura")
+        console.log(`pagina. El Sistema HexaRCi y ${empresa}`)
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Cumplimiento por factor  ⛔
@@ -505,7 +506,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         otraPagina.appendChild(tabla);
 
         contenido.appendChild(otraPagina);
-        console.log("pagina 3 Evaluacion")
+        console.log("pagina. Cumplimiento por factor")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔  Añadir Gobierno Corporativo  ⛔
@@ -570,7 +571,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(otraPagina);
 
-        console.log("pagina 3.1. Gob Corpo")
+        console.log("pagina. Gob Corporativo")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir  Apetito de riesgo  ⛔
@@ -630,6 +631,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         otraPagina.appendChild(tabla);
         contenido.appendChild(otraPagina);
 
+        console.log("pagina. Apetito de Riesgo")
+
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔  Añadir  -  Riesgos de mercado  ⛔
@@ -660,11 +663,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         const respondidosSegundaParte = respuestas[0].respuesta[14];
         const ctddRespondidos = respondidosSegundaParte.length
         const puntosTotales = respuestas[0].score;
-
-        console.log("respuestas:", respuestas);
-        console.log("respuestas[0]:", respuestas[0]);
-        console.log("respuestas[0][14]:", respuestas[0].respuesta[14]);
-        console.log("ctdd respondidos", ctddRespondidos);
 
         // :::::::::::::::::::::::::::::::::::::::::::::::
         //                          obtenerRespuestas
@@ -737,6 +735,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(otraPagina);
 
+        console.log("pagina. Riesgos de Mercado")
+
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir -  Riesgos de procesos
@@ -799,6 +799,8 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         otraPagina.appendChild(tabla);
         contenido.appendChild(otraPagina);
+
+        console.log("pagina. Riesgos de Procesos")
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -884,7 +886,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         }
 
         async function realizaCalculos() {
-            console.log('muestra cuit', datoParaMirar.CUIT);
             totalScore = 0;
             let puntos = 0;
             let texto;
@@ -1133,6 +1134,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
             contenido.appendChild(otraPagina);
 
         }
+        console.log("pagina. Situación Financiera")
 
         // otraPagina.appendChild(tabla);
         // contenido.appendChild(otraPagina);
@@ -1207,28 +1209,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         await iniciarProcesoResultados();
 
-        // async function leerRespuestas(CUIT, capitulo) {
-        //     try {
-        //         const response = await fetch(
-        //             `/busca-respuesta-capitulo?CUIT=${CUIT}&capitulo=${capitulo}`
-        //         );
-        //         if (response.ok) {
-        //             const result = await response.json();
-        //             console.log(result.records)
-        //             if (result.exists) {
-        //                 return { exists: true, records: result.records };
-        //             }
-        //         } else {
-        //             console.error(`Sin respuesta para lectura seccion en capitulo ${capitulo} en buscaRespuesta`);
-        //         }
-        //     } catch (error) {
-        //         console.error("Error al realizar la solicitud en buscaRespuesta:", error);
-        //     }
-        //     return { exists: false };
-        // }
-
         async function realizaCalculosResultados(datoParaMirar, datoParaMirarF) {
-            console.log('muestra cuit', datoParaMirar.CUIT);
             totalScore = 0;
             let puntos = 0;
             let texto;
@@ -1425,7 +1406,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         // otraPagina.appendChild(tabla);
         // contenido.appendChild(otraPagina);
 
-        console.log("pagina 3.6. Resultados")
+        console.log("pagina. Generación de Resultados")
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1468,7 +1449,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(cuartaPagina);
 
-        console.log("pagina 4 Aplicacion Modelo")
+        console.log("pagina. Diagnóstico")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir la quinta página dibujo hexagono ⛔
@@ -1641,7 +1622,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
         quintaPagina.appendChild(parrafo);
 
         contenido.appendChild(quintaPagina);
-        console.log("pagina 5. Dibujito")
+        console.log("pagina. Hexágono")
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         // ⛔ Añadir la sexta pagina presenta mejoras ⛔
@@ -1666,7 +1647,7 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
 
         contenido.appendChild(sextaPagina);
 
-        console.log("pagina 6. Recomendaciones")
+        console.log("pagina. Recomendaciones")
 
 
         // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1793,7 +1774,6 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                             const textoCompleto = renglon.textContent || renglon.innerText;
                             const lineasEstimadas = estimarLineasPorCaracteres(textoCompleto, 80);
                             alturaActual += lineasEstimadas;
-                            console.log("puso recomendación")
                         }
 
                         function estimarLineasPorCaracteres(texto, caracteresPromedioPorLinea) {
@@ -1806,12 +1786,12 @@ El tamaño de una hoja A4 es de 210 x 297 milímetros, es decir, 21 centímetros
                             mejorasPagina = crearPaginaConMarco();
                             alturaActual = 0; // Reiniciar el contador de altura
                         };
-
                     })
                     contenido.appendChild(mejorasPagina);
                 }
             }
         }
+        console.log("pagina. Fin del Informe")
 
         // Generar PDF directamente
         await html2pdf().from(contenido).set(opciones).save("Informe HexaRCi.pdf")
