@@ -173,6 +173,8 @@ async function sendMail(to, subject, text, html, useGmail = true) {
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
 //  * * * * *  # minuto, hora, día del mes, mes, día de la semana
 cron.schedule("*/30 * * * *", () => {
+  const ahora = new Date().toISOString();
+  console.log(`[CRON] Ejecutando tarea programada a las ${ahora}`);
   // Esta expresión ejecutará la tarea cada 2 horas (a las 00:00, 02:00, 04:00, etc.)
   // a las 15 hs
   console.log("Ejecutando tarea programada: registrando en la base de datos");
