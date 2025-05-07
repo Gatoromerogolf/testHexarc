@@ -179,6 +179,21 @@ cron.schedule("*/30 * * * *", () => {
   // a las 15 hs
   console.log("Ejecutando tarea programada: registrando en la base de datos");
 
+  let textoCron = `
+  <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
+      <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+          <h2 style="color: #333;">Mensaje enviado por Cron</h2>
+          <p>Se ha registrado otra cosa.</p>
+              <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                  ${ahora}
+              </div>
+          <p style="margin-top: 20px;">Si no solicitaste esta información, no importa.</p>
+          <hr style="border: none; height: 1px; background: #ddd;">
+          <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
+      </div>
+  </div>
+  `;
+
   const query = "INSERT INTO tablalogs (logs) VALUES (NOW())";
 
   pool.query(query, (err, results) => {
@@ -193,8 +208,9 @@ cron.schedule("*/30 * * * *", () => {
   sendMail({
     to: "ruben.e.garcia@gmail.com",
     subject: "Informe automático",
-    html: "<p>Informe generado por el cron.</p>",
-    useGmail: false, // usar SMTP (soporte@bdtadvisory.com)
+    text: "texto mensaje cron",
+    html: textoCron,
+    useGmail: true, // usar SMTP (soporte@bdtadvisory.com)
   });
 });
 
