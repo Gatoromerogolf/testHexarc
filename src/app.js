@@ -205,13 +205,13 @@ cron.schedule("*/30 * * * *", () => {
   });
 
   // En cron: usar SMTP
-  sendMail({
-    to: "ruben.e.garcia@gmail.com",
-    subject: "Informe automático",
-    text: "texto mensaje cron",
-    html: textoCron,
-    useGmail: true, // usar SMTP (soporte@bdtadvisory.com)
-  });
+  sendMail(
+    "ruben.e.garcia@gmail.com",
+    "Informe automático",
+    "texto mensaje cron",
+    textoCron,
+    false // usar SMTP (soporte@bdtadvisory.com)
+  );
 });
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
