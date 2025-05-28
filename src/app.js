@@ -172,7 +172,7 @@ async function sendMail(to, subject, text, html, useGmail = true) {
 //   ⚽⚽⚽      Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
 //  * * * * *  # minuto, hora, día del mes, mes, día de la semana
-cron.schedule("0 */2 * * *", () => {
+cron.schedule("0 */8 * * *", () => {
   const ahora = new Date().toLocaleString();
   console.log(`[CRON] Ejecutando tarea programada a las ${ahora}`);
   // Esta expresión ejecutará la tarea cada 2 horas (a las 00:00, 02:00, 04:00, etc.)
@@ -233,6 +233,21 @@ app.use(
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
+    const ahora = new Date().toLocaleString();
+    let textoCron = `
+  <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
+      <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+          <h2 style="color: #333;">Mensaje enviado por Cron</h2>
+          <p>Ingreso de usuario.</p>
+              <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                  ${ahora}
+              </div>
+          <p style="margin-top: 20px;">Alguno entró.</p>
+          <hr style="border: none; height: 1px; background: #ddd;">
+          <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
+      </div>
+  </div>
+  `;
   pool.query(
     "SELECT * FROM users WHERE username = ? AND password = ?",
     [username, password],
@@ -274,7 +289,9 @@ app.post("/api/login", (req, res) => {
         sendMail(
           "ruben.e.garcia@gmail.com",
           "Ingreso de usuario",
-          `Ha ingresado recien ${user.Apellido}, de ${user.Empresa}, con ${user.username}`
+          `Ha ingresado recien ${user.Apellido}, de ${user.Empresa}, con ${user.username}`,
+            textoCron,
+            false // usar SMTP (soporte@bdtadvisory.com)
         );
         updateLoginTimestamp(user.id);
       } else {
