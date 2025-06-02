@@ -45,6 +45,7 @@
 
             const email = document.getElementById('username').value;
             await verificarEmail(email);
+            alert ('hasta aca llego')
             window.location.href = '../login.html'
         });
 
@@ -86,6 +87,7 @@
 
                 // Llamar al backend para enviar el mail
                 await fetch('/enviar-correo', {
+                // await fetch('/sendMail', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -96,6 +98,7 @@
                         subject: "Información solicitada",
                         text: `Tu contraseña es protegida ${password}`,
                         html: htmlContent,
+                        useGmail: false
                     })
                 });
             } else {

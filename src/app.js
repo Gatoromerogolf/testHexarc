@@ -101,7 +101,7 @@ async function getGmailTransporter() {
 //                       enviar correo
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post("/enviar-correo", async (req, res) => {
-  let { to, subject, text, html } = req.body;
+  let { to, subject, text, html, useGmail } = req.body;
 
   console.log("📥 Datos recibidos en backend:", req.body); // Debugging
 
@@ -117,7 +117,7 @@ app.post("/enviar-correo", async (req, res) => {
   }
 
   // Llamada a la función para enviar el correo
-  await sendMail(to, subject, text, html)
+  await sendMail(to, subject, text, html, useGmail)
     .then(() => {
       res.send("👍 Correo enviado correctamente");
     })
@@ -129,9 +129,57 @@ app.post("/enviar-correo", async (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::    sendmail
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// async function sendMail(to, subject, text, html, useGmail = true) {
+//   try {
+//     let transporter;
+
+//     if (useGmail) {
+//       const accessTokenObject = await oAuth2Client.getAccessToken();
+//       const accessToken = accessTokenObject?.token;
+
+//       transporter = nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//           type: "OAuth2",
+//           user: process.env.GMAIL_USER,
+//           clientId: process.env.CLIENT_ID,
+//           clientSecret: process.env.CLIENT_SECRET,
+//           refreshToken: process.env.REFRESH_TOKEN,
+//           accessToken: accessToken,
+//         },
+//       });
+//     } else {
+//       transporter = smtpTransporter;
+//     }
+
+//     const mailOptions = {
+//       from: useGmail ? process.env.GMAIL_USER : "soporte@bdtadvisory.com",
+//       to: Array.isArray(to) ? to.join(", ") : to,
+//       bcc: "rgarcia@consejo.org.ar",
+//       subject: subject,
+//       text: text,
+//       html: html,
+//     };
+
+//     const result = await transporter.sendMail(mailOptions);
+//     console.log("✅ Correo enviado con:", useGmail ? "Gmail" : "SMTP (Ferozo)");
+//   } catch (error) {
+//     console.error("❌ Error al enviar el correo:", error);
+//   }
+// }
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// ::::    sendMail
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 async function sendMail(to, subject, text, html, useGmail = true) {
   try {
+    if (!to) {
+      console.error("❌ No se especificó destinatario.");
+      return;
+    }
+
     let transporter;
+    let from;
 
     if (useGmail) {
       const accessTokenObject = await oAuth2Client.getAccessToken();
@@ -148,12 +196,15 @@ async function sendMail(to, subject, text, html, useGmail = true) {
           accessToken: accessToken,
         },
       });
+
+      from = process.env.GMAIL_USER;
     } else {
       transporter = smtpTransporter;
+      from = "soporte@bdtadvisory.com";
     }
 
     const mailOptions = {
-      from: useGmail ? process.env.GMAIL_USER : "soporte@bdtadvisory.com",
+      from: from,
       to: Array.isArray(to) ? to.join(", ") : to,
       bcc: "rgarcia@consejo.org.ar",
       subject: subject,
@@ -162,7 +213,11 @@ async function sendMail(to, subject, text, html, useGmail = true) {
     };
 
     const result = await transporter.sendMail(mailOptions);
-    console.log("✅ Correo enviado con:", useGmail ? "Gmail" : "SMTP (Ferozo)");
+
+    console.log("✅ Correo enviado correctamente.");
+    console.log("📤 Desde:", from);
+    console.log("📩 Para:", mailOptions.to);
+    console.log("📬 Método:", useGmail ? "Gmail (OAuth2)" : "SMTP (Ferozo)");
   } catch (error) {
     console.error("❌ Error al enviar el correo:", error);
   }
@@ -233,21 +288,21 @@ app.use(
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
-    const ahora = new Date().toLocaleString();
-    let textoCron = `
-  <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
-      <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
-          <h2 style="color: #333;">Mensaje enviado por Cron</h2>
-          <p>Ingreso de usuario.</p>
-              <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                  ${ahora}
-              </div>
-          <p style="margin-top: 20px;">Alguno entró.</p>
-          <hr style="border: none; height: 1px; background: #ddd;">
-          <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
-      </div>
-  </div>
-  `;
+  const ahora = new Date().toLocaleString();
+  // let textoCron = `
+  // <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
+  //     <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+  //         <h2 style="color: #333;">Mensaje enviado por Cron</h2>
+  //         <p>Ingreso de usuario.</p>
+  //             <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+  //                 ${ahora}
+  //             </div>
+  //         <p style="margin-top: 20px;">Alguno entró.</p>
+  //         <hr style="border: none; height: 1px; background: #ddd;">
+  //         <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
+  //     </div>
+  // </div>
+  // `;
   pool.query(
     "SELECT * FROM users WHERE username = ? AND password = ?",
     [username, password],
@@ -284,14 +339,31 @@ app.post("/api/login", (req, res) => {
             aceptacion: user.aceptacion,
           },
         });
+
+        let textoCron = `
+  <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
+      <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+          <h2 style="color: #333;">Mensaje enviado por Cron</h2>
+          <p>Ingreso de usuario.</p>
+              <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                  ${ahora}
+              </div>
+          <p style="margin-top: 20px;">Alguno entró.</p>
+          <p>Ha ingresado recien ${user.Apellido}, de ${user.Empresa}, con ${user.username}</p>
+          <hr style="border: none; height: 1px; background: #ddd;">
+          <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
+      </div>
+  </div>
+  `;
+
         // Llama a esta función donde necesites en tu aplicación
         // console.log('llama a sendmail')
         sendMail(
           "ruben.e.garcia@gmail.com",
           "Ingreso de usuario",
           `Ha ingresado recien ${user.Apellido}, de ${user.Empresa}, con ${user.username}`,
-            textoCron,
-            false // usar SMTP (soporte@bdtadvisory.com)
+          textoCron,
+          false // usar SMTP (soporte@bdtadvisory.com)
         );
         updateLoginTimestamp(user.id);
       } else {
