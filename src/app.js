@@ -126,47 +126,6 @@ app.post("/enviar-correo", async (req, res) => {
     });
 });
 
-//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// ::::    sendmail
-// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// async function sendMail(to, subject, text, html, useGmail = true) {
-//   try {
-//     let transporter;
-
-//     if (useGmail) {
-//       const accessTokenObject = await oAuth2Client.getAccessToken();
-//       const accessToken = accessTokenObject?.token;
-
-//       transporter = nodemailer.createTransport({
-//         service: "gmail",
-//         auth: {
-//           type: "OAuth2",
-//           user: process.env.GMAIL_USER,
-//           clientId: process.env.CLIENT_ID,
-//           clientSecret: process.env.CLIENT_SECRET,
-//           refreshToken: process.env.REFRESH_TOKEN,
-//           accessToken: accessToken,
-//         },
-//       });
-//     } else {
-//       transporter = smtpTransporter;
-//     }
-
-//     const mailOptions = {
-//       from: useGmail ? process.env.GMAIL_USER : "soporte@bdtadvisory.com",
-//       to: Array.isArray(to) ? to.join(", ") : to,
-//       bcc: "rgarcia@consejo.org.ar",
-//       subject: subject,
-//       text: text,
-//       html: html,
-//     };
-
-//     const result = await transporter.sendMail(mailOptions);
-//     console.log("✅ Correo enviado con:", useGmail ? "Gmail" : "SMTP (Ferozo)");
-//   } catch (error) {
-//     console.error("❌ Error al enviar el correo:", error);
-//   }
-// }
 
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::    sendMail
@@ -227,7 +186,7 @@ async function sendMail(to, subject, text, html, useGmail = true) {
 //   ⚽⚽⚽      Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
 //  * * * * *  # minuto, hora, día del mes, mes, día de la semana
-cron.schedule("0 */8 * * *", () => {
+cron.schedule("*/15 * * * *", () => {
   const ahora = new Date().toLocaleString();
   console.log(`[CRON] Ejecutando tarea programada a las ${ahora}`);
   // Esta expresión ejecutará la tarea cada 2 horas (a las 00:00, 02:00, 04:00, etc.)
@@ -238,11 +197,11 @@ cron.schedule("0 */8 * * *", () => {
   <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
       <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
           <h2 style="color: #333;">Mensaje enviado por Cron</h2>
-          <p>Se ha registrado otra cosa.</p>
+          <p>Mensaje automático</p>
               <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                   ${ahora}
               </div>
-          <p style="margin-top: 20px;">Si no solicitaste esta información, no importa.</p>
+          <p style="margin-top: 20px;">Texto genérico</p>
           <hr style="border: none; height: 1px; background: #ddd;">
           <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
       </div>
@@ -265,7 +224,7 @@ cron.schedule("0 */8 * * *", () => {
     "Informe automático",
     "texto mensaje cron",
     textoCron,
-    false // usar SMTP (soporte@bdtadvisory.com)
+    true // false: usar SMTP (soporte@bdtadvisory.com) - true: gmail
   );
 });
 
@@ -343,12 +302,11 @@ app.post("/api/login", (req, res) => {
         let textoCron = `
   <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
       <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
-          <h2 style="color: #333;">Mensaje enviado por Cron</h2>
+          <h2 style="color: #333;">Mensaje enviado por api/login</h2>
           <p>Ingreso de usuario.</p>
               <div style="display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                   ${ahora}
               </div>
-          <p style="margin-top: 20px;">Alguno entró.</p>
           <p>Ha ingresado recien ${user.Apellido}, de ${user.Empresa}, con ${user.username}</p>
           <hr style="border: none; height: 1px; background: #ddd;">
           <small style="color: #888;">&copy; 2025 BDTA. Todos los derechos reservados.</small>
