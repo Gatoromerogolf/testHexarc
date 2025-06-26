@@ -186,7 +186,7 @@ async function sendMail(to, subject, text, html, useGmail = true) {
 //   ⚽⚽⚽      Definir la tarea cron
 // cron.schedule('0 */4 * * *', () => { cada cuatro horas
 //  * * * * *  # minuto, hora, día del mes, mes, día de la semana
-cron.schedule("* */12 * * *", () => {
+cron.schedule("0 0,12 * * *", () => {
   const ahora = new Date().toLocaleString();
   console.log(`[CRON] Ejecutando tarea programada a las ${ahora}`);
   // Esta expresión ejecutará la tarea cada 2 horas (a las 00:00, 02:00, 04:00, etc.)
